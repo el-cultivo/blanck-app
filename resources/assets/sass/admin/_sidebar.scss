@@ -1,0 +1,117 @@
+.row {
+	margin-bottom: 0;
+	.sidebar {
+		width: $sidebar-width;
+		height: 100vh;
+		padding: 0px;
+		position: fixed;
+		box-shadow: 0 0 8px rgba(0,0,0,0.2);
+		overflow: auto;
+		background: #fff;
+		z-index: 3;
+		&__nav {
+			margin: 0;
+			&-label {
+				color: #333;
+				cursor: pointer;
+				padding: 18px 20px;
+				display: block;
+				font-weight: bold;
+				text-transform: uppercase;
+				@include ease-transition;
+				&:hover { background: #ccc;}
+				&.label_active { background: #eee;}
+			}
+			&--nested-ul {
+				display: none;
+				&--link {
+					color: #333;
+					cursor: pointer;
+					padding: 15px 20px 15px 40px;
+					display: block;
+					@include ease-transition;
+					&:hover { background: #eee;}
+					&.link_active {
+						color: #fff;
+						background: $primary-color;
+					}
+				}
+			}
+		}
+
+		$logo_sidebar_width: 56px;
+
+		&__main {
+			padding: 30px 20px;
+			display: flex;
+			align-items: center;
+			border-bottom: 1px solid #eee;
+
+			&--logo {
+				// padding: 20px 10px;
+				width: $logo_sidebar_width;
+				text-align: center;
+				& img {
+					height: $logo_sidebar_width;
+				}
+			}
+
+			&--profile {
+				width: calc(100% - #{$logo_sidebar_width} );
+				cursor: pointer;
+
+				&--app-name,
+				&--profile-name {
+					display: block;
+				}
+
+				&--app-name {
+					color: black !important;
+					font-weight: bold;
+				}
+
+				&--profile-name {
+					color: $primary-color;
+					overflow: hidden;
+    				text-overflow: ellipsis;
+					white-space: nowrap;
+				}
+
+				&--dropDown {
+					width: 100%;
+					padding: 10px;
+					padding-right: 40px;
+					margin-top: 5px;
+					border-radius: 4px;
+
+					background-size: 15px auto;
+					background-image: url(../images/arrow-down.png);
+					background-repeat: no-repeat;
+					background-position: 95% 50%;
+
+					&:hover{
+						background-color: #eee;
+					}
+
+					&-ul{
+						&--link {
+							background-color: white;
+							color: black;
+							font-size: 16px;
+						    display: block;
+						    line-height: 22px;
+						    padding: 14px 16px;
+							width: 100%;
+    						text-align: left;
+							border: 0;
+
+							&:hover{
+								background-color: #eee;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

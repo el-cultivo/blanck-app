@@ -1,0 +1,16 @@
+.row {
+	.main {
+		float: right;
+		width: calc(100% - #{$sidebar-width});
+		margin-left: 300px;
+		padding: 0;
+		position: relative;
+		min-height: 100vh;
+		&__title {
+			margin-top: 0;
+		}
+		&__divider {
+			margin-bottom: 50px;
+		}
+	}
+}

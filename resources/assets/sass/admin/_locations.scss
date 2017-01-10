@@ -1,0 +1,33 @@
+.locations {
+	&__table {
+		&--nombre {
+			width: 30%;
+		}
+		&--tipo {
+			width: 20%;
+		}
+		&--direccion {
+			width: 50%;
+			padding-right: 10px;
+		}
+	}
+}
+
+.locations-types {
+	&__table {
+		&--buttons {
+			margin: 10px;
+		}
+	}
+}
+
+.add-locations {
+	&__save-button {
+		margin: 50px;
+	}
+
+	&__location-selects{
+		float: right;
+		width: calc(100% - 80px);
+	}
+}

@@ -1,0 +1,17 @@
+$colors: (
+	base:	#000000,
+	dark:	#666666,
+	white:	#FFFFFF,
+	light: 	#f9f9f9,
+	gray: 	#d6d6d6,
+	yellow: #fff100
+	);
+
+@function c($color:base) {
+	@return map-get($colors, $color);
+}
+
+$colorForeground: c();
+$colorBackground: c(white);
+$colorFeatured: c(dark);
+$colorError: #8A1010;

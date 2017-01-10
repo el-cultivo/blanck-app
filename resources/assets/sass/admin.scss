@@ -1,0 +1,60 @@
+@charset "UTF-8";
+// //===Mazorca Core===//
+// @import "node_modules/mazorca-core/_mazorca-core.scss";
+//
+// //===Configs===//
+// @import "mazorca/config/_config";
+//
+// .admin {
+// 	font-family: f(light);
+// 	line-height: 150%;
+// }
+// .footer {
+// 	&__container {
+// 		background: c(gray);
+// 	}
+// 	&__logo {
+// 		width: 100%;
+// 		max-width: 80px;
+// 	}
+// }
+//
+//
+
+//=== Materialize Preload ===//
+@import "node_modules/materialize-css/sass/components/mixins";
+@import "node_modules/materialize-css/sass/components/color";
+
+//=== Redefinir variables de Materialize ===//
+@import "admin/_materialize__variables";
+
+//=== Admin Config ===//
+@import "admin/_config";
+@import "node_modules/mazorca-core/core/mixins/transitions/_ease-transition";
+
+//=== Materialize Load ===//
+@import "node_modules/materialize-css/sass/materialize";
+
+//=== Importar Módulos ===//
+@import "admin/_admin";
+@import "admin/_select";
+@import "admin/_header";
+@import "admin/_sidebar";
+@import "admin/_main";
+@import "admin/_content";
+@import "admin/_footer";
+@import "admin/_alerts";
+@import "admin/_modal";
+@import "admin/_media-manager";
+@import "admin/_locations";
+@import "admin/_allies";
+@import "admin/_users";
+@import "admin/_films";
+@import "admin/_films-categories";
+
+
+
+//=== Summernote for Material styles ===//
+@import "admin/_summernote-material";
+
+select {display: block !important;}

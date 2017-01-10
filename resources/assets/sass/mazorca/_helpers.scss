@@ -1,0 +1,40 @@
+.size_14 {
+	font-size: 14px;
+}
+.size_18 {
+	font-size: 18px;
+}
+.size_22 {
+	font-size: 22px;
+}
+.size_36 {
+	font-size: 36px;
+	@media (max-width: b(sm)) {
+		font-size: 30px;
+	}
+}
+.size_45 {
+	font-size: 45px;
+}
+.page-title {
+	font-size: 22px;
+	text-align: center;
+	font-family: f(bold);
+	margin-bottom: 75px;
+	text-transform: uppercase;
+	@include ease-transition;
+	@media (max-width: b(md)) {
+		margin-bottom: 50px;
+	}
+}
+.inline {
+	float: left;
+	display: inline-block;
+	vertical-align: top;
+}
+.half {
+	width: 50%;
+	@media (max-width: b(sm)) {
+		width: 100%;
+	}
+}

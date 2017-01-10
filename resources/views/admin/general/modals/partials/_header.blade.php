@@ -1,0 +1,1 @@
+<span class="modal-action modal-close waves-effect waves-green modal__close" aria-hidden="true"><i class="material-icons">&#10005;</i></span>

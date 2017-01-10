@@ -1,0 +1,15 @@
+// Prevent overscroll
+html {
+	overflow: hidden;
+	height: 100%;
+}
+body {
+	height: 100%;
+	overflow: auto;
+}
+.divider {
+	margin: 5% 0;
+}
+
+// Admin Variables
+$sidebar-width: 300px;

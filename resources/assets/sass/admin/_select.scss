@@ -1,0 +1,20 @@
+.select {
+	&--item {
+		display: block;
+	}
+	&--label {
+		display: block;
+		position: relative !important;
+		margin-bottom: -5px;
+	}
+	&--modal-trigger {
+		margin: 5px 0 15px 0;
+		cursor: pointer;
+		display: inline-block;
+		font-size: 12px;
+		&:before {
+			content: '+ ';
+			display: inline-block;
+		}
+	}
+}

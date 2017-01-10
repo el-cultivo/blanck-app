@@ -1,0 +1,113 @@
+.contacto {
+	padding: 85px 0;
+	width: 100%;
+	margin: 0 auto;
+	@media (max-width: b(sm)) {
+		padding: 50px 0;
+	}
+	&--wrap {
+		padding: 0 20px;
+		max-width: 660px;
+		margin-bottom: 55px;
+	}
+	&__info {
+		float: left;
+		width: 40%;
+		@media (max-width: b(sm)) {
+			float: none;
+			width: 100%;
+			text-align: center;
+		}
+		&--title {
+			text-align: left;
+			margin-bottom: 30px;
+			@media (max-width: b(sm)) {
+				text-align: center;
+			}
+		}
+		&--text {
+			margin-bottom: 50px;
+		}
+	}
+	&__form {
+		float: right;
+		width: 60%;
+		font-size: 0;
+		overflow-y: auto;
+		margin-bottom: 30px;		
+		@media (max-width: b(sm)) {
+			float: none;
+			width: 100%;
+			display: block !important;
+			margin-bottom: 80px;
+		}
+		&--title {
+			text-align: left;
+			margin-bottom: 30px;
+			text-transform: none;
+		}
+		&--label {
+			width: 25%;
+			display: inline-block;
+			vertical-align: middle;
+			margin-bottom: 12px;
+		}
+		&--input {
+			width: 75%;
+			border: none;
+			padding: 8px 5px 0px 5px;
+			display: inline-block;
+			font-size: 18px;
+			background: c(gray);
+			font-family: f(light);
+			margin-bottom: 20px;
+			vertical-align: middle;
+		}
+		&--submit {
+			float: right;
+			width: auto;
+			color: c(base);
+			border: none;
+			cursor: pointer;
+			padding: 15px 30px 8px 30px;
+			font-size: 18px;
+			font-family: f(bold);
+			background: c(yellow) !important;
+			text-transform: uppercase;
+			@include ease-transition;
+			&:hover {
+				padding: 15px 35px 8px 35px;
+			}
+		}
+	}
+	&__equipo {
+		&--title {
+			display: block;
+			@media (max-width: b(sm)) {
+				margin-bottom: 30px;
+			}
+		}
+		&--content {
+			width: 100%;
+			padding: 0 60px;
+			column-count: 3;
+			@media (max-width: b(sm)) {
+				text-align: center;
+				column-count: 1;
+			}
+		}
+		&--item {
+			font-size: 16px;
+			line-height: 130%;
+			margin-bottom: 20px;
+			display: inline-block;
+			i {
+				font-family: f(medium);
+			}
+			a {
+				color: c(dark);
+				&:hover { color: c(base);}
+			}
+		}		
+	}
+}

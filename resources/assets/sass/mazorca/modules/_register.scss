@@ -1,0 +1,10 @@
+.register {
+	padding: 85px 0;
+	text-align: center;
+	&__links {
+		&--link {
+			margin: 0 15px;
+			display: inline-block;
+		}
+	}
+}

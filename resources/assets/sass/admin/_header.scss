@@ -1,0 +1,22 @@
+.header {
+	top: 0;
+	width: calc(100% - #{$sidebar-width});
+	z-index: 1;
+	padding: 0 30px;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	position: fixed;
+	border-bottom: 1px solid #eceff1;
+	background-color: white;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    border-bottom: 1px solid #eceff1;
+    background-color: white;
+    &__ttl {
+    }
+    &__action {
+    }
+}

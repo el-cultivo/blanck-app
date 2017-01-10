@@ -1,0 +1,28 @@
+.allieslist {
+
+	&__save-button {
+		margin-bottom: 50px;
+	}
+
+	&__allies-items {
+		&--move-button {
+			cursor: move;
+		}
+		&--delete-button {
+			margin-left: 20px;
+		}
+	}
+
+	&__sort-form {
+		overflow: auto;
+	}
+	
+}
+
+.create-ally {
+	
+	&__type-select{
+		float: right;
+		width: calc(100% - 80px);
+	}
+}

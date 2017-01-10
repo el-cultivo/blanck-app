@@ -1,0 +1,63 @@
+// $editor_bg_color: #37454D;
+// $editor_fg_color: #fff;
+// $editor_active_bg_color: #2F659D; 
+//
+// .note-editor.note-frame {
+//     border: 1px solid $editor_bg_color;
+//     border-top: 0;
+// }
+//
+// .note-popover .popover-content, .panel-heading.note-toolbar {
+//     padding: 0;
+//     background-color: $editor_bg_color;
+// }
+//
+// .note-popover .popover-content>.btn-group, .panel-heading.note-toolbar>.btn-group {
+//     display: inline;
+//     margin: 0;
+// }
+//
+// .note-btn{
+//     background-color: $editor_bg_color;
+//     letter-spacing: 0;
+//     border-radius: 0;
+//     padding: 0 1rem;
+//     color: $editor_fg_color;
+//     box-shadow: none;
+//     border: 0;
+//
+//     &.active {
+//         background-color: $editor_active_bg_color;
+//     }
+//
+//     &:hover,
+//     &:focus {
+//         background-color: $editor_fg_color;
+//         color: $editor_bg_color;
+//         box-shadow: none;
+//
+//
+//     }
+//
+// }
+//
+// .btn i, .btn-large i, .btn-floating i, .btn-large i, .btn-flat i {
+//     font-size: 0.8rem !important;
+// }
+//
+// // .material-tooltip {
+// //     display: none !important;
+// // }
+//
+// .note-editor.note-frame .note-statusbar {
+//     background-color: $editor_bg_color;
+// }
+//
+// .note-editor.note-frame .note-statusbar .note-resizebar .note-icon-bar {
+//     border-top: 1px solid $editor_bg_color;
+// }
+//
+// .btn.disabled, .disabled.btn-large, .btn-floating.disabled, .btn-large.disabled, .btn-flat.disabled, .btn:disabled, .btn-large:disabled, .btn-floating:disabled, .btn-large:disabled, .btn-flat:disabled, .btn[disabled], [disabled].btn-large, .btn-floating[disabled], .btn-large[disabled], .btn-flat[disabled]{
+//     background-color: rgba(0,0,0,0.4) !important;
+//     border: 0;
+// }

@@ -1,0 +1,70 @@
+.festival {
+	padding: 85px 0;
+	@media (max-width: b(sm)) {
+		padding: 50px 0;
+	}
+	&__title {
+		margin-top: 5px;
+		text-align: left;
+		text-transform: none;
+	}
+	&__about {
+		width: 100%;
+		margin: 0 auto;
+		overflow: auto;
+		max-width: 620px;
+		margin-bottom: 55px;
+		&-title {
+			display: block;
+			margin-bottom: 20px;
+		}
+		&-text {
+			margin-bottom: 20px;
+		}
+		&-img {
+			float: right;
+			width: 120px;
+			height: auto;
+			display: inline-block;
+		}
+	}
+	&__ediciones {
+		width: calc(100% + 30px);
+		font-size: 0;
+		margin-left: -15px;
+		@media (max-width: b(sm)) {
+			width: 100%;
+			margin: 0;
+		}
+		&--title {
+			margin-bottom: 50px;
+		}
+		&--item {
+			width: calc(33.33% - 20px);
+			margin: 0 10px;
+			display: inline-block;
+			text-align: center;
+			@include bg-cover;
+			@media (max-width: b(sm)) {
+				width: 100%;
+				margin: 0 0 30px 0;
+			}
+			&-year {
+				color: c(white);
+				display: block;
+				padding: 100px 0 90px 0;
+				background: transparent;
+				line-height: 100%;
+				font-family: f(bold);
+				@include ease-transition;
+				&:hover {
+					color: c(white);
+					background: c(yellow);
+				}
+			}
+		}
+		.edicion_2016 { background-image: url(../images/festival-2016.jpg);}
+		.edicion_2015 { background-image: url(../images/festival-2015.jpg);}
+		.edicion_2014 { background-image: url(../images/festival-2014.jpg);}
+	}
+}

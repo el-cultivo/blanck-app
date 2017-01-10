@@ -1,0 +1,39 @@
+.form {
+	width: 100%;
+	margin: 0 auto 30px auto;
+	max-width: 300px;
+	&--input {
+		width: 100%;
+		border: none;
+		padding: 8px 5px 0px 5px;
+		display: inline-block;
+		font-size: 18px;
+		text-align: center;
+		background: c(gray);
+		font-family: f(light);
+		margin-bottom: 20px;
+		vertical-align: middle;
+		@include ease-transition;
+		&:focus {
+			background: #eee;
+		}
+	}
+	&--submit {
+		width: auto;
+		color: c(base);
+		border: none;
+		cursor: pointer;
+		display: inline-block;
+		padding: 15px 30px 8px 30px;
+		font-size: 18px;
+		background: c(yellow) !important;
+		text-align: center;
+		font-family: f(bold);
+		text-transform: uppercase;
+		white-space: nowrap;
+		@include ease-transition;
+		&:hover {
+			padding: 15px 25px 8px 25px;
+		}
+	}
+}

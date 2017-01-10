@@ -1,0 +1,29 @@
+.row {
+    .footer {
+        color: #fff;
+        width: 100%;
+        bottom: 0;
+        padding: 8px 0;
+        position: absolute;
+        font-size: 12px;
+        margin-top: 0;
+        border-top: 1px solid #eceff1;
+        background-color: $primary-color;
+        &__copyright {
+            color: #fff;
+            background-color: initial;
+        }
+        &__container {
+            line-height: 48px;
+        }
+        &__logo {
+            height: 40px;
+            margin-top: 6px;
+        }
+        &__link {
+            color: #fff;
+            font-weight: 300;
+            text-decoration: underline;
+        }
+    }
+}
