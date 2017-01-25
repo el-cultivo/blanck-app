@@ -64,8 +64,9 @@ class Photo extends Model
         "ally"                  => "App\Models\Allies\Ally",
         "registrationtype"      => "App\Models\Registrations\Registrationtype",
         "speaker"               => "App\Models\Speakers\Speaker",
-        'film'              => "App\Models\Films\Film",
+        'film'                  => "App\Models\Films\Film",
         'page'                  => "App\Page",
+        'category'              => 'App\Models\Films\Category'
     ];
 
     /**
