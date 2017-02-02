@@ -25,10 +25,7 @@ class PagesController extends ClientController
      */
     public function index()
     {
-        // if (!env("CLTVO_DEV_MODE")) {
-    	// 	return view('welcome');
-    	// }
-    	return Redirect::route('client::login:get');
+    	return view('index');
     }
 
     public function contact(CreateContactRequest $request)

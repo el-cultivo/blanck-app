@@ -77,12 +77,12 @@ Route::group(['middleware' => ['permission:manage_categories'] ,'prefix' => 'cat
 
 });
 
-// //paginas
-// Route::group(['middleware' => ['permission:manage_pages'], 'prefix' => 'pages', "as" => "pages."  ], function(){
-//
-//     Route::resource('/','Admin\Pages\ManagePagesController',[
-//         'only' 			=> ['index', 'edit', 'update'],
-//         'parameters'    => ['' => 'page'],
-//     ]);
-//
-// });
+//paginas
+Route::group(['middleware' => ['permission:manage_pages'], 'prefix' => 'pages', "as" => "pages."  ], function(){
+
+    Route::resource('/','Admin\Pages\ManagePagesController',[
+        'only' 			=> ['index', 'edit', 'update'],
+        'parameters'    => ['' => 'page'],
+    ]);
+
+});

@@ -55,15 +55,15 @@ class AdminMainMenuComposer
 			]
 		],
 
-		// "Páginas" 		=> [
-		// 	"permission" => "manage_pages",
-		// 	"routes" => [
-		// 	// 	route_name => label // label vacio si no se quiere mostrar la ruta pero se quere que se active la seccion
-		// 		"pages.index"	=> "Lista de páginas",
-		// 		"pages.edit"	=> ""
-		// 	]
-		//
-		// ],
+		"Páginas" 		=> [
+			"permission" => "manage_pages",
+			"routes" => [
+			// 	route_name => label // label vacio si no se quiere mostrar la ruta pero se quere que se active la seccion
+				"pages.index"	=> "Lista de páginas",
+				"pages.edit"	=> ""
+			]
+
+		],
 
 		"Ajustes" 		=> [
 			"permission" => "system_config",
