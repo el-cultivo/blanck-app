@@ -14,76 +14,38 @@ class AdminMainMenuComposer
 	protected $current_route_name = "";
 	protected $route_group_name_prefix = "admin::";
 
+	protected function getMenuItems()
+	{
+		return collect([
+			$this->setMenuItem("Inicio",[
+				$this->setSubMenuItem("index", "admin_access","Administrador"),
+			]),
 
-	protected $menu_items = [
-		"Inicio" 		=> [
-			"permission" => "admin_access",
-			"routes" => [
-				"index"	=> "Administrador"
-			]
-		],
+			$this->setMenuItem("Usuarios",[
+				$this->setSubMenuItem("users.create","manage_users","Agregar usuario"),
+				$this->setSubMenuItem("users.index", "manage_users","Lista de usuarios"),
+				$this->setSubMenuItem("users.trash", "manage_users","Usuarios desactivados"),
+				$this->setSubMenuItem("users.edit", "manage_users",""),
+			]),
 
+			$this->setMenuItem("Imágenes",[
+				$this->setSubMenuItem("photos.index", "photos_view","Media Manager"),
+			]),
 
-		"Usuarios" 		=> [
-			"permission" => "manage_users",
-			"routes" => [
-			// 	route_name => label // label vacio si no se quiere mostrar la ruta pero se quere que se active la seccion
-				"users.create"	=> "Agregar usuario",
-				"users.index"	=> "Lista de usuarios",
-				"users.trash"	=> "Usuarios desactivados",
-				"users.edit"	=> ""
-			]
+			$this->setMenuItem("Ajustes",[
+				$this->setSubMenuItem("settings.index", "system_config","Ajustes del sistema"),
+			]),
 
-		],
+			$this->setMenuItem("Manuales",[
+				$this->setSubMenuItem("manuals", "admin_access","Videos"),
+			]),
 
-		"Imágenes"		=> [
-			"permission" => "photos_view",
-			"routes" => [
-				"photos.index"	=> "Media Manager"
-			]
-		],
+		]);
+	}
 
-		"Films_ traducir "		=> [
-			"permission" => "manage_films",
-			"routes" => [
-				// "films.create"		=> "Agregar actividad",
-				// "films.index"		=> "Lista de actividades",
-				// "films.edit"		=> "",
-
-				"categories.index"		=> "Categorias de actividades",
-				// "topics.index"		=> "Temas de actividades",
-			]
-		],
-
-		// "Páginas" 		=> [
-		// 	"permission" => "manage_pages",
-		// 	"routes" => [
-		// 	// 	route_name => label // label vacio si no se quiere mostrar la ruta pero se quere que se active la seccion
-		// 		"pages.index"	=> "Lista de páginas",
-		// 		"pages.edit"	=> ""
-		// 	]
-		//
-		// ],
-
-		"Ajustes" 		=> [
-			"permission" => "system_config",
-			"routes" => [
-				"settings.index"	=> "Ajustes del sistema",
-			]
-
-		],
-		"Manuales" 		=> [
-			"permission" => "admin_access",
-			"routes" => [
-				"manuals"	=> "Videos"
-			]
-		],
-
-	];
 
 	public function __construct(){
 		$this->current_route_name =  str_replace($this->route_group_name_prefix, "",  Route::currentRouteName()) ;
-		$this->menu_items_collection = collect($this->menu_items);
     }
 
 	public function compose(View $view)
@@ -101,15 +63,36 @@ class AdminMainMenuComposer
 	public function constructMenuMap()
 	{
 		$user = Auth::user();
-		return $this->menu_items_collection->filter(function($menu_item) use ($user){
-					return $user->hasPermission($menu_item["permission"]);
-				})->map(function($menu_item){
-					return [
-						"current"		=> $this->isActiveSection(array_keys($menu_item["routes"])),
-						"sub_menu"		=> array_filter($menu_item["routes"],function($label){
-							return !empty($label);
-						})
+		return $this->getMenuItems()->filter(function($menu_item) use ($user){
+					$permissions = $menu_item->routes->pluck("permission");
+					return $user->hasPermission($permissions->unique()->toArray());
+				})->map(function($menu_item) use ($user){
+
+					return (object) [
+						"label"			=> $menu_item->label,
+						"current"		=> $this->isActiveSection($menu_item->routes->pluck("name")->toArray()),
+						"sub_menu"		=> $menu_item->routes->filter(function($sub_menu_item) use ($user){
+							return !empty($sub_menu_item->label) && $user->hasPermission($sub_menu_item->permission);
+						}),
 					];
 				});
+	}
+
+	protected function setSubMenuItem($route_name, $permission, $label)
+	{
+		return (object) [
+			"name"			=> $route_name,
+			"permission" 	=> $permission,
+			"label"			=> $label
+		];
+	}
+
+
+	protected function setMenuItem($label, array $sub_menu)
+	{
+		return (object) [
+			"label"			=> $label,
+			"routes"		=> collect($sub_menu),
+		];
 	}
 }

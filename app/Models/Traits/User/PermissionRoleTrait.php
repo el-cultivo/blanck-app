@@ -112,8 +112,14 @@ trait PermissionRoleTrait {
      */
     public function hasPermission($permissionSlug)
     {
-        if ($this->isSuperAdmin()) {
-            return true;
+        // if ($this->isSuperAdmin()) {
+        //     return true;
+        // }
+
+        if (is_array($permissionSlug)) {
+            return $this->roles()->with("permissions")->whereHas("permissions",function($q) use ($permissionSlug){
+                $q->whereIn("slug",$permissionSlug);
+            })->get()->count() > 0;
         }
 
         return $this->roles()->with("permissions")->whereHas("permissions",function($q) use ($permissionSlug){
