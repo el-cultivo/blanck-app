@@ -1,14 +1,14 @@
 @extends('layouts.client')
 
 @section('content')
-	<div class="register page">
-		<div class="register--wrap wrap">
+	<div class="auth page">
+		<div class="auth--wrap wrap">
 
-			<div class="register--title page-title">
+			<div class="auth--title page-title">
 				Registrar Nuevo Usuario
 			</div>
 
-			<form class="form" role="form" method="POST" action="{{ route('client::register:post') }}">
+			<form class="form" role="form" method="POST" action="{{ route('client::auth:post') }}">
 				{{ csrf_field() }}
 				<div class="">
 					<input id="first_name" type="text" class="form--input" placeholder="Nombre" name="first_name" value="{{ old('first_name') }}" required autofocus>
@@ -22,12 +22,12 @@
 				</button>
 			</form>
 
-			<div class="register__links">
-				<a class="register__links--link" href="{{ route('client::login:get') }}">
+			<div class="auth__links">
+				<a class="auth__links--link" href="{{ route('client::login:get') }}">
 					Ya estoy registrado
 				</a>
 
-				<a class="register__links--link" href="{{ route('client::index') }}">
+				<a class="auth__links--link" href="{{ route('client::index') }}">
 					Ir a la página principal
 				</a>
 			</div>

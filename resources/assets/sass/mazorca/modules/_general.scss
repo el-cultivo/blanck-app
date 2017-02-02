@@ -25,6 +25,8 @@ b,strong {
 	position: fixed;
 	background-color: #fff;
 }
+$header-height: 60px;
+$footer-height: 140px;
 .main-wrap {
-	min-height: calc(100vh - 60px - 310px);
+	min-height: calc(100vh - #{$header-height} - #{$footer-height});
 }

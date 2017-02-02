@@ -366,7 +366,7 @@ function debounce(func, wait, options) {
     var timeSinceLastCall = time - lastCallTime,
         timeSinceLastInvoke = time - lastInvokeTime;
 
-    // Either this is the first call, film has stopped and we're at the
+    // Either this is the first call, activity has stopped and we're at the
     // trailing edge, the system time has gone backwards and we're treating
     // it as the trailing edge, or we've hit the `maxWait` limit.
     return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
@@ -15027,7 +15027,7 @@ function getPath(obj, path) {
 var warnNonExistent;
 if (process.env.NODE_ENV !== 'production') {
   warnNonExistent = function (path, vm) {
-    warn('You are setting a non-existent path "' + path.raw + '" ' + 'on a vm instance. Consider pre-initializing the property ' + 'with the "data" option for more reliable refilm ' + 'and better performance.', vm);
+    warn('You are setting a non-existent path "' + path.raw + '" ' + 'on a vm instance. Consider pre-initializing the property ' + 'with the "data" option for more reliable reactivity ' + 'and better performance.', vm);
   };
 }
 

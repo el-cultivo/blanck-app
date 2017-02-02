@@ -1,10 +1,7 @@
 <div class="sidebar__main">
 
-	<div class="sidebar__main--logo">
-		<a href="{{ route("client::index") }}">
-			<img class="" src="/images/logo-default.svg" alt="El cultivo" />
-		</a>
-	</div>
+	<a class="sidebar__main--logo" href="{{ route("client::index") }}" alt="{{ env('APP_NAME') }}" style="background-image:url({{ asset('images/logo.svg') }});">
+	</a>
 
 	<div class="sidebar__main--profile">
 

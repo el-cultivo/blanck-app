@@ -8293,7 +8293,6 @@ textarea.materialize-textarea + label:after {
 textarea {
   width: 100%;
   height: 3rem;
-  resize: resize-y;
   background-color: transparent;
 }
 
@@ -10912,16 +10911,17 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 }
 
 .row .sidebar__main--logo {
-  width: 56px;
-  text-align: center;
-}
-
-.row .sidebar__main--logo img {
-  height: 56px;
+  width: 60px;
+  height: 60px;
+  display: inline-block;
+  margin-right: 10px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .row .sidebar__main--profile {
-  width: calc(100% - 56px);
+  width: calc(100% - 60px);
   cursor: pointer;
 }
 
@@ -11440,74 +11440,9 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   line-height: 100% !important;
 }
 
-.locations__table--nombre {
-  width: 30%;
-}
-
-.locations__table--tipo {
-  width: 20%;
-}
-
-.locations__table--direccion {
-  width: 50%;
-  padding-right: 10px;
-}
-
-.locations-types__table--buttons {
-  margin: 10px;
-}
-
-.add-locations__save-button {
-  margin: 50px;
-}
-
-.add-locations__location-selects {
-  float: right;
-  width: calc(100% - 80px);
-}
-
-.allieslist__save-button {
-  margin-bottom: 50px;
-}
-
-.allieslist__allies-items--move-button {
-  cursor: move;
-}
-
-.allieslist__allies-items--delete-button {
-  margin-left: 20px;
-}
-
-.allieslist__sort-form {
-  overflow: auto;
-}
-
-.create-ally__type-select {
-  float: right;
-  width: calc(100% - 80px);
-}
-
 .users-create__role-select {
   float: right;
   width: calc(100% - 80px);
-}
-
-.create-film__select-status {
-  float: right;
-  width: calc(100% - 135px);
-}
-
-.create-film__select {
-  float: right;
-  width: calc(100% - 200px);
-}
-
-.edit-film__button {
-  margin: 10px;
-}
-
-.edit-category__button {
-  margin: 10px;
 }
 
 select {
