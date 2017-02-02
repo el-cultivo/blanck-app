@@ -65,6 +65,10 @@ class Category extends Model
         'label',
     ];
 
+    public static $image_galleries = [ 
+        'gallery' 
+    ];
+
     /**
      * Get the administrator flag for the user.
      *

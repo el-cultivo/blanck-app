@@ -51,6 +51,12 @@ class AssociatePhotoRequest extends Request
             if ($table_name) {
                 $rules["photoable_id"] .= "|exists:".$table_name.",id" ;
             }
+
+            if(isset(Photo::$associable_models[$input["photoable_type"]])) 
+            { 
+                $photoable_class = Photo::$associable_models[$input["photoable_type"]]; 
+                $rules['use'] .= '|in:' . implode(',', $photoable_class::$image_uses); 
+            }
         }
         return $rules;
     }
