@@ -28,19 +28,20 @@
 
 </div>
 
-@foreach ($menu_items as $name => $menu_item)
-	<ul class="nav sidebar__nav nav_JS">
-		<label class="tree-toggler sidebar__nav-label {{ $menu_item['current'] ? 'label_active' : '' }} label_JS">
-			{{ $name }}
-		</label>
+@foreach ($menu_items as $menu_item)
+	@if (!$menu_item->sub_menu->isEmpty())
+		<ul class="nav sidebar__nav nav_JS">
+			<label class="tree-toggler sidebar__nav-label {{ $menu_item->current ? 'label_active' : '' }} label_JS">
+				{{ $menu_item->label }}
+			</label>
 
-		<ul class="sidebar__nav--nested-ul tree tree_JS">
-			@foreach ($menu_item["sub_menu"] as $route_name => $route_label )
-				<li>
-					<a class="sidebar__nav--nested-ul--link {{ is_page( $route_group_prefix.$route_name ) ? 'link_active' : '' }}" href="{{route($route_group_prefix.$route_name)}}">{{$route_label}}</a>
-				</li>
-			@endforeach
+			<ul class="sidebar__nav--nested-ul tree tree_JS">
+				@foreach ($menu_item->sub_menu as $sub_menu_item )
+					<li>
+						<a class="sidebar__nav--nested-ul--link {{ is_page( $route_group_prefix.$sub_menu_item->name ) ? 'link_active' : '' }}" href="{{route($route_group_prefix.$sub_menu_item->name)}}">{{$sub_menu_item->label}}</a>
+					</li>
+				@endforeach
+			</ul>
 		</ul>
-	</ul>
-
+	@endif
 @endforeach
