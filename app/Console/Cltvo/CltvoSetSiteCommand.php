@@ -14,11 +14,9 @@ class CltvoSetSiteCommand extends Command
         'PermissionSet',
         'RoleSet',
         'AssociatePermissionRoleSet',
-
         'FirstUserSet',
-        // 'AdminsUserSet',
+        'AdminsUserSet',
         'LanguageSet',
-
         'PhotoSet',
         'PublishSet',
 
