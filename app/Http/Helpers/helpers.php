@@ -15,11 +15,14 @@ function is_page($route_name)
  * @param  string $mail        mail encriptasrse
  * @return string              valor encriptado
  */
-function cltvoMailEncode($mail)
-{
-    $key = env("CLTVO_ENCRYPTION_KEY=") ? env("CLTVO_ENCRYPTION_KEY=") : '#&$sdfx2s7sffgg4';
-    return base64url_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($key), $mail, MCRYPT_MODE_CBC, md5(md5($key))));
-}
+ function cltvoMailEncode($mail)
+ {
+     $iv = getIVKey();
+
+     $key = env("CLTVO_ENCRYPTION_KEY=") ? env("CLTVO_ENCRYPTION_KEY=") : '#&$sdfx2s7sffgg4';
+
+     return  base64url_encode( openssl_encrypt( $mail, Config::get('app.cipher'), md5($key), OPENSSL_RAW_DATA, $iv));
+ }
 
 
 /**
@@ -27,10 +30,24 @@ function cltvoMailEncode($mail)
  * @param  string $encodedMail mail encryptado con la la funcion cltvoMailEnconde
  * @return string              valor desencriptado
  */
-function cltvoMailDecode($encodedMail)
+ function cltvoMailDecode($mail_encoded)
+ {
+     $iv = getIVKey();
+
+     $key = env("CLTVO_ENCRYPTION_KEY=") ? env("CLTVO_ENCRYPTION_KEY=") : '#&$sdfx2s7sffgg4';
+
+     return openssl_decrypt( base64url_decode($mail_encoded), Config::get('app.cipher'), md5($key), OPENSSL_RAW_DATA, $iv);
+ }
+
+ function getIVKey()
 {
-    $key = env("CLTVO_ENCRYPTION_KEY=") ? env("CLTVO_ENCRYPTION_KEY=") : '#&$sdfx2s7sffgg4';
-    return rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($key), base64url_decode($encodedMail), MCRYPT_MODE_CBC, md5(md5($key))), "\0");
+    $app_key    = env('APP_KEY');
+    $cipher     = Config::get('app.cipher');
+    $iv_lenght  = openssl_cipher_iv_length($cipher);
+    $iv_base64  = explode(':', $app_key)[1];
+    $iv         = base64_decode($iv_base64);
+
+    return substr($iv, $iv_lenght);
 }
 
 function base64url_encode($data) {
