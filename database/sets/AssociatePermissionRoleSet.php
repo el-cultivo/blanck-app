@@ -37,7 +37,7 @@ class AssociatePermissionRoleSet extends CltvoSet
                     "manage_photos",
                     "associate_photos",
 
-                    "manage_pages",
+                    "manage_pages_contents",
 
                     "manage_films",
 

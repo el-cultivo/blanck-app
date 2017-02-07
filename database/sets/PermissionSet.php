@@ -49,6 +49,11 @@ class PermissionSet extends CltvoSet
             ],
 
             [
+                "slug"  => "manage_pages_contents",
+                "label" => "Manejo del contenido de las páginas"
+            ],
+
+            [
                 "slug"  => "manage_films",
                 "label" => "Manejo de películas"
             ],
