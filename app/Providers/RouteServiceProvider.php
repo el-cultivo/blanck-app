@@ -23,8 +23,8 @@ class RouteServiceProvider extends ServiceProvider
     protected $bind_classes = [
         'App\Http\Binds\ManageUserBind',
         'App\Http\Binds\ManagePhotosBind',
-        // 'App\Http\Binds\ManagePagesBind',
-        'App\Http\Binds\Films\ManageCategoriesBind',
+        'App\Http\Binds\Pages\ManagePagesBind',
+        'App\Http\Binds\Pages\PublicPagesBind',
         'App\Http\Binds\ManageLanguagesBind'
     ];
 
