@@ -39,7 +39,7 @@
 			}
 		}
 
-		$logo_sidebar_width: 56px;
+		$logo_sidebar_width: 60px;
 
 		&__main {
 			padding: 30px 20px;
@@ -48,12 +48,13 @@
 			border-bottom: 1px solid #eee;
 
 			&--logo {
-				// padding: 20px 10px;
 				width: $logo_sidebar_width;
-				text-align: center;
-				& img {
-					height: $logo_sidebar_width;
-				}
+				height: $logo_sidebar_width;
+				display: inline-block;
+				margin-right: 10px;
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center;
 			}
 
 			&--profile {

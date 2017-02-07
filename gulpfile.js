@@ -32,5 +32,5 @@ elixir(mix => {
 		.browserify(['micorriza.js'], 'public/js/functions.js')
 		.sass(['admin.scss'], 'public/css/admin.css')
 		.sass(['mazorca.scss'], 'public/css/mazorca.css')
-		.browserSync({proxy: 'mextropoli.dev'});
+		.browserSync({proxy: 'blank-app.dev'});
 });

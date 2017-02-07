@@ -1,22 +1,15 @@
 .header {
-	height: 60px;
+	height: $header-height;
 	padding: 15px 0;
-	background: c(white);
+	background: c(light);
 	text-align: right;
 	&__logo {
 		float: left;
 		height: 27px;
-		&:hover &-default { display: none;}
-		&:hover &-hover   { display: inline-block;}
-		&-default {
-			width: auto;
-			height: 100%;
+		&--img {
+			width: 50px;
+			height: auto;
 			display: inline-block;
-		}
-		&-hover {
-			width: auto;
-			height: 100%;
-			display: none;
 		}
 	}
 	&__menu {
@@ -61,11 +54,10 @@
 		}
 	}
 	&__mobile {
-		top: 60px;
+		top: $header-height;
 		left: 0;
 		width: 100%;
 		z-index: 99;
-		display: none;
 		position: absolute;
 		text-align: center;
 		border-top: 1px solid c(light);
@@ -84,5 +76,4 @@
 			}
 		}
 	}
-
 }

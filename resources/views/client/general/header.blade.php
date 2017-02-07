@@ -1,10 +1,8 @@
-{{-- <div id="pre_JS" class="pre"></div> --}}
 
 <header class="header">
 	<div class="wrap">
 		<a class="header__logo" href="/">
-			<img class="header__logo-default" src="{{ asset('images/logo-default.svg') }}">
-			<img class="header__logo-hover" src="{{ asset('images/logo-hover.svg') }}">
+			<img class="header__logo--img" src="{{ asset('images/logo.svg') }}">
 		</a>
 		<div class="header__menu">
 			@include('client.general._menu', [

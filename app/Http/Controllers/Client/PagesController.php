@@ -26,6 +26,12 @@ class PagesController extends ClientController
     public function index()
     {
     	return view('index');
+
+        // if (!env("CLTVO_DEV_MODE")) {
+    	// 	return view('welcome');
+    	// }
+    	dd('Página de Inicio de Blank App');
+        //return Redirect::route('client::login:get');
     }
 
     public function contact(CreateContactRequest $request)

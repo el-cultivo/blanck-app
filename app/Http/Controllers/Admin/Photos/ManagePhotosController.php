@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Admin\Photos\AssociatePhotoRequest;
 use App\Http\Requests\Admin\Photos\DisassociatePhotoRequest;
-// use App\Http\Requests\Admin\Photos\SortPhotoRequest;
+use App\Http\Requests\Admin\Photos\SortPhotoRequest;
 use App\Http\Requests\Admin\Photos\CreatePhotoRequest;
 use App\Http\Requests\Admin\Photos\UpdatePhotoRequest;
 
@@ -181,6 +181,7 @@ class ManagePhotosController extends Controller
 
         $photoable_class = Photo::$associable_models[$input["photoable_type"]];
         $photoable = $photoable_class::find($input["photoable_id"]);
+        $is_gallery = in_array($input['use'], $photoable_class::$image_galleries); 
 
         $use_order_class = [
             "use"   => $input["use"],
@@ -188,10 +189,13 @@ class ManagePhotosController extends Controller
             "class" => $input["class"],
         ];
 
-        if ($photoable->hasPhotoTo($use_order_class) ) {
-            return Response::json([
-                'error' => ["Ya cuenta con una imagen asignada previamente"]
-            ], 422);
+        if(!$is_gallery || !is_null($use_order_class['order'])) 
+        { 
+            if ($photoable->hasPhotoTo($use_order_class) ) { 
+                return Response::json([ 
+                    'error' => ["1 Ya cuenta con una imagen asignada previamente"] 
+                ], 422); 
+            } 
         }
 
         if ($photoable->cantUsePhotoFor($photo,$use_order_class["use"]) ) {
@@ -246,50 +250,49 @@ class ManagePhotosController extends Controller
 
     public function sort(SortPhotoRequest $request)
     {
-
-        // $input = $request->all();
-        // $photoable_class = Photo::$associable_models[$input["photoable_type"]];
-        // $photoable = $photoable_class::find($input["photoable_id"]);
-        //
-        // $photos =  $photoable->photos()->orderBy("pivot_order","ASC")->wherePivot('use', $input["use"])->get();
-        //
-        // $max_order = $photos->map(function($photo){
-        //                     return $photo->pivot->order;
-        //                 })->max();
-        //
-        // $order_array = $photos->keyBy(function($photo){
-        //                     return $photo->pivot->order;
-        //                 })->map(function($photo){
-        //                     return $photo->id;
-        //                 })->toArray();
-        //
-        // $translados = [true,false];
-        // foreach ( $translados as $transladar) {
-        //     foreach ($input["photos"] as $photo_new_order => $photo_id) {
-        //         if (in_array($photo_id, $order_array)) { // si la foto esta associada
-        //             $photo_original_order = array_search($photo_id,$order_array);
-        //
-        //             if ($transladar ) {
-        //                 $new_orders[] = [
-        //                     "order"     => $photo_new_order,
-        //                     "photo_id"  => $photo_id
-        //                 ];
-        //             }
-        //
-        //             $order = $transladar ? $photo_original_order + 1 + 2*$max_order : $photo_new_order;
-        //
-        //             $photoable->photos()
-        //                 ->wherePivot('use', $input["use"])
-        //                 ->updateExistingPivot($photo_id, ["order" => $order ]);
-        //         }
-        //     }
-        // }
-        //
-        // return Response::json([ // todo bien
-        //     "data"    => $new_orders ,
-        //     'message' => ["Orden correctamente guardado"],
-        //     'success' => true
-        // ]);
+        $input = $request->all();
+        $photoable_class = Photo::$associable_models[$input["photoable_type"]];
+        $photoable = $photoable_class::find($input["photoable_id"]);
+        
+        $photos =  $photoable->photos()->orderBy("pivot_order","ASC")->wherePivot('use', $input["use"])->get();
+        
+        $max_order = $photos->map(function($photo){
+                            return $photo->pivot->order;
+                        })->max();
+        
+        $order_array = $photos->keyBy(function($photo){
+                            return $photo->pivot->order;
+                        })->map(function($photo){
+                            return $photo->id;
+                        })->toArray();
+        
+        $translados = [true,false];
+        foreach ( $translados as $transladar) {
+            foreach ($input["photos"] as $photo_new_order => $photo_id) {
+                if (in_array($photo_id, $order_array)) { // si la foto esta associada
+                    $photo_original_order = array_search($photo_id,$order_array);
+        
+                    if ($transladar ) {
+                        $new_orders[] = [
+                            "order"     => $photo_new_order,
+                            "photo_id"  => $photo_id
+                        ];
+                    }
+        
+                    $order = $transladar ? $photo_original_order + 1 + 2*$max_order : $photo_new_order;
+        
+                    $photoable->photos()
+                        ->wherePivot('use', $input["use"])
+                        ->updateExistingPivot($photo_id, ["order" => $order ]);
+                }
+            }
+        }
+        
+        return Response::json([ // todo bien
+            "data"    => $new_orders ,
+            'message' => ["Orden correctamente guardado"],
+            'success' => true
+        ]);
     }
 
 }
