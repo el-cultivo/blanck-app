@@ -49,12 +49,11 @@
 @import "admin/_locations";
 @import "admin/_allies";
 @import "admin/_users";
-@import "admin/_films";
-@import "admin/_films-categories";
 
 
 
 //=== Summernote for Material styles ===//
-@import "admin/_summernote-material";
+@import "admin/_materialNote";
+@import "admin/_vue-html5-editor";
 
 select {display: block !important;}
