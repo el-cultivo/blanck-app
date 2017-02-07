@@ -33,8 +33,16 @@ class AdminMainMenuComposer
 			]),
 
 			$this->setMenuItem("Páginas",[
-				$this->setSubMenuItem("pages.index", "manage_pages","Lista de páginas"),
+				$this->setSubMenuItem("pages.content.index", "manage_pages_contents","Lista de páginas"),
+				$this->setSubMenuItem("pages.content.edit", "manage_pages_contents",""),
+
+				$this->setSubMenuItem("pages.create","manage_pages","Agregar página"),
+				$this->setSubMenuItem("pages.index", "manage_pages","Administrar páginas"),
 				$this->setSubMenuItem("pages.edit", "manage_pages",""),
+
+				
+				// $this->setSubMenuItem("pages.index", "manage_pages","Lista de páginas"),
+				// $this->setSubMenuItem("pages.index", "manage_pages","Lista de páginas"),
 			]),
 
 

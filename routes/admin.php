@@ -78,11 +78,32 @@ Route::group(['middleware' => ['permission:manage_categories'] ,'prefix' => 'cat
 });
 
 //paginas
-Route::group(['middleware' => ['permission:manage_pages'], 'prefix' => 'pages', "as" => "pages."  ], function(){
+Route::group(['prefix' => 'pages', "as" => "pages."  ], function(){
 
-    Route::resource('/','Admin\Pages\ManagePagesController',[
-        'only' 			=> ['index', 'edit', 'update'],
-        'parameters'    => ['' => 'page'],
-    ]);
+    // rutas para editar el content
+    Route::group(['middleware' => ['permission:manage_pages_contents'], 'prefix' => 'content', "as" => "content."  ], function(){
+        Route::resource('/','Admin\Pages\ManagePagesContentsController',[
+            'only' 			=> ['index', 'edit', 'update'],
+            'parameters'    => ['' => 'page_content'],
+        ]);
+
+    });
+
+    // rutas para editar las paginas
+    Route::group(['middleware' => ['permission:manage_pages']], function(){
+        Route::resource('/','Admin\Pages\ManagePagesController',[
+            'parameters'    => ['' => 'page'],
+        ]);
+
+        Route::group([ 'prefix' => '{page}/sections', "as" => "sections."  ], function(){
+            Route::patch( '{page_section}/association' , 'Admin\Pages\ManagePagesController@sectionAssociation')->name('association');
+            Route::patch( "sort" , 'Admin\Pages\ManagePagesController@sort')->name("sort");
+        });
+
+        // Route::group([ 'prefix' => 'sections', "as" => "sections."  ], function(){
+        //
+        // });
+
+    });
 
 });
