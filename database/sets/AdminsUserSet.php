@@ -26,12 +26,12 @@ class AdminsUserSet extends CltvoSet
         return [
             [
                 [
-                    // 'name'              => 'mara-loera',
-                    // 'first_name'        => 'Mara',
-                    // 'last_name'         => 'Loera',
-                    // 'email'             => 'mara@nicetohave.com.mx',
-                    // 'password'          => bcrypt(str_random(10)),
-                    // 'active'            => true
+                    'name'              => 'admin-el-cultivo',
+                    'first_name'        => 'El Cultivo',
+                    'last_name'         => 'Admin',
+                    'email'             => 'admin@elcultivo.mx',
+                    'password'          => 'admin',
+                    'active'            => true
                 ],
             ]
 
