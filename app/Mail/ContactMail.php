@@ -42,9 +42,9 @@ class ContactMail extends Mailable implements ShouldQueue
         return $this->from($this->email, $this->full_name)
                     ->view('vendor.notifications.email')
                     ->text('vendor.notifications.email-plain')
-                    ->subject('Información de contacto mextropoli.mx ['.$this->email.']')
+                    ->subject('Información de contacto elcultivo.mx ['.$this->email.']')
                     ->with([
-                        'greeting'   => 'Información de contacto mextropoli.com.mx',
+                        'greeting'   => 'Información de contacto elcultivo.mx',
                         'introLines' => $this->input,
                         'outroLines' => [],
                     ]);

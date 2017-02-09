@@ -29,7 +29,7 @@ class PageSet extends CltvoSet
                 'order'  => 0,
                 'publish'=> 1,
                 'es'        => [
-                    'name'  => 'Mextropoli',
+                    'name'  => 'El Cultivo',
                 ],
             ],
             "el-festival" => [

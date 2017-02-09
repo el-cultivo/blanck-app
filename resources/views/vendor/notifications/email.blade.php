@@ -71,8 +71,8 @@ $style = [
                     <tr>
                         <td style="{{ $style['email-masthead'] }}">
                             <a style="{{ $fontFamily }} {{ $style['email-masthead_name'] }}" href="{{ url('/') }}" target="_blank">
-                                <img src="{{ asset('images/logo-min.png')}}" alt="Mextropoli" style="max-width: 52px;display: block;margin: 0 auto;margin-bottom: 10px;">
-                                MEXTROPOLI
+                                <img src="{{ asset('images/logo-min.png')}}" alt="Elcultivo" style="max-width: 52px;display: block;margin: 0 auto;margin-bottom: 10px;">
+                                EL CULTIVO
                             </a>
                         </td>
                     </tr>
@@ -141,7 +141,7 @@ $style = [
 
                                         <!-- Salutation -->
                                         <p style="{{ $style['paragraph'] }}">
-                                            Saludos,<br> Mextropoli
+                                            Saludos,<br> El Cultivo
                                         </p>
 
                                         <!-- Sub Copy -->
@@ -177,7 +177,7 @@ $style = [
                                     <td style="{{ $fontFamily }} {{ $style['email-footer_cell'] }}">
                                         <p style="margin-top: 0; color: white; font-size: 12px; line-height: 1.5em;">
                                             &copy; {{ date('Y') }}
-                                            <a style="{{ $style['anchor'] }}; color: white;text-decoration:underline;" href="{{ url('/') }}" target="_blank">Mextropoli</a>.
+                                            <a style="{{ $style['anchor'] }}; color: white;text-decoration:underline;" href="{{ url('/') }}" target="_blank">El Cultivo</a>.
                                             All rights reserved.
                                         </p>
                                     </td>

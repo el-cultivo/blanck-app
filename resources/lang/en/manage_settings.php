@@ -21,7 +21,7 @@ return [
         'email' => [
 
             'label'         => 'Correo de usuario',
-            'placeholder'   => 'info@mextropoli.net',
+            'placeholder'   => 'info@elcultivo.net',
 
         ],
 
@@ -62,7 +62,7 @@ return [
     'blog' => [
         'title' => 'Blog',
         'url'   => [
-            'placeholder'   => 'Ej. https://www.tumblr.com/mextropoli/',
+            'placeholder'   => 'Ej. https://www.tumblr.com/elcultivo/',
             'label'         => 'Link:',
             'helper'        => 'Este link estará conectado con la imagen de Moodboard en About',
         ]
@@ -71,22 +71,22 @@ return [
     'social' => [
         'title'     => 'Redes sociales',
         'facebook'  => [
-            'placeholder'   => 'Ej. https://www.tumblr.com/mextropoli/',
+            'placeholder'   => 'Ej. https://www.tumblr.com/elcultivo/',
             'label'         => 'Facebook:',
             'helper'        => 'Este link estará conectado con la forma de contacto del footer',
         ],
         'twitter'   => [
-            'placeholder'   => 'Ej. https://www.tumblr.com/mextropoli/',
+            'placeholder'   => 'Ej. https://www.tumblr.com/elcultivo/',
             'label'         => 'Twitter:',
             'helper'        => 'Este link estará conectado con la forma de contacto del footer',
         ],
         'instagram' => [
-            'placeholder'   => 'Ej. https://www.tumblr.com/mextropoli/',
+            'placeholder'   => 'Ej. https://www.tumblr.com/elcultivo/',
             'label'         => 'Instagram:',
             'helper'        => 'Este link estará conectado con la imagen de instagram en About',
         ],
         'pinterest' => [
-            'placeholder'   => 'Ej. https://www.tumblr.com/mextropoli/',
+            'placeholder'   => 'Ej. https://www.tumblr.com/elcultivo/',
             'label'         => 'Pinterest:',
             'helper'        => 'Este link estará conectado con la forma de contacto del footer',
         ],
@@ -95,17 +95,17 @@ return [
     'mail' => [
         'title' => 'Correo',
         'contact'   => [
-            'placeholder'   => 'Ej. info@mextropoli.net',
+            'placeholder'   => 'Ej. info@elcultivo.net',
             'label'         => 'Correo de contacto:',
             'helper'        => '',
         ],
         'system'   => [
-            'placeholder'   => 'Ej. hola@mextropoli.net',
+            'placeholder'   => 'Ej. hola@elcultivo.net',
             'label'         => 'Correo del sistema:',
             'helper'        => 'Correo con el que se enviarán los mails de registro, etc.',
         ],
         'notifications'   => [
-            'placeholder'   => 'Ej. hola@mextropoli.net',
+            'placeholder'   => 'Ej. hola@elcultivo.net',
             'label'         => 'Correo de notificaciones:',
             'helper'        => 'Correo con el que se enviarán los mails de notificaciones',
         ],

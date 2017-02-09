@@ -10,7 +10,7 @@ return [
     ],
 
     'ActivationAccountNotification' => [
-        'subject'   => 'Mextropoli register',
+        'subject'   => 'El Cultivo register',
         'greeting'  => 'hello!',
         'copy'      => '<strong> Copy </strong>',
         'action'    => 'Activate account',

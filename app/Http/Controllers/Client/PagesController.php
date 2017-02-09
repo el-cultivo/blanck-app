@@ -59,7 +59,7 @@ class PagesController extends ClientController
             'Dirección: '.$street1.' '.$street2.', '.$city.', '.$state.', '.$country.', '.$zip,
         ];
 
-        Mail::to('hola@mextropoli.mx')->send(new ContactMail($content, $email, $first_name));
+        Mail::to('dev@elcultivo.mx')->send(new ContactMail($content, $email, $first_name));
 
         Mail::to($email)->send( new ThanksForContactMail($full_name) );
 

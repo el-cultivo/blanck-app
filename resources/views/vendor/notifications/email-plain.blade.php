@@ -19,4 +19,4 @@ if (! empty($outroLines)) {
 }
 
 echo 'Saludos,', "\n";
-echo "Mextropoli", "\n";
+echo "El Cultivo", "\n";

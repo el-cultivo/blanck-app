@@ -10,7 +10,7 @@ return [
     ],
 
     'ActivationAccountNotification' => [
-        'subject'   => 'Registro en Mextropoli',
+        'subject'   => 'Registro en El Cultivo',
         'greeting'  => 'saludo!',
         'copy'      => '<strong> texto de setting </strong>',
         'action'    => 'Activar cuenta',
@@ -34,7 +34,7 @@ return [
     ],
 
     'BuySuccessNotification'    => [
-        'subject'   => 'Tu pedido mextropoli.mx #:BAG_KEY',
+        'subject'   => 'Tu pedido elcultivo.mx #:BAG_KEY',
         'greeting'  => 'Confirmación de pedido',
         'copy'      => '',
         'action'    => 'Detalles del pedido',
@@ -42,9 +42,9 @@ return [
     ],
 
     'PresentNotification'       => [
-        'subject'   => 'mextropoli.mx tiene una sorpresa para ti.',
+        'subject'   => 'elcultivo.mx tiene una sorpresa para ti.',
         'greeting'  => '¡Felicidades :Name!',
-        'copy'      => ':User_name te ha hecho un regalo a través de mextropoli.mx, haz click en el siguiente enlace y mira lo que muy pronto recibirás.',
+        'copy'      => ':User_name te ha hecho un regalo a través de elcultivo.mx, haz click en el siguiente enlace y mira lo que muy pronto recibirás.',
         'action'    => '¡Quiero ver mis regalos!',
         'farewell'  => '',
     ],
