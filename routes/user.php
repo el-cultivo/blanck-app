@@ -12,5 +12,8 @@
 */
 
 Route::group(['prefix' => '{user}' ], function(){
-    Route::get('/', 'Users\UserController@show')->name('home');
+    Route::get('/', 'Users\UserController@show')->name('profile');
+    
+    Route::patch('/', 'Users\UserController@updateEmail')->name('email.update');
+    Route::patch('password', 'Users\UserController@updatePassword')->name('password.update');
 });
