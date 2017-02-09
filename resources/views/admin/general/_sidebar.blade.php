@@ -13,7 +13,7 @@
 
 		<!-- Dropdown Structure -->
 		<ul id='dropdown1' class='dropdown-content sidebar__main--profile--dropDown-ul'>
-			<li><a href="#!" class="sidebar__main--profile--dropDown-ul--link">Mi perfil</a></li>
+			<li><a href="{{ route("user::home", $user->name) }}" class="sidebar__main--profile--dropDown-ul--link">Mi perfil</a></li>
 			<li><a href="{{ route("client::index") }}" class="sidebar__main--profile--dropDown-ul--link">Ver sitio</a></li>
 			<li class="divider"></li>
 			<li>
