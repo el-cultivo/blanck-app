@@ -51,7 +51,7 @@ class UserController extends ClientController
 
         $clone->notify( new UpdateMailNotification);
 
-        return Redirect::route('user::home',$user->name)->with('status', "El email fue correctamente actualizado");
+        return Redirect::route('user::profile',$user->name)->with('status', "El email fue correctamente actualizado");
     }
 
 
@@ -67,7 +67,7 @@ class UserController extends ClientController
 
         $user->notify( new UpdatePasswordNotification);
 
-        return Redirect::route('user::home',$user->name)->with('status', "La contraseña fue correctamente actualizada");
+        return Redirect::route('user::profile',$user->name)->with('status', "La contraseña fue correctamente actualizada");
     }
 
 }
