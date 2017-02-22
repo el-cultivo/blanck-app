@@ -61,22 +61,6 @@ Route::group(['middleware' => ['permission:manage_photos'] ,'prefix' => 'photos'
     });
 });
 
-// categorias
-Route::group(['middleware' => ['permission:manage_categories'] ,'prefix' => 'categories', 'as' => 'categories.' ], function(){
-
-    Route::get( '/' , 'Admin\Films\ManageCategoriesController@indexView')->name('index');
-
-    Route::group(['middleware' => ['onlyajax'], 'as' => 'ajax.'  ,'prefix' => 'ajax' ], function(){
-
-        Route::resource('/','Admin\Films\ManageCategoriesController',[
-            'only'       => ['index','store','update','destroy'],
-            'parameters' => ['' => 'category']
-        ]);
-
-    });
-
-});
-
 //paginas
 Route::group(['prefix' => 'pages', "as" => "pages."  ], function(){
 
