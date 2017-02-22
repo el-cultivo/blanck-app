@@ -11,13 +11,6 @@ use App\Models\Locations\Locationtype;
 | database. Just tell the factory how a default model should look.
 |
 */
-/**
- * factory de categorias
- */
-$factory->define( App\Models\Films\Category::class, function (Faker\Generator $faker) {
-    return [];
-});
-
 
 /**
  * factory de usuarios

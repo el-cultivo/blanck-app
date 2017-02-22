@@ -57,16 +57,6 @@ class PermissionSet extends CltvoSet
                 "slug"  => "manage_films",
                 "label" => "Manejo de películas"
             ],
-
-            [
-                "slug"  => "manage_categories",
-                "label" => "Manejo de categorías"
-            ],
-            [
-                "slug"  => "associate_categories",
-                "label" => "asociar categorías"
-            ],
-
             [
                 "slug"  => "manage_clicks",
                 "label" => "Manejo de clics"

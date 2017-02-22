@@ -41,9 +41,6 @@ class AssociatePermissionRoleSet extends CltvoSet
 
                     "manage_films",
 
-                    "manage_categories",
-                    "associate_categories",
-
                     "manage_clicks",
                 ]
             ],
