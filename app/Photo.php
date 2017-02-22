@@ -61,12 +61,7 @@ class Photo extends Model
 
     public static $associable_models = [
         // code  => class name
-        "ally"                  => "App\Models\Allies\Ally",
-        "registrationtype"      => "App\Models\Registrations\Registrationtype",
-        "speaker"               => "App\Models\Speakers\Speaker",
-        'film'                  => "App\Models\Films\Film",
         'page'                  => "App\Models\Pages\Page",
-        'category'              => 'App\Models\Films\Category'
     ];
 
     /**
