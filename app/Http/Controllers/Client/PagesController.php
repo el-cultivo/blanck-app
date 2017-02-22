@@ -14,7 +14,7 @@ use App\Http\Controllers\ClientController;
 
 use View;
 use Redirect;
-use App\Page;
+use App\Models\Pages\Page;
 
 class PagesController extends ClientController
 {

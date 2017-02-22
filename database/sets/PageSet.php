@@ -2,6 +2,9 @@
 
 use Illuminate\Console\Command;
 
+use App\Models\Pages\Page;
+
+
 class PageSet extends CltvoSet
 {
     /**
@@ -13,7 +16,7 @@ class PageSet extends CltvoSet
      * nombre de la clase a ser sembrada
      */
     protected function CltvoGetModelClass(){
-        return "App\Page";
+        return "Page";
     }
 
     /**
@@ -103,11 +106,11 @@ class PageSet extends CltvoSet
 
         foreach ($pages as $value) {
 
-            $page = App\Page::getObjectBySlug(str_slug($value['es']['name']));
+            $page = Page::getObjectBySlug(str_slug($value['es']['name']));
 
             if(!$page){
 
-                $page = new App\Page;
+                $page = new Page;
 
                 $page->home = isset($value['home']) ? $value['home'] : null;
                 $page->order = isset($value['order']) ? $value['order'] : 0;
@@ -148,11 +151,11 @@ class PageSet extends CltvoSet
 
                 foreach ($value['childs'] as $child_value) {
 
-                    $child_page = App\Page::getObjectBySlug(str_slug($child_value["es"]['name']));
+                    $child_page = Page::getObjectBySlug(str_slug($child_value["es"]['name']));
 
                     if(!$child_page){
 
-                        $child_page = new App\Page;
+                        $child_page = new Page;
 
                         $child_page->home = isset($child_value['home']) ? $child_value['home'] : null;
                         $child_page->order = isset($child_value['order']) ? $child_value['order'] : 0;

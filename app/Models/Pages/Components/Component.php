@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Components;
+namespace App\Models\Pages\Components;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -72,7 +72,7 @@ class Component extends Model
         'thumbnail',
     ];
 
-    public static $image_galleries = [ 
+    public static $image_galleries = [
         'gallery'
     ];
 

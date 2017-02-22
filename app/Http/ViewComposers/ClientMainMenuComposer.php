@@ -3,7 +3,7 @@ namespace App\Http\ViewComposers;
 
 use Illuminate\Contracts\View\View;
 
-use App\Page;
+use App\Models\Pages\Page;
 use App\Setting;
 
 class ClientMainMenuComposer

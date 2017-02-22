@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use View;
 use Response;
 use Redirect;
-use App\Page;
+use App\Models\Pages\Page;
 use App\Publish;
 
 use Carbon\Carbon;

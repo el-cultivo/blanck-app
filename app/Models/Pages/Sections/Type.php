@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\Sections;
+namespace App\Models\Pages\Sections;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Sectiontype extends Model
+class Type extends Model
 {
     /**
      * The database table used by the model.

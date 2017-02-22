@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Sections;
+namespace App\Models\Pages\Sections;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\PhotoableTrait;
@@ -23,7 +23,7 @@ class Section extends Model
      * @var array
      */
     protected $hidden = [
-        'created_at', 
+        'created_at',
         'updated_at'
     ];
 
@@ -40,7 +40,7 @@ class Section extends Model
         'thumbnail',
     ];
 
-    public static $image_galleries = [ 
+    public static $image_galleries = [
         'gallery'
     ];
 

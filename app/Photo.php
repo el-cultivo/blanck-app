@@ -65,7 +65,7 @@ class Photo extends Model
         "registrationtype"      => "App\Models\Registrations\Registrationtype",
         "speaker"               => "App\Models\Speakers\Speaker",
         'film'                  => "App\Models\Films\Film",
-        'page'                  => "App\Page",
+        'page'                  => "App\Models\Pages\Page",
         'category'              => 'App\Models\Films\Category'
     ];
 

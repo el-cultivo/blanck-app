@@ -3,7 +3,7 @@
 namespace App\Http\Binds\Pages;
 
 use App\Http\Binds\CltvoBind;
-use App\Page;
+use App\Models\Pages\Page;
 use Route;
 
 class PublicPagesBind extends CltvoBind
