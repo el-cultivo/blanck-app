@@ -20,7 +20,7 @@ class CltvoSetSiteCommand extends Command
         'PhotoSet',
         'PublishSet',
 
-        // 'PageSet',
+        'PageSet',
 
     ];
 

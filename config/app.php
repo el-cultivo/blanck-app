@@ -95,7 +95,10 @@ return [
     /**
      * List of alternative languages (not including the one specified as 'locale')
      */
-    'available_langs' => ["en" => "English", "es" => "Español"],
+    'available_langs' => [
+        "es" => "Español",
+        "en" => "English"
+    ],
 
     /*
     |--------------------------------------------------------------------------
