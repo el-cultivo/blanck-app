@@ -13,21 +13,13 @@ class CreateSectionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sectiontypes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('label');
-            $table->text('description');
-            $table->string('view');
-            $table->timestamps();
-        });
-
         Schema::create('sections', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('index');
+            $table->string('index')->unique();
 
-            $table->integer('sectiontype_id')->unsigned();
+            $table->integer('type_id')->unsigned();
 
-            $table  ->foreign('sectiontype_id')
+            $table  ->foreign('type_id')
                     ->references('id')
                     ->on('sectiontypes')
                     ->onDelete('RESTRICT');
@@ -39,14 +31,16 @@ class CreateSectionsTable extends Migration
             $table->integer('page_id')->unsigned();
             $table->integer('section_id')->unsigned();
 
-            $table->integer('order');
+            $table->unsignedInteger('order')->nullable();
 
+            $table->unique(['order', 'page_id']);
             $table->primary(['page_id', 'section_id']);
 
             $table  ->foreign('page_id')
                     ->references('id')
                     ->on('pages')
                     ->onDelete('RESTRICT');
+
             $table  ->foreign('section_id')
                     ->references('id')
                     ->on('sections')
@@ -55,23 +49,7 @@ class CreateSectionsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('component_section', function (Blueprint $table) {
-            $table->integer('component_id')->unsigned();
-            $table->integer('section_id')->unsigned();
 
-            $table->primary(['component_id', 'section_id']);
-
-            $table  ->foreign('component_id')
-                    ->references('id')
-                    ->on('components')
-                    ->onDelete('RESTRICT');
-            $table  ->foreign('section_id')
-                    ->references('id')
-                    ->on('sections')
-                    ->onDelete('RESTRICT');
-
-            $table->timestamps();
-        });
     }
 
     /**
@@ -81,9 +59,7 @@ class CreateSectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('component_section');
         Schema::dropIfExists('page_section');
         Schema::dropIfExists('sections');
-        Schema::dropIfExists('sectiontypes');
     }
 }

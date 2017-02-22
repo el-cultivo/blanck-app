@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateComponentsTable extends Migration
+class CreateComponetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,15 @@ class CreateComponentsTable extends Migration
     {
         Schema::create('components', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('rules');
+            $table->integer('section_id')->unsigned();
+            $table->unsignedInteger('order')->nullable();
+            $table->unique(['order', 'section_id']);
+
+            $table  ->foreign('section_id')
+                    ->references('id')
+                    ->on('sections')
+                    ->onDelete('RESTRICT');
+
             $table->timestamps();
         });
 
@@ -23,10 +31,14 @@ class CreateComponentsTable extends Migration
             $table->integer('language_id')->unsigned();
             $table->integer('component_id')->unsigned();
 
-            $table->string('title')->default('');
-            $table->string('label')->default('');
-            $table->string('slug')->unique()->nullable();
-            $table->text('content');
+            $table->string('title')->nullable();
+            $table->string('subtitle')->nullable();
+            $table->text('excerpt')->nullable();
+
+            $table->text('content')->nullable();
+            $table->text('iframe')->nullable();
+            
+            $table->string('link')->nullable();
 
             $table->primary(['language_id', 'component_id']);
 

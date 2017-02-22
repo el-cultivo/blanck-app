@@ -3,12 +3,13 @@
 namespace App\Models\Pages\Sections;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Traits\PhotoableTrait;
-use App\Models\Components\Component;
+use App\Models\Pages\Sections\Components\Component;
+use App\Models\Traits\UpdatedAtTrait;
+use App\Models\Pages\Page;
 
 class Section extends Model
 {
-    use PhotoableTrait;
+    use UpdatedAtTrait;
 
     /**
      * The database table used by the model.
@@ -33,48 +34,59 @@ class Section extends Model
      * @var array
      */
     protected $fillable = [
-        'index'
+        'index',
+        'type_id'
     ];
 
-    public static $image_uses = [
-        'thumbnail',
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'type_id'    => 'integer',
     ];
-
-    public static $image_galleries = [
-        'gallery'
-    ];
-
     /**
      * The accessors to append to the model's array form.
      *
      * @var array
      */
     protected $appends = [
-        'order',
-        'label',
-        'description',
-        'view'
     ];
+
+    /**
+     * Get the type that owns the section.
+     */
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
+    /**
+     * The pages that belong to the section.
+     */
+    public function pages()
+    {
+        return $this->belongsToMany(Page::class)
+            ->withPivot(["order"])
+            ->orderBy('pivot_order',"ASC")
+            ->withTimestamps();
+    }
 
     /**
      * Trae las sections del component
      */
     public function components()
     {
-        return $this->belongsToMany(Component::class);
+        return $this->hasMany(Component::class)
+            ->orderBy('order',"ASC");
     }
 
-    /**
-     * Trae el Section Type del Section
-     */
-    public function sectiontype()
-    {
-        return $this->belongsTo(Sectiontype::class);
-    }
 
     public function isDeletable()
     {
         $total = 0;
+        $total += $this->pages->count();
         $total += $this->components->count();
         return $total == 0;
     }

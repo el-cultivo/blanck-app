@@ -31,7 +31,17 @@ class Type extends Model
     protected $fillable = [
         'label',
         'description',
-        'view'
+        'view',
+        'rules'
+    ];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'rules'    => 'array',
     ];
 
     /**
@@ -42,9 +52,4 @@ class Type extends Model
         return $this->hasMany(Section::class);
     }
 
-
-    public function isDeletable()
-    {
-        return !boolval($this->sections->count());
-    }
 }

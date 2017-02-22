@@ -1,18 +1,16 @@
 <?php
 
-namespace App\Models\Pages\Components;
+namespace App\Models\Pages\Sections\Components;
 
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Traits\TranslationTrait;
-use App\Models\Traits\UniqueSlugTrait;
 use App\Models\Traits\PhotoableTrait;
 
 use App\Models\Sections\Section;
 
 class Component extends Model
 {
-    use UniqueSlugTrait;
     use TranslationTrait;
     use PhotoableTrait;
 
@@ -46,14 +44,27 @@ class Component extends Model
      * @var array
      */
     protected $fillable = [
-        'rules'
+        'order',
+        'section_id'
+    ];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'order'         => 'integer',
+        'section_id'    => 'integer',
     ];
 
     protected  $translatable = [
-        'slug',
-        'label',
         'title',
-        'content'
+        'subtitle',
+        'excerpt',
+        'content',
+        'iframe',
+        'link'
     ];
 
     /**
@@ -62,72 +73,90 @@ class Component extends Model
      * @var array
      */
     protected $appends = [
-        'slug',
-        'label',
         'title',
-        'content'
+        'subtitle',
+        'excerpt',
+        'content',
+        'iframe',
+        'link'
     ];
 
     public static $image_uses = [
         'thumbnail',
+        'gallery'
     ];
 
     public static $image_galleries = [
         'gallery'
     ];
 
-    /**
-     * Get the administrator flag for the user.
-     *
-     * @return bool
-     */
-    public function getSlugAttribute()
-    {
-        return $this->translation()->slug;
-    }
 
     /**
-     * Get the administrator flag for the user.
-     *
-     * @return bool
-     */
-    public function getLabelAttribute()
-    {
-        return $this->translation()->label;
-    }
-
-    /**
-     * Get the administrator flag for the user.
+     * Get the current language title.
      *
      * @return bool
      */
     public function getTitleAttribute()
     {
-        return $this->translation()->label;
+        return $this->translation()->title;
     }
 
     /**
-     * Get the administrator flag for the user.
+     * Get the current language subtitle.
+     *
+     * @return bool
+     */
+    public function getSubtitleAttribute()
+    {
+        return $this->translation()->subtitle;
+    }
+
+    /**
+     * Get the current language excerpt.
+     *
+     * @return bool
+     */
+    public function getExcerptAttribute()
+    {
+        return $this->translation()->excerpt;
+    }
+
+    /**
+     * Get the current language content.
      *
      * @return bool
      */
     public function getContentAttribute()
     {
-        return $this->translation()->label;
+        return $this->translation()->content;
+    }
+
+    /**
+     * Get the current language iframe.
+     *
+     * @return bool
+     */
+    public function getIframeAttribute()
+    {
+        return $this->translation()->iframe;
+    }
+
+    /**
+     * Get the current language link.
+     *
+     * @return bool
+     */
+    public function getLinkAttribute()
+    {
+        return $this->translation()->link;
     }
 
     /**
      * Trae las sections del component
      */
-    public function sections()
+    public function section()
     {
-        return $this->belongsToMany(Section::class);
+        return $this->belongsTo(Section::class);
     }
 
-    public function isDeletable()
-    {
-        $total = 0;
-        $total += $this->sections->count();
-        return $total == 0;
-    }
 }
