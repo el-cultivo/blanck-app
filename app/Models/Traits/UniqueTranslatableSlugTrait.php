@@ -2,7 +2,9 @@
 
 namespace App\Models\Traits;
 
-trait UniqueSlugTrait
+use DB;
+
+trait UniqueTranslatableSlugTrait
 {
     /**
      * genera un nombre de usuario unico a partir del nombre y apellido
@@ -12,14 +14,14 @@ trait UniqueSlugTrait
     public static function generateUniqueSlug($name)
     {
         $slug = str_slug(trim($name));
-        $not_unique_slug = true;
+        $slug_is_not_unique = true;
         $gluter = "-";
 
-        while ($not_unique_slug) {
+        while ($slug_is_not_unique) {
             if (!static::slugExist($slug)) {
-                $not_unique_slug = false;
+                $slug_is_not_unique = false;
             }else {
-                $slug .= $gluter.rand(0,9);
+                $slug.= $gluter.rand(0,9);
             }
             $gluter = "";
         }
@@ -29,12 +31,15 @@ trait UniqueSlugTrait
 
     public static function slugExist($slug)
     {
-        return static::getModelBySlug($slug)->count() > 0;
+        $table = with(new static)->getTranslationTable();
+        return DB::table($table)->where('slug', $slug)->count() > 0;
     }
 
     public function scopeGetModelBySlug($query, $slug)
     {
-        return $query->where('slug', $slug);
+        return $query->whereHas('languages', function($pivot_query) use($slug) {
+            $pivot_query->where('slug', $slug);
+        })->with('languages');
     }
 
     public static function getObjectBySlug($slug)
@@ -43,12 +48,17 @@ trait UniqueSlugTrait
         return $models->count() > 0 ? $models->first() : null;
     }
 
-    public function updateUniqueSlug( $new_name )
+    public function updateUniqueSlug( $new_name, $language_iso )
     {
-        if (trim(strtolower($new_name))  == trim(strtolower($this->label)) ) {
-            return $this->slug;
+        if (trim(strtolower($new_name))  == trim(strtolower($this->translation($language_iso)->label)) ) {
+            return $this->translation($language_iso)->slug;
         }
 
         return static::generateUniqueSlug($new_name);
+    }
+
+    public function getSlugAttribute()
+    {
+        return $this->translation()->slug;
     }
 }
