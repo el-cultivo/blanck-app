@@ -3,8 +3,8 @@
         <tr>
             <th>Nombre (index)</th>
             <th>Estado</th>
-            <th>Ver</th>
-            <th>Editar</th>
+            <th class="center-align"  >Ver</th>
+            <th class="center-align"  >Editar</th>
         </tr>
     </thead>
 
@@ -19,12 +19,12 @@
                 <td>
                     {{ $page->publish->label }}
                 </td>
-                <td>
+                <td  class="center-align" >
                     <a href="{{ $page->public_url }}" class="btn-floating waves-effect waves-light" target="_blank">
                         <i class="material-icons small">input</i>
                     </a>
                 </td>
-                <td>
+                <td class="center-align" >
                     <a href="{{ $page->edit_content_url }}" class="btn-floating waves-effect waves-light">
                         <i class="material-icons small">mode_edit</i>
                     </a>
