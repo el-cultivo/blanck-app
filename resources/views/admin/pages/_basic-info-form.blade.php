@@ -25,7 +25,7 @@
 
         </div>
 
-        <div class="input-field col s4">
+        <div class="input-field col s4 offset-s4 ">
             {!! Form::date('publish_at', $page_edit->publish_at ? $page_edit->publish_at->format("Y-m-d") : date("Y-m-d"), [
                 'class'         => 'validate  datepicker',
                 'required'      => 'required',
@@ -51,7 +51,25 @@
         </div>
 
         @unless ($page_edit->main)
-            <div class="input-field col s4">
+            <div class="col s12"></div>
+            <div class="col s4 ">
+
+                <label for="">
+                    Abrir en nueva ventana ?
+                </label>
+                <div class=" switch ">
+                    No
+                    <label>
+                        {!! Form::checkbox("tblank", true , $page_edit->tblank, [
+                            'class'     => 'input__checkbox',
+                            'form'      => $form_id,
+                        ]) !!}
+                        <span class="lever"></span>
+                    </label>
+                    Sí
+                </div>
+            </div>
+            <div class="input-field col s8 ">
                 {!! Form::select('parent_id', $pages_list, $page_edit->parent_id, [
                     'class'         => 'validate',
                     // 'required'      => 'required',
@@ -63,7 +81,8 @@
                 ]) !!}
             </div>
         @endunless
-        
+
+
         <div class="col s12 ">
 
             @foreach($languages as $lang)

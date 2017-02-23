@@ -20,6 +20,7 @@ class ManagePagesBind extends CltvoBind
                 ])
                 ->where(["id" => $page_id])->first();
         });
+        
         Route::bind('page_edit', function ($page_id) {
             return Page::with([
                     "languages",

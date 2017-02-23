@@ -65,6 +65,7 @@ class ManagePagesController extends Controller
             "publish_at"    => $input["publish_at"],
             "publish_id"    => $input["publish_id"],
             "parent_id"     => empty($input["parent_id"]) ? null : $input["parent_id"],
+            "tblank"        => isset($input["tblank"])  ,
         ]);
 
         if(!$new_page){
@@ -111,6 +112,7 @@ class ManagePagesController extends Controller
         $page_edit->publish_at    = $input["publish_at"];
         $page_edit->publish_id    = $input["publish_id"];
         $page_edit->parent_id     = (empty($input["parent_id"]) || $page_edit->main)? null : $input["parent_id"];
+        $page_edit->tblank        = $page_edit->main ? false : isset($input["tblank"]);
 
         if ($this->user->hasPermission('manage_pages')) {
             $page_edit->index     = $input["index"];
