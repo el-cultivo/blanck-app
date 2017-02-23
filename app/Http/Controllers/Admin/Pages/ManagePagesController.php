@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Admin\Pages\CreatePageRequest;
+use App\Http\Requests\Admin\Pages\UpdatePageRequest;
 
 use App\Models\Pages\Page;
 use App\Publish;
@@ -82,25 +83,18 @@ class ManagePagesController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Page $page_edit)
     {
-        //
+        $data = [
+            "page_edit"         => $page_edit
+        ];
+
+        return view('admin.pages.edit',$data);
     }
 
     /**
@@ -110,9 +104,31 @@ class ManagePagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePageRequest $request, Page $page_edit)
     {
-        //
+        $input = $request->all();
+
+        $page_edit->publish_at    = $input["publish_at"];
+        $page_edit->publish_id    = $input["publish_id"];
+        $page_edit->parent_id     = (empty($input["parent_id"]) || $page_edit->main)? null : $input["parent_id"];
+
+        if ($this->user->hasPermission('manage_pages')) {
+            $page_edit->index     = $input["index"];
+        }
+
+        if(!$page_edit->save()){
+            return Redirect::back()->withErrors(["No se pudo actualizar la página"]);
+        }
+
+        foreach ($this->languages as $language) {
+            $name = $input["label"][$language->iso6391];
+            $page_edit->updateTranslationByIso($language->iso6391,[
+                'label'         => $name,
+                'slug'          => $page_edit->updateUniqueSlug($name,$language->iso6391)
+            ]);
+        }
+
+        return Redirect::route( 'admin::pages.edit', [$page_edit->id] )->with('status', "Página correctamente actualizada");
     }
 
     /**

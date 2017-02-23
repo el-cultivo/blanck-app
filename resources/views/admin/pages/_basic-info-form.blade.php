@@ -50,18 +50,20 @@
             ]) !!}
         </div>
 
-        <div class="input-field col s4">
-            {!! Form::select('parent_id', $pages_list, $page_edit->parent_id, [
-                'class'         => 'validate',
-                // 'required'      => 'required',
-                'placeholder'   => "Seleccionar",
-                'form'          => $form_id,
-            ])  !!}
-            {!! Form::label('parent_id', "Página padre", [
-                'class' => 'input-label active'
-            ]) !!}
-        </div>
-
+        @unless ($page_edit->main)
+            <div class="input-field col s4">
+                {!! Form::select('parent_id', $pages_list, $page_edit->parent_id, [
+                    'class'         => 'validate',
+                    // 'required'      => 'required',
+                    'placeholder'   => "Seleccionar",
+                    'form'          => $form_id,
+                ])  !!}
+                {!! Form::label('parent_id', "Página padre", [
+                    'class' => 'input-label active'
+                ]) !!}
+            </div>
+        @endunless
+        
         <div class="col s12 ">
 
             @foreach($languages as $lang)
