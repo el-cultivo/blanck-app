@@ -127,8 +127,27 @@ class ManagePagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Page $page_edit)
     {
-        //
+        if ($page_edit->main) {
+            return Redirect::back()->withErrors(["No puedes borrar la página principal del sitio"]);
+        }
+
+        if (!$page_edit->sections->isEmpty()) {
+            if (!$page_edit->sections()->detach()) {
+                return Redirect::back()->withErrors(["La página que desea borrar tiene secciones asociadas"]);
+            }
+        }
+
+        if (!$page_edit->languages()->detach()) {
+            return Redirect::back()->withErrors(["La página no pudo ser borrada"]); //Enviar el mensaje con el idioma que corresponde
+        }
+
+        if (!$page_edit->delete()) {
+            return Redirect::back()->withErrors(["La página no pudo ser borrada"]);
+        }
+
+        return Redirect::route('admin::pages.index')->with('status', "La página fue correctamente borrada");
+
     }
 }

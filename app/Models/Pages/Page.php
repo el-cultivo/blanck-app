@@ -150,9 +150,6 @@ class Page extends Model
             ->withTimestamps();
     }
 
-
-
-
     // start; Función scope para obtener las páginas que apareceran en el menú principal
 
     // public function scopeMenuMain($query)
