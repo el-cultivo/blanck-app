@@ -53,6 +53,21 @@ class Page extends Model
         'slug',
     ];
 
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'order'    => 'integer',
+
+        'parent_id'    => 'integer',
+        'publish_id'    => 'integer',
+
+        'main'      => 'boolean',
+        'tblank'    => 'boolean',
+    ];
+
     protected $dates = [
         'created_at',
         'updated_at',
