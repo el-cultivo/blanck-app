@@ -79,6 +79,27 @@ class Page extends Model
         return $this->translation()->slug;
     }
 
+    /**
+     * Get the current language slug.
+     *
+     * @return bool
+     */
+    public function getPublicUrlAttribute()
+    {
+        return route("client::show",$this->slug);
+    }
+
+    /**
+     * Get the current language slug.
+     *
+     * @return bool
+     */
+    public function getEditContentUrlAttribute()
+    {
+        return route("admin::pages.content.edit",$this->id);
+    }
+
+
     public function childs()
     {
         return $this->hasMany(static::class);
@@ -88,6 +109,7 @@ class Page extends Model
     {
         return $this->belongsTo(static::class, 'parent_id');
     }
+
 
     // start; Función para saber si una página es padre.
 

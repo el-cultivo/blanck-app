@@ -10,8 +10,6 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-    Route::get('/', 'Client\PagesController@index')->name('index');
-
 // Authentication Routes...
 	Route::get('login', 'Auth\LoginController@showLoginForm')->name('login:get');
 	Route::post('login', 'Auth\LoginController@login')->name('login:post');
@@ -38,3 +36,8 @@
 
 // // Contact
 //     Route::post('contact', 'Client\PagesController@contact')->name('contact');
+
+    Route::resource('/','Client\PagesController',
+        ['only' => [ 'index', 'show'],
+        'parameters' => ['' => 'public_page']
+    ]);

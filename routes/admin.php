@@ -68,25 +68,41 @@ Route::group(['prefix' => 'pages', "as" => "pages."  ], function(){
     Route::group(['middleware' => ['permission:manage_pages_contents'], 'prefix' => 'content', "as" => "content."  ], function(){
         Route::resource('/','Admin\Pages\ManagePagesContentsController',[
             'only' 			=> ['index', 'edit', 'update'],
-            'parameters'    => ['' => 'page_content'],
+            'parameters'    => ['' => 'page_edit_content'],
         ]);
 
     });
 
-    // rutas para editar las paginas
+    // rutas para el manejo de paginas
     Route::group(['middleware' => ['permission:manage_pages']], function(){
+
+    // crud de paginas
         Route::resource('/','Admin\Pages\ManagePagesController',[
-            'parameters'    => ['' => 'page'],
+            'only' 			=> ['index','create','store', 'edit', 'update','destroy'],
+            'parameters'    => ['' => 'page_edit'],
         ]);
 
-        Route::group([ 'prefix' => '{page}/sections', "as" => "sections."  ], function(){
-            Route::patch( '{page_section}/association' , 'Admin\Pages\ManagePagesController@sectionAssociation')->name('association');
-            Route::patch( "sort" , 'Admin\Pages\ManagePagesController@sort')->name("sort");
-        });
+        Route::group([ "as" => "sections."  ], function(){
 
-        // Route::group([ 'prefix' => 'sections', "as" => "sections."  ], function(){
-        //
-        // });
+            // para asociar y ortear secciones de una pagina
+            Route::group([ 'prefix' => '{page}/sections'  ], function(){
+                Route::patch( '{page_section}/association' , 'Admin\Pages\ManagePagesController@sectionAssociation')->name('association');
+                Route::patch( "sort" , 'Admin\Pages\ManagePagesController@sort')->name("sort");
+            });
+
+            Route::group([ 'prefix' => 'sections'], function(){
+                Route::resource('/','Admin\Pages\ManagePagesSectionsController',[
+                    'only' 			=> ['index','create','store','destroy'],
+                    'parameters'    => ['' => 'page_section'],
+                ]);
+
+                // Route::resource('/','Admin\Pages\ManagePagesComponentsController',[
+                //     'only' 			=> ['index','create','store', 'edit', 'update','destroy'],
+                //     'parameters'    => ['' => 'page_section'],
+                // ]);
+            });
+
+        });
 
     });
 

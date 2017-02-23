@@ -28,7 +28,7 @@ class ManagePagesContentsController extends Controller
             'pages' => Page::orderBy('order', 'ASC')->parents()->get(),
         ];
 
-        return view('admin.pages.index', $data );
+        return view('admin.pages.contents.index', $data );
     }
 
     /**
@@ -37,13 +37,14 @@ class ManagePagesContentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Page $page)
+    public function edit(Page $page_edit_content)
     {
 
-        $view = 'admin.pages.edit.'.$page->translation('es')->slug;
+        dd($page_edit_content);
+        $view = 'admin.pages.contents.edit.'.$page->translation('es')->slug;
 
         if (!View::exists($view)) {
-            $view = 'admin.pages.edit.template';
+            $view = 'admin.pages.contents.edit.template';
         }
 
         $pages = Page::parents()->getWithTranslations()->get()->pluck('es_name','id');
@@ -55,8 +56,8 @@ class ManagePagesContentsController extends Controller
             "pages"     => $pages,
         ];
 
-        // return view('admin.pages.edit.materialNote', $data );
-        return view('admin.pages.edit', $data );
+        // return view('admin.pages.contents.edit.materialNote', $data );
+        return view('admin.pages.contents.edit', $data );
     }
 
     /**

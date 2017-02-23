@@ -14,13 +14,13 @@ class ManagePagesBind extends CltvoBind
      */
     public static function Bind(){
         // para las páginas
-            Route::bind('page', function ($page_slug) {
-
-                $page = Page::published()->getModelBySlug($page_slug)->get()->first();
-
-                return $page && $page->translation()->slug == $page_slug ? $page : null;
-
+            Route::bind('page_edit_content', function ($page_id) {
+                return Page::with([
+                        "languages",
+                    ])
+                    ->where(["id" => $page_id])->first();
             });
+
 
     }
 
