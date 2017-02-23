@@ -15,7 +15,9 @@ class ViewComposerServiceProvider extends ServiceProvider
     {
     // admin
         // view()->composer('layouts.admin', 'App\Http\ViewComposers\AdminLayoutComposer');
-        // view()->composer('admin.general._menu', 'App\Http\ViewComposers\AdminTopMenuComposer');
+
+        view()->composer('admin.pages._basic-info-form', 'App\Http\ViewComposers\Admin\Pages\BasicInfoFormComposer');
+        
         view()->composer('admin.general._sidebar', 'App\Http\ViewComposers\AdminMainMenuComposer');
 
     // front

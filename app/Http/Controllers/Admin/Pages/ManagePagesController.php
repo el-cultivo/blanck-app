@@ -43,12 +43,6 @@ class ManagePagesController extends Controller
     public function create()
     {
         $data = [
-            "pages_list"        => Page::with([
-                    "languages"
-                ])
-                ->orderBy('index', 'ASC')->get()->pluck('index','id'),
-            "publishes_list"    => Publish::get()->pluck('label','id'),
-
             "page_edit"         => new Page
         ];
 
