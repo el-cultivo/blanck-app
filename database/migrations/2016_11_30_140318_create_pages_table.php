@@ -20,7 +20,7 @@ class CreatePagesTable extends Migration
             $table->smallInteger('order')->unsigned()->nullable();
 
             $table->integer('parent_id')->unsigned()->nullable();
-
+            $table->boolean('main')->default(false);
             $table->integer('publish_id')->unsigned()->nullable();
             $table->timestamp('publish_at')->nullable();
 

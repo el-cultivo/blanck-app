@@ -49,19 +49,20 @@ class PageSet extends CltvoSet
     {
         return [
             "home" => [
-                'index'         => "home",
+                'index'         => "main",
                 'order'         => null,
                 'parent_id'     => null,
                 'tblank'        => false,
                 'publish_id'    => $this->publish->id,
                 'publish_at'    => date("Y-m-d"),
+                'main'          => true,
 
                 'translations'  => [
                     'en'        => [
-                        'label'  => 'Home',
+                        'label'  => 'Main',
                     ],
                     'es'        => [
-                        'label'  => 'Inicio',
+                        'label'  => 'Principal',
                     ],
                 ],
 
@@ -101,6 +102,15 @@ class PageSet extends CltvoSet
 
         if(!$page){
             return false;
+        }
+
+        if ( isset($page_args["main"]) && $page_args["main"]) {
+            if (!Page::getMainPage()) {
+                $page->main = $page_args["main"];
+                if(!$page->save()){
+                    return false;
+                }
+            }
         }
 
         foreach ($this->languages as $language) {
