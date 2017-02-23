@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Pages;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Models\Pages\Page;
 class ManagePagesController extends Controller
 {
     /**
@@ -14,7 +15,18 @@ class ManagePagesController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'pages' => Page::with([
+                    "languages",
+                    "sections"
+                ])
+                ->orderBy('main', 'DESC')
+                ->orderBy('parent_id', 'ASC')
+                ->orderBy('order', 'ASC')
+                ->get(),
+        ];
+
+        return view('admin.pages.index', $data );
     }
 
     /**

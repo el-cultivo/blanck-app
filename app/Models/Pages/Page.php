@@ -80,7 +80,7 @@ class Page extends Model
     }
 
     /**
-     * Get the current language slug.
+     * Get public url
      *
      * @return bool
      */
@@ -90,7 +90,7 @@ class Page extends Model
     }
 
     /**
-     * Get the current language slug.
+     * Get edit content url
      *
      * @return bool
      */
@@ -99,6 +99,15 @@ class Page extends Model
         return route("admin::pages.content.edit",$this->id);
     }
 
+    /**
+     * Get edit structure url
+     *
+     * @return bool
+     */
+    public function getEditUrlAttribute()
+    {
+        return route("admin::pages.edit",$this->id);
+    }
 
     public function childs()
     {
@@ -110,6 +119,11 @@ class Page extends Model
         return $this->belongsTo(static::class, 'parent_id');
     }
 
+
+    public static function getMainPage()
+    {
+        return static::where(["main" => true])->first();
+    }
 
     // start; Función para saber si una página es padre.
 
