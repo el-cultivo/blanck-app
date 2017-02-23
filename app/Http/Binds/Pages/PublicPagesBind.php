@@ -14,13 +14,9 @@ class PublicPagesBind extends CltvoBind
      */
     public static function Bind(){
         // para las páginas
-            Route::bind('public_page', function ($page_slug) {
-
-                $page = Page::published()->getModelBySlug($page_slug)->get()->first();
-
-                return $page && $page->translation()->slug == $page_slug ? $page : null;
-
-            });
+        Route::bind('public_page', function ($page_slug) {
+            return Page::notMain()->published()->getModelBySlug($page_slug)->get()->first();
+        });
 
     }
 

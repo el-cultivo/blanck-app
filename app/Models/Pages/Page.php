@@ -101,6 +101,9 @@ class Page extends Model
      */
     public function getPublicUrlAttribute()
     {
+        if ($this->main) {
+            return route("client::index");
+        }
         return route("client::show",$this->slug);
     }
 
@@ -165,25 +168,11 @@ class Page extends Model
             ->withTimestamps();
     }
 
-    // start; Función scope para obtener las páginas que apareceran en el menú principal
+    // Get only not main pages
 
-    // public function scopeMenuMain($query)
-    // {
-    //     return $query->where([ 'header' => 1 ]);
-    // }
-    //
-    // // start; Función scope para obtener las páginas que apareceran en el footer
-    //
-    // public function scopeMenuFooter($query)
-    // {
-    //     return $query->where([ 'footer' => 1 ]);
-    // }
-    //
-    // // start; Función para obtener la página que funcionará como Home
-    //
-    // public function scopeHome($query, $home = true)
-    // {
-    //     return $query->where(['home' => $home]);
-    // }
+    public function scopeNotMain($query)
+    {
+        return $query->where([ 'main' => false ]);
+    }
 
 }
