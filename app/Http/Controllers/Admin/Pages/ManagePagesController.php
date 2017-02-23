@@ -5,7 +5,13 @@ namespace App\Http\Controllers\Admin\Pages;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\Admin\Pages\CreatePageRequest;
+
 use App\Models\Pages\Page;
+use App\Publish;
+
+use Redirect;
+
 class ManagePagesController extends Controller
 {
     /**
@@ -36,7 +42,17 @@ class ManagePagesController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            "pages_list"        => Page::with([
+                    "languages"
+                ])
+                ->orderBy('index', 'ASC')->get()->pluck('index','id'),
+            "publishes_list"    => Publish::get()->pluck('label','id'),
+
+            "page_edit"         => new Page
+        ];
+
+        return view('admin.pages.create',$data);
     }
 
     /**
@@ -45,9 +61,30 @@ class ManagePagesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreatePageRequest $request)
     {
-        //
+        $input = $request->all();
+
+        $new_page = Page::create([
+            "index"         => $input["index"],
+            "publish_at"    => $input["publish_at"],
+            "publish_id"    => $input["publish_id"],
+            "parent_id"     => empty($input["parent_id"]) ? null : $input["parent_id"],
+        ]);
+
+        if(!$new_page){
+            return Redirect::back()->withErrors(["No se pudo crear la página"]);
+        }
+
+        foreach ($this->languages as $language) {
+            $name = $input["label"][$language->iso6391];
+            $new_page->updateTranslationByIso($language->iso6391,[
+                'label'         => $name,
+                'slug'          => Page::generateUniqueSlug($name)
+            ]);
+        }
+
+        return Redirect::route( 'admin::pages.edit', [$new_page->id] )->with('status', "Página correctamente creada");
     }
 
     /**
