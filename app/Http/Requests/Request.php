@@ -9,7 +9,7 @@ use Auth;
 
 abstract class Request extends FormRequest
 {
-    protected $languages;
+    protected $languages_isos;
     protected $user;
 
     public function __construct(\Illuminate\Http\Request $request)
