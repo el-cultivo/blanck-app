@@ -35,7 +35,7 @@ class CreatePageRequest extends Request
                 'present',
                 Rule::exists('pages','id')
                 ->where(function ($query) {
-                    return $query->whereNull('parent_id');
+                    return $query->whereNull('parent_id')->where("main","!=",true);
                 })
             ],
             'label'     => 'required|array',

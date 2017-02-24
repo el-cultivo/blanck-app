@@ -41,7 +41,7 @@ class UpdatePageRequest extends Request
                 'not_in:'.$page_edit->id,
                 Rule::exists('pages','id')
                 ->where(function ($query) {
-                    return $query->whereNull('parent_id');
+                    return $query->whereNull('parent_id')->where("main","!=",true);
                 })
             ];
         }

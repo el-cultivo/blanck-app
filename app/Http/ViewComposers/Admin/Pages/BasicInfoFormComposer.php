@@ -14,6 +14,7 @@ class BasicInfoFormComposer
 		$view->with('pages_list',  Page::with([
 				"languages"
 			])
+			->notMain()
 			->whereNull('parent_id')
 			->orderBy('index', 'ASC')
 			->get()
