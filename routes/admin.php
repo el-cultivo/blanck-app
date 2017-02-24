@@ -94,14 +94,9 @@ Route::group(['prefix' => 'pages', "as" => "pages."  ], function(){
 
             Route::group([ 'prefix' => 'sections'], function(){
                 Route::resource('/','Admin\Pages\ManagePagesSectionsController',[
-                    'only' 			=> ['index','create','store','destroy'],
+                    'only' 			=> ['index','create','store','edit','update','destroy'],
                     'parameters'    => ['' => 'page_section'],
                 ]);
-
-                // Route::resource('/','Admin\Pages\ManagePagesComponentsController',[
-                //     'only' 			=> ['index','create','store', 'edit', 'update','destroy'],
-                //     'parameters'    => ['' => 'page_section'],
-                // ]);
             });
 
         });

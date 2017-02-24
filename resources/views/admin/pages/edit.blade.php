@@ -2,11 +2,11 @@
 
 
 @section('title')
-    Madificar página
+    Modificar página
 @endsection
 
 @section('h1')
-    Madificar página
+    Modificar página
 @endsection
 
 
