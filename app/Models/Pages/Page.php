@@ -129,7 +129,7 @@ class Page extends Model
 
     public function childs()
     {
-        return $this->hasMany(static::class);
+        return $this->hasMany(static::class, 'parent_id');
     }
 
     public function parent()
@@ -173,6 +173,13 @@ class Page extends Model
     public function scopeNotMain($query)
     {
         return $query->where([ 'main' => false ]);
+    }
+
+    public function isDeletable()
+    {
+        $total = 0;
+        $total += $this->childs->count();
+        return $total == 0;
     }
 
 }

@@ -145,6 +145,10 @@ class ManagePagesController extends Controller
             return Redirect::back()->withErrors(["No puedes borrar la página principal del sitio"]);
         }
 
+        if (!$page_edit->isDeletable()) {
+            return Redirect::back()->withErrors(["La página que desea borrar tiene páginas hijas"]);
+        }
+
         if (!$page_edit->sections->isEmpty()) {
             if (!$page_edit->sections()->detach()) {
                 return Redirect::back()->withErrors(["La página que desea borrar tiene secciones asociadas"]);
