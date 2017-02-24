@@ -14,7 +14,10 @@ class BasicInfoFormComposer
 		$view->with('pages_list',  Page::with([
 				"languages"
 			])
-			->orderBy('index', 'ASC')->get()->pluck('index','id')
+			->whereNull('parent_id')
+			->orderBy('index', 'ASC')
+			->get()
+			->pluck('index','id')
 		);
 
 		$view->with("publishes_list", Publish::get()->pluck('label','id') );

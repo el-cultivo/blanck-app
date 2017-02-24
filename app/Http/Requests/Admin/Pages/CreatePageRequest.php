@@ -3,8 +3,8 @@
 namespace App\Http\Requests\Admin\Pages;
 
 use App\Http\Requests\Request;
+use Illuminate\Validation\Rule;
 use App\Page;
-use App\Role;
 
 class CreatePageRequest extends Request
 {
@@ -31,7 +31,13 @@ class CreatePageRequest extends Request
     {
         $rules = [
             'index'     => 'required|max:255|unique:pages,index',
-            'parent_id' => 'present|exists:pages,id',
+            'parent_id' => [
+                'present',
+                Rule::exists('pages','id')
+                ->where(function ($query) {
+                    return $query->whereNull('parent_id');
+                })
+            ],
             'label'     => 'required|array',
         ];
 

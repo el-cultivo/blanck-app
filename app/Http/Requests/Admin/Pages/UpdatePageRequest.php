@@ -3,8 +3,8 @@
 namespace App\Http\Requests\Admin\Pages;
 
 use App\Http\Requests\Request;
+use Illuminate\Validation\Rule;
 use App\Page;
-use App\Role;
 
 class UpdatePageRequest extends Request
 {
@@ -36,7 +36,14 @@ class UpdatePageRequest extends Request
         ];
 
         if (!$page_edit->main) {
-            $rules['parent_id'] = 'present|exists:pages,id|not_in:'.$page_edit->id;
+            $rules['parent_id'] = [
+                'present',
+                'not_in:'.$page_edit->id,
+                Rule::exists('pages','id')
+                ->where(function ($query) {
+                    return $query->whereNull('parent_id');
+                })
+            ];
         }
 
         if ($this->user->hasPermission('manage_pages')) {
