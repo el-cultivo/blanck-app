@@ -25,7 +25,16 @@ class ManagePagesContentsController extends Controller
     public function index()
     {
         $data = [
-            'pages' => Page::orderBy('order', 'ASC')->parents()->get(),
+            'pages' => Page::with([
+                    "languages",
+                    "publish",
+                    "parent",
+                    "childs"
+                ])
+                ->orderBy('main', 'DESC')
+                ->orderBy('parent_id', 'ASC')
+                ->orderBy('order', 'ASC')
+                ->get(),
         ];
 
         return view('admin.pages.contents.index', $data );

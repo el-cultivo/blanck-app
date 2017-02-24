@@ -8,7 +8,7 @@
 			<div class="home__banner--title">
 				<img class="home__banner--title-img" src="{{ asset('images/home-banner-title.svg') }}">
 				<br>
-				{{-- <a class="home__banner--title-txt size_22" href="{{ route('client::show', 'boletos') }}">
+				{{-- <a class="home__banner--title-txt size_22" href="{{ route('client::pages.show', 'boletos') }}">
 					&iexcl;Aparta ya tus boletos!
 				</a> --}}
 			</div>

@@ -78,5 +78,17 @@ class PagesController extends ClientController
         return view($view);
     }
 
+    public function showChild(Page $public_page, Page $public_child_page)
+    {
+
+        $view = 'client.pages.'.$public_page->translation('es')->slug;
+
+        if (!View::exists($view)) {
+            $view = 'client.pages.template';
+        }
+
+        return view($view);
+    }
+
 
 }

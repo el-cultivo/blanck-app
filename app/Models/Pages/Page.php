@@ -102,9 +102,13 @@ class Page extends Model
     public function getPublicUrlAttribute()
     {
         if ($this->main) {
-            return route("client::index");
+            return route("client::pages.index");
         }
-        return route("client::show",$this->slug);
+
+        if ($this->parent_id) {
+            return route("client::pages.showChild",[$this->parent->slug,$this->slug]);
+        }
+        return route("client::pages.show",$this->slug);
     }
 
     /**

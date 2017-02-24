@@ -25,7 +25,9 @@ class ManagePagesController extends Controller
         $data = [
             'pages' => Page::with([
                     "languages",
-                    "sections"
+                    "sections",
+                    "parent",
+                    "childs"
                 ])
                 ->orderBy('main', 'DESC')
                 ->orderBy('parent_id', 'ASC')

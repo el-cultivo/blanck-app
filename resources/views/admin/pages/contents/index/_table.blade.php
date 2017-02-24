@@ -2,6 +2,7 @@
     <thead class="">
         <tr>
             <th>Nombre (index)</th>
+            <th>Página padre</th>
             <th>Estado</th>
             <th class="center-align"  >Ver</th>
             <th class="center-align"  >Editar</th>
@@ -15,6 +16,9 @@
                 <td>
                     {{ $page->label }}<br>
                     <small>({{ $page->index }})</small>
+                </td>
+                <td>
+                    {!! $page->parent ? $page->parent->label."<br><small>(".$page->parent->index.")</small>"  :"N/A"  !!}
                 </td>
                 <td>
                     {{ $page->publish->label }}

@@ -1,6 +1,6 @@
 <div class="sidebar__main">
 
-	<a class="sidebar__main--logo" href="{{ route("client::index") }}" alt="{{ env('APP_NAME') }}" style="background-image:url({{ asset('images/logo.svg') }});">
+	<a class="sidebar__main--logo" href="{{ route("client::pages.index") }}" alt="{{ env('APP_NAME') }}" style="background-image:url({{ asset('images/logo.svg') }});">
 	</a>
 
 	<div class="sidebar__main--profile">
@@ -14,7 +14,7 @@
 		<!-- Dropdown Structure -->
 		<ul id='dropdown1' class='dropdown-content sidebar__main--profile--dropDown-ul'>
 			<li><a href="{{ route("user::profile", $user->name) }}" class="sidebar__main--profile--dropDown-ul--link">Mi perfil</a></li>
-			<li><a href="{{ route("client::index") }}" class="sidebar__main--profile--dropDown-ul--link">Ver sitio</a></li>
+			<li><a href="{{ route("client::pages.index") }}" class="sidebar__main--profile--dropDown-ul--link">Ver sitio</a></li>
 			<li class="divider"></li>
 			<li>
 				{!! Form::open(['method' => 'POST', 'route' => 'client::logout']) !!}

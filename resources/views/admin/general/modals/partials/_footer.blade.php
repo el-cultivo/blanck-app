@@ -6,7 +6,7 @@
 
 <div class="row modal__row-footer">
     <div class="col s6 ">
-        <a href="{{ route("client::index") }}">
+        <a href="{{ route("client::pages.index") }}">
             <img class="footer__logo" src="/images/logo-default.svg" alt="El cultivo" />
         </a>
     </div>

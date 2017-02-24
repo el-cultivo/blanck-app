@@ -27,7 +27,7 @@
 					Ya estoy registrado
 				</a>
 
-				<a class="auth__links--link" href="{{ route('client::index') }}">
+				<a class="auth__links--link" href="{{ route('client::pages.index') }}">
 					Ir a la página principal
 				</a>
 			</div>

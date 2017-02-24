@@ -37,7 +37,12 @@
 // // Contact
 //     Route::post('contact', 'Client\PagesController@contact')->name('contact');
 
-    Route::resource('/','Client\PagesController',
-        ['only' => [ 'index', 'show'],
-        'parameters' => ['' => 'public_page']
-    ]);
+	Route::group([ "as" => "pages."  ], function(){
+		Route::resource('/','Client\PagesController',
+			['only' => [ 'index', 'show'],
+			'parameters' => ['' => 'public_page']
+		]);
+
+
+		Route::get('{public_page}/{public_child_page}','Client\PagesController@showChild')->name('showChild');
+	});
