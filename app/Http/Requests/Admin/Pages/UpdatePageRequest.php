@@ -35,7 +35,7 @@ class UpdatePageRequest extends Request
             'label'     => 'required|array',
         ];
 
-        if (!$page_edit->main) {
+        if (!$page_edit->main && $page_edit->childs->isEmpty()) {
             $rules['parent_id'] = [
                 'present',
                 'not_in:'.$page_edit->id,

@@ -51,34 +51,36 @@
         </div>
 
         @unless ($page_edit->main)
-            <div class="col s12"></div>
-            <div class="col s4 ">
-
-                <label for="">
-                    Abrir en nueva ventana ?
-                </label>
-                <div class=" switch ">
-                    No
-                    <label>
-                        {!! Form::checkbox("tblank", true , $page_edit->tblank, [
-                            'class'     => 'input__checkbox',
-                            'form'      => $form_id,
-                        ]) !!}
-                        <span class="lever"></span>
-                    </label>
-                    Sí
-                </div>
-            </div>
             <div class="input-field col s8 ">
-                {!! Form::select('parent_id', $pages_list, $page_edit->parent_id, [
-                    'class'         => 'validate',
-                    // 'required'      => 'required',
-                    'placeholder'   => "Seleccionar",
-                    'form'          => $form_id,
-                ])  !!}
-                {!! Form::label('parent_id', "Página padre", [
-                    'class' => 'input-label active'
-                ]) !!}
+                @if ($page_edit->childs->isEmpty())
+                    {!! Form::select('parent_id', $pages_list, $page_edit->parent_id, [
+                        'class'         => 'validate',
+                        // 'required'      => 'required',
+                        'placeholder'   => "Seleccionar",
+                        'form'          => $form_id,
+                    ])  !!}
+                    {!! Form::label('parent_id', "Página padre", [
+                        'class' => 'input-label active'
+                    ]) !!}
+                @endif
+            </div>
+            <div class="col s4 ">
+                <div class="pull-right">
+                    <label for="">
+                        Abrir en nueva ventana ?
+                    </label>
+                    <div class=" switch ">
+                        No
+                        <label>
+                            {!! Form::checkbox("tblank", true , $page_edit->tblank, [
+                                'class'     => 'input__checkbox',
+                                'form'      => $form_id,
+                            ]) !!}
+                            <span class="lever"></span>
+                        </label>
+                        Sí
+                    </div>
+                </div>
             </div>
         @endunless
 
