@@ -47,7 +47,7 @@ class UpdatePageRequest extends Request
         }
 
         if ($this->user->hasPermission('manage_pages')) {
-            $rules['index'] = 'required|max:255|unique:pages,index,'.$page_edit->id.',id';
+            $rules['index'] = 'required|max:255|alpha_dash|unique:pages,index,'.$page_edit->id.',id';
         }
 
         foreach ($this->languages_isos as $lang_iso) {

@@ -30,7 +30,7 @@ class CreatePageRequest extends Request
     public function rules()
     {
         $rules = [
-            'index'     => 'required|max:255|unique:pages,index',
+            'index'     => 'required|max:255|alpha_dash|unique:pages,index',
             'parent_id' => [
                 'present',
                 Rule::exists('pages','id')
