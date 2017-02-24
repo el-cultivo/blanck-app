@@ -65,12 +65,14 @@ Route::group(['middleware' => ['permission:manage_photos'] ,'prefix' => 'photos'
 Route::group(['prefix' => 'pages', "as" => "pages."  ], function(){
 
     // rutas para editar el content
-    Route::group(['middleware' => ['permission:manage_pages_contents'], 'prefix' => 'content', "as" => "content."  ], function(){
-        Route::resource('/','Admin\Pages\ManagePagesContentsController',[
-            'only' 			=> ['index', 'edit', 'update'],
-            'parameters'    => ['' => 'page_edit_content'],
-        ]);
-
+    Route::group(['middleware' => ['permission:manage_pages_contents']  ], function(){
+        Route::patch( "sort" , 'Admin\Pages\ManagePagesContentsController@sort')->name("sort");
+        Route::group([ 'prefix' => 'content', "as" => "content."  ], function(){
+            Route::resource('/','Admin\Pages\ManagePagesContentsController',[
+                'only' 			=> ['index', 'edit', 'update'],
+                'parameters'    => ['' => 'page_edit_content'],
+            ]);
+        });
     });
 
     // rutas para el manejo de paginas

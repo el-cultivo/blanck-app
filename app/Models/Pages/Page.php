@@ -54,6 +54,17 @@ class Page extends Model
     ];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'complete_label',
+        'public_url',
+        'edit_content_url',
+    ];
+
+    /**
      * The attributes that should be casted to native types.
      *
      * @var array
@@ -131,9 +142,40 @@ class Page extends Model
         return route("admin::pages.edit",$this->id);
     }
 
+    /**
+     * Get name with index
+     *
+     * @return bool
+     */
+    public function getCompleteLabelAttribute()
+    {
+        return $this->label."<br><small>(".$this->index.")</small>";
+    }
+
+    /**
+     * Get parent name with index
+     *
+     * @return bool
+     */
+    public function getParentLabelAttribute()
+    {
+        return $this->parent ? $this->parent->complete_label :"Sin página padre";
+    }
+
+    /**
+     * Get parent index
+     *
+     * @return bool
+     */
+    public function getParentIndexAttribute()
+    {
+        return $this->parent ? $this->parent->index :"cltvo-n-a";
+    }
+
+
     public function childs()
     {
-        return $this->hasMany(static::class, 'parent_id');
+        return $this->hasMany(static::class, 'parent_id')->orderBy('order', 'ASC');
     }
 
     public function parent()

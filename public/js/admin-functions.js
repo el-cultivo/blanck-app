@@ -23084,37 +23084,7 @@ _constants.w.on('load', function () {
 	(0, _dom.ifElementExistsThenLaunch)([[], ['#admin-vue', _mainVue.mainVue, undefined, [{ mixins: [_mexicoStatesAndMunicipalities.mexicoStatesAndMunicipalities] }, {
 		mediaManager: _mediaManager.mediaManager,
 		singleImage: _singleImage.singleImage,
-		allytypes: _simpleCruds.allytypes,
-		allytypesModalCreate: _simpleCruds.allytypesModalCreate,
-		allytypesModalEdit: _simpleCruds.allytypesModalEdit,
-		allies: _simpleCruds.allies,
-		allytypesSelect: _simpleCruds.allytypesSelect,
-		// alliesModalEdit,
-		// alliesModalCreate,
-		locationtypesModalCreate: _simpleCruds.locationtypesModalCreate,
-		locationtypesModalEdit: _simpleCruds.locationtypesModalEdit,
-		locationtypes: _simpleCruds.locationtypes,
-		locationtypesSelect: _simpleCruds.locationtypesSelect,
-		locationsModalCreate: _simpleCruds.locationsModalCreate,
-		locationsModalEdit: _simpleCruds.locationsModalEdit,
-		locations: _simpleCruds.locations,
-		categoriesModalCreate: _simpleCruds.categoriesModalCreate,
-		categoriesModalEdit: _simpleCruds.categoriesModalEdit,
-		categories: _simpleCruds.categories,
-		topicsModalCreate: _simpleCruds.topicsModalCreate,
-		topicsModalEdit: _simpleCruds.topicsModalEdit,
-		topics: _simpleCruds.topics,
-		registrationtypesModalCreate: _simpleCruds.registrationtypesModalCreate,
-		registrationtypesModalEdit: _simpleCruds.registrationtypesModalEdit,
-		registrationtypes: _simpleCruds.registrationtypes,
-		speakersModalCreate: _simpleCruds.speakersModalCreate,
-		speakersModalEdit: _simpleCruds.speakersModalEdit,
-		speakers: _simpleCruds.speakers,
-		registrationtypesSelect: _simpleCruds.registrationtypesSelect,
-		topicsSelect: _simpleCruds.topicsSelect,
-		speakersSelect: _simpleCruds.speakersSelect,
-		categoriesSelect: _simpleCruds.categoriesSelect,
-		locationsSelect: _simpleCruds.locationsSelect
+		pages: _simpleCruds.pages
 	}]], ['#alert__container', _alertsController.alertsController, 'init', []]]);
 });
 
@@ -23567,7 +23537,7 @@ var mediaManager = exports.mediaManager = Vue.extend({
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.categoriesSelect = exports.speakersSelect = exports.topicsSelect = exports.registrationtypesSelect = exports.locationsSelect = exports.speakers = exports.speakersRow = exports.speakersModalEdit = exports.speakersModalCreate = exports.registrationtypes = exports.registrationtypesRow = exports.registrationtypesModalEdit = exports.registrationtypesModalCreate = exports.topics = exports.topicsModalEdit = exports.topicsModalCreate = exports.categories = exports.categoriesModalEdit = exports.categoriesModalCreate = exports.locations = exports.locationsModalEdit = exports.locationsModalCreate = exports.locationtypes = exports.locationtypesSelect = exports.locationtypesModalEdit = exports.locationtypesModalCreate = exports.allies = exports.allyList = exports.allytypesSelect = exports.allytypes = exports.allytypesModalEdit = exports.allytypesModalCreate = undefined;
+exports.pages = exports.pagesGroup = undefined;
 
 var _ramda = require('ramda');
 
@@ -23676,66 +23646,14 @@ var openModalFromSimpleImageCrud = function openModalFromSimpleImageCrud(name, $
 	$(name).modal('open');
 };
 
-var allytypesModalCreate = exports.allytypesModalCreate = (0, _simpleCrudComponentMakers.simpleModalCrud)('#allytypes-modal-create-template');
-var allytypesModalEdit = exports.allytypesModalEdit = (0, _simpleCrudComponentMakers.simpleModalCrud)('#allytypes-modal-edit-template', { props: ['edit-index'] });
-var allytypes = exports.allytypes = (0, _simpleCrudComponentMakers.simpleCrud)('#allytypes-template', { methods: { openModal: openModal }, components: { allytypesModalCreate: allytypesModalCreate, allytypesModalEdit: allytypesModalEdit }, mixins: [_sortable.sortable] });
-var allytypesSelect = exports.allytypesSelect = (0, _simpleCrudComponentMakers.simpleCrud)('#allytypes-select-template', { props: ['current-ally'], methods: { openModal: openModal }, components: { allytypesModalCreate: allytypesModalCreate } });
-
-// export const alliesModalCreate = simpleModalCrud('#allies-modal-create-template');
-// export const alliesModalEdit = simpleModalCrud('#allies-modal-edit-template',{props:['edit-index']});
-var allyList = exports.allyList = (0, _simpleCrudComponentMakers.simpleCrud)('#ally-list-template', { props: ['label'], mixins: [_sortable.sortable] });
-var allies = exports.allies = (0, _simpleCrudComponentMakers.simpleCrud)('#allies-template', { methods: { openModal: openModal }, components: {
-		allyList: allyList
-		// alliesModalCreate,
-		// alliesModalEdit
-	}, mixins: [_multilistSortable.multilistSortable] });
-
 var form_id = function form_id() {
 	return _ramda2.default.replace('{{item_on_edit.id}}', this.id, this.formId);
 };
-var locationtypesModalCreate = exports.locationtypesModalCreate = (0, _simpleCrudComponentMakers.simpleModalCrud)('#locationtypes-modal-create-template');
-var locationtypesModalEdit = exports.locationtypesModalEdit = (0, _simpleCrudComponentMakers.simpleModalCrud)('#locationtypes-modal-edit-template', { props: ['edit-index'] });
-var locationtypesSelect = exports.locationtypesSelect = (0, _simpleCrudComponentMakers.simpleCrud)('#locationtypes-select-template', { props: ['current-location', 'formId', 'id'], computed: { form_id: form_id }, methods: { openModal: openModal }, components: { locationtypesModalCreate: locationtypesModalCreate } });
-var locationtypes = exports.locationtypes = (0, _simpleCrudComponentMakers.simpleCrud)('#locationtypes-template', { methods: { openModal: openModal }, components: { locationtypesModalCreate: locationtypesModalCreate, locationtypesModalEdit: locationtypesModalEdit } });
 
-var locationsModalCreate = exports.locationsModalCreate = (0, _simpleCrudComponentMakers.simpleModalCrud)('#locations-modal-create-template', { data: { form_id: '' }, props: ['store'], mixins: [_mexicoStatesAndMunicipalities.mexicoStatesAndMunicipalities], components: { locationtypesSelect: locationtypesSelect, gMap: _gMap.gMap } });
-var locationsModalEdit = exports.locationsModalEdit = (0, _simpleCrudComponentMakers.simpleModalCrud)('#locations-modal-edit-template', { data: { form_id: '' }, props: ['edit-index', 'store'], mixins: [_mexicoStatesAndMunicipalities.mexicoStatesAndMunicipalities], components: { locationtypesSelect: locationtypesSelect, gMap: _gMap.gMap } });
-var locations = exports.locations = (0, _simpleCrudComponentMakers.simpleCrud)('#locations-template', { props: ['store'], methods: { openModal: openModal }, components: { locationsModalCreate: locationsModalCreate, locationsModalEdit: locationsModalEdit, locationtypesSelect: locationtypesSelect, locationtypesModalCreate: locationtypesModalCreate } });
-
-var categoriesModalCreate = exports.categoriesModalCreate = (0, _simpleCrudComponentMakers.simpleModalCrud)('#categories-modal-create-template');
-var categoriesModalEdit = exports.categoriesModalEdit = (0, _simpleCrudComponentMakers.simpleModalCrud)('#categories-modal-edit-template', { props: ['edit-index'] });
-var categories = exports.categories = (0, _simpleCrudComponentMakers.simpleCrud)('#categories-template', { methods: { openModal: openModal }, components: { categoriesModalCreate: categoriesModalCreate, categoriesModalEdit: categoriesModalEdit } });
-
-var topicsModalCreate = exports.topicsModalCreate = (0, _simpleCrudComponentMakers.simpleModalCrud)('#topics-modal-create-template');
-var topicsModalEdit = exports.topicsModalEdit = (0, _simpleCrudComponentMakers.simpleModalCrud)('#topics-modal-edit-template', { props: ['edit-index'] });
-var topics = exports.topics = (0, _simpleCrudComponentMakers.simpleCrud)('#topics-template', { methods: { openModal: openModal }, components: { topicsModalCreate: topicsModalCreate, topicsModalEdit: topicsModalEdit } });
-
-var registrationtypesModalCreate = exports.registrationtypesModalCreate = (0, _simpleCrudComponentMakers.simpleModalCrud)('#registrationtypes-modal-create-template');
-var registrationtypesModalEdit = exports.registrationtypesModalEdit = (0, _simpleCrudComponentMakers.simpleModalCrud)('#registrationtypes-modal-edit-template', { props: ['edit-index'] });
-var registrationtypesRow = exports.registrationtypesRow = (0, _simpleCrudComponentMakers.simpleCrudWithImage)('#registrationtypes-row-template', { props: ['registrationtype'], methods: { openModalFromSimpleImageCrud: openModalFromSimpleImageCrud } });
-var registrationtypes = exports.registrationtypes = (0, _simpleCrudComponentMakers.simpleCrud)('#registrationtypes-template', { methods: { openModal: openModal }, components: { registrationtypesModalCreate: registrationtypesModalCreate, registrationtypesModalEdit: registrationtypesModalEdit, registrationtypesRow: registrationtypesRow } });
-
-var speakersModalCreate = exports.speakersModalCreate = (0, _simpleCrudComponentMakers.simpleModalCrud)('#speakers-modal-create-template');
-var speakersModalEdit = exports.speakersModalEdit = (0, _simpleCrudComponentMakers.simpleModalCrud)('#speakers-modal-edit-template', { props: ['edit-index'] });
-var speakersRow = exports.speakersRow = (0, _simpleCrudComponentMakers.simpleCrudWithImage)('#speakers-row-template', { props: ['speaker'], methods: { openModalFromSimpleImageCrud: openModalFromSimpleImageCrud } });
-var speakers = exports.speakers = (0, _simpleCrudComponentMakers.simpleCrud)('#speakers-template', { methods: { openModal: openModal }, components: { speakersModalCreate: speakersModalCreate, speakersModalEdit: speakersModalEdit, speakersRow: speakersRow } });
-
-var locationsSelect = exports.locationsSelect = (0, _simpleCrudComponentMakers.simpleCrud)('#locations-select-template', { props: ['current-film'], methods: { openModal: openModal }, components: { locationsModalCreate: locationsModalCreate } });
-
-var registrationtypesSelect = exports.registrationtypesSelect = (0, _simpleCrudComponentMakers.simpleCrud)('#registrationtypes-select-template', { props: ['current-film'], methods: { openModal: openModal }, components: { registrationtypesModalCreate: registrationtypesModalCreate } });
-
-var topicsSelect = exports.topicsSelect = (0, _simpleCrudComponentMakers.simpleCrud)('#topics-select-template', { props: ['current-film'], methods: { openModal: openModal }, components: { topicsModalCreate: topicsModalCreate } });
-
-var speakersSelect = exports.speakersSelect = (0, _simpleCrudComponentMakers.simpleCrud)('#speakers-select-template', { props: ['current-film'], methods: { openModal: openModal }, components: { speakersModalCreate: speakersModalCreate } });
-
-var categoriesSelect = exports.categoriesSelect = (0, _simpleCrudComponentMakers.simpleCrud)('#categories-select-template', { props: ['current-film'], methods: { openModal: openModal }, components: { categoriesModalCreate: categoriesModalCreate } });
-
-// // export var userCards = simpleCrudComponentMaker('#user-cards-template');
-// // export var sizes = simpleCrudComponentMaker('#size-inputs-template');
-// // export var colors  = simpleCrudComponentMaker('#color-inputs-template');
-// // export var categoriesModal = simpleCrudComponentMaker('#categories-modal-template', simpleModalCrud('categories', categoriesModalConfig));
-// // export var colorsModal = simpleCrudComponentMaker('#colors-modal-template', simpleModalCrud('colors'));
-// // export var sizesModal = simpleCrudComponentMaker('#sizes-modal-template', simpleModalCrud('sizes'));
+var pagesGroup = exports.pagesGroup = (0, _simpleCrudComponentMakers.simpleCrud)('#pages-group-template', { props: ['label', 'index'], mixins: [_sortable.sortable] });
+var pages = exports.pages = (0, _simpleCrudComponentMakers.simpleCrud)('#pages-template', { components: {
+		pagesGroup: pagesGroup
+	}, mixins: [_multilistSortable.multilistSortable] });
 
 },{"../../functions/dom":11,"../../functions/pure":12,"../components/g-map":16,"../factories/simple-crud-component-makers.js":20,"../mixins/mexico-states-and-municipalities":26,"../mixins/multilist-sortable":27,"../mixins/number-filters":28,"../mixins/sortable":30,"ramda":3,"vue":7}],19:[function(require,module,exports){
 'use strict';
