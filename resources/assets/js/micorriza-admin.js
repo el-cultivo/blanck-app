@@ -6,6 +6,9 @@ import {alertsController} from './alerts-controller';
 import {mainVue} from './vue/main-vue';
 import {
 		pages,
+		pagesectionsModalCreate,
+		pagesectionsModalEdit,
+		pagesections
 	} from './vue/components/simple-cruds';
 import {mexicoStatesAndMunicipalities} from './vue/mixins/mexico-states-and-municipalities';
 import {mediaManager} from './vue/components/media-manager';
@@ -18,6 +21,9 @@ w.on('load', () => {
 			mediaManager,
 			singleImage,
 			pages,
+			pagesectionsModalCreate,
+			pagesectionsModalEdit,
+			pagesections
 		}]],
 		['#alert__container', alertsController, 'init', []],
 	]);
