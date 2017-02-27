@@ -17,8 +17,9 @@ class CreateSectiontypesTable extends Migration
             $table->increments('id');
             $table->string('label');
             $table->text('description');
-            $table->string('view');
-            $table->text('rules');
+            $table->string('admin_view_path');
+            $table->boolean('protected')->default(false);
+            $table->boolean('unlimited')->default(false);
             $table->timestamps();
         });
 

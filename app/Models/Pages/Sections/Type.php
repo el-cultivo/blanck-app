@@ -31,8 +31,9 @@ class Type extends Model
     protected $fillable = [
         'label',
         'description',
-        'view',
-        'rules'
+        'admin_view_path',
+        'protected',
+        'unlimited'
     ];
 
     /**
@@ -41,7 +42,8 @@ class Type extends Model
      * @var array
      */
     protected $casts = [
-        'rules'    => 'array',
+        'protected'    => 'boolean',
+        'unlimited'    => 'boolean',
     ];
 
     /**
