@@ -93,10 +93,16 @@ Route::group(['prefix' => 'pages', "as" => "pages."  ], function(){
             });
 
             Route::group([ 'prefix' => 'sections'], function(){
-                Route::resource('/','Admin\Pages\ManagePagesSectionsController',[
-                    'only' 			=> ['index','create','store','edit','update','destroy'],
-                    'parameters'    => ['' => 'page_section'],
-                ]);
+
+                Route::get( '/' , 'Admin\Pages\ManagePagesSectionsController@indexView')->name('index');
+
+                Route::group(['middleware' => ['onlyajax'], 'as' => 'ajax.'  ,'prefix' => 'ajax' ], function(){
+                    Route::resource('/','Admin\Pages\ManagePagesSectionsController',[
+                        'only' 			=> ['index',/*'create','edit',*/'store','update','destroy'],
+                        'parameters'    => ['' => 'page_section'],
+                    ]);
+                });
+                
             });
 
         });
