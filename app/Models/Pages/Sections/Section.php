@@ -35,7 +35,10 @@ class Section extends Model
      */
     protected $fillable = [
         'index',
-        'type_id'
+        'template_path',
+        'components_max',
+        'type_id',
+        'editable_contents'
     ];
 
     /**
@@ -44,7 +47,9 @@ class Section extends Model
      * @var array
      */
     protected $casts = [
-        'type_id'    => 'integer',
+        'type_id'           => 'integer',
+        'components_max'    => 'integer',
+        'editable_contents' => 'array'
     ];
     /**
      * The accessors to append to the model's array form.

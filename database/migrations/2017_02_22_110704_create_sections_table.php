@@ -16,8 +16,13 @@ class CreateSectionsTable extends Migration
         Schema::create('sections', function (Blueprint $table) {
             $table->increments('id');
             $table->string('index')->unique();
+            $table->string('template_path')->unique();
+
+            $table->integer('components_max')->unsigned();
 
             $table->integer('type_id')->unsigned();
+
+            $table->text('editable_contents');
 
             $table  ->foreign('type_id')
                     ->references('id')
