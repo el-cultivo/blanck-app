@@ -20,6 +20,7 @@ class CreateSectiontypesTable extends Migration
             $table->string('admin_view_path');
             $table->boolean('protected')->default(false);
             $table->boolean('unlimited')->default(false);
+            $table->boolean('sortable')->default(false);
             $table->timestamps();
         });
 

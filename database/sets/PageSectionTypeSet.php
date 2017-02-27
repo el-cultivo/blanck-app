@@ -26,29 +26,33 @@ class PageSectionTypeSet extends CltvoSet
                 "label"             => "Especial",
                 "description"       => "Seccion que requiere informacion de modelos diferentes a los componenetes",
                 "admin_view_path"   => "protected",
-                "protected"         =>  true,
-                "unlimited"         =>  false,
+                "protected"         => true,
+                "unlimited"         => false,
+                'sortable'          => false
             ],
             [
-                "label"             => "Sensilla",
-                "description"       => "Seccion que requiere informacion un unico componente",
-                "admin_view_path"   => "single",
-                "protected"         =>  false,
-                "unlimited"         =>  false,
-            ],
-            [
-                "label"             => "Miltiple fija",
+                "label"             => "Fija",
                 "description"       => "Seccion que requiere informacion de una cantidad exacta de componentes",
+                "admin_view_path"   => "multipe-fixed",
+                "protected"         => false,
+                "unlimited"         => false,
+                'sortable'          => false
+            ],
+            [
+                "label"             => "Miltiple limitada",
+                "description"       => "Seccion que requiere informacion de una cantidad exacta de componentes que pueden ordenarse",
                 "admin_view_path"   => "multipe-limited",
-                "protected"         =>  false,
-                "unlimited"         =>  false,
+                "protected"         => false,
+                "unlimited"         => false,
+                'sortable'          => true
             ],
             [
                 "label"             => "Miltiple ilimitada",
-                "description"       => "Seccion que requiere informacion de una cantidad ilimitada de componentes",
+                "description"       => "Seccion que requiere informacion de una cantidad ilimitada de componentes que pueden ordenarse",
                 "admin_view_path"   => "multipe-unlimited",
-                "protected"         =>  false,
-                "unlimited"         =>  true,
+                "protected"         => false,
+                "unlimited"         => true,
+                'sortable'          => true
             ],
         ];
     }

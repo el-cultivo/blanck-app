@@ -33,7 +33,8 @@ class Type extends Model
         'description',
         'admin_view_path',
         'protected',
-        'unlimited'
+        'unlimited',
+        'sortable'
     ];
 
     /**

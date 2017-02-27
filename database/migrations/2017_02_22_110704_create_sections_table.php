@@ -18,10 +18,8 @@ class CreateSectionsTable extends Migration
             $table->string('index')->unique();
             $table->string('template_path')->unique();
 
-            $table->integer('components_max')->unsigned();
-
             $table->integer('type_id')->unsigned();
-
+            $table->integer('components_max')->unsigned();
             $table->text('editable_contents');
 
             $table  ->foreign('type_id')
