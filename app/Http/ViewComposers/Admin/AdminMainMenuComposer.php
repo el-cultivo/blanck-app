@@ -40,9 +40,7 @@ class AdminMainMenuComposer
 				$this->setSubMenuItem("pages.index", "manage_pages","Administrar páginas"),
 				$this->setSubMenuItem("pages.edit", "manage_pages",""),
 
-				$this->setSubMenuItem("pages.sections.create","manage_pages","Agregar sección"),
 				$this->setSubMenuItem("pages.sections.index", "manage_pages","Administrar secciones"),
-				$this->setSubMenuItem("pages.sections.edit", "manage_pages",""),
 			]),
 
 
