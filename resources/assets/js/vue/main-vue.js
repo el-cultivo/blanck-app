@@ -41,7 +41,7 @@ export const mainVue = function(config ={}, components = {}) {
 					this.get(url, {data: {callee: obj}});
 				}
 			}, stored_objs);
-			
+
 			this.store.languages = JsonParseOrFalse(this.store.languages);
 
 			if(typeof config.created === 'function') return config.created.call(this);
@@ -49,6 +49,8 @@ export const mainVue = function(config ={}, components = {}) {
 
 		ready() {
 			console.log('main-vue', this);
+			$('.collapsible').collapsible(); // borrar y colocarlo donde sea  nencesario
+			console.log("borrar esta linea");
 			ifElementExistsThenLaunch([
 				['#header__logo', logoSwitch, 'init', []],
 			]);

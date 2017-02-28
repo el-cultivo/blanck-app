@@ -23585,7 +23585,7 @@ var mediaManager = exports.mediaManager = Vue.extend({
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.currentPageSections = exports.componentForm = exports.sectionMultipleFixed = exports.sectionMultipleLimited = exports.sectionMultipleUnlimited = exports.sectionProtected = exports.pagesectionsSort = exports.pagesectionsCheckbox = exports.pagesections = exports.pagesectionsModalEdit = exports.pagesectionsModalCreate = exports.pages = exports.pagesGroup = undefined;
+exports.currentPageSections = exports.sectionMultipleFixed = exports.sectionMultipleLimited = exports.sectionMultipleUnlimited = exports.sectionProtected = exports.componentForm = exports.pagesectionsSort = exports.pagesectionsCheckbox = exports.pagesections = exports.pagesectionsModalEdit = exports.pagesectionsModalCreate = exports.pages = exports.pagesGroup = undefined;
 
 var _ramda = require('ramda');
 
@@ -23682,13 +23682,14 @@ var pagesections = exports.pagesections = (0, _simpleCrudComponentMakers.simpleC
 var pagesectionsCheckbox = exports.pagesectionsCheckbox = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-checkbox-template', checkboxesMethods);
 var pagesectionsSort = exports.pagesectionsSort = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-sort-template', { props: ['currentPage'], mixins: [_sortable.sortable] });
 
-var sectionProtected = exports.sectionProtected = (0, _simpleCrudComponentMakers.simpleCrud)('#section-protected-template', { props: ['section'] });
-var sectionMultipleUnlimited = exports.sectionMultipleUnlimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-unlimited-template', { props: ['section'] });
-var sectionMultipleLimited = exports.sectionMultipleLimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-limited-template', { props: ['section'] });
-var sectionMultipleFixed = exports.sectionMultipleFixed = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-fixed-template', { props: ['section'] });
 var componentForm = exports.componentForm = (0, _simpleCrudComponentMakers.simpleCrud)('#component-form-template', { props: ['section', 'component'] });
 
-var currentPageSections = exports.currentPageSections = (0, _simpleCrudComponentMakers.simpleCrud)('#current-page-sections-template', { props: ['currentPage'], mixins: [_multilistSortable.multilistSortable], components: { sectionProtected: sectionProtected, sectionMultipleUnlimited: sectionMultipleUnlimited, sectionMultipleLimited: sectionMultipleLimited, sectionMultipleFixed: sectionMultipleFixed, componentForm: componentForm } });
+var sectionProtected = exports.sectionProtected = (0, _simpleCrudComponentMakers.simpleCrud)('#section-protected-template', { props: ['section'] });
+var sectionMultipleUnlimited = exports.sectionMultipleUnlimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-unlimited-template', { props: ['section'], components: { componentForm: componentForm } });
+var sectionMultipleLimited = exports.sectionMultipleLimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-limited-template', { props: ['section'], components: { componentForm: componentForm } });
+var sectionMultipleFixed = exports.sectionMultipleFixed = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-fixed-template', { props: ['section'], components: { componentForm: componentForm } });
+
+var currentPageSections = exports.currentPageSections = (0, _simpleCrudComponentMakers.simpleCrud)('#current-page-sections-template', { props: ['currentPage'], mixins: [_multilistSortable.multilistSortable], components: { sectionProtected: sectionProtected, sectionMultipleUnlimited: sectionMultipleUnlimited, sectionMultipleLimited: sectionMultipleLimited, sectionMultipleFixed: sectionMultipleFixed } });
 
 },{"../../functions/dom":11,"../../functions/pure":12,"../components/g-map":16,"../factories/simple-crud-component-makers.js":21,"../mixins/mexico-states-and-municipalities":27,"../mixins/multilist-sortable":28,"../mixins/number-filters":29,"../mixins/sortable":31,"./helpers/simple-crud-helpers":17,"ramda":3,"vue":7}],20:[function(require,module,exports){
 'use strict';
@@ -24005,6 +24006,8 @@ var mainVue = exports.mainVue = function mainVue() {
 		},
 		ready: function ready() {
 			console.log('main-vue', this);
+			$('.collapsible').collapsible(); // borrar y colocarlo donde sea  nencesario
+			console.log("borrar esta linea");
 			(0, _dom.ifElementExistsThenLaunch)([['#header__logo', _logoManipulations.logoSwitch, 'init', []]]);
 			if (typeof config.ready === 'function') return config.ready.call(this);
 		},
