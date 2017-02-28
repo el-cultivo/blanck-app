@@ -36,15 +36,13 @@ class CreatePageSectionRequest extends Request
         $editable_types = $types
             ->where("protected", false)
             ;
-        $rules = [
+        return [
             'index'                 => 'required|max:255|alpha_dash|unique:sections,index',
-            'template_path'         => 'required|max:255|unique:sections,index',
+            'template_path'         => 'required|max:255',
             'type_id'               => 'exists:sectiontypes,id',
             'components_max'        => 'integer|min:1|required_if:type_id,'.$limited_types->implode("id",","),
             "editable_contents"     => 'array|required_if:type_id,'.$editable_types->implode("id",","),
             "editable_contents.*"   => 'boolean',
         ];
-
-        return $rules;
     }
 }
