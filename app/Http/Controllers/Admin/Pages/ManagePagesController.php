@@ -7,11 +7,19 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Admin\Pages\CreatePageRequest;
 use App\Http\Requests\Admin\Pages\UpdatePageRequest;
+use App\Http\Requests\Admin\Pages\UpdateAssociateSectionRequest;
+
 
 use App\Models\Pages\Page;
+
+use App\Models\Pages\Sections\Type;
+use App\Models\Pages\Sections\Section;
+use App\Models\Pages\Sections\Components\Component;
+
 use App\Publish;
 
 use Redirect;
+use Response;
 
 class ManagePagesController extends Controller
 {
@@ -94,7 +102,9 @@ class ManagePagesController extends Controller
     public function edit(Page $page_edit)
     {
         $data = [
-            "page_edit"         => $page_edit
+            "page_edit"         => $page_edit,
+            'types_list'     => Type::get()->pluck('label','id'),
+            'editable_parts' => Component::EDITABLE_CONTENTS,
         ];
 
         return view('admin.pages.edit',$data);
@@ -167,5 +177,59 @@ class ManagePagesController extends Controller
 
         return Redirect::route('admin::pages.index')->with('status', "La página fue correctamente borrada");
 
+    }
+
+    public function sectionAssociation(UpdateAssociateSectionRequest $request, Page $page_edit, Section $page_section)
+    {
+        $input = $request->all();
+
+        // dd($input);
+        $is_associated = isset($input["section"]);
+
+        if ($is_associated) {
+            if ($page_edit->sections()->find($page_section->id)) {
+                return Response::json([
+                    'data'=> [
+                        "section_id"        =>  $page_section->id,
+                        "is_associated"    =>  true
+                    ],
+                    'error' => ["La seccion ya se encuetra previamente asociada"]
+                ], 422);
+            }
+
+            if (!$page_edit->sections()->save($page_section)) {
+                return Response::json([
+                    'data'=> [
+                        "section_id"        =>  $page_section->id,
+                        "is_associated"    =>  false
+                    ],
+                    'error' => ["La seccion no pudo ser asociada"]
+                ], 422);
+            }
+
+
+            $mesaje = ["Seccion asociada correctamente."];
+        }else{
+            if (!$page_edit->sections()->detach($page_section)) {
+                return Response::json([
+                    'data'=> [
+                        "section_id"        =>  $page_section->id,
+                        "is_associated"    =>  true
+                    ],
+                    'error' => ["La seccion no pudo ser desasociado"]
+                ], 422);
+            }
+
+            $mesaje = ["Seccion desasociada correctamente."];
+        }
+
+        return Response::json([ // todo bien
+            'data'=> [
+                "section_id"        =>  $page_section->id,
+                "is_associated"    => $is_associated
+            ],
+            'message' => $mesaje,
+            'success' => true
+        ]);
     }
 }

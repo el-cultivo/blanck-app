@@ -62,6 +62,7 @@ class Page extends Model
         'complete_label',
         'public_url',
         'edit_content_url',
+        'sections_ids'
     ];
 
     /**
@@ -131,6 +132,16 @@ class Page extends Model
             return route("client::pages.showChild",[$this->parent->slug,$this->slug]);
         }
         return route("client::pages.show",$this->slug);
+    }
+
+    /**
+     * Get public url
+     *
+     * @return bool
+     */
+    public function getSectionsIdsAttribute()
+    {
+        return $this->sections->pluck("id");
     }
 
     /**
