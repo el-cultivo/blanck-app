@@ -5,8 +5,23 @@ namespace App\Http\Controllers\Admin\Pages;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+
+use App\Models\Pages\Sections\Section;
+use App\Models\Pages\Sections\Type;
+
+
 class ManagePagesSectionsController extends Controller
 {
+    public function indexView()
+    {
+        $data = [
+            'types_list'     => Type::get()->pluck('label','id'),
+            'editable_parts' => Component::EDITABLE_CONTENTS,
+        ];
+
+        return view('admin.pages.sections.index',$data);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +29,7 @@ class ManagePagesSectionsController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Section::with("type","pages")->get();
     }
 
     /**

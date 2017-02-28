@@ -39,6 +39,23 @@ class Component extends Model
     ];
 
     /**
+     * The parts to can be edited in sections.
+     *
+     * @var array
+     */
+    const EDITABLE_CONTENTS = [
+        'gallery_img'   => 'Galerías de imágenes',
+        'thumbnail_img' => 'Imagen destacada',
+
+        'title'         => 'Título',
+        'subtitle'      => 'Subtítulo',
+        'excerpt'       => 'Extrato',
+        'content'       => 'Contenido',
+        'iframe'        => 'Iframe o html',
+        'link'          => 'Link'
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array

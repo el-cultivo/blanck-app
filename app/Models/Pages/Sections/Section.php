@@ -57,7 +57,32 @@ class Section extends Model
      * @var array
      */
     protected $appends = [
+        'type_label',
+        'implode_pages_index',
     ];
+
+    /**
+     * Get type label.
+     *
+     * @return bool
+     */
+    public function getTypeLabelAttribute()
+    {
+        return $this->type->label.( $this->components_max ? "<br/><small> Componentes:".$this->components_max."</small>" : "");
+    }
+
+    /**
+     * Get type label.
+     *
+     * @return bool
+     */
+    public function getImplodePagesIndexAttribute()
+    {
+        if ($this->pages->isEmpty()) {
+            return "Sin páginas";
+        }
+        return $this->pages->implode(",","index");
+    }
 
     /**
      * Get the type that owns the section.
