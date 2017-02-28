@@ -34,22 +34,27 @@
 @section('vue_templates')
 
     <template id="current-page-sections-template">
-        <div class="" v-if="list.length > 0" >
+        <div class="">
+            <div class="" v-if="list.length > 0" >
 
-            <div class="col s12 ">
-                <div class="divider" ></div>
+                <div class="col s12 ">
+                    <div class="divider" ></div>
+                </div>
+
+                {{-- @include('admin.general._page-subtitle', [
+                    'title'         =>  'Secciones',
+                ]) --}}
+
+                <component
+                    :is='"section-"+section.type.admin_view_path'
+                    v-for="section in list"
+                    :section="section"
+                    :list= "section.components"
+                ></component>
+
             </div>
-
-            @include('admin.general._page-subtitle', [
-                'title'         =>  'Secciones',
-            ])
-            
-            <component
-                :is='"section-"+section.type.admin_view_path +"-template"'
-                v-for="section in list"
-                :section="section"
-            ></component>
         </div>
+
     </template>
 
     @include('admin.pages.contents.templates.protected')
