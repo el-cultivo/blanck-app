@@ -35,7 +35,7 @@
 
 
     <pagesections-checkbox :list="store.pagesections.data" :current-page="store.current_page"></pagesections-checkbox>
-    <pagesections-sort :list="store.pagesections.data" :current-page="store.current_page"></pagesections-sort>
+    <pagesections-sort :list="store.current_page.sections_order" :current-page="store.current_page"></pagesections-sort>
 
 @endsection
 

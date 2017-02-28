@@ -62,7 +62,8 @@ class Page extends Model
         'complete_label',
         'public_url',
         'edit_content_url',
-        'sections_ids'
+        'sections_ids',
+        'sections_order'
     ];
 
     /**
@@ -135,13 +136,28 @@ class Page extends Model
     }
 
     /**
-     * Get public url
+     * Get related sections ids
      *
      * @return bool
      */
     public function getSectionsIdsAttribute()
     {
         return $this->sections->pluck("id");
+    }
+
+    /**
+     * Get related sections id and index
+     *
+     * @return bool
+     */
+    public function getSectionsOrderAttribute()
+    {
+        return $this->sections->map(function($section){
+            return (object) [
+                "id"    => $section->id,
+                "index" => $section->index,
+            ];
+        });
     }
 
     /**

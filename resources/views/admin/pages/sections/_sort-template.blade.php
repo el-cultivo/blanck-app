@@ -40,7 +40,7 @@
 		        type="hidden"
 		        v-for="id in sorted_ids"
 		        :form="sort_page_sections_form"
-		        name="pages[]"
+		        name="sections[]"
 		        :value="id">
 		    <div class="pull-right pageslists--save-button">
 		        {!! Form::submit("Guardar orden", [

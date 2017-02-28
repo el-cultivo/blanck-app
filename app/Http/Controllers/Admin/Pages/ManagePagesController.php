@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Pages\CreatePageRequest;
 use App\Http\Requests\Admin\Pages\UpdatePageRequest;
 use App\Http\Requests\Admin\Pages\UpdateAssociateSectionRequest;
+use App\Http\Requests\Admin\Pages\SortPageSectionsRequest;
 
 
 use App\Models\Pages\Page;
@@ -229,6 +230,38 @@ class ManagePagesController extends Controller
                 "is_associated"    => $is_associated
             ],
             'message' => $mesaje,
+            'success' => true
+        ]);
+    }
+
+    public function sort(SortPageSectionsRequest $request,Page $page_edit)
+    {
+        $input = $request->all();
+
+        $order_array =  $page_edit->sections()->orderBy("pivot_order","ASC")->get()->keyBy(function($section){
+                            return $section->pivot->order;
+                        })->map(function($section){
+                            return $section->id;
+                        })->toArray();
+
+        foreach ($order_array as $section_id) {
+            $page_edit->sections()
+                ->updateExistingPivot($section_id, ["order" => null ]);
+        }
+
+        foreach ($input["sections"] as $section_new_order => $section_id) {
+            $new_orders[] = [
+                "order"         => $section_new_order,
+                "section_id"    => $section_id
+            ];
+
+            $page_edit->sections()
+                ->updateExistingPivot($section_id, ["order" => $section_new_order ]);
+        }
+
+        return Response::json([ // todo bien
+            "data"    => $page_edit->load("sections")->sections_order,
+            'message' => ["Orden correctamente guardado"],
             'success' => true
         ]);
     }
