@@ -86,6 +86,17 @@ class Page extends Model
     ];
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        "sections",
+        "created_at",
+        "updated_at",
+    ];
+
+    /**
      * Get the current language label.
      *
      * @return bool

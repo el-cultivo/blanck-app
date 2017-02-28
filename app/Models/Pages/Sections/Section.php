@@ -24,6 +24,7 @@ class Section extends Model
      * @var array
      */
     protected $hidden = [
+        'pages',
         'created_at',
         'updated_at'
     ];
@@ -82,7 +83,7 @@ class Section extends Model
         if ($this->pages->isEmpty()) {
             return "Sin páginas";
         }
-        return $this->pages->implode(",<br/>","index");
+        return $this->pages->implode("index",",<br/>");
     }
 
     /**

@@ -26,7 +26,7 @@
 				</small>
 			</td>
 			<td class="sections__table--direccion">
-				@{{ section.implode_pages_index }}
+				@{{{ section.implode_pages_index }}}
 			</td>
 			<td class="center-align sections__table--editar">
 				<span
