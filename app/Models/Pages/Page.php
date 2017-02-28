@@ -63,7 +63,7 @@ class Page extends Model
         'public_url',
         'edit_content_url',
         'sections_ids',
-        'sections_order'
+        'sections_minified'
     ];
 
     /**
@@ -150,13 +150,10 @@ class Page extends Model
      *
      * @return bool
      */
-    public function getSectionsOrderAttribute()
+    public function getSectionsMinifiedAttribute()
     {
         return $this->sections->map(function($section){
-            return (object) [
-                "id"    => $section->id,
-                "index" => $section->index,
-            ];
+            return $section->minified;
         });
     }
 

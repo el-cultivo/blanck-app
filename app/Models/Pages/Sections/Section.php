@@ -60,7 +60,8 @@ class Section extends Model
     protected $appends = [
         'type_label',
         'implode_pages_index',
-        'implode_editable_contents'
+        'implode_editable_contents',
+        'minified'
     ];
 
     /**
@@ -72,6 +73,19 @@ class Section extends Model
     {
         return $this->type->label.( $this->components_max ? "<br/><small> Componentes:".$this->components_max."</small>" : "");
     }
+    /**
+     * Get type label.
+     *
+     * @return bool
+     */
+    public function getMinifiedAttribute()
+    {
+        return (object) [
+            "id"    => $this->id,
+            "index" => $this->index
+        ];
+    }
+
 
     /**
      * Get type label.
