@@ -30,7 +30,7 @@
                     @if ($page_edit->sections->isEmpty())
                         sin secciones
                     @else
-                        {{$page_edit->sections->implode("index")}}
+                        {!!$page_edit->sections->implode("index",",<br/>")!!}
                     @endif
                 </td>
                 <td class="center-align" >

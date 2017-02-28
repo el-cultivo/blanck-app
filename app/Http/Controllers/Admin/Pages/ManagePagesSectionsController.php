@@ -113,7 +113,7 @@ class ManagePagesSectionsController extends Controller
     {
         if (!$page_section->isDeletable()) {
             return Response::json([
-                'error' => ["El tipo de registro que desea borrar tiene actividades asociadas"]
+                'error' => ["El tipo de registro que desea borrar tiene páginas o componentes asociados"]
             ], 422);
         }
 
