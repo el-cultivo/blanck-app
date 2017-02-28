@@ -115,8 +115,23 @@ class ManagePagesSectionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Section $page_section)
     {
-        //
+        if (!$page_section->isDeletable()) {
+            return Response::json([
+                'error' => ["El tipo de registro que desea borrar tiene actividades asociadas"]
+            ], 422);
+        }
+
+        if (!$page_section->delete()) {
+            return Response::json([
+                'error' => ["La seccion no pudo ser borrada"]
+            ], 422);
+        }
+
+        return Response::json([ // todo bien
+            'message' => ["La seccion fue correctamente borrada"],
+            'success' => true
+        ]);
     }
 }
