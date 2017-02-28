@@ -59,6 +59,7 @@ class Section extends Model
     protected $appends = [
         'type_label',
         'implode_pages_index',
+        'implode_editable_contents'
     ];
 
     /**
@@ -81,8 +82,23 @@ class Section extends Model
         if ($this->pages->isEmpty()) {
             return "Sin páginas";
         }
-        return $this->pages->implode(",","index");
+        return $this->pages->implode(",<br/>","index");
     }
+
+    /**
+     * Get type label.
+     *
+     * @return bool
+     */
+    public function getImplodeEditableContentsAttribute()
+    {
+        $editable_contents = collect($this->editable_contents ? $this->editable_contents : []);
+
+        return $editable_contents->map(function($true,$key){
+            return $true && isset(Component::EDITABLE_CONTENTS[$key]) ? Component::EDITABLE_CONTENTS[$key] : null;
+        })->implode(",<br/>");
+    }
+
 
     /**
      * Get the type that owns the section.

@@ -12,14 +12,26 @@
 
 	<tbody class="sections__table__body">
 		<tr class="sections__table__row" v-for="section in list" >
-			<td class="sections__table--nombre">@{{ section.index }}</td>
-			<td class="sections__table--tipo">@{{{ section.type_label }}}</td>
-			<td class="sections__table--direccion">@{{ section.template_path }}</td>
-			<td class="sections__table--direccion">@{{ section.implode_pages_index }}</td>
+			<td class="sections__table--nombre">
+				@{{ section.index }}
+			</td>
+			<td class="sections__table--tipo">
+				@{{{ section.type_label }}}
+			</td>
+			<td class="sections__table--direccion">
+				@{{ section.template_path }}
+				<br>
+				<small>
+					@{{{ section.implode_editable_contents }}}
+				</small>
+			</td>
+			<td class="sections__table--direccion">
+				@{{ section.implode_pages_index }}
+			</td>
 			<td class="center-align sections__table--editar">
 				<span
 					class=" btn-floating waves-effect waves-light"
-					@click="openModal('#sections-modal-edit' ,$index)">
+					@click="openModal('#pagesections-modal-edit' ,$index)">
 					<i class="material-icons waves-effect waves-light " >mode_edit</i>
 				</span>
 			</td>
