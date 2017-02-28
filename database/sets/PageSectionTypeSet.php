@@ -33,7 +33,7 @@ class PageSectionTypeSet extends CltvoSet
             [
                 "label"             => "Fija",
                 "description"       => "Seccion que requiere informacion de una cantidad exacta de componentes",
-                "admin_view_path"   => "multipe-fixed",
+                "admin_view_path"   => "multiple-fixed",
                 "protected"         => false,
                 "unlimited"         => false,
                 'sortable'          => false
@@ -41,7 +41,7 @@ class PageSectionTypeSet extends CltvoSet
             [
                 "label"             => "Miltiple limitada",
                 "description"       => "Seccion que requiere informacion de una cantidad exacta de componentes que pueden ordenarse",
-                "admin_view_path"   => "multipe-limited",
+                "admin_view_path"   => "multiple-limited",
                 "protected"         => false,
                 "unlimited"         => false,
                 'sortable'          => true
@@ -49,7 +49,7 @@ class PageSectionTypeSet extends CltvoSet
             [
                 "label"             => "Miltiple ilimitada",
                 "description"       => "Seccion que requiere informacion de una cantidad ilimitada de componentes que pueden ordenarse",
-                "admin_view_path"   => "multipe-unlimited",
+                "admin_view_path"   => "multiple-unlimited",
                 "protected"         => false,
                 "unlimited"         => true,
                 'sortable'          => true
