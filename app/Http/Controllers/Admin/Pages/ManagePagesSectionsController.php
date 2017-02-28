@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Admin\Pages\Sections\CreatePageSectionRequest;
+use App\Http\Requests\Admin\Pages\Sections\UpdatePageSectionRequest;
 
 use App\Models\Pages\Sections\Section;
 use App\Models\Pages\Sections\Type;
+use App\Models\Pages\Sections\Components\Component;
+
 use Response;
 
 
@@ -67,48 +70,39 @@ class ManagePagesSectionsController extends Controller
         ]);
 
     }
-    //
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function update(UpdatePageSectionRequest $request, Section $page)
-    // {
-    //     $input = $request->all();
-    //
-    //     $page->name              = $input['name'];
-    //     $page->phone             = $input['phone'];
-    //     $page->references        = $input['references'];
-    //
-    //     $page->country_id        = $input['country_id'];
-    //     $page->street1           = $input['street1'];
-    //     $page->street2           = $input['street2'];
-    //     $page->street3           = $input['street3'];
-    //     $page->city              = $input['city'];
-    //     $page->state             = $input['state'];
-    //     $page->zip               = $input['zip'];
-    //
-    //     $page->longitude         = $input['longitude'];
-    //     $page->latitude          = $input['latitude'];
-    //
-    //     $page->pagetype_id   = $input['pagetype_id'];
-    //
-    //     if (!$page->save()) {
-    //         return Response::json([
-    //             'error' => ["La seccion no pudo ser actualizada"]
-    //         ], 422);
-    //     }
-    //
-    //     return Response::json([ // todo bien
-    //         'data'    => Section::with("pagetype","country","country.languages")->find($page->id),
-    //         'message' => ["La seccion fue correctamente actualizada"],
-    //         'success' => true
-    //     ]);
-    // }
-    //
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdatePageSectionRequest $request, Section $page_section)
+    {
+        $input = $request->all();
+        $page_section->template_path = $input["template_path"];
+
+        if (!$page_section->type->protected) {
+            $page_section->editable_contents   = $input["editable_contents"];
+            if (!$page_section->type->unlimited) {
+                $page_section->components_max  = $input["components_max"];
+            }
+        }
+
+        if (!$page_section->save()) {
+            return Response::json([
+                'error' => ["La seccion no pudo ser actualizada"]
+            ], 422);
+        }
+
+        return Response::json([ // todo bien
+            'data'    => $page_section->load("type","pages"),
+            'message' => ["La seccion fue correctamente actualizada"],
+            'success' => true
+        ]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

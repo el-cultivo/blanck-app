@@ -1,7 +1,7 @@
 @extends('layouts.modal', ["modal_id"=> "pagesections-modal-edit"])
 
 @section('modal-title')
-    Editar una seccion de página
+    Editar una seccion de <em>@{{ item_on_edit.index }}</em>
 @overwrite
 
 @section('modal-content')
@@ -15,17 +15,8 @@
         'v-on:submit.prevent' => 'post'
         ]) !!}
 
-        <div class="input-field col s6">
-            {!! Form::label('index', "Nombre:", [
-                'class' => 'input-label active',
-            ]) !!}
-            {!! Form::text('index', null, [
-                'v-model'       => 'item_on_edit.index',
-                'class'         => 'validate',
-                'required'      => 'required',
-                'form'          => 'update_page_section-&#123;&#123;item_on_edit.id&#125;&#125;_form',
-                'placeholder'   => 'home-slider'
-            ]) !!}
+        <div class="input-field col s6 offset-s6">
+            <strong>@{{{item_on_edit.type_label}}}</strong>
         </div>
 
         <div class=" input-field col s12">
@@ -40,7 +31,7 @@
                 'placeholder'   => "home.slider"
             ]) !!}
         </div>
-        <div class="input-field col s6 ">
+        <div class="input-field col s12 " v-if="item_on_edit.type && !item_on_edit.type.protected && !item_on_edit.type.unlimited">
             {!! Form::label('components_max',"Número maximo de componentes:", [
                 'class' => 'input-label active',
             ]) !!}
@@ -55,18 +46,25 @@
             ]) !!}
         </div>
 
-        <div class="input-field col s6 ">
-            {!! Form::select('type_id', $types_list,null, [
-                'class'         => 'validate ',
-                'required'      => 'required',
-                'v-model'       => 'item_on_edit.type_id',
-                 'placeholder'   => "Seleccionar",
-                'form'          => 'update_page_section-&#123;&#123;item_on_edit.id&#125;&#125;_form',
-                "id"            => "types-".'update_page_section-&#123;&#123;item_on_edit.id&#125;&#125;_form',
-            ])  !!}
-            {!! Form::label("types-".'update_page_section-&#123;&#123;item_on_edit.id&#125;&#125;_form', "Tipo:", [
-                'class'         => 'input-label active',
-            ]) !!}
+        <div class="col s12 " v-if="item_on_edit.type && !item_on_edit.type.protected ">
+            <h6>Partes editables por el usuario</h6>
+
+            <div class="row">
+                @foreach ($editable_parts as $part_key => $part_label)
+                    <div class="input-field col s6">
+                        {{ Form::checkbox('editable_contents['.$part_key.']', true, null, [
+                            'v-model'   => 'item_on_edit.editable_contents.'.$part_key,
+                            'class'     => 'filled-in',
+                            'id'        => 'editable_contents-'.$part_key.'-update_page_section-&#123;&#123;item_on_edit.id&#125;&#125;_form',
+                            'form'	    => 'update_page_section-&#123;&#123;item_on_edit.id&#125;&#125;_form',
+                            ]) }}
+                        {!! Form::label('editable_contents-'.$part_key.'-update_page_section-&#123;&#123;item_on_edit.id&#125;&#125;_form', $part_label, [
+                            'class' => 'input-label'
+                        ]) !!}
+                    </div>
+                @endforeach
+            </div>
+            <br><br>
         </div>
 
         <div class="col s12 ">
