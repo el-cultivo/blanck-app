@@ -64,3 +64,4 @@ export const pagesectionsModalEdit = simpleModalCrud('#pagesections-modal-edit-t
 export const pagesections = simpleCrud('#pagesections-template', {methods: {openModal}, components:{pagesectionsModalCreate, pagesectionsModalEdit}});
 
 export const pagesectionsCheckbox = simpleCrud('#pagesections-checkbox-template', checkboxesMethods);
+export const pagesectionsSort = simpleCrud('#pagesections-sort-template',{props: ['currentPage'], mixins:[sortable]});

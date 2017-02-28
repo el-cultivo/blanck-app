@@ -23330,7 +23330,8 @@ _constants.w.on('load', function () {
 		pagesectionsModalCreate: _simpleCruds.pagesectionsModalCreate,
 		pagesectionsModalEdit: _simpleCruds.pagesectionsModalEdit,
 		pagesections: _simpleCruds.pagesections,
-		pagesectionsCheckbox: _simpleCruds.pagesectionsCheckbox
+		pagesectionsCheckbox: _simpleCruds.pagesectionsCheckbox,
+		pagesectionsSort: _simpleCruds.pagesectionsSort
 	}]], ['#alert__container', _alertsController.alertsController, 'init', []]]);
 });
 
@@ -23820,7 +23821,7 @@ var mediaManager = exports.mediaManager = Vue.extend({
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.pagesectionsCheckbox = exports.pagesections = exports.pagesectionsModalEdit = exports.pagesectionsModalCreate = exports.pages = exports.pagesGroup = undefined;
+exports.pagesectionsSort = exports.pagesectionsCheckbox = exports.pagesections = exports.pagesectionsModalEdit = exports.pagesectionsModalCreate = exports.pages = exports.pagesGroup = undefined;
 
 var _ramda = require('ramda');
 
@@ -23915,6 +23916,7 @@ var pagesectionsModalEdit = exports.pagesectionsModalEdit = (0, _simpleCrudCompo
 var pagesections = exports.pagesections = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-template', { methods: { openModal: _simpleCrudHelpers.openModal }, components: { pagesectionsModalCreate: pagesectionsModalCreate, pagesectionsModalEdit: pagesectionsModalEdit } });
 
 var pagesectionsCheckbox = exports.pagesectionsCheckbox = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-checkbox-template', checkboxesMethods);
+var pagesectionsSort = exports.pagesectionsSort = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-sort-template', { props: ['currentPage'], mixins: [_sortable.sortable] });
 
 },{"../../functions/dom":12,"../../functions/pure":13,"../components/g-map":17,"../factories/simple-crud-component-makers.js":22,"../mixins/mexico-states-and-municipalities":28,"../mixins/multilist-sortable":29,"../mixins/number-filters":30,"../mixins/sortable":32,"./helpers/simple-crud-helpers":18,"ramda":4,"vue":8}],21:[function(require,module,exports){
 'use strict';

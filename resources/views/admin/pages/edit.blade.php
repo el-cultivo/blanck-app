@@ -35,6 +35,7 @@
 
 
     <pagesections-checkbox :list="store.pagesections.data" :current-page="store.current_page"></pagesections-checkbox>
+    <pagesections-sort :list="store.pagesections.data" :current-page="store.current_page"></pagesections-sort>
 
 @endsection
 
@@ -46,6 +47,7 @@
 @section('vue_templates')
 	@include('admin.pages.sections._modal-create')
     @include('admin.pages.sections._checkbox-template')
+    @include('admin.pages.sections._sort-template')
 @endsection
 
 @section('vue_store')
