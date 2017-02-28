@@ -25,7 +25,8 @@ class RouteServiceProvider extends ServiceProvider
         'App\Http\Binds\ManagePhotosBind',
         'App\Http\Binds\Pages\ManagePagesBind',
         'App\Http\Binds\Pages\PublicPagesBind',
-        'App\Http\Binds\ManageLanguagesBind'
+        'App\Http\Binds\ManageLanguagesBind',
+        'App\Http\Binds\Pages\ManagePagesSectionsBind'
     ];
 
     /**
