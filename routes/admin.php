@@ -69,8 +69,12 @@ Route::group(['prefix' => 'pages', "as" => "pages."  ], function(){
         Route::patch( "sort" , 'Admin\Pages\ManagePagesContentsController@sort')->name("sort");
         Route::group([ 'prefix' => 'content', "as" => "content."  ], function(){
             Route::resource('/','Admin\Pages\ManagePagesContentsController',[
-                'only' 			=> ['index', 'edit', 'update'],
+                'only' 			=> ['index', 'edit'],
                 'parameters'    => ['' => 'page_edit_content'],
+            ]);
+            Route::resource('/','Admin\Pages\ManagePagesController',[
+                'only' 			=> ['update'],
+                'parameters'    => ['' => 'page_edit'],
             ]);
         });
     });

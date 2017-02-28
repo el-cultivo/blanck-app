@@ -67,23 +67,10 @@ class ManagePagesContentsController extends Controller
     public function edit(Page $page_edit_content)
     {
 
-        dd($page_edit_content);
-        $view = 'admin.pages.contents.edit.'.$page->translation('es')->slug;
-
-        if (!View::exists($view)) {
-            $view = 'admin.pages.contents.edit.template';
-        }
-
-        $pages = Page::parents()->getWithTranslations()->get()->pluck('es_name','id');
-
         $data = [
-            'page'      => $page,
-            'view'      => $view,
-            "publishes" => Publish::get()->pluck('label','id'),
-            "pages"     => $pages,
+            'page_edit'      => $page_edit_content
         ];
 
-        // return view('admin.pages.contents.edit.materialNote', $data );
         return view('admin.pages.contents.edit', $data );
     }
 
@@ -98,7 +85,7 @@ class ManagePagesContentsController extends Controller
     {
         $input = $request->all();
 
-        dd($input);
+        dd("karen",$input);
 
         $page->order    = $input['order'];
         $page->page_id  = isset($input['page_id']) && !empty($input['page_id']) ? $input['page_id'] : null;

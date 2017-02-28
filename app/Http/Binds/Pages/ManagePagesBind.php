@@ -17,6 +17,12 @@ class ManagePagesBind extends CltvoBind
         Route::bind('page_edit_content', function ($page_id) {
             return Page::with([
                     "languages",
+                    "publish",
+                    "sections",
+                    "sections.type",
+                    "sections.components",
+                    "sections.components.photos",
+                    "sections.components.languages",
                 ])
                 ->where(["id" => $page_id])->first();
         });

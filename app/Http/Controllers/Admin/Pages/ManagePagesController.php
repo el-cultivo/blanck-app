@@ -143,7 +143,7 @@ class ManagePagesController extends Controller
             ]);
         }
 
-        return Redirect::route( 'admin::pages.edit', [$page_edit->id] )->with('status', "Página correctamente actualizada");
+        return Redirect::back()->with('status', "Página correctamente actualizada");
     }
 
     /**

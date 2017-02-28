@@ -20,7 +20,7 @@
                     'placeholder'   =>  "Home"
                 ]) !!}
             @else
-                <p class="text__p text__p--instructions"><strong>dfs{{ $page_edit->index }}</strong></p>
+                <p class="text__p text__p--instructions"><strong>{{ $page_edit->index }}</strong></p>
             @endif
 
         </div>
