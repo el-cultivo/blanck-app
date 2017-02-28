@@ -65,3 +65,11 @@ export const pagesections = simpleCrud('#pagesections-template', {methods: {open
 
 export const pagesectionsCheckbox = simpleCrud('#pagesections-checkbox-template', checkboxesMethods);
 export const pagesectionsSort = simpleCrud('#pagesections-sort-template',{props: ['currentPage'], mixins:[sortable]});
+
+export const sectionProtected = simpleCrud('#section-protected-template',{props: ['section']} );
+export const sectionMultipleUnlimited = simpleCrud('#section-multiple-unlimited-template',{props: ['section']} );
+export const sectionMultipleLimited = simpleCrud('#section-multiple-limited-template',{props: ['section']} );
+export const sectionMultipleFixed = simpleCrud('#section-multiple-fixed-template',{props: ['section']} );
+export const componentForm = simpleCrud('#component-form-template',{props: ['section','component']} );
+
+export const currentPageSections = simpleCrud('#current-page-sections-template',{props: ['currentPage'],  mixins:[multilistSortable],components:{sectionProtected,sectionMultipleUnlimited, sectionMultipleLimited,sectionMultipleFixed, componentForm} } );

@@ -35,11 +35,6 @@ table {
   border-spacing: 0;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
 /**
 * Basic Styles
 * ---------------
@@ -68,8 +63,7 @@ body {
   position: relative;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  font-size: 14px;
-  font-family: BlissPro;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 strong {
@@ -153,17 +147,6 @@ time, mark {
   transform: translate(-50%, -50%);
 }
 
-.text-center {
-  text-align: center !important;
-}
-
-.flex {
-  display: -webkit-box !important;
-  display: -webkit-flex !important;
-  display: -ms-flexbox !important;
-  display: flex !important;
-}
-
 .left {
   float: left !important;
 }
@@ -182,28 +165,6 @@ time, mark {
 
 .z-0 {
   z-index: 0 !important;
-}
-
-.w100 {
-  width: 100% !important;
-}
-
-.h100 {
-  height: 100% !important;
-}
-
-.op1 {
-  opacity: 1 !important;
-}
-
-.tdn {
-  text-decoration: none !important;
-}
-
-.text-overflow-ellipsis {
-  text-overflow: ellipsis !important;
-  overflow: hidden !important;
-  white-space: nowrap !important;
 }
 
 /*************************** Layout ***************************/
@@ -231,6 +192,8 @@ time, mark {
 
 .inline-block {
   display: inline-block !important;
+  float: left;
+  vertical-align: top;
 }
 
 /*************************** Gutters ***************************/
@@ -255,8 +218,8 @@ time, mark {
   margin-bottom: 0 !important;
 }
 
-.mb40 {
-  margin-bottom: 40px !important;
+.m50 {
+  margin-bottom: 50px !important;
 }
 
 /*************************** Arrows ***************************/
@@ -293,8 +256,8 @@ time, mark {
 }
 
 .transition-slow {
-  -webkit-transition: all 1s;
-  transition: all 1s;
+  -webkit-transition: all 0.7s;
+  transition: all 0.7s;
 }
 
 .hover-scale-up:hover {
@@ -304,17 +267,8 @@ time, mark {
 }
 
 /*************************** JS Classes ***************************/
-[v-cloak] {
-  opacity: 0;
-}
-
-.noScroll_JS, .no-scroll {
+.noScroll_JS {
   overflow: hidden !important;
-}
-
-/*************************** Bootstrap ***************************/
-.hidden {
-  display: none !important;
 }
 
 .wrap {
@@ -366,11 +320,6 @@ table {
   border-spacing: 0;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
 html {
   font-size: 14px;
 }
@@ -406,10 +355,7 @@ body, html {
 @font-face {
   font-family: "FoundersGrotesk-Light";
   src: url("../fonts/FoundersGrotesk-Light.eot");
-  src: url("../fonts/FoundersGrotesk-Light.eot?#iefix") format("embedded-opentype");
-  src: url("../fonts/FoundersGrotesk-Light.woff") format("woff");
-  src: url("../fonts/FoundersGrotesk-Light.ttf") format("truetype");
-  src: url("../fonts/FoundersGrotesk-Light.svg#../fonts/FoundersGrotesk-Light") format("svg");
+  src: url("../fonts/FoundersGrotesk-Light.eot?#iefix") format("embedded-opentype"), url("../fonts/FoundersGrotesk-Light.woff") format("woff"), url("../fonts/FoundersGrotesk-Light.ttf") format("truetype"), url("../fonts/FoundersGrotesk-Light.svg#../fonts/FoundersGrotesk-Light") format("svg");
   font-weight: 100;
   font-style: normal;
   font-stretch: normal;
@@ -418,10 +364,7 @@ body, html {
 @font-face {
   font-family: "FoundersGrotesk-Medium";
   src: url("../fonts/FoundersGrotesk-Medium.eot");
-  src: url("../fonts/FoundersGrotesk-Medium.eot?#iefix") format("embedded-opentype");
-  src: url("../fonts/FoundersGrotesk-Medium.woff") format("woff");
-  src: url("../fonts/FoundersGrotesk-Medium.ttf") format("truetype");
-  src: url("../fonts/FoundersGrotesk-Medium.svg#../fonts/FoundersGrotesk-Medium") format("svg");
+  src: url("../fonts/FoundersGrotesk-Medium.eot?#iefix") format("embedded-opentype"), url("../fonts/FoundersGrotesk-Medium.woff") format("woff"), url("../fonts/FoundersGrotesk-Medium.ttf") format("truetype"), url("../fonts/FoundersGrotesk-Medium.svg#../fonts/FoundersGrotesk-Medium") format("svg");
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -430,10 +373,7 @@ body, html {
 @font-face {
   font-family: "FoundersGrotesk-Bold";
   src: url("../fonts/FoundersGrotesk-Bold.eot");
-  src: url("../fonts/FoundersGrotesk-Bold.eot?#iefix") format("embedded-opentype");
-  src: url("../fonts/FoundersGrotesk-Bold.woff") format("woff");
-  src: url("../fonts/FoundersGrotesk-Bold.ttf") format("truetype");
-  src: url("../fonts/FoundersGrotesk-Bold.svg#../fonts/FoundersGrotesk-Bold") format("svg");
+  src: url("../fonts/FoundersGrotesk-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/FoundersGrotesk-Bold.woff") format("woff"), url("../fonts/FoundersGrotesk-Bold.ttf") format("truetype"), url("../fonts/FoundersGrotesk-Bold.svg#../fonts/FoundersGrotesk-Bold") format("svg");
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -457,7 +397,7 @@ input, textarea {
   border: 1px solid #000000;
   border-radius: initial;
   padding: 0 .5em;
-  -moz-appearance: none;
+  -moz-appereance: none;
   -webkit-appearance: none;
 }
 
@@ -510,7 +450,7 @@ input[type="radio"] {
 }
 
 select {
-  -moz-appearance: none;
+  -moz-appereance: none;
   -webkit-appearance: none;
   cursor: pointer;
 }

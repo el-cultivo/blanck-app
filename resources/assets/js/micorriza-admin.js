@@ -10,7 +10,13 @@ import {
 		pagesectionsModalEdit,
 		pagesections,
 		pagesectionsCheckbox,
-		pagesectionsSort
+		pagesectionsSort,
+		sectionProtected,
+		sectionMultipleUnlimited,
+		sectionMultipleLimited,
+		sectionMultipleFixed,
+		componentForm,
+		currentPageSections
 	} from './vue/components/simple-cruds';
 import {mexicoStatesAndMunicipalities} from './vue/mixins/mexico-states-and-municipalities';
 import {mediaManager} from './vue/components/media-manager';
@@ -27,7 +33,13 @@ w.on('load', () => {
 			pagesectionsModalEdit,
 			pagesections,
 			pagesectionsCheckbox,
-			pagesectionsSort
+			pagesectionsSort,
+			sectionProtected,
+			sectionMultipleUnlimited,
+			sectionMultipleLimited,
+			sectionMultipleFixed,
+			componentForm,
+			currentPageSections
 		}]],
 		['#alert__container', alertsController, 'init', []],
 	]);

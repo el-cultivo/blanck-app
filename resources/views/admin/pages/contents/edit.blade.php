@@ -28,4 +28,41 @@
         "form_method"   => 'PATCH'
     ])
 
+    <current-page-sections :list="store.current_page.sections_maped" :current-page="store.current_page"></current-page-sections-checkbox>
+@endsection
+
+@section('vue_templates')
+
+    <template id="current-page-sections-template">
+        <div class="" v-if="list.length > 0" >
+
+            <div class="col s12 ">
+                <div class="divider" ></div>
+            </div>
+
+            @include('admin.general._page-subtitle', [
+                'title'         =>  'Secciones',
+            ])
+            
+            <component
+                :is='"section-"+section.type.admin_view_path +"-template"'
+                v-for="section in list"
+                :section="section"
+            ></component>
+        </div>
+    </template>
+
+    @include('admin.pages.contents.templates.protected')
+    @include('admin.pages.contents.templates.multiple-unlimited')
+    @include('admin.pages.contents.templates.multiple-limited')
+    @include('admin.pages.contents.templates.multiple-fixed')
+
+    @include('admin.pages.contents.templates._component-form')
+
+@endsection
+
+@section('vue_store')
+	<script>
+        mainVueStore.current_page = {!! $page_edit !!};
+	</script>
 @endsection
