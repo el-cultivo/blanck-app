@@ -8,7 +8,8 @@ import {
 		pages,
 		pagesectionsModalCreate,
 		pagesectionsModalEdit,
-		pagesections
+		pagesections,
+		pagesectionsCheckbox
 	} from './vue/components/simple-cruds';
 import {mexicoStatesAndMunicipalities} from './vue/mixins/mexico-states-and-municipalities';
 import {mediaManager} from './vue/components/media-manager';
@@ -23,7 +24,8 @@ w.on('load', () => {
 			pages,
 			pagesectionsModalCreate,
 			pagesectionsModalEdit,
-			pagesections
+			pagesections,
+			pagesectionsCheckbox
 		}]],
 		['#alert__container', alertsController, 'init', []],
 	]);

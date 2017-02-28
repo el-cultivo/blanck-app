@@ -8,46 +8,34 @@ import {multilistSortable} from '../mixins/multilist-sortable';
 import {mexicoStatesAndMunicipalities} from '../mixins/mexico-states-and-municipalities';
 import {sortByNestedProp, toArray, objTextFilter, tapLog} from '../../functions/pure';
 import {preSelectOption} from '../../functions/dom';
+import {makePost, openModal, openModalFromSimpleImageCrud, postWithMaterialNote} from './helpers/simple-crud-helpers';
 
 
 const checkboxesMethods = {
-	props:['selectedElems', 'relatedProducts'],
+	props:['currentPage'],
 
 	data: {
 		selected_checkboxes: [],
 		search: ''
 	},
 
-	computed: {
-		filterable_elems() {
-			return objTextFilter(['title'], this.search, this.list);
-		}
+	ready() {
+		this.selected_checkboxes = this.currentPage.sections_ids;
 	},
+
 	methods: {
-		makePost($event) {
-   			this.post($event.target.form);
-   		},
+		openModal,
+
+		makePost,
 
    		updateSelectedCheckboxes() {
 			this.selected_checkboxes = R.map(elem => elem.id+'', this.selectedElems || []);
-			this.relatedProducts = this.selected_checkboxes;
    		},
 
-   		onUpdaterelatedproductsSuccess(body) {
-   			this.relatedProducts = R.map(prod => prod.id, R.pathOr([], ['data', 'related_products'], body));
-   		}
-	},
-
-	watch: {
-		selectedElems() {
-			this.updateSelectedCheckboxes();
-		},
-
-		list() {
-			this.updateSelectedCheckboxes();
+		is_checked(id) {
+			return R.contains(id, this.selected_checkboxes) ? true : false;
 		}
-	},
-
+	}
 };
 
 const relatedProductsFilter = {
@@ -66,21 +54,6 @@ const relatedProductsFilter = {
 	}
 };
 
-const openModal = function(name, $index) {
-	if ($index === undefined) {return}
-	this.edit_index = $index;
-	$(name).modal('open');
-}
-
-
-const openModalFromSimpleImageCrud = function(name, $index) {
-	if ($index === undefined) {return}
-	this.$parent.$data.edit_index = $index;
-	$(name).modal('open');
-}
-
-
-
 const form_id  = function() {return R.replace('{{item_on_edit.id}}', this.id, this.formId)}
 
 export const pagesGroup = simpleCrud('#pages-group-template',{props: ['label','index'], mixins:[sortable]});
@@ -89,3 +62,5 @@ export const pages = simpleCrud('#pages-template', { components:{pagesGroup}, mi
 export const pagesectionsModalCreate = simpleModalCrud('#pagesections-modal-create-template');
 export const pagesectionsModalEdit = simpleModalCrud('#pagesections-modal-edit-template',{props:['edit-index']});
 export const pagesections = simpleCrud('#pagesections-template', {methods: {openModal}, components:{pagesectionsModalCreate, pagesectionsModalEdit}});
+
+export const pagesectionsCheckbox = simpleCrud('#pagesections-checkbox-template', checkboxesMethods);

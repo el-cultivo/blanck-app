@@ -23329,7 +23329,8 @@ _constants.w.on('load', function () {
 		pages: _simpleCruds.pages,
 		pagesectionsModalCreate: _simpleCruds.pagesectionsModalCreate,
 		pagesectionsModalEdit: _simpleCruds.pagesectionsModalEdit,
-		pagesections: _simpleCruds.pagesections
+		pagesections: _simpleCruds.pagesections,
+		pagesectionsCheckbox: _simpleCruds.pagesectionsCheckbox
 	}]], ['#alert__container', _alertsController.alertsController, 'init', []]]);
 });
 
@@ -23435,7 +23436,7 @@ console.log('Hola, estás bien sabroso de tu micorriza');
 	});
 })(jQuery);
 
-},{"./alerts-controller":9,"./cltvo/constants.js":10,"./functions/dom":12,"./vue/components/media-manager":18,"./vue/components/simple-cruds":19,"./vue/components/single-image":20,"./vue/main-vue":23,"./vue/mixins/mexico-states-and-municipalities":27}],17:[function(require,module,exports){
+},{"./alerts-controller":9,"./cltvo/constants.js":10,"./functions/dom":12,"./vue/components/media-manager":19,"./vue/components/simple-cruds":20,"./vue/components/single-image":21,"./vue/main-vue":24,"./vue/mixins/mexico-states-and-municipalities":28}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23592,6 +23593,43 @@ var gMap = exports.gMap = _vue2.default.extend({
 });
 
 },{"ramda":4,"vue":8}],18:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+var makePost = exports.makePost = function makePost($event) {
+	this.post($event.target.form);
+};
+
+var openModal = exports.openModal = function openModal(name, $index) {
+	if ($index === undefined) {
+		return;
+	}
+	this.edit_index = $index;
+	$(name).modal('open');
+};
+
+var openModalFromSimpleImageCrud = exports.openModalFromSimpleImageCrud = function openModalFromSimpleImageCrud(name, $index) {
+	if ($index === undefined) {
+		return;
+	}
+	this.$parent.$data.edit_index = $index;
+	$(name).modal('open');
+};
+
+var postWithMaterialNote = exports.postWithMaterialNote = function postWithMaterialNote($event) {
+	var mn = $($event.target).find('.materialnote_JS');
+	mn.each(function () {
+		var $this = $(this),
+		    note = $this.siblings('.note-editor').find('.note-editable');
+
+		$this.text(note.html());
+	});
+	this.post($event);
+};
+
+},{}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23776,13 +23814,13 @@ var mediaManager = exports.mediaManager = Vue.extend({
 	}
 });
 
-},{"../../file-dnd.js":11,"../../functions/pure":13,"../mixins/crud-ajax":25,"ramda":4,"vue":8,"vue-resource":6}],19:[function(require,module,exports){
+},{"../../file-dnd.js":11,"../../functions/pure":13,"../mixins/crud-ajax":26,"ramda":4,"vue":8,"vue-resource":6}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.pagesections = exports.pagesectionsModalEdit = exports.pagesectionsModalCreate = exports.pages = exports.pagesGroup = undefined;
+exports.pagesectionsCheckbox = exports.pagesections = exports.pagesectionsModalEdit = exports.pagesectionsModalCreate = exports.pages = exports.pagesGroup = undefined;
 
 var _ramda = require('ramda');
 
@@ -23808,47 +23846,37 @@ var _pure = require('../../functions/pure');
 
 var _dom = require('../../functions/dom');
 
+var _simpleCrudHelpers = require('./helpers/simple-crud-helpers');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var checkboxesMethods = {
-	props: ['selectedElems', 'relatedProducts'],
+	props: ['currentPage'],
 
 	data: {
 		selected_checkboxes: [],
 		search: ''
 	},
 
-	computed: {
-		filterable_elems: function filterable_elems() {
-			return (0, _pure.objTextFilter)(['title'], this.search, this.list);
-		}
+	ready: function ready() {
+		this.selected_checkboxes = this.currentPage.sections_ids;
 	},
+
+
 	methods: {
-		makePost: function makePost($event) {
-			this.post($event.target.form);
-		},
+		openModal: _simpleCrudHelpers.openModal,
+
+		makePost: _simpleCrudHelpers.makePost,
+
 		updateSelectedCheckboxes: function updateSelectedCheckboxes() {
 			this.selected_checkboxes = _ramda2.default.map(function (elem) {
 				return elem.id + '';
 			}, this.selectedElems || []);
-			this.relatedProducts = this.selected_checkboxes;
 		},
-		onUpdaterelatedproductsSuccess: function onUpdaterelatedproductsSuccess(body) {
-			this.relatedProducts = _ramda2.default.map(function (prod) {
-				return prod.id;
-			}, _ramda2.default.pathOr([], ['data', 'related_products'], body));
-		}
-	},
-
-	watch: {
-		selectedElems: function selectedElems() {
-			this.updateSelectedCheckboxes();
-		},
-		list: function list() {
-			this.updateSelectedCheckboxes();
+		is_checked: function is_checked(id) {
+			return _ramda2.default.contains(id, this.selected_checkboxes) ? true : false;
 		}
 	}
-
 };
 
 var relatedProductsFilter = {
@@ -23875,22 +23903,6 @@ var relatedProductsFilter = {
 	}
 };
 
-var openModal = function openModal(name, $index) {
-	if ($index === undefined) {
-		return;
-	}
-	this.edit_index = $index;
-	$(name).modal('open');
-};
-
-var openModalFromSimpleImageCrud = function openModalFromSimpleImageCrud(name, $index) {
-	if ($index === undefined) {
-		return;
-	}
-	this.$parent.$data.edit_index = $index;
-	$(name).modal('open');
-};
-
 var form_id = function form_id() {
 	return _ramda2.default.replace('{{item_on_edit.id}}', this.id, this.formId);
 };
@@ -23900,9 +23912,11 @@ var pages = exports.pages = (0, _simpleCrudComponentMakers.simpleCrud)('#pages-t
 
 var pagesectionsModalCreate = exports.pagesectionsModalCreate = (0, _simpleCrudComponentMakers.simpleModalCrud)('#pagesections-modal-create-template');
 var pagesectionsModalEdit = exports.pagesectionsModalEdit = (0, _simpleCrudComponentMakers.simpleModalCrud)('#pagesections-modal-edit-template', { props: ['edit-index'] });
-var pagesections = exports.pagesections = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-template', { methods: { openModal: openModal }, components: { pagesectionsModalCreate: pagesectionsModalCreate, pagesectionsModalEdit: pagesectionsModalEdit } });
+var pagesections = exports.pagesections = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-template', { methods: { openModal: _simpleCrudHelpers.openModal }, components: { pagesectionsModalCreate: pagesectionsModalCreate, pagesectionsModalEdit: pagesectionsModalEdit } });
 
-},{"../../functions/dom":12,"../../functions/pure":13,"../components/g-map":17,"../factories/simple-crud-component-makers.js":21,"../mixins/mexico-states-and-municipalities":27,"../mixins/multilist-sortable":28,"../mixins/number-filters":29,"../mixins/sortable":31,"ramda":4,"vue":8}],20:[function(require,module,exports){
+var pagesectionsCheckbox = exports.pagesectionsCheckbox = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-checkbox-template', checkboxesMethods);
+
+},{"../../functions/dom":12,"../../functions/pure":13,"../components/g-map":17,"../factories/simple-crud-component-makers.js":22,"../mixins/mexico-states-and-municipalities":28,"../mixins/multilist-sortable":29,"../mixins/number-filters":30,"../mixins/sortable":32,"./helpers/simple-crud-helpers":18,"ramda":4,"vue":8}],21:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23918,7 +23932,7 @@ var singleImage = exports.singleImage = Vue.extend({
 	mixins: [_singleImageMixin.singleImageMixin]
 });
 
-},{"../mixins/single-image-mixin":30,"vue":8}],21:[function(require,module,exports){
+},{"../mixins/single-image-mixin":31,"vue":8}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24099,7 +24113,7 @@ var simpleModalCrud = exports.simpleModalCrud = _ramda2.default.curry(function (
 	return simpleCrud(template, modalOptions);
 });
 
-},{"../../functions/pure":13,"../helpers":22,"../mixins/crud-ajax":25,"../mixins/single-image-mixin":30,"../mixins/v-for-filters.js":32,"ramda":4,"vue":8,"vue-resource":6}],22:[function(require,module,exports){
+},{"../../functions/pure":13,"../helpers":23,"../mixins/crud-ajax":26,"../mixins/single-image-mixin":31,"../mixins/v-for-filters.js":33,"ramda":4,"vue":8,"vue-resource":6}],23:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24138,7 +24152,7 @@ var turnInputTypeIntoNumber = exports.turnInputTypeIntoNumber = function turnInp
 	}, inputs);
 };
 
-},{"../functions/pure":13,"ramda":4}],23:[function(require,module,exports){
+},{"../functions/pure":13,"ramda":4}],24:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24273,7 +24287,7 @@ var mainVue = exports.mainVue = function mainVue() {
 	});
 };
 
-},{"../functions/dom":12,"../functions/pure":13,"../logoManipulations":14,"../menu-tree-toggler":15,"./mixins/crud-ajax":25,"./mixins/menus":26,"ramda":4,"vue":8,"vue-resource":6}],24:[function(require,module,exports){
+},{"../functions/dom":12,"../functions/pure":13,"../logoManipulations":14,"../menu-tree-toggler":15,"./mixins/crud-ajax":26,"./mixins/menus":27,"ramda":4,"vue":8,"vue-resource":6}],25:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24288,7 +24302,7 @@ var componentInteractionsWithMediaManager = exports.componentInteractionsWithMed
 	}
 };
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24461,7 +24475,7 @@ var crudAjax = exports.crudAjax = {
 	}
 };
 
-},{"../../alerts-controller.js":9,"../../functions/pure":13,"ramda":4}],26:[function(require,module,exports){
+},{"../../alerts-controller.js":9,"../../functions/pure":13,"ramda":4}],27:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24495,7 +24509,7 @@ var menusMixin = exports.menusMixin = {
 	}
 };
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24551,7 +24565,7 @@ var mexicoStatesAndMunicipalities = exports.mexicoStatesAndMunicipalities = {
 	}
 };
 
-},{"ramda":4}],28:[function(require,module,exports){
+},{"ramda":4}],29:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24621,7 +24635,7 @@ var multilistSortable = exports.multilistSortable = {
 
 _vue2.default.use(_vueSortable2.default);
 
-},{"../../functions/pure":13,"ramda":4,"vue":8,"vue-sortable":7}],29:[function(require,module,exports){
+},{"../../functions/pure":13,"ramda":4,"vue":8,"vue-sortable":7}],30:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24646,7 +24660,7 @@ var numberFilters = exports.numberFilters = {
 	}
 };
 
-},{}],30:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24771,7 +24785,7 @@ var singleImageMixin = exports.singleImageMixin = {
 	}
 };
 
-},{"../helpers":22,"./component-interactions-with-media-manager.js":24,"./crud-ajax":25,"ramda":4,"vue":8}],31:[function(require,module,exports){
+},{"../helpers":23,"./component-interactions-with-media-manager.js":25,"./crud-ajax":26,"ramda":4,"vue":8}],32:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24819,7 +24833,7 @@ var sortable = exports.sortable = {
 
 _vue2.default.use(_vueSortable2.default);
 
-},{"../../functions/pure":13,"ramda":4,"vue":8,"vue-sortable":7}],32:[function(require,module,exports){
+},{"../../functions/pure":13,"ramda":4,"vue":8,"vue-sortable":7}],33:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
