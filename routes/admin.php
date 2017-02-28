@@ -87,7 +87,7 @@ Route::group(['prefix' => 'pages', "as" => "pages."  ], function(){
         Route::group([ "as" => "sections."  ], function(){
 
             // para asociar y ortear secciones de una pagina
-            Route::group([ 'prefix' => '{page}/sections'  ], function(){
+            Route::group(['middleware' => ['onlyajax'], 'as' => 'ajax.', 'prefix' => '{page_edit}/sections'  ], function(){
                 Route::patch( '{page_section}/association' , 'Admin\Pages\ManagePagesController@sectionAssociation')->name('association');
                 Route::patch( "sort" , 'Admin\Pages\ManagePagesController@sort')->name("sort");
             });
@@ -102,7 +102,7 @@ Route::group(['prefix' => 'pages', "as" => "pages."  ], function(){
                         'parameters'    => ['' => 'page_section'],
                     ]);
                 });
-                
+
             });
 
         });
