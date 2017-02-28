@@ -63,7 +63,8 @@ class Page extends Model
         'public_url',
         'edit_content_url',
         'sections_ids',
-        'sections_minified'
+        'sections_minified',
+        'sections_maped'
     ];
 
     /**
@@ -143,6 +144,18 @@ class Page extends Model
     public function getSectionsIdsAttribute()
     {
         return $this->sections->pluck("id");
+    }
+
+    /**
+     * Get related sections id and index
+     *
+     * @return bool
+     */
+    public function getSectionsMapedAttribute()
+    {
+        return $this->sections->map(function($section){
+            return $section->maped;
+        });
     }
 
     /**

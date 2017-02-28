@@ -86,6 +86,61 @@ class Section extends Model
         ];
     }
 
+    /**
+     * Get type label.
+     *
+     * @return bool
+     */
+    public function getMapedAttribute()
+    {
+        return (object) [
+            'id'                    => $this->id,
+            'index'                 => $this->index,
+            'template_path'         => $this->template_path,
+            'components_max'        => $this->components_max,
+            'type_id'               => $this->type_id,
+            'editable_contents'     => $this->all_editable_contents,
+            'components'            => $this->all_components,
+            'type'                  => $this->type,
+        ];
+    }
+
+    /**
+     * Get type label.
+     *
+     * @return bool
+     */
+    public function getAllComponentsAttribute()
+    {
+        $db_componets = $this->components()->getWithTranslations()->get();
+
+        if (!$this->type->protected && !$this->type->unlimited) {
+            $components = [];
+            for ($i=0; $i < $this->components_max ; $i++) {
+                $component = $db_componets->where("order",$i)->first();
+                $components[] = $component ? $component : Component::Create(["section_id" => $this->id]);
+            }
+            return collect($components);
+        }
+
+        return $db_componets;
+    }
+
+    /**
+     * Get type label.
+     *
+     * @return bool
+     */
+    public function getAllEditableContentsAttribute()
+    {
+        $all_editable_contents = [];
+        foreach (Component::EDITABLE_CONTENTS as $key => $label) {
+            $all_editable_contents[$key] = (boolean)(isset($this->editable_contents[$key]) ? $this->editable_contents[$key] : false);
+        }
+
+        return (object) $all_editable_contents;
+    }
+
 
     /**
      * Get type label.
