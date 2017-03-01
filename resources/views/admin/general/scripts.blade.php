@@ -11,11 +11,10 @@
 <!-- JavaScripts -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
 
-<!--Summernote -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.js"></script>
-{{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+<!-- Materialnote -->
 <script type="text/javascript" src="/js/ckMaterializeOverrides.js"></script>
-<script type="text/javascript" src="/js/materialNote.js"></script> --}}
+<script type="text/javascript" src="/js/materialNote.js"></script>
+<script type="text/javascript" src="/js/vue-html5-editor.js"></script>
 
 <!-- Data Tables -->
 <script type="text/javascript" src="https://cdn.datatables.net/u/dt/dt-1.10.12/datatables.min.js"></script>

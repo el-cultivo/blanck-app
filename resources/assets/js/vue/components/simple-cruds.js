@@ -59,7 +59,7 @@ const form_id  = function() {return R.replace('{{item_on_edit.id}}', this.id, th
 export const pagesGroup = simpleCrud('#pages-group-template',{props: ['label','index'], mixins:[sortable]});
 export const pages = simpleCrud('#pages-template', { components:{pagesGroup}, mixins:[multilistSortable]});
 
-export const pagesectionsModalCreate = simpleModalCrud('#pagesections-modal-create-template');
+export const pagesectionsModalCreate = simpleModalCrud('#pagesections-modal-create-template',{data: { item_on_create: {description: '' } }});
 export const pagesectionsModalEdit = simpleModalCrud('#pagesections-modal-edit-template',{props:['edit-index']});
 export const pagesections = simpleCrud('#pagesections-template', {methods: {openModal}, components:{pagesectionsModalCreate, pagesectionsModalEdit}});
 

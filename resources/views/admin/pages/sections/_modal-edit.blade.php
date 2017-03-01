@@ -23,13 +23,8 @@
             {!! Form::label('description',"Descripción:", [
                 'class' => 'input-label active',
             ]) !!}
-            {!! Form::textarea('description', null, [
-                'v-model'       => 'item_on_edit.description',
-                'class'         => 'materialize-textarea validate',
-                'required'      => 'required',
-                'form'          => 'update_page_section-&#123;&#123;item_on_edit.id&#125;&#125;_form',
-                'placeholder'   => "Lorem ipsum dolor sit amet, nibh..."
-            ]) !!}
+            <v-editor :content.sync='item_on_edit.description'></v-editor>
+            <input type="hidden" v-model="item_on_edit.description" name="description">
         </div>
 
         <div class=" input-field col s12">

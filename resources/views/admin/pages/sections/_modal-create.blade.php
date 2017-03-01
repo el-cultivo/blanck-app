@@ -30,12 +30,8 @@
             {!! Form::label('description',"Descripción:", [
                 'class' => 'input-label active',
             ]) !!}
-            {!! Form::textarea('description', null, [
-                'class'         => 'materialize-textarea validate',
-                'required'      => 'required',
-                'form'          => 'create_page_section_form',
-                'placeholder'   => "Lorem ipsum dolor sit amet, nibh..."
-            ]) !!}
+            <v-editor :content.sync='item_on_create.description'></v-editor>
+            <input type="hidden" v-model="item_on_create.description" name="description">
         </div>
         <div class=" input-field col s12">
             {!! Form::label('template_path',"Client template path:", [

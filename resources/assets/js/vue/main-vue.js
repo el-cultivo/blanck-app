@@ -9,6 +9,20 @@ import {ifElementExistsThenLaunch} from '../functions/dom';
 import {logoSwitch} from '../logoManipulations';
 import {menuTreeToggler} from '../menu-tree-toggler';
 
+Vue.use(VueHtml5Editor, {
+	name: 'v-editor',
+	visibleModules: [
+        "text",
+        "font",
+        "list",
+        "link",
+        "unlink",
+        "hr",
+        "eraser",
+        "undo",
+    ]
+});
+
 Vue.use(VueResource);
 
 export const mainVue = function(config ={}, components = {}) {
