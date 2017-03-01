@@ -37,9 +37,38 @@
                             'class'       => 'validate',
                             'placeholder' => "título (".$language->label.")",
                             'required'    => 'required',
-                            'v-model'     => 'component.'.$language->iso6391.'_description',
+                            'v-model'     => 'component.'.$language->iso6391.'_title',
                             'form'        => '&#123;&#123;"update_component_"+component.id+"_form"&#125;&#125;'
                         ]) !!}
+                    </div>
+                @endforeach
+
+            </div>
+            <div class="col s12" >
+
+                @foreach($languages as $language)
+                    <div class="input-field" v-if="section.editable_contents.subtitle">
+                        {!! Form::label("subtitle[".$language->iso6391."]", 'Subtítulo ('.$language->label.'):', ['class' => 'input-label active']) !!}
+                        {!! Form::text("subtitle[".$language->iso6391."]", null, [
+                            'class'       => 'validate',
+                            'placeholder' => "subtítulo (".$language->label.")",
+                            'required'    => 'required',
+                            'v-model'     => 'component.'.$language->iso6391.'_subtitle',
+                            'form'        => '&#123;&#123;"update_component_"+component.id+"_form"&#125;&#125;'
+                        ]) !!}
+                    </div>
+                @endforeach
+
+            </div>
+
+            <div class="col s12" v-if="section.editable_contents.excerpt">
+
+                @foreach($languages as $language)
+                    <div class="input-field" v-if="section.editable_contents.excerpt">
+                        {!! Form::label("excerpt[".$language->iso6391."]", 'Extracto ('.$language->label.'):', ['class' => 'input-label active']) !!}
+
+                        <v-editor :content.sync='component.{{ $language->iso6391 }}_excerpt '></v-editor>
+                        <input type="hidden" v-model="component.{{ $language->iso6391 }}_excerpt" name="excerpt[{{ $language->iso6391 }}]">
                     </div>
                 @endforeach
 
@@ -50,17 +79,14 @@
                 @foreach($languages as $language)
                     <div class="input-field" v-if="section.editable_contents.content">
                         {!! Form::label("content[".$language->iso6391."]", 'Contentido ('.$language->label.'):', ['class' => 'input-label active']) !!}
-                        {!! Form::textarea("content[".$language->iso6391."]", null, [
-                            'class'       => 'validate materialize-textarea',
-                            'placeholder' => "Contentido (".$language->label.")",
-                            'required'    => 'required',
-                            'v-model'     => 'component.'.$language->iso6391.'_description',
-                            'form'        => '&#123;&#123;"update_component_"+component.id+"_form"&#125;&#125;'
-                        ]) !!}
+
+                        <v-editor :content.sync='component.{{ $language->iso6391 }}_content'></v-editor>
+                        <input type="hidden" v-model="component.{{ $language->iso6391 }}_content" name="content[{{ $language->iso6391 }}]">
                     </div>
                 @endforeach
 
             </div>
+
 
             <div class="col s12" v-if="section.editable_contents.iframe">
 
@@ -71,7 +97,7 @@
                             'class'       => 'validate materialize-textarea',
                             'placeholder' => "iframe (".$language->label.")",
                             'required'    => 'required',
-                            'v-model'     => 'component.'.$language->iso6391.'_description',
+                            'v-model'     => 'component.'.$language->iso6391.'_iframe',
                             'form'        => '&#123;&#123;"update_component_"+component.id+"_form"&#125;&#125;'
                         ]) !!}
                     </div>
@@ -79,17 +105,20 @@
 
             </div>
 
-            <div class="">
-                content:false
+            <div class="col s12" >
 
-
-                excerpt:false
-                iframe:false
-                link:false
-                subtitle:false
-
-
-                title:false
+                @foreach($languages as $language)
+                    <div class="input-field" v-if="section.editable_contents.link">
+                        {!! Form::label("link[".$language->iso6391."]", 'Link ('.$language->label.'):', ['class' => 'input-label active']) !!}
+                        {!! Form::url("link[".$language->iso6391."]", null, [
+                            'class'       => 'validate',
+                            'placeholder' => "Link (".$language->label.")",
+                            'required'    => 'required',
+                            'v-model'     => 'component.'.$language->iso6391.'_link',
+                            'form'        => '&#123;&#123;"update_component_"+component.id+"_form"&#125;&#125;'
+                        ]) !!}
+                    </div>
+                @endforeach
 
             </div>
 
