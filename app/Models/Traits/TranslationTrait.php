@@ -151,7 +151,7 @@ trait TranslationTrait {
                 )
             )
             ->groupBy($this->table.".id")
-            ->join($this->translation_table, $this->table.'.id', '=', $this->translation_table.'.'.$class.'_id')
+            ->leftJoin($this->translation_table, $this->table.'.id', '=', $this->translation_table.'.'.$class.'_id')
             ->orderBy('id', 'DESC');
     }
 
