@@ -14,6 +14,10 @@
 		<tr class="sections__table__row" v-for="section in list" >
 			<td class="sections__table--nombre">
 				@{{ section.index }}
+				<small>
+					<br>
+					@{{{ section.description }}}
+				</small>
 			</td>
 			<td class="sections__table--tipo">
 				@{{{ section.type_label }}}

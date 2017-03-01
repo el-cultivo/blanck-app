@@ -20,6 +20,19 @@
         </div>
 
         <div class=" input-field col s12">
+            {!! Form::label('description',"Descripción:", [
+                'class' => 'input-label active',
+            ]) !!}
+            {!! Form::textarea('description', null, [
+                'v-model'       => 'item_on_edit.description',
+                'class'         => 'materialize-textarea validate',
+                'required'      => 'required',
+                'form'          => 'update_page_section-&#123;&#123;item_on_edit.id&#125;&#125;_form',
+                'placeholder'   => "Lorem ipsum dolor sit amet, nibh..."
+            ]) !!}
+        </div>
+
+        <div class=" input-field col s12">
             {!! Form::label('template_path',"Client template path:", [
                 'class' => 'input-label active',
             ]) !!}
@@ -69,7 +82,7 @@
 
         <div class="col s12 ">
             <div class="pull-right">
-                {!! Form::submit('Crear', [
+                {!! Form::submit('Actualizar', [
                     'class'  => 'btn waves-effect waves-light',
                     'form'   => 'update_page_section-&#123;&#123;item_on_edit.id&#125;&#125;_form',
                 ]) !!}

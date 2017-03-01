@@ -26,7 +26,17 @@
                 'placeholder'   => 'home-slider'
             ]) !!}
         </div>
-
+        <div class=" input-field col s12">
+            {!! Form::label('description',"Descripción:", [
+                'class' => 'input-label active',
+            ]) !!}
+            {!! Form::textarea('description', null, [
+                'class'         => 'materialize-textarea validate',
+                'required'      => 'required',
+                'form'          => 'create_page_section_form',
+                'placeholder'   => "Lorem ipsum dolor sit amet, nibh..."
+            ]) !!}
+        </div>
         <div class=" input-field col s12">
             {!! Form::label('template_path',"Client template path:", [
                 'class' => 'input-label active',
