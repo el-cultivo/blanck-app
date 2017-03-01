@@ -61,28 +61,43 @@ class ManagePagesComponentsController extends Controller
     {
         $input = $request->all();
 
-        $page_edit->publish_at    = $input["publish_at"];
-        $page_edit->publish_id    = $input["publish_id"];
-        $page_edit->parent_id     = (empty($input["parent_id"]) || $page_edit->main || !$page_edit->childs->isEmpty())? null : $input["parent_id"];
-        $page_edit->tblank        = $page_edit->main ? false : isset($input["tblank"]);
+        $editables   = $page_section->all_editable_contents;
 
-        if ($this->user->hasPermission('manage_pages')) {
-            $page_edit->index     = $input["index"];
-        }
-
-        if(!$page_edit->save()){
-            return Redirect::back()->withErrors(["No se pudo actualizar la página"]);
-        }
 
         foreach ($this->languages as $language) {
-            $name = $input["label"][$language->iso6391];
-            $page_edit->updateTranslationByIso($language->iso6391,[
-                'label'         => $name,
-                'slug'          => $page_edit->updateUniqueSlug($name,$language->iso6391)
-            ]);
+
+            $update = [];
+
+            if ($editables->title) {
+                $update['title']  = $input["title"][$language->iso6391];
+            }
+            if ($editables->subtitle) {
+                $update['subtitle']  = $input["subtitle"][$language->iso6391];
+            }
+            if ($editables->excerpt) {
+                $update['excerpt']  = $input["excerpt"][$language->iso6391];
+            }
+            if ($editables->content) {
+                $update['content']  = $input["content"][$language->iso6391];
+            }
+            if ($editables->iframe) {
+                $update['iframe']  = $input["iframe"][$language->iso6391];
+            }
+            if ($editables->link) {
+                $update['link']  = $input["link"][$language->iso6391];
+            }
+
+            $section_component->updateTranslationByIso($language->iso6391,$update);
         }
 
-        return Redirect::back()->with('status', "Página correctamente actualizada");
+        return Response::json([ // todo bien
+            'data'    => Component::with('languages','photos')->GetWithTranslations()->find($section_component->id),
+            'message' => ["Componente correctmente actualizado"],
+            'success' => true
+        ]);
+
+
+
     }
 
     /**

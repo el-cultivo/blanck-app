@@ -26,18 +26,24 @@ class UpdatePageComponentRequest extends Request
      */
     public function rules()
     {
-        $page_section   = $this->route()->parameters()["page_section"];
+        $editables   = $this->route()->parameters()["page_section"]->all_editable_contents;
 
         $rules = [
-            'template_path'         => 'required|max:255',
+            'content'       => 'array',
+            'excerpt'       => 'array',
+            'iframe'        => 'array',
+            'link'          => 'array',
+            'subtitle'      => 'array',
+            'title'         => 'array',
         ];
 
-        if (!$page_section->type->protected) {
-            $rules["editable_contents"  ]   = 'array|required';
-            $rules["editable_contents.*"]   = 'boolean';
-            if (!$page_section->type->unlimited) {
-                $rules["components_max"] = 'integer|min:1|required'; // verificar el cambio de este valor
-            }
+        foreach ($this->languages_isos as $key => $lang_iso) {
+            $rules['title.'.$lang_iso   ]  = $editables->title ? 'present|string' : '';
+            $rules['subtitle.'.$lang_iso]  = $editables->subtitle ? 'present|string' : '';
+            $rules['excerpt.'.$lang_iso ]  = $editables->excerpt ? 'present|string' : '';
+            $rules['content.'.$lang_iso ]  = $editables->content ? 'present|string' : '';
+            $rules['iframe.'.$lang_iso  ]  = $editables->iframe ? 'present|string' : '';
+            $rules['link.'.$lang_iso    ]  = $editables->link ? 'present|url' : '';
         }
 
         return $rules;
