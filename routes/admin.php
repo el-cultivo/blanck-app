@@ -78,6 +78,20 @@ Route::group(['prefix' => 'pages', "as" => "pages."  ], function(){
                 'parameters'    => ['' => 'page_edit'],
             ]);
         });
+
+        Route::group(['prefix' => 'sections', 'as' => 'sections.' ], function(){
+            Route::group(['middleware' => ['onlyajax'], 'as' => 'ajax.', 'prefix' => 'ajax'  ], function(){
+                Route::group(['prefix' => '{page_section}'  ], function(){
+                    Route::group([ 'as' => 'components.', 'prefix' => 'components'  ], function(){
+                        Route::patch( "sort" , 'Admin\Pages\ManagePagesComponentsController@sort')->name("sort");
+                        Route::resource('/','Admin\Pages\ManagePagesComponentsController',[
+                            'only' 			=> ['store','update','destroy'],
+                            'parameters'    => ['' => 'section_component'],
+                        ]);
+                    });
+                });
+            });
+        });
     });
 
     // rutas para el manejo de paginas
