@@ -29,6 +29,7 @@
 
             </div>
             <div class="col " v-bind:class="{ s8: section.editable_contents.thumbnail_img, s12: !section.editable_contents.thumbnail_img  }">
+
                 @foreach($languages as $language)
                     <div class="input-field" v-if="section.editable_contents.title">
                         {!! Form::label("title[".$language->iso6391."]", 'Título ('.$language->label.'):', ['class' => 'input-label active']) !!}
@@ -83,7 +84,6 @@
 
 
                 excerpt:false
-
                 iframe:false
                 link:false
                 subtitle:false

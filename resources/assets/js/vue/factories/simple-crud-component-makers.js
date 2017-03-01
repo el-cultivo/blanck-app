@@ -45,6 +45,8 @@ export const simpleCrud = R.curry(function(template, options = {}) {
 
 		filters: options.filters || {},
 
+		events: options.events || {},
+
 		computed: R.merge({
 					list_with_langs() {
 						return R.map(obj =>
@@ -119,6 +121,7 @@ export const simpleModalCrud = R.curry(function(template, config ={}) {
 		mixins: [].concat(config.mixins || []),
 
 		props: ['editIndex', 'list'].concat(config.props || []),
+		events: config.events || {},
 
 		data: R.merge({
 			modal: $(name),

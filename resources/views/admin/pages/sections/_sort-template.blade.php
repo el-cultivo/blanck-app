@@ -10,12 +10,12 @@
             </thead>
 
             <tbody class="collection" v-sortable="{onUpdate: onUpdate, onMove: onMove, handle: '.handle', group: label}">
-                <tr  v-for="section in list" >
+                <tr  v-for="section in sortable_list" >
                     <td>
-                        <span class="btn-floating waves-effect waves-light">
+                        <span class="btn-floating waves-effect waves-light" @click="move(-1, $index, sortable_list)">
                             <i class="small">&uarr;</i>
                         </span>
-                        <span class="btn-floating waves-effect waves-light">
+                        <span class="btn-floating waves-effect waves-light" @click="move(1, $index, sortable_list)">
                             <i class="small">
                                 &darr;
                             </i>

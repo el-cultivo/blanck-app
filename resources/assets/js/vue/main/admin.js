@@ -1,23 +1,19 @@
 import R from 'ramda';
+import {mexicoStatesAndMunicipalities} from '../mixins/mexico-states-and-municipalities';
 
 export var adminVue = {
 	el: '#admin-vue',
-
+	mixins:[mexicoStatesAndMunicipalities],
 	methods: {
-		openMediaManager() {
-			this.$refs.media_manager.open();
-		},
-
-		closeMediaManager() {
-			this.$refs.media_manager.close();
-		},
-
-		openComponent(ref) {
-			R.path(['$refs', ref, 'open'], this) ? this.$refs[ref].open() : '';
-		},
-
-		closeComponent(ref){
-			R.path(['$refs', ref, 'close'], this) ? this.$refs[ref].close() : '';
+	},
+	events: {
+		onAssociatedCheckbox(elem) {
+			console.log('elem', elem);
+			this.$broadcast('addedCheckboxElem', elem);
+		}, 
+		onDissociatedCheckbox(id) {
+			console.log('id', id);
+			this.$broadcast('removedCheckboxId', id);
 		}
 	}
 };

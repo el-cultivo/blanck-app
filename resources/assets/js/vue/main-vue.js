@@ -98,7 +98,7 @@ export const mainVue = function(config ={}, components = {}) {
 
 		mixins: mixins,
 
-		events: {
+		events: R.merge({
 			'toggle-menu': function(menu_name) {
 				let other_menus_names = R.filter(menu => menu !== menu_name, R.keys(this.store.menus));
 
@@ -111,7 +111,7 @@ export const mainVue = function(config ={}, components = {}) {
 					this.store.menus[menu_name].isOpen = !this.store.menus[menu_name].isOpen;
 				}
 			}
-		},
+		}, config.events || {}),
 
 		watch: config.watch || {},
 

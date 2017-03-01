@@ -1,4 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+
+},{}],2:[function(require,module,exports){
 (function (global){
 /**
  * lodash (Custom Build) <https://lodash.com/>
@@ -379,7 +381,7 @@ function toNumber(value) {
 module.exports = debounce;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -561,7 +563,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 //  Ramda v0.21.0
 //  https://github.com/ramda/ramda
 //  (c) 2013-2016 Scott Sauyet, Michael Hurley, and David Chambers
@@ -9347,15 +9349,14 @@ process.umask = function() { return 0; };
 
 }.call(this));
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /**!
  * Sortable
  * @author	RubaXa   <trash@rubaxa.org>
  * @license MIT
  */
 
-
-(function (factory) {
+(function sortableModule(factory) {
 	"use strict";
 
 	if (typeof define === "function" && define.amd) {
@@ -9364,15 +9365,18 @@ process.umask = function() { return 0; };
 	else if (typeof module != "undefined" && typeof module.exports != "undefined") {
 		module.exports = factory();
 	}
-	else if (typeof Package !== "undefined") {
-		Sortable = factory();  // export for Meteor.js
-	}
 	else {
 		/* jshint sub:true */
 		window["Sortable"] = factory();
 	}
-})(function () {
+})(function sortableFactory() {
 	"use strict";
+
+	if (typeof window == "undefined" || !window.document) {
+		return function sortableError() {
+			throw new Error("Sortable.js requires a window with a document");
+		};
+	}
 
 	var dragEl,
 		parentEl,
@@ -9380,9 +9384,11 @@ process.umask = function() { return 0; };
 		cloneEl,
 		rootEl,
 		nextEl,
+		lastDownEl,
 
 		scrollEl,
 		scrollParentEl,
+		scrollCustomFn,
 
 		lastEl,
 		lastCSS,
@@ -9392,6 +9398,8 @@ process.umask = function() { return 0; };
 		newIndex,
 
 		activeGroup,
+		putSortable,
+
 		autoScroll = {},
 
 		tapEvt,
@@ -9400,7 +9408,8 @@ process.umask = function() { return 0; };
 		moved,
 
 		/** @const */
-		RSPACE = /\s+/g,
+		R_SPACE = /\s+/g,
+		R_FLOAT = /left|right|inline/,
 
 		expando = 'Sortable' + (new Date).getTime(),
 
@@ -9408,8 +9417,17 @@ process.umask = function() { return 0; };
 		document = win.document,
 		parseInt = win.parseInt,
 
+		$ = win.jQuery || win.Zepto,
+		Polymer = win.Polymer,
+
+		captureMode = false,
+
 		supportDraggable = !!('draggable' in document.createElement('div')),
 		supportCssPointerEvents = (function (el) {
+			// false when IE11
+			if (!!navigator.userAgent.match(/Trident.*rv[ :]?11\./)) {
+				return false;
+			}
 			el = document.createElement('x');
 			el.style.cssText = 'pointer-events:auto';
 			return el.style.pointerEvents === 'auto';
@@ -9418,14 +9436,16 @@ process.umask = function() { return 0; };
 		_silent = false,
 
 		abs = Math.abs,
-		slice = [].slice,
+		min = Math.min,
 
+		savedInputChecked = [],
 		touchDragOverListeners = [],
 
 		_autoScroll = _throttle(function (/**Event*/evt, /**Object*/options, /**HTMLElement*/rootEl) {
 			// Bug: https://bugzilla.mozilla.org/show_bug.cgi?id=505521
 			if (rootEl && options.scroll) {
-				var el,
+				var _this = rootEl[expando],
+					el,
 					rect,
 					sens = options.scrollSensitivity,
 					speed = options.scrollSpeed,
@@ -9437,13 +9457,17 @@ process.umask = function() { return 0; };
 					winHeight = window.innerHeight,
 
 					vx,
-					vy
+					vy,
+
+					scrollOffsetX,
+					scrollOffsetY
 				;
 
 				// Delect scrollEl
 				if (scrollParentEl !== rootEl) {
 					scrollEl = options.scroll;
 					scrollParentEl = rootEl;
+					scrollCustomFn = options.scrollFn;
 
 					if (scrollEl === true) {
 						scrollEl = rootEl;
@@ -9485,11 +9509,18 @@ process.umask = function() { return 0; };
 
 					if (el) {
 						autoScroll.pid = setInterval(function () {
+							scrollOffsetY = vy ? vy * speed : 0;
+							scrollOffsetX = vx ? vx * speed : 0;
+
+							if ('function' === typeof(scrollCustomFn)) {
+								return scrollCustomFn.call(_this, scrollOffsetX, scrollOffsetY, evt);
+							}
+
 							if (el === win) {
-								win.scrollTo(win.pageXOffset + vx * speed, win.pageYOffset + vy * speed);
+								win.scrollTo(win.pageXOffset + scrollOffsetX, win.pageYOffset + scrollOffsetY);
 							} else {
-								vy && (el.scrollTop += vy * speed);
-								vx && (el.scrollLeft += vx * speed);
+								el.scrollTop += scrollOffsetY;
+								el.scrollLeft += scrollOffsetX;
 							}
 						}, 24);
 					}
@@ -9498,22 +9529,42 @@ process.umask = function() { return 0; };
 		}, 30),
 
 		_prepareGroup = function (options) {
-			var group = options.group;
+			function toFn(value, pull) {
+				if (value === void 0 || value === true) {
+					value = group.name;
+				}
 
-			if (!group || typeof group != 'object') {
-				group = options.group = {name: group};
+				if (typeof value === 'function') {
+					return value;
+				} else {
+					return function (to, from) {
+						var fromGroup = from.options.group.name;
+
+						return pull
+							? value
+							: value && (value.join
+								? value.indexOf(fromGroup) > -1
+								: (fromGroup == value)
+							);
+					};
+				}
 			}
 
-			['pull', 'put'].forEach(function (key) {
-				if (!(key in group)) {
-					group[key] = true;
-				}
-			});
+			var group = {};
+			var originalGroup = options.group;
 
-			options.groups = ' ' + group.name + (group.put.join ? ' ' + group.put.join(' ') : '') + ' ';
+			if (!originalGroup || typeof originalGroup != 'object') {
+				originalGroup = {name: originalGroup};
+			}
+
+			group.name = originalGroup.name;
+			group.checkPull = toFn(originalGroup.pull, true);
+			group.checkPut = toFn(originalGroup.put);
+			group.revertClone = originalGroup.revertClone;
+
+			options.group = group;
 		}
 	;
-
 
 
 	/**
@@ -9533,7 +9584,6 @@ process.umask = function() { return 0; };
 		// Export instance
 		el[expando] = this;
 
-
 		// Default options
 		var defaults = {
 			group: Math.random(),
@@ -9547,8 +9597,10 @@ process.umask = function() { return 0; };
 			draggable: /[uo]l/i.test(el.nodeName) ? 'li' : '>*',
 			ghostClass: 'sortable-ghost',
 			chosenClass: 'sortable-chosen',
+			dragClass: 'sortable-drag',
 			ignore: 'a, img',
 			filter: null,
+			preventOnFilter: true,
 			animation: 0,
 			setData: function (dataTransfer, dragEl) {
 				dataTransfer.setData('Text', dragEl.textContent);
@@ -9559,7 +9611,9 @@ process.umask = function() { return 0; };
 			delay: 0,
 			forceFallback: false,
 			fallbackClass: 'sortable-fallback',
-			fallbackOnBody: false
+			fallbackOnBody: false,
+			fallbackTolerance: 0,
+			fallbackOffset: {x: 0, y: 0}
 		};
 
 
@@ -9572,7 +9626,7 @@ process.umask = function() { return 0; };
 
 		// Bind all private methods
 		for (var fn in this) {
-			if (fn.charAt(0) === '_') {
+			if (fn.charAt(0) === '_' && typeof this[fn] === 'function') {
 				this[fn] = this[fn].bind(this);
 			}
 		}
@@ -9583,6 +9637,7 @@ process.umask = function() { return 0; };
 		// Bind events
 		_on(el, 'mousedown', this._onTapStart);
 		_on(el, 'touchstart', this._onTapStart);
+		_on(el, 'pointerdown', this._onTapStart);
 
 		if (this.nativeDraggable) {
 			_on(el, 'dragover', this);
@@ -9603,16 +9658,26 @@ process.umask = function() { return 0; };
 			var _this = this,
 				el = this.el,
 				options = this.options,
+				preventOnFilter = options.preventOnFilter,
 				type = evt.type,
 				touch = evt.touches && evt.touches[0],
 				target = (touch || evt).target,
-				originalTarget = target,
-				filter = options.filter;
+				originalTarget = evt.target.shadowRoot && evt.path[0] || target,
+				filter = options.filter,
+				startIndex;
 
+			_saveInputCheckedState(el);
+
+
+			// Don't trigger start event when an element is been dragged, otherwise the evt.oldindex always wrong when set option.group.
+			if (dragEl) {
+				return;
+			}
 
 			if (type === 'mousedown' && evt.button !== 0 || options.disabled) {
 				return; // only left button or enabled
 			}
+
 
 			target = _closest(target, options.draggable, el);
 
@@ -9620,14 +9685,19 @@ process.umask = function() { return 0; };
 				return;
 			}
 
-			// get the index of the dragged element within its parent
-			oldIndex = _index(target);
+			if (lastDownEl === target) {
+				// Ignoring duplicate `down`
+				return;
+			}
+
+			// Get the index of the dragged element within its parent
+			startIndex = _index(target, options.draggable);
 
 			// Check filter
 			if (typeof filter === 'function') {
 				if (filter.call(this, evt, target, this)) {
-					_dispatchEvent(_this, originalTarget, 'filter', target, el, oldIndex);
-					evt.preventDefault();
+					_dispatchEvent(_this, originalTarget, 'filter', target, el, startIndex);
+					preventOnFilter && evt.preventDefault();
 					return; // cancel dnd
 				}
 			}
@@ -9636,28 +9706,26 @@ process.umask = function() { return 0; };
 					criteria = _closest(originalTarget, criteria.trim(), el);
 
 					if (criteria) {
-						_dispatchEvent(_this, criteria, 'filter', target, el, oldIndex);
+						_dispatchEvent(_this, criteria, 'filter', target, el, startIndex);
 						return true;
 					}
 				});
 
 				if (filter) {
-					evt.preventDefault();
+					preventOnFilter && evt.preventDefault();
 					return; // cancel dnd
 				}
 			}
-
 
 			if (options.handle && !_closest(originalTarget, options.handle, el)) {
 				return;
 			}
 
-
 			// Prepare `dragstart`
-			this._prepareDragStart(evt, touch, target);
+			this._prepareDragStart(evt, touch, target, startIndex);
 		},
 
-		_prepareDragStart: function (/** Event */evt, /** Touch */touch, /** HTMLElement */target) {
+		_prepareDragStart: function (/** Event */evt, /** Touch */touch, /** HTMLElement */target, /** Number */startIndex) {
 			var _this = this,
 				el = _this.el,
 				options = _this.options,
@@ -9671,7 +9739,14 @@ process.umask = function() { return 0; };
 				dragEl = target;
 				parentEl = dragEl.parentNode;
 				nextEl = dragEl.nextSibling;
+				lastDownEl = target;
 				activeGroup = options.group;
+				oldIndex = startIndex;
+
+				this._lastX = (touch || evt).clientX;
+				this._lastY = (touch || evt).clientY;
+
+				dragEl.style['will-change'] = 'transform';
 
 				dragStartFn = function () {
 					// Delayed drag has been triggered
@@ -9679,13 +9754,16 @@ process.umask = function() { return 0; };
 					_this._disableDelayedDrag();
 
 					// Make the element draggable
-					dragEl.draggable = true;
+					dragEl.draggable = _this.nativeDraggable;
 
 					// Chosen item
-					_toggleClass(dragEl, _this.options.chosenClass, true);
+					_toggleClass(dragEl, options.chosenClass, true);
 
 					// Bind the events: dragstart/dragend
-					_this._triggerDragStart(touch);
+					_this._triggerDragStart(evt, touch);
+
+					// Drag start event
+					_dispatchEvent(_this, rootEl, 'choose', dragEl, rootEl, oldIndex);
 				};
 
 				// Disable "draggable"
@@ -9696,6 +9774,8 @@ process.umask = function() { return 0; };
 				_on(ownerDocument, 'mouseup', _this._onDrop);
 				_on(ownerDocument, 'touchend', _this._onDrop);
 				_on(ownerDocument, 'touchcancel', _this._onDrop);
+				_on(ownerDocument, 'pointercancel', _this._onDrop);
+				_on(ownerDocument, 'selectstart', _this);
 
 				if (options.delay) {
 					// If the user moves the pointer or let go the click or touch
@@ -9706,11 +9786,14 @@ process.umask = function() { return 0; };
 					_on(ownerDocument, 'touchcancel', _this._disableDelayedDrag);
 					_on(ownerDocument, 'mousemove', _this._disableDelayedDrag);
 					_on(ownerDocument, 'touchmove', _this._disableDelayedDrag);
+					_on(ownerDocument, 'pointermove', _this._disableDelayedDrag);
 
 					_this._dragStartTimer = setTimeout(dragStartFn, options.delay);
 				} else {
 					dragStartFn();
 				}
+
+
 			}
 		},
 
@@ -9723,9 +9806,12 @@ process.umask = function() { return 0; };
 			_off(ownerDocument, 'touchcancel', this._disableDelayedDrag);
 			_off(ownerDocument, 'mousemove', this._disableDelayedDrag);
 			_off(ownerDocument, 'touchmove', this._disableDelayedDrag);
+			_off(ownerDocument, 'pointermove', this._disableDelayedDrag);
 		},
 
-		_triggerDragStart: function (/** Touch */touch) {
+		_triggerDragStart: function (/** Event */evt, /** Touch */touch) {
+			touch = touch || (evt.pointerType == 'touch' ? evt : null);
+
 			if (touch) {
 				// Touch device support
 				tapEvt = {
@@ -9745,8 +9831,11 @@ process.umask = function() { return 0; };
 			}
 
 			try {
-				if (document.selection) {
-					document.selection.empty();
+				if (document.selection) {					
+					// Timeout neccessary for IE9					
+					setTimeout(function () {
+						document.selection.empty();
+					});					
 				} else {
 					window.getSelection().removeAllRanges();
 				}
@@ -9756,13 +9845,18 @@ process.umask = function() { return 0; };
 
 		_dragStarted: function () {
 			if (rootEl && dragEl) {
+				var options = this.options;
+
 				// Apply effect
-				_toggleClass(dragEl, this.options.ghostClass, true);
+				_toggleClass(dragEl, options.ghostClass, true);
+				_toggleClass(dragEl, options.dragClass, false);
 
 				Sortable.active = this;
 
 				// Drag start event
 				_dispatchEvent(this, rootEl, 'start', dragEl, rootEl, oldIndex);
+			} else {
+				this._nulling();
 			}
 		},
 
@@ -9781,12 +9875,11 @@ process.umask = function() { return 0; };
 
 				var target = document.elementFromPoint(touchEvt.clientX, touchEvt.clientY),
 					parent = target,
-					groupName = ' ' + this.options.group.name + '',
 					i = touchDragOverListeners.length;
 
 				if (parent) {
 					do {
-						if (parent[expando] && parent[expando].options.groups.indexOf(groupName) > -1) {
+						if (parent[expando]) {
 							while (i--) {
 								touchDragOverListeners[i]({
 									clientX: touchEvt.clientX,
@@ -9814,18 +9907,27 @@ process.umask = function() { return 0; };
 
 		_onTouchMove: function (/**TouchEvent*/evt) {
 			if (tapEvt) {
+				var	options = this.options,
+					fallbackTolerance = options.fallbackTolerance,
+					fallbackOffset = options.fallbackOffset,
+					touch = evt.touches ? evt.touches[0] : evt,
+					dx = (touch.clientX - tapEvt.clientX) + fallbackOffset.x,
+					dy = (touch.clientY - tapEvt.clientY) + fallbackOffset.y,
+					translate3d = evt.touches ? 'translate3d(' + dx + 'px,' + dy + 'px,0)' : 'translate(' + dx + 'px,' + dy + 'px)';
+
 				// only set the status to dragging, when we are actually dragging
 				if (!Sortable.active) {
+					if (fallbackTolerance &&
+						min(abs(touch.clientX - this._lastX), abs(touch.clientY - this._lastY)) < fallbackTolerance
+					) {
+						return;
+					}
+
 					this._dragStarted();
 				}
 
 				// as well as creating the ghost element on the document body
 				this._appendGhost();
-
-				var touch = evt.touches ? evt.touches[0] : evt,
-					dx = touch.clientX - tapEvt.clientX,
-					dy = touch.clientY - tapEvt.clientY,
-					translate3d = evt.touches ? 'translate3d(' + dx + 'px,' + dy + 'px,0)' : 'translate(' + dx + 'px,' + dy + 'px)';
 
 				moved = true;
 				touchEvt = touch;
@@ -9850,6 +9952,7 @@ process.umask = function() { return 0; };
 
 				_toggleClass(ghostEl, options.ghostClass, false);
 				_toggleClass(ghostEl, options.fallbackClass, true);
+				_toggleClass(ghostEl, options.dragClass, true);
 
 				_css(ghostEl, 'top', rect.top - parseInt(css.marginTop, 10));
 				_css(ghostEl, 'left', rect.left - parseInt(css.marginLeft, 10));
@@ -9875,19 +9978,29 @@ process.umask = function() { return 0; };
 
 			this._offUpEvents();
 
-			if (activeGroup.pull == 'clone') {
-				cloneEl = dragEl.cloneNode(true);
+			if (activeGroup.checkPull(this, this, dragEl, evt)) {
+				cloneEl = _clone(dragEl);
+
+				cloneEl.draggable = false;
+				cloneEl.style['will-change'] = '';
+
 				_css(cloneEl, 'display', 'none');
+				_toggleClass(cloneEl, this.options.chosenClass, false);
+
 				rootEl.insertBefore(cloneEl, dragEl);
+				_dispatchEvent(this, rootEl, 'clone', dragEl);
 			}
 
-			if (useFallback) {
+			_toggleClass(dragEl, options.dragClass, true);
 
+			if (useFallback) {
 				if (useFallback === 'touch') {
 					// Bind touch events
 					_on(document, 'touchmove', this._onTouchMove);
 					_on(document, 'touchend', this._onDrop);
 					_on(document, 'touchcancel', this._onDrop);
+					_on(document, 'pointermove', this._onTouchMove);
+					_on(document, 'pointerup', this._onDrop);
 				} else {
 					// Old brwoser
 					_on(document, 'mousemove', this._onTouchMove);
@@ -9911,11 +10024,13 @@ process.umask = function() { return 0; };
 			var el = this.el,
 				target,
 				dragRect,
+				targetRect,
 				revert,
 				options = this.options,
 				group = options.group,
-				groupPut = group.put,
+				activeSortable = Sortable.active,
 				isOwner = (activeGroup === group),
+				isMovingBetweenSortable = false,
 				canSort = options.sort;
 
 			if (evt.preventDefault !== void 0) {
@@ -9923,14 +10038,21 @@ process.umask = function() { return 0; };
 				!options.dragoverBubble && evt.stopPropagation();
 			}
 
+			if (dragEl.animated) {
+				return;
+			}
+
 			moved = true;
 
-			if (activeGroup && !options.disabled &&
+			if (activeSortable && !options.disabled &&
 				(isOwner
 					? canSort || (revert = !rootEl.contains(dragEl)) // Reverting item into the original list
-					: activeGroup.pull && groupPut && (
-						(activeGroup.name === group.name) || // by Name
-						(groupPut.indexOf && ~groupPut.indexOf(activeGroup.name)) // by Array
+					: (
+						putSortable === this ||
+						(
+							(activeSortable.lastPullMode = activeGroup.checkPull(this, activeSortable, dragEl, evt)) &&
+							group.checkPut(this, activeSortable, dragEl, evt)
+						)
 					)
 				) &&
 				(evt.rootEl === void 0 || evt.rootEl === this.el) // touch fallback
@@ -9945,8 +10067,14 @@ process.umask = function() { return 0; };
 				target = _closest(evt.target, options.draggable, el);
 				dragRect = dragEl.getBoundingClientRect();
 
+				if (putSortable !== this) {
+					putSortable = this;
+					isMovingBetweenSortable = true;
+				}
+
 				if (revert) {
-					_cloneHide(true);
+					_cloneHide(activeSortable, true);
+					parentEl = rootEl; // actualization
 
 					if (cloneEl || nextEl) {
 						rootEl.insertBefore(dragEl, cloneEl || nextEl);
@@ -9962,7 +10090,6 @@ process.umask = function() { return 0; };
 				if ((el.children.length === 0) || (el.children[0] === ghostEl) ||
 					(el === evt.target) && (target = _ghostIsLast(el, evt))
 				) {
-
 					if (target) {
 						if (target.animated) {
 							return;
@@ -9971,9 +10098,9 @@ process.umask = function() { return 0; };
 						targetRect = target.getBoundingClientRect();
 					}
 
-					_cloneHide(isOwner);
+					_cloneHide(activeSortable, isOwner);
 
-					if (_onMove(rootEl, el, dragEl, dragRect, target, targetRect) !== false) {
+					if (_onMove(rootEl, el, dragEl, dragRect, target, targetRect, evt) !== false) {
 						if (!dragEl.contains(el)) {
 							el.appendChild(dragEl);
 							parentEl = el; // actualization
@@ -9990,25 +10117,25 @@ process.umask = function() { return 0; };
 						lastParentCSS = _css(target.parentNode);
 					}
 
+					targetRect = target.getBoundingClientRect();
 
-					var targetRect = target.getBoundingClientRect(),
-						width = targetRect.right - targetRect.left,
+					var width = targetRect.right - targetRect.left,
 						height = targetRect.bottom - targetRect.top,
-						floating = /left|right|inline/.test(lastCSS.cssFloat + lastCSS.display)
+						floating = R_FLOAT.test(lastCSS.cssFloat + lastCSS.display)
 							|| (lastParentCSS.display == 'flex' && lastParentCSS['flex-direction'].indexOf('row') === 0),
 						isWide = (target.offsetWidth > dragEl.offsetWidth),
 						isLong = (target.offsetHeight > dragEl.offsetHeight),
 						halfway = (floating ? (evt.clientX - targetRect.left) / width : (evt.clientY - targetRect.top) / height) > 0.5,
 						nextSibling = target.nextElementSibling,
-						moveVector = _onMove(rootEl, el, dragEl, dragRect, target, targetRect),
-						after
+						moveVector = _onMove(rootEl, el, dragEl, dragRect, target, targetRect, evt),
+						after = false
 					;
 
 					if (moveVector !== false) {
 						_silent = true;
 						setTimeout(_unsilent, 30);
 
-						_cloneHide(isOwner);
+						_cloneHide(activeSortable, isOwner);
 
 						if (moveVector === 1 || moveVector === -1) {
 							after = (moveVector === 1);
@@ -10019,10 +10146,13 @@ process.umask = function() { return 0; };
 
 							if (elTop === tgTop) {
 								after = (target.previousElementSibling === dragEl) && !isWide || halfway && isWide;
+							}
+							else if (target.previousElementSibling === dragEl || dragEl.previousElementSibling === target) {
+								after = (evt.clientY - targetRect.top) / height > 0.5;
 							} else {
 								after = tgTop > elTop;
 							}
-						} else {
+						} else if (!isMovingBetweenSortable) {
 							after = (nextSibling !== dragEl) && !isLong || halfway && isLong;
 						}
 
@@ -10049,6 +10179,10 @@ process.umask = function() { return 0; };
 			if (ms) {
 				var currentRect = target.getBoundingClientRect();
 
+				if (prevRect.nodeType === 1) {
+					prevRect = prevRect.getBoundingClientRect();
+				}
+
 				_css(target, 'transition', 'none');
 				_css(target, 'transform', 'translate3d('
 					+ (prevRect.left - currentRect.left) + 'px,'
@@ -10073,9 +10207,12 @@ process.umask = function() { return 0; };
 			var ownerDocument = this.el.ownerDocument;
 
 			_off(document, 'touchmove', this._onTouchMove);
+			_off(document, 'pointermove', this._onTouchMove);
 			_off(ownerDocument, 'mouseup', this._onDrop);
 			_off(ownerDocument, 'touchend', this._onDrop);
+			_off(ownerDocument, 'pointerup', this._onDrop);
 			_off(ownerDocument, 'touchcancel', this._onDrop);
+			_off(ownerDocument, 'selectstart', this);
 		},
 
 		_onDrop: function (/**Event*/evt) {
@@ -10104,39 +10241,42 @@ process.umask = function() { return 0; };
 
 				ghostEl && ghostEl.parentNode.removeChild(ghostEl);
 
+				if (rootEl === parentEl || Sortable.active.lastPullMode !== 'clone') {
+					// Remove clone
+					cloneEl && cloneEl.parentNode.removeChild(cloneEl);
+				}
+
 				if (dragEl) {
 					if (this.nativeDraggable) {
 						_off(dragEl, 'dragend', this);
 					}
 
 					_disableDraggable(dragEl);
+					dragEl.style['will-change'] = '';
 
 					// Remove class's
 					_toggleClass(dragEl, this.options.ghostClass, false);
 					_toggleClass(dragEl, this.options.chosenClass, false);
 
 					if (rootEl !== parentEl) {
-						newIndex = _index(dragEl);
+						newIndex = _index(dragEl, options.draggable);
 
 						if (newIndex >= 0) {
-							// drag from one list and drop into another
-							_dispatchEvent(null, parentEl, 'sort', dragEl, rootEl, oldIndex, newIndex);
-							_dispatchEvent(this, rootEl, 'sort', dragEl, rootEl, oldIndex, newIndex);
-
 							// Add event
 							_dispatchEvent(null, parentEl, 'add', dragEl, rootEl, oldIndex, newIndex);
 
 							// Remove event
 							_dispatchEvent(this, rootEl, 'remove', dragEl, rootEl, oldIndex, newIndex);
+
+							// drag from one list and drop into another
+							_dispatchEvent(null, parentEl, 'sort', dragEl, rootEl, oldIndex, newIndex);
+							_dispatchEvent(this, rootEl, 'sort', dragEl, rootEl, oldIndex, newIndex);
 						}
 					}
 					else {
-						// Remove clone
-						cloneEl && cloneEl.parentNode.removeChild(cloneEl);
-
 						if (dragEl.nextSibling !== nextEl) {
 							// Get the index of the dragged element within its parent
-							newIndex = _index(dragEl);
+							newIndex = _index(dragEl, options.draggable);
 
 							if (newIndex >= 0) {
 								// drag & drop within the same list
@@ -10147,7 +10287,8 @@ process.umask = function() { return 0; };
 					}
 
 					if (Sortable.active) {
-						if (newIndex === null || newIndex === -1) {
+						/* jshint eqnull:true */
+						if (newIndex == null || newIndex === -1) {
 							newIndex = oldIndex;
 						}
 
@@ -10158,43 +10299,60 @@ process.umask = function() { return 0; };
 					}
 				}
 
-				// Nulling
-				rootEl =
-				dragEl =
-				parentEl =
-				ghostEl =
-				nextEl =
-				cloneEl =
-
-				scrollEl =
-				scrollParentEl =
-
-				tapEvt =
-				touchEvt =
-
-				moved =
-				newIndex =
-
-				lastEl =
-				lastCSS =
-
-				activeGroup =
-				Sortable.active = null;
 			}
+
+			this._nulling();
 		},
 
+		_nulling: function() {
+			rootEl =
+			dragEl =
+			parentEl =
+			ghostEl =
+			nextEl =
+			cloneEl =
+			lastDownEl =
+
+			scrollEl =
+			scrollParentEl =
+
+			tapEvt =
+			touchEvt =
+
+			moved =
+			newIndex =
+
+			lastEl =
+			lastCSS =
+
+			putSortable =
+			activeGroup =
+			Sortable.active = null;
+
+			savedInputChecked.forEach(function (el) {
+				el.checked = true;
+			});
+			savedInputChecked.length = 0;
+		},
 
 		handleEvent: function (/**Event*/evt) {
-			var type = evt.type;
+			switch (evt.type) {
+				case 'drop':
+				case 'dragend':
+					this._onDrop(evt);
+					break;
 
-			if (type === 'dragover' || type === 'dragenter') {
-				if (dragEl) {
-					this._onDragOver(evt);
-					_globalDragOver(evt);
-				}
-			}
-			else if (type === 'drop' || type === 'dragend') {
-				this._onDrop(evt);
+				case 'dragover':
+				case 'dragenter':
+					if (dragEl) {
+						this._onDragOver(evt);
+						_globalDragOver(evt);
+					}
+					break;
+
+				case 'selectstart':
+					evt.preventDefault();
+					break;
 			}
 		},
 
@@ -10297,6 +10455,7 @@ process.umask = function() { return 0; };
 
 			_off(el, 'mousedown', this._onTapStart);
 			_off(el, 'touchstart', this._onTapStart);
+			_off(el, 'pointerdown', this._onTapStart);
 
 			if (this.nativeDraggable) {
 				_off(el, 'dragover', this);
@@ -10317,10 +10476,25 @@ process.umask = function() { return 0; };
 	};
 
 
-	function _cloneHide(state) {
+	function _cloneHide(sortable, state) {
+		if (sortable.lastPullMode !== 'clone') {
+			state = true;
+		}
+
 		if (cloneEl && (cloneEl.state !== state)) {
 			_css(cloneEl, 'display', state ? 'none' : '');
-			!state && cloneEl.state && rootEl.insertBefore(cloneEl, dragEl);
+
+			if (!state) {
+				if (cloneEl.state) {
+					if (sortable.options.group.revertClone) {
+						rootEl.insertBefore(cloneEl, nextEl);
+						sortable._animate(dragEl, cloneEl);
+					} else {
+						rootEl.insertBefore(cloneEl, dragEl);
+					}
+				}
+			}
+
 			cloneEl.state = state;
 		}
 	}
@@ -10329,25 +10503,23 @@ process.umask = function() { return 0; };
 	function _closest(/**HTMLElement*/el, /**String*/selector, /**HTMLElement*/ctx) {
 		if (el) {
 			ctx = ctx || document;
-			selector = selector.split('.');
-
-			var tag = selector.shift().toUpperCase(),
-				re = new RegExp('\\s(' + selector.join('|') + ')(?=\\s)', 'g');
 
 			do {
-				if (
-					(tag === '>*' && el.parentNode === ctx) || (
-						(tag === '' || el.nodeName.toUpperCase() == tag) &&
-						(!selector.length || ((' ' + el.className + ' ').match(re) || []).length == selector.length)
-					)
-				) {
+				if ((selector === '>*' && el.parentNode === ctx) || _matches(el, selector)) {
 					return el;
 				}
-			}
-			while (el !== ctx && (el = el.parentNode));
+				/* jshint boss:true */
+			} while (el = _getParentOrHost(el));
 		}
 
 		return null;
+	}
+
+
+	function _getParentOrHost(el) {
+		var parent = el.host;
+
+		return (parent && parent.nodeType) ? parent : el.parentNode;
 	}
 
 
@@ -10360,12 +10532,12 @@ process.umask = function() { return 0; };
 
 
 	function _on(el, event, fn) {
-		el.addEventListener(event, fn, false);
+		el.addEventListener(event, fn, captureMode);
 	}
 
 
 	function _off(el, event, fn) {
-		el.removeEventListener(event, fn, false);
+		el.removeEventListener(event, fn, captureMode);
 	}
 
 
@@ -10375,8 +10547,8 @@ process.umask = function() { return 0; };
 				el.classList[state ? 'add' : 'remove'](name);
 			}
 			else {
-				var className = (' ' + el.className + ' ').replace(RSPACE, ' ').replace(' ' + name + ' ', ' ');
-				el.className = (className + (state ? ' ' + name : '')).replace(RSPACE, ' ');
+				var className = (' ' + el.className + ' ').replace(R_SPACE, ' ').replace(' ' + name + ' ', ' ');
+				el.className = (className + (state ? ' ' + name : '')).replace(R_SPACE, ' ');
 			}
 		}
 	}
@@ -10426,8 +10598,10 @@ process.umask = function() { return 0; };
 
 
 	function _dispatchEvent(sortable, rootEl, name, targetEl, fromEl, startIndex, newIndex) {
+		sortable = (sortable || rootEl[expando]);
+
 		var evt = document.createEvent('Event'),
-			options = (sortable || rootEl[expando]).options,
+			options = sortable.options,
 			onName = 'on' + name.charAt(0).toUpperCase() + name.substr(1);
 
 		evt.initEvent(name, true, true);
@@ -10448,7 +10622,7 @@ process.umask = function() { return 0; };
 	}
 
 
-	function _onMove(fromEl, toEl, dragEl, dragRect, targetEl, targetRect) {
+	function _onMove(fromEl, toEl, dragEl, dragRect, targetEl, targetRect, originalEvt) {
 		var evt,
 			sortable = fromEl[expando],
 			onMoveFn = sortable.options.onMove,
@@ -10467,7 +10641,7 @@ process.umask = function() { return 0; };
 		fromEl.dispatchEvent(evt);
 
 		if (onMoveFn) {
-			retVal = onMoveFn.call(sortable, evt);
+			retVal = onMoveFn.call(sortable, evt, originalEvt);
 		}
 
 		return retVal;
@@ -10487,9 +10661,14 @@ process.umask = function() { return 0; };
 	/** @returns {HTMLElement|false} */
 	function _ghostIsLast(el, evt) {
 		var lastEl = el.lastElementChild,
-				rect = lastEl.getBoundingClientRect();
+			rect = lastEl.getBoundingClientRect();
 
-		return ((evt.clientY - (rect.top + rect.height) > 5) || (evt.clientX - (rect.right + rect.width) > 5)) && lastEl; // min delta
+		// 5 — min delta
+		// abs — нельзя добавлять, а то глюки при наведении сверху
+		return (
+			(evt.clientY - (rect.top + rect.height) > 5) ||
+			(evt.clientX - (rect.right + rect.width) > 5)
+		) && lastEl;
 	}
 
 
@@ -10512,11 +10691,13 @@ process.umask = function() { return 0; };
 	}
 
 	/**
-	 * Returns the index of an element within its parent
+	 * Returns the index of an element within its parent for a selected set of
+	 * elements
 	 * @param  {HTMLElement} el
+	 * @param  {selector} selector
 	 * @return {number}
 	 */
-	function _index(el) {
+	function _index(el, selector) {
 		var index = 0;
 
 		if (!el || !el.parentNode) {
@@ -10524,12 +10705,28 @@ process.umask = function() { return 0; };
 		}
 
 		while (el && (el = el.previousElementSibling)) {
-			if (el.nodeName.toUpperCase() !== 'TEMPLATE') {
+			if ((el.nodeName.toUpperCase() !== 'TEMPLATE') && (selector === '>*' || _matches(el, selector))) {
 				index++;
 			}
 		}
 
 		return index;
+	}
+
+	function _matches(/**HTMLElement*/el, /**String*/selector) {
+		if (el) {
+			selector = selector.split('.');
+
+			var tag = selector.shift().toUpperCase(),
+				re = new RegExp('\\s(' + selector.join('|') + ')(?=\\s)', 'g');
+
+			return (
+				(tag === '' || el.nodeName.toUpperCase() == tag) &&
+				(!selector.length || ((' ' + el.className + ' ').match(re) || []).length == selector.length)
+			);
+		}
+
+		return false;
 	}
 
 	function _throttle(callback, ms) {
@@ -10565,6 +10762,42 @@ process.umask = function() { return 0; };
 		return dst;
 	}
 
+	function _clone(el) {
+		return $
+			? $(el).clone(true)[0]
+			: (Polymer && Polymer.dom
+				? Polymer.dom(el).cloneNode(true)
+				: el.cloneNode(true)
+			);
+	}
+
+	function _saveInputCheckedState(root) {
+		var inputs = root.getElementsByTagName('input');
+		var idx = inputs.length;
+
+		while (idx--) {
+			var el = inputs[idx];
+			el.checked && savedInputChecked.push(el);
+		}
+	}
+
+	// Fixed #973: 
+	_on(document, 'touchmove', function (evt) {
+		if (Sortable.active) {
+			evt.preventDefault();
+		}
+	});
+
+	try {
+		window.addEventListener('test', null, Object.defineProperty({}, 'passive', {
+			get: function () {
+				captureMode = {
+					capture: false,
+					passive: false
+				};
+			}
+		}));
+	} catch (err) {}
 
 	// Export utils
 	Sortable.utils = {
@@ -10579,6 +10812,7 @@ process.umask = function() { return 0; };
 		throttle: _throttle,
 		closest: _closest,
 		toggleClass: _toggleClass,
+		clone: _clone,
 		index: _index
 	};
 
@@ -10594,14 +10828,14 @@ process.umask = function() { return 0; };
 
 
 	// Export
-	Sortable.version = '1.4.2';
+	Sortable.version = '1.5.1';
 	return Sortable;
 });
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /*!
- * vue-resource v1.0.3
- * https://github.com/vuejs/vue-resource
+ * vue-resource v1.2.1
+ * https://github.com/pagekit/vue-resource
  * Released under the MIT License.
  */
 
@@ -10613,7 +10847,7 @@ process.umask = function() { return 0; };
 
 var RESOLVED = 0;
 var REJECTED = 1;
-var PENDING = 2;
+var PENDING  = 2;
 
 function Promise$1(executor) {
 
@@ -10648,8 +10882,7 @@ Promise$1.resolve = function (x) {
 
 Promise$1.all = function all(iterable) {
     return new Promise$1(function (resolve, reject) {
-        var count = 0,
-            result = [];
+        var count = 0, result = [];
 
         if (iterable.length === 0) {
             resolve(result);
@@ -10701,6 +10934,7 @@ p$1.resolve = function resolve(x) {
                         promise.resolve(x);
                     }
                     called = true;
+
                 }, function (r) {
                     if (!called) {
                         promise.reject(r);
@@ -10850,25 +11084,36 @@ p.catch = function (rejected) {
 p.finally = function (callback) {
 
     return this.then(function (value) {
-        callback.call(this);
-        return value;
-    }, function (reason) {
-        callback.call(this);
-        return Promise.reject(reason);
-    });
+            callback.call(this);
+            return value;
+        }, function (reason) {
+            callback.call(this);
+            return Promise.reject(reason);
+        }
+    );
 };
 
 /**
  * Utility functions.
  */
 
-var debug = false;var util = {};var slice = [].slice;
+var ref = {};
+var hasOwnProperty = ref.hasOwnProperty;
 
+var ref$1 = [];
+var slice = ref$1.slice;
+var debug = false;
+var ntick;
 
-function Util (Vue) {
-    util = Vue.util;
-    debug = Vue.config.debug || !Vue.config.silent;
-}
+var inBrowser = typeof window !== 'undefined';
+
+var Util = function (ref) {
+    var config = ref.config;
+    var nextTick = ref.nextTick;
+
+    ntick = nextTick;
+    debug = config.debug || !config.silent;
+};
 
 function warn(msg) {
     if (typeof console !== 'undefined' && debug) {
@@ -10883,11 +11128,11 @@ function error(msg) {
 }
 
 function nextTick(cb, ctx) {
-    return util.nextTick(cb, ctx);
+    return ntick(cb, ctx);
 }
 
 function trim(str) {
-    return str.replace(/^\s*|\s*$/g, '');
+    return str ? str.replace(/^\s*|\s*$/g, '') : '';
 }
 
 function toLower(str) {
@@ -10904,9 +11149,7 @@ function isString(val) {
     return typeof val === 'string';
 }
 
-function isBoolean(val) {
-    return val === true || val === false;
-}
+
 
 function isFunction(val) {
     return typeof val === 'function';
@@ -10947,20 +11190,20 @@ function options(fn, obj, opts) {
         opts = opts.call(obj);
     }
 
-    return merge(fn.bind({ $vm: obj, $options: opts }), fn, { $options: opts });
+    return merge(fn.bind({$vm: obj, $options: opts}), fn, {$options: opts});
 }
 
 function each(obj, iterator) {
 
     var i, key;
 
-    if (obj && typeof obj.length == 'number') {
+    if (isArray(obj)) {
         for (i = 0; i < obj.length; i++) {
             iterator.call(obj[i], obj[i], i);
         }
     } else if (isObject(obj)) {
         for (key in obj) {
-            if (obj.hasOwnProperty(key)) {
+            if (hasOwnProperty.call(obj, key)) {
                 iterator.call(obj[key], obj[key], key);
             }
         }
@@ -10993,6 +11236,7 @@ function defaults(target) {
                 target[key] = source[key];
             }
         }
+
     });
 
     return target;
@@ -11029,28 +11273,26 @@ function _merge(target, source, deep) {
  * Root Prefix Transform.
  */
 
-function root (options, next) {
+var root = function (options$$1, next) {
 
-    var url = next(options);
+    var url = next(options$$1);
 
-    if (isString(options.root) && !url.match(/^(https?:)?\//)) {
-        url = options.root + '/' + url;
+    if (isString(options$$1.root) && !url.match(/^(https?:)?\//)) {
+        url = options$$1.root + '/' + url;
     }
 
     return url;
-}
+};
 
 /**
  * Query Parameter Transform.
  */
 
-function query (options, next) {
+var query = function (options$$1, next) {
 
-    var urlParams = Object.keys(Url.options.params),
-        query = {},
-        url = next(options);
+    var urlParams = Object.keys(Url.options.params), query = {}, url = next(options$$1);
 
-    each(options.params, function (value, key) {
+    each(options$$1.params, function (value, key) {
         if (urlParams.indexOf(key) === -1) {
             query[key] = value;
         }
@@ -11063,7 +11305,7 @@ function query (options, next) {
     }
 
     return url;
-}
+};
 
 /**
  * URL Template v2.0.6 (https://github.com/bramstein/url-template)
@@ -11071,8 +11313,7 @@ function query (options, next) {
 
 function expand(url, params, variables) {
 
-    var tmpl = parse(url),
-        expanded = tmpl.expand(params);
+    var tmpl = parse(url), expanded = tmpl.expand(params);
 
     if (variables) {
         variables.push.apply(variables, tmpl.vars);
@@ -11083,17 +11324,15 @@ function expand(url, params, variables) {
 
 function parse(template) {
 
-    var operators = ['+', '#', '.', '/', ';', '?', '&'],
-        variables = [];
+    var operators = ['+', '#', '.', '/', ';', '?', '&'], variables = [];
 
     return {
         vars: variables,
-        expand: function (context) {
+        expand: function expand(context) {
             return template.replace(/\{([^\{\}]+)\}|([^\{\}]+)/g, function (_, expression, literal) {
                 if (expression) {
 
-                    var operator = null,
-                        values = [];
+                    var operator = null, values = [];
 
                     if (operators.indexOf(expression.charAt(0)) !== -1) {
                         operator = expression.charAt(0);
@@ -11120,6 +11359,7 @@ function parse(template) {
                     } else {
                         return values.join(',');
                     }
+
                 } else {
                     return encodeReserved(literal);
                 }
@@ -11130,8 +11370,7 @@ function parse(template) {
 
 function getValues(context, operator, key, modifier) {
 
-    var value = context[key],
-        result = [];
+    var value = context[key], result = [];
 
     if (isDefined(value) && value !== '') {
         if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
@@ -11201,7 +11440,7 @@ function isKeyOperator(operator) {
 
 function encodeValue(operator, value, key) {
 
-    value = operator === '+' || operator === '#' ? encodeReserved(value) : encodeURIComponent(value);
+    value = (operator === '+' || operator === '#') ? encodeReserved(value) : encodeURIComponent(value);
 
     if (key) {
         return encodeURIComponent(key) + '=' + value;
@@ -11223,42 +11462,36 @@ function encodeReserved(str) {
  * URL Template (RFC 6570) Transform.
  */
 
-function template (options) {
+var template = function (options) {
 
-    var variables = [],
-        url = expand(options.url, options.params, variables);
+    var variables = [], url = expand(options.url, options.params, variables);
 
     variables.forEach(function (key) {
         delete options.params[key];
     });
 
     return url;
-}
+};
 
 /**
  * Service for URL templating.
  */
 
-var ie = document.documentMode;
-var el = document.createElement('a');
-
 function Url(url, params) {
 
-    var self = this || {},
-        options = url,
-        transform;
+    var self = this || {}, options$$1 = url, transform;
 
     if (isString(url)) {
-        options = { url: url, params: params };
+        options$$1 = {url: url, params: params};
     }
 
-    options = merge({}, Url.options, self.$options, options);
+    options$$1 = merge({}, Url.options, self.$options, options$$1);
 
     Url.transforms.forEach(function (handler) {
         transform = factory(handler, transform, self.$vm);
     });
 
-    return transform(options);
+    return transform(options$$1);
 }
 
 /**
@@ -11285,8 +11518,7 @@ Url.transforms = [template, query, root];
 
 Url.params = function (obj) {
 
-    var params = [],
-        escape = encodeURIComponent;
+    var params = [], escape = encodeURIComponent;
 
     params.add = function (key, value) {
 
@@ -11314,7 +11546,9 @@ Url.params = function (obj) {
 
 Url.parse = function (url) {
 
-    if (ie) {
+    var el = document.createElement('a');
+
+    if (document.documentMode) {
         el.href = url;
         url = el.href;
     }
@@ -11334,16 +11568,14 @@ Url.parse = function (url) {
 };
 
 function factory(handler, next, vm) {
-    return function (options) {
-        return handler.call(vm, options, next);
+    return function (options$$1) {
+        return handler.call(vm, options$$1, next);
     };
 }
 
 function serialize(params, obj, scope) {
 
-    var array = isArray(obj),
-        plain = isPlainObject(obj),
-        hash;
+    var array = isArray(obj), plain = isPlainObject(obj), hash;
 
     each(obj, function (value, key) {
 
@@ -11367,12 +11599,11 @@ function serialize(params, obj, scope) {
  * XDomain client (Internet Explorer).
  */
 
-function xdrClient (request) {
+var xdrClient = function (request) {
     return new PromiseObj(function (resolve) {
 
-        var xdr = new XDomainRequest(),
-            handler = function (_ref) {
-            var type = _ref.type;
+        var xdr = new XDomainRequest(), handler = function (ref) {
+            var type = ref.type;
 
 
             var status = 0;
@@ -11383,64 +11614,63 @@ function xdrClient (request) {
                 status = 500;
             }
 
-            resolve(request.respondWith(xdr.responseText, { status: status }));
+            resolve(request.respondWith(xdr.responseText, {status: status}));
         };
 
-        request.abort = function () {
-            return xdr.abort();
-        };
+        request.abort = function () { return xdr.abort(); };
 
         xdr.open(request.method, request.getUrl());
-        xdr.timeout = 0;
+
+        if (request.timeout) {
+            xdr.timeout = request.timeout;
+        }
+
         xdr.onload = handler;
+        xdr.onabort = handler;
         xdr.onerror = handler;
         xdr.ontimeout = handler;
         xdr.onprogress = function () {};
         xdr.send(request.getBody());
     });
-}
+};
 
 /**
  * CORS Interceptor.
  */
 
-var ORIGIN_URL = Url.parse(location.href);
-var SUPPORTS_CORS = 'withCredentials' in new XMLHttpRequest();
+var SUPPORTS_CORS = inBrowser && 'withCredentials' in new XMLHttpRequest();
 
-function cors (request, next) {
+var cors = function (request, next) {
 
-    if (!isBoolean(request.crossOrigin) && crossOrigin(request)) {
-        request.crossOrigin = true;
-    }
+    if (inBrowser) {
 
-    if (request.crossOrigin) {
+        var orgUrl = Url.parse(location.href);
+        var reqUrl = Url.parse(request.getUrl());
 
-        if (!SUPPORTS_CORS) {
-            request.client = xdrClient;
+        if (reqUrl.protocol !== orgUrl.protocol || reqUrl.host !== orgUrl.host) {
+
+            request.crossOrigin = true;
+            request.emulateHTTP = false;
+
+            if (!SUPPORTS_CORS) {
+                request.client = xdrClient;
+            }
         }
-
-        delete request.emulateHTTP;
     }
 
     next();
-}
-
-function crossOrigin(request) {
-
-    var requestUrl = Url.parse(Url(request));
-
-    return requestUrl.protocol !== ORIGIN_URL.protocol || requestUrl.host !== ORIGIN_URL.host;
-}
+};
 
 /**
  * Body Interceptor.
  */
 
-function body (request, next) {
+var body = function (request, next) {
 
     if (isFormData(request.body)) {
 
         request.headers.delete('Content-Type');
+
     } else if (isObject(request.body) || isArray(request.body)) {
 
         if (request.emulateJSON) {
@@ -11454,49 +11684,58 @@ function body (request, next) {
     next(function (response) {
 
         Object.defineProperty(response, 'data', {
-            get: function () {
+
+            get: function get() {
                 return this.body;
             },
-            set: function (body) {
+
+            set: function set(body) {
                 this.body = body;
             }
+
         });
 
         return response.bodyText ? when(response.text(), function (text) {
 
-            var type = response.headers.get('Content-Type');
+            var type = response.headers.get('Content-Type') || '';
 
-            if (isString(type) && type.indexOf('application/json') === 0) {
+            if (type.indexOf('application/json') === 0 || isJson(text)) {
 
                 try {
                     response.body = JSON.parse(text);
                 } catch (e) {
                     response.body = null;
                 }
+
             } else {
                 response.body = text;
             }
 
             return response;
+
         }) : response;
+
     });
+};
+
+function isJson(str) {
+
+    var start = str.match(/^\[|^\{(?!\{)/), end = {'[': /]$/, '{': /}$/};
+
+    return start && end[start[0]].test(str);
 }
 
 /**
- * JSONP client.
+ * JSONP client (Browser).
  */
 
-function jsonpClient (request) {
+var jsonpClient = function (request) {
     return new PromiseObj(function (resolve) {
 
-        var name = request.jsonp || 'callback',
-            callback = '_jsonp' + Math.random().toString(36).substr(2),
-            body = null,
-            handler,
-            script;
+        var name = request.jsonp || 'callback', callback = request.jsonpCallback || '_jsonp' + Math.random().toString(36).substr(2), body = null, handler, script;
 
-        handler = function (_ref) {
-            var type = _ref.type;
+        handler = function (ref) {
+            var type = ref.type;
 
 
             var status = 0;
@@ -11507,17 +11746,27 @@ function jsonpClient (request) {
                 status = 500;
             }
 
-            resolve(request.respondWith(body, { status: status }));
+            if (status && window[callback]) {
+                delete window[callback];
+                document.body.removeChild(script);
+            }
 
-            delete window[callback];
-            document.body.removeChild(script);
+            resolve(request.respondWith(body, {status: status}));
         };
-
-        request.params[name] = callback;
 
         window[callback] = function (result) {
             body = JSON.stringify(result);
         };
+
+        request.abort = function () {
+            handler({type: 'abort'});
+        };
+
+        request.params[name] = callback;
+
+        if (request.timeout) {
+            setTimeout(request.abort, request.timeout);
+        }
 
         script = document.createElement('script');
         script.src = request.getUrl();
@@ -11528,50 +11777,39 @@ function jsonpClient (request) {
 
         document.body.appendChild(script);
     });
-}
+};
 
 /**
  * JSONP Interceptor.
  */
 
-function jsonp (request, next) {
+var jsonp = function (request, next) {
 
     if (request.method == 'JSONP') {
         request.client = jsonpClient;
     }
 
-    next(function (response) {
-
-        if (request.method == 'JSONP') {
-
-            return when(response.json(), function (json) {
-
-                response.body = json;
-
-                return response;
-            });
-        }
-    });
-}
+    next();
+};
 
 /**
  * Before Interceptor.
  */
 
-function before (request, next) {
+var before = function (request, next) {
 
     if (isFunction(request.before)) {
         request.before.call(this, request);
     }
 
     next();
-}
+};
 
 /**
  * HTTP method override Interceptor.
  */
 
-function method (request, next) {
+var method = function (request, next) {
 
     if (request.emulateHTTP && /^(PUT|PATCH|DELETE)$/i.test(request.method)) {
         request.headers.set('X-HTTP-Method-Override', request.method);
@@ -11579,15 +11817,18 @@ function method (request, next) {
     }
 
     next();
-}
+};
 
 /**
  * Header Interceptor.
  */
 
-function header (request, next) {
+var header = function (request, next) {
 
-    var headers = assign({}, Http.headers.common, !request.crossOrigin ? Http.headers.custom : {}, Http.headers[toLower(request.method)]);
+    var headers = assign({}, Http.headers.common,
+        !request.crossOrigin ? Http.headers.custom : {},
+        Http.headers[toLower(request.method)]
+    );
 
     each(headers, function (value, name) {
         if (!request.headers.has(name)) {
@@ -11596,42 +11837,25 @@ function header (request, next) {
     });
 
     next();
-}
+};
 
 /**
- * Timeout Interceptor.
+ * XMLHttp client (Browser).
  */
 
-function timeout (request, next) {
+var SUPPORTS_BLOB = typeof Blob !== 'undefined' && typeof FileReader !== 'undefined';
 
-    var timeout;
-
-    if (request.timeout) {
-        timeout = setTimeout(function () {
-            request.abort();
-        }, request.timeout);
-    }
-
-    next(function (response) {
-
-        clearTimeout(timeout);
-    });
-}
-
-/**
- * XMLHttp client.
- */
-
-function xhrClient (request) {
+var xhrClient = function (request) {
     return new PromiseObj(function (resolve) {
 
-        var xhr = new XMLHttpRequest(),
-            handler = function (event) {
+        var xhr = new XMLHttpRequest(), handler = function (event) {
 
-            var response = request.respondWith('response' in xhr ? xhr.response : xhr.responseText, {
-                status: xhr.status === 1223 ? 204 : xhr.status, // IE9 status bug
-                statusText: xhr.status === 1223 ? 'No Content' : trim(xhr.statusText)
-            });
+            var response = request.respondWith(
+                'response' in xhr ? xhr.response : xhr.responseText, {
+                    status: xhr.status === 1223 ? 204 : xhr.status, // IE9 status bug
+                    statusText: xhr.status === 1223 ? 'No Content' : trim(xhr.statusText)
+                }
+            );
 
             each(trim(xhr.getAllResponseHeaders()).split('\n'), function (row) {
                 response.headers.append(row.slice(0, row.indexOf(':')), row.slice(row.indexOf(':') + 1));
@@ -11640,9 +11864,7 @@ function xhrClient (request) {
             resolve(response);
         };
 
-        request.abort = function () {
-            return xhr.abort();
-        };
+        request.abort = function () { return xhr.abort(); };
 
         if (request.progress) {
             if (request.method === 'GET') {
@@ -11654,34 +11876,78 @@ function xhrClient (request) {
 
         xhr.open(request.method, request.getUrl(), true);
 
-        if ('responseType' in xhr) {
-            xhr.responseType = 'blob';
+        if (request.timeout) {
+            xhr.timeout = request.timeout;
         }
 
         if (request.credentials === true) {
             xhr.withCredentials = true;
         }
 
+        if (!request.crossOrigin) {
+            request.headers.set('X-Requested-With', 'XMLHttpRequest');
+        }
+
+        if ('responseType' in xhr && SUPPORTS_BLOB) {
+            xhr.responseType = 'blob';
+        }
+
         request.headers.forEach(function (value, name) {
             xhr.setRequestHeader(name, value);
         });
 
-        xhr.timeout = 0;
         xhr.onload = handler;
+        xhr.onabort = handler;
         xhr.onerror = handler;
+        xhr.ontimeout = handler;
         xhr.send(request.getBody());
     });
-}
+};
+
+/**
+ * Http client (Node).
+ */
+
+var nodeClient = function (request) {
+
+    var client = require('got');
+
+    return new PromiseObj(function (resolve) {
+
+        var url = request.getUrl();
+        var body = request.getBody();
+        var method = request.method;
+        var headers = {}, handler;
+
+        request.headers.forEach(function (value, name) {
+            headers[name] = value;
+        });
+
+        client(url, {body: body, method: method, headers: headers}).then(handler = function (resp) {
+
+            var response = request.respondWith(resp.body, {
+                    status: resp.statusCode,
+                    statusText: trim(resp.statusMessage)
+                }
+            );
+
+            each(resp.headers, function (value, name) {
+                response.headers.set(name, value);
+            });
+
+            resolve(response);
+
+        }, function (error$$1) { return handler(error$$1.response); });
+    });
+};
 
 /**
  * Base client.
  */
 
-function Client (context) {
+var Client = function (context) {
 
-    var reqHandlers = [sendRequest],
-        resHandlers = [],
-        handler;
+    var reqHandlers = [sendRequest], resHandlers = [], handler;
 
     if (!isObject(context)) {
         context = null;
@@ -11697,7 +11963,7 @@ function Client (context) {
                 if (isFunction(handler)) {
                     handler.call(context, request, next);
                 } else {
-                    warn('Invalid interceptor of type ' + typeof handler + ', must be a function');
+                    warn(("Invalid interceptor of type " + (typeof handler) + ", must be a function"));
                     next();
                 }
             }
@@ -11707,6 +11973,7 @@ function Client (context) {
                 if (isFunction(response)) {
 
                     resHandlers.unshift(response);
+
                 } else if (isObject(response)) {
 
                     resHandlers.forEach(function (handler) {
@@ -11724,6 +11991,7 @@ function Client (context) {
             }
 
             exec();
+
         }, context);
     }
 
@@ -11732,85 +12000,73 @@ function Client (context) {
     };
 
     return Client;
-}
+};
 
 function sendRequest(request, resolve) {
 
-    var client = request.client || xhrClient;
+    var client = request.client || (inBrowser ? xhrClient : nodeClient);
 
     resolve(client(request));
 }
-
-var classCallCheck = function (instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-};
 
 /**
  * HTTP Headers.
  */
 
-var Headers = function () {
-    function Headers(headers) {
-        var _this = this;
-
-        classCallCheck(this, Headers);
+var Headers = function Headers(headers) {
+    var this$1 = this;
 
 
-        this.map = {};
+    this.map = {};
 
-        each(headers, function (value, name) {
-            return _this.append(name, value);
-        });
+    each(headers, function (value, name) { return this$1.append(name, value); });
+};
+
+Headers.prototype.has = function has (name) {
+    return getName(this.map, name) !== null;
+};
+
+Headers.prototype.get = function get (name) {
+
+    var list = this.map[getName(this.map, name)];
+
+    return list ? list.join() : null;
+};
+
+Headers.prototype.getAll = function getAll (name) {
+    return this.map[getName(this.map, name)] || [];
+};
+
+Headers.prototype.set = function set (name, value) {
+    this.map[normalizeName(getName(this.map, name) || name)] = [trim(value)];
+};
+
+Headers.prototype.append = function append (name, value){
+
+    var list = this.map[getName(this.map, name)];
+
+    if (list) {
+        list.push(trim(value));
+    } else {
+        this.set(name, value);
     }
+};
 
-    Headers.prototype.has = function has(name) {
-        return getName(this.map, name) !== null;
-    };
+Headers.prototype.delete = function delete$1 (name){
+    delete this.map[getName(this.map, name)];
+};
 
-    Headers.prototype.get = function get(name) {
+Headers.prototype.deleteAll = function deleteAll (){
+    this.map = {};
+};
 
-        var list = this.map[getName(this.map, name)];
+Headers.prototype.forEach = function forEach (callback, thisArg) {
+        var this$1 = this;
 
-        return list ? list[0] : null;
-    };
-
-    Headers.prototype.getAll = function getAll(name) {
-        return this.map[getName(this.map, name)] || [];
-    };
-
-    Headers.prototype.set = function set(name, value) {
-        this.map[normalizeName(getName(this.map, name) || name)] = [trim(value)];
-    };
-
-    Headers.prototype.append = function append(name, value) {
-
-        var list = this.getAll(name);
-
-        if (list.length) {
-            list.push(trim(value));
-        } else {
-            this.set(name, value);
-        }
-    };
-
-    Headers.prototype.delete = function _delete(name) {
-        delete this.map[getName(this.map, name)];
-    };
-
-    Headers.prototype.forEach = function forEach(callback, thisArg) {
-        var _this2 = this;
-
-        each(this.map, function (list, name) {
-            each(list, function (value) {
-                return callback.call(thisArg, value, name, _this2);
-            });
-        });
-    };
-
-    return Headers;
-}();
+    each(this.map, function (list, name) {
+        each(list, function (value) { return callback.call(thisArg, value, name, this$1); });
+    });
+};
 
 function getName(map, name) {
     return Object.keys(map).reduce(function (prev, curr) {
@@ -11831,51 +12087,45 @@ function normalizeName(name) {
  * HTTP Response.
  */
 
-var Response = function () {
-    function Response(body, _ref) {
-        var url = _ref.url;
-        var headers = _ref.headers;
-        var status = _ref.status;
-        var statusText = _ref.statusText;
-        classCallCheck(this, Response);
+var Response = function Response(body, ref) {
+    var url = ref.url;
+    var headers = ref.headers;
+    var status = ref.status;
+    var statusText = ref.statusText;
 
 
-        this.url = url;
-        this.ok = status >= 200 && status < 300;
-        this.status = status || 0;
-        this.statusText = statusText || '';
-        this.headers = new Headers(headers);
-        this.body = body;
+    this.url = url;
+    this.ok = status >= 200 && status < 300;
+    this.status = status || 0;
+    this.statusText = statusText || '';
+    this.headers = new Headers(headers);
+    this.body = body;
 
-        if (isString(body)) {
+    if (isString(body)) {
 
-            this.bodyText = body;
-        } else if (isBlob(body)) {
+        this.bodyText = body;
 
-            this.bodyBlob = body;
+    } else if (isBlob(body)) {
 
-            if (isBlobText(body)) {
-                this.bodyText = blobText(body);
-            }
+        this.bodyBlob = body;
+
+        if (isBlobText(body)) {
+            this.bodyText = blobText(body);
         }
     }
+};
 
-    Response.prototype.blob = function blob() {
-        return when(this.bodyBlob);
-    };
+Response.prototype.blob = function blob () {
+    return when(this.bodyBlob);
+};
 
-    Response.prototype.text = function text() {
-        return when(this.bodyText);
-    };
+Response.prototype.text = function text () {
+    return when(this.bodyText);
+};
 
-    Response.prototype.json = function json() {
-        return when(this.text(), function (text) {
-            return JSON.parse(text);
-        });
-    };
-
-    return Response;
-}();
+Response.prototype.json = function json () {
+    return when(this.text(), function (text) { return JSON.parse(text); });
+};
 
 function blobText(body) {
     return new PromiseObj(function (resolve) {
@@ -11886,6 +12136,7 @@ function blobText(body) {
         reader.onload = function () {
             resolve(reader.result);
         };
+
     });
 }
 
@@ -11897,60 +12148,53 @@ function isBlobText(body) {
  * HTTP Request.
  */
 
-var Request = function () {
-    function Request(options) {
-        classCallCheck(this, Request);
+var Request = function Request(options$$1) {
 
+    this.body = null;
+    this.params = {};
 
-        this.body = null;
-        this.params = {};
+    assign(this, options$$1, {
+        method: toUpper(options$$1.method || 'GET')
+    });
 
-        assign(this, options, {
-            method: toUpper(options.method || 'GET')
-        });
-
-        if (!(this.headers instanceof Headers)) {
-            this.headers = new Headers(this.headers);
-        }
+    if (!(this.headers instanceof Headers)) {
+        this.headers = new Headers(this.headers);
     }
+};
 
-    Request.prototype.getUrl = function getUrl() {
-        return Url(this);
-    };
+Request.prototype.getUrl = function getUrl (){
+    return Url(this);
+};
 
-    Request.prototype.getBody = function getBody() {
-        return this.body;
-    };
+Request.prototype.getBody = function getBody (){
+    return this.body;
+};
 
-    Request.prototype.respondWith = function respondWith(body, options) {
-        return new Response(body, assign(options || {}, { url: this.getUrl() }));
-    };
-
-    return Request;
-}();
+Request.prototype.respondWith = function respondWith (body, options$$1) {
+    return new Response(body, assign(options$$1 || {}, {url: this.getUrl()}));
+};
 
 /**
  * Service for sending network requests.
  */
 
-var CUSTOM_HEADERS = { 'X-Requested-With': 'XMLHttpRequest' };
-var COMMON_HEADERS = { 'Accept': 'application/json, text/plain, */*' };
-var JSON_CONTENT_TYPE = { 'Content-Type': 'application/json;charset=utf-8' };
+var COMMON_HEADERS = {'Accept': 'application/json, text/plain, */*'};
+var JSON_CONTENT_TYPE = {'Content-Type': 'application/json;charset=utf-8'};
 
-function Http(options) {
+function Http(options$$1) {
 
-    var self = this || {},
-        client = Client(self.$vm);
+    var self = this || {}, client = Client(self.$vm);
 
-    defaults(options || {}, self.$options, Http.options);
+    defaults(options$$1 || {}, self.$options, Http.options);
 
     Http.interceptors.forEach(function (handler) {
         client.use(handler);
     });
 
-    return client(new Request(options)).then(function (response) {
+    return client(new Request(options$$1)).then(function (response) {
 
         return response.ok ? response : PromiseObj.reject(response);
+
     }, function (response) {
 
         if (response instanceof Error) {
@@ -11968,40 +12212,44 @@ Http.headers = {
     post: JSON_CONTENT_TYPE,
     patch: JSON_CONTENT_TYPE,
     delete: JSON_CONTENT_TYPE,
-    custom: CUSTOM_HEADERS,
-    common: COMMON_HEADERS
+    common: COMMON_HEADERS,
+    custom: {}
 };
 
-Http.interceptors = [before, timeout, method, body, jsonp, header, cors];
+Http.interceptors = [before, method, body, jsonp, header, cors];
 
-['get', 'delete', 'head', 'jsonp'].forEach(function (method) {
+['get', 'delete', 'head', 'jsonp'].forEach(function (method$$1) {
 
-    Http[method] = function (url, options) {
-        return this(assign(options || {}, { url: url, method: method }));
+    Http[method$$1] = function (url, options$$1) {
+        return this(assign(options$$1 || {}, {url: url, method: method$$1}));
     };
+
 });
 
-['post', 'put', 'patch'].forEach(function (method) {
+['post', 'put', 'patch'].forEach(function (method$$1) {
 
-    Http[method] = function (url, body, options) {
-        return this(assign(options || {}, { url: url, method: method, body: body }));
+    Http[method$$1] = function (url, body$$1, options$$1) {
+        return this(assign(options$$1 || {}, {url: url, method: method$$1, body: body$$1}));
     };
+
 });
 
 /**
  * Service for interacting with RESTful services.
  */
 
-function Resource(url, params, actions, options) {
+function Resource(url, params, actions, options$$1) {
 
-    var self = this || {},
-        resource = {};
+    var self = this || {}, resource = {};
 
-    actions = assign({}, Resource.actions, actions);
+    actions = assign({},
+        Resource.actions,
+        actions
+    );
 
     each(actions, function (action, name) {
 
-        action = merge({ url: url, params: assign({}, params) }, options, action);
+        action = merge({url: url, params: assign({}, params)}, options$$1, action);
 
         resource[name] = function () {
             return (self.$http || Http)(opts(action, arguments));
@@ -12013,9 +12261,7 @@ function Resource(url, params, actions, options) {
 
 function opts(action, args) {
 
-    var options = assign({}, action),
-        params = {},
-        body;
+    var options$$1 = assign({}, action), params = {}, body;
 
     switch (args.length) {
 
@@ -12028,7 +12274,7 @@ function opts(action, args) {
 
         case 1:
 
-            if (/^(POST|PUT|PATCH)$/i.test(options.method)) {
+            if (/^(POST|PUT|PATCH)$/i.test(options$$1.method)) {
                 body = args[0];
             } else {
                 params = args[0];
@@ -12042,23 +12288,23 @@ function opts(action, args) {
 
         default:
 
-            throw 'Expected up to 4 arguments [params, body], got ' + args.length + ' arguments';
+            throw 'Expected up to 2 arguments [params, body], got ' + args.length + ' arguments';
     }
 
-    options.body = body;
-    options.params = assign({}, options.params, params);
+    options$$1.body = body;
+    options$$1.params = assign({}, options$$1.params, params);
 
-    return options;
+    return options$$1;
 }
 
 Resource.actions = {
 
-    get: { method: 'GET' },
-    save: { method: 'POST' },
-    query: { method: 'GET' },
-    update: { method: 'PUT' },
-    remove: { method: 'DELETE' },
-    delete: { method: 'DELETE' }
+    get: {method: 'GET'},
+    save: {method: 'POST'},
+    query: {method: 'GET'},
+    update: {method: 'PUT'},
+    remove: {method: 'DELETE'},
+    delete: {method: 'DELETE'}
 
 };
 
@@ -12082,30 +12328,28 @@ function plugin(Vue) {
     Object.defineProperties(Vue.prototype, {
 
         $url: {
-            get: function () {
+            get: function get() {
                 return options(Vue.url, this, this.$options.url);
             }
         },
 
         $http: {
-            get: function () {
+            get: function get() {
                 return options(Vue.http, this, this.$options.http);
             }
         },
 
         $resource: {
-            get: function () {
+            get: function get() {
                 return Vue.resource.bind(this);
             }
         },
 
         $promise: {
-            get: function () {
-                var _this = this;
+            get: function get() {
+                var this$1 = this;
 
-                return function (executor) {
-                    return new Vue.Promise(executor, _this);
-                };
+                return function (executor) { return new Vue.Promise(executor, this$1); };
             }
         }
 
@@ -12117,7 +12361,8 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 module.exports = plugin;
-},{}],6:[function(require,module,exports){
+
+},{"got":1}],7:[function(require,module,exports){
 ;(function () {
 
   var vSortable = {}
@@ -12164,7 +12409,7 @@ module.exports = plugin;
 
 })()
 
-},{"sortablejs":4}],7:[function(require,module,exports){
+},{"sortablejs":5}],8:[function(require,module,exports){
 (function (process){
 /*!
  * Vue.js v1.0.28
@@ -22405,7 +22650,7 @@ setTimeout(function () {
 
 module.exports = Vue;
 }).call(this,require('_process'))
-},{"_process":2}],8:[function(require,module,exports){
+},{"_process":3}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22501,7 +22746,7 @@ var alertsController = exports.alertsController = function () {
 	};
 }(jQuery);
 
-},{"ramda":3}],9:[function(require,module,exports){
+},{"ramda":4}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22512,7 +22757,7 @@ var menu_top = exports.menu_top = $('#menuTop');
 var menu_top_height = exports.menu_top_height = menu_top.outerHeight();
 var document_click_callbacks = exports.document_click_callbacks = [];
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22616,7 +22861,7 @@ var fileDnD = exports.fileDnD = function fileDnD(opts) {
 	};
 };
 
-},{"lodash.debounce":1,"ramda":3}],11:[function(require,module,exports){
+},{"lodash.debounce":2,"ramda":4}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22727,14 +22972,14 @@ var preSelectOption = exports.preSelectOption = function preSelectOption(select_
 	}
 };
 
-},{"../cltvo/constants.js":9,"ramda":3}],12:[function(require,module,exports){
+},{"../cltvo/constants.js":10,"ramda":4}],13:[function(require,module,exports){
 (function (process){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.validateEmail = exports.objTextFilter = exports.inString = exports.isNumber = exports.rangeFilter = exports.additiveFilter = exports.sumTotalPrice = exports.sumTotal = exports.defaultIndexTo1 = exports.defaultTo1 = exports.sortingOrder = exports.numericalObjSort = exports.alphabeticalObjSort = exports.logAndReturnSomething = exports.tapLog = exports.sortByFirstItem = exports.orderAscending = exports.diff = exports.uppercaseFirst = exports.removeAndInsert = exports.moveInArray = exports.lensPropMaker = exports.removeNullsAndUndefineds = exports.deundefinedify = exports.denullify = exports.toNumber = exports.logEach = exports.idsByParentIds = exports.provisionedFromPairs = exports.objFromPairs = exports.concatValuesToArrayIfDuplicateKeys = exports.toArrIfNotArr = exports.arrsIntoObjs = exports.mergeObj = exports.objsById = exports.pairObjToIdProp = exports.pairWithObj = exports.pairWith = exports.doubleMapNestedAndReturnInUpperLevel = exports.nestedPropToUpperLevel = exports.toArray = exports.JsonParseOrFalse = undefined;
+exports.validateEmail = exports.objTextFilter = exports.inString = exports.isNumber = exports.rangeFilter = exports.additiveFilter = exports.sumTotalPrice = exports.sumTotal = exports.defaultIndexTo1 = exports.defaultTo1 = exports.sortingOrder = exports.numericalObjSort = exports.alphabeticalObjSort = exports.logAndReturnSomething = exports.tapLog = exports.sortByFirstItem = exports.orderAscending = exports.diff = exports.uppercaseFirst = exports.removeAndInsert = exports.nonCyclingMoveInArray = exports.moveInArray = exports.lensPropMaker = exports.removeNullsAndUndefineds = exports.deundefinedify = exports.denullify = exports.toNumber = exports.logEach = exports.idsByParentIds = exports.provisionedFromPairs = exports.objFromPairs = exports.concatValuesToArrayIfDuplicateKeys = exports.toArrIfNotArr = exports.arrsIntoObjs = exports.mergeObj = exports.objsById = exports.pairObjToIdProp = exports.pairWithObj = exports.pairWith = exports.doubleMapNestedAndReturnInUpperLevel = exports.nestedPropToUpperLevel = exports.toArray = exports.JsonParseOrFalse = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -22857,6 +23102,15 @@ var lensPropMaker = exports.lensPropMaker = function lensPropMaker(lens_arr) {
  */
 var moveInArray = exports.moveInArray = function moveInArray(direction, index, array) {
 	return _ramda2.default.insert(index + direction, array[index], _ramda2.default.remove(index, 1, array));
+};
+
+//same a moveInArray, but prevents the first element of the array from becoming the last one when direction + index is less than  0
+var nonCyclingMoveInArray = exports.nonCyclingMoveInArray = function nonCyclingMoveInArray(direction, index, array) {
+	if (index + direction < 0 || index + direction > array.length - 1) {
+		return array;
+	} else {
+		return moveInArray(direction, index, array);
+	}
 };
 
 // A different API for the same operation as moveInArray. 
@@ -23005,7 +23259,7 @@ var validateEmail = exports.validateEmail = function validateEmail(email) {
 };
 
 }).call(this,require('_process'))
-},{"_process":2,"ramda":3}],13:[function(require,module,exports){
+},{"_process":3,"ramda":4}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23038,7 +23292,7 @@ var logoSwitch = exports.logoSwitch = {
 	}
 };
 
-},{"./cltvo/constants.js":9}],14:[function(require,module,exports){
+},{"./cltvo/constants.js":10}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23061,7 +23315,7 @@ var menuTreeToggler = exports.menuTreeToggler = function menuTreeToggler(label, 
 	});
 };
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 var _dom = require('./functions/dom');
@@ -23072,16 +23326,16 @@ var _alertsController = require('./alerts-controller');
 
 var _mainVue = require('./vue/main-vue');
 
-var _simpleCruds = require('./vue/components/simple-cruds');
+var _admin = require('./vue/main/admin');
 
-var _mexicoStatesAndMunicipalities = require('./vue/mixins/mexico-states-and-municipalities');
+var _simpleCruds = require('./vue/components/simple-cruds');
 
 var _mediaManager = require('./vue/components/media-manager');
 
 var _singleImage = require('./vue/components/single-image');
 
 _constants.w.on('load', function () {
-	(0, _dom.ifElementExistsThenLaunch)([[], ['#admin-vue', _mainVue.mainVue, undefined, [{ mixins: [_mexicoStatesAndMunicipalities.mexicoStatesAndMunicipalities] }, {
+	(0, _dom.ifElementExistsThenLaunch)([[], ['#admin-vue', _mainVue.mainVue, undefined, [_admin.adminVue, {
 		mediaManager: _mediaManager.mediaManager,
 		singleImage: _singleImage.singleImage,
 		pages: _simpleCruds.pages,
@@ -23201,7 +23455,7 @@ console.log('Hola, estás bien sabroso de tu micorriza');
 	});
 })(jQuery);
 
-},{"./alerts-controller":8,"./cltvo/constants.js":9,"./functions/dom":11,"./vue/components/media-manager":18,"./vue/components/simple-cruds":19,"./vue/components/single-image":20,"./vue/main-vue":23,"./vue/mixins/mexico-states-and-municipalities":27}],16:[function(require,module,exports){
+},{"./alerts-controller":9,"./cltvo/constants.js":10,"./functions/dom":12,"./vue/components/media-manager":19,"./vue/components/simple-cruds":20,"./vue/components/single-image":21,"./vue/main-vue":24,"./vue/main/admin":25}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23357,7 +23611,7 @@ var gMap = exports.gMap = _vue2.default.extend({
 	}
 });
 
-},{"ramda":3,"vue":7}],17:[function(require,module,exports){
+},{"ramda":4,"vue":8}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23394,7 +23648,7 @@ var postWithMaterialNote = exports.postWithMaterialNote = function postWithMater
 	this.post($event);
 };
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23579,7 +23833,7 @@ var mediaManager = exports.mediaManager = Vue.extend({
 	}
 });
 
-},{"../../file-dnd.js":10,"../../functions/pure":12,"../mixins/crud-ajax":25,"ramda":3,"vue":7,"vue-resource":5}],19:[function(require,module,exports){
+},{"../../file-dnd.js":11,"../../functions/pure":13,"../mixins/crud-ajax":27,"ramda":4,"vue":8,"vue-resource":6}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23605,6 +23859,8 @@ var _sortable = require('../mixins/sortable');
 
 var _multilistSortable = require('../mixins/multilist-sortable');
 
+var _sortableListByClick = require('../mixins/sortable-list-by-click');
+
 var _mexicoStatesAndMunicipalities = require('../mixins/mexico-states-and-municipalities');
 
 var _pure = require('../../functions/pure');
@@ -23615,33 +23871,41 @@ var _simpleCrudHelpers = require('./helpers/simple-crud-helpers');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var checkboxesMethods = {
-	props: ['currentPage'],
+var toNumberMap = _ramda2.default.map(function (n) {
+	return Number(n);
+});
 
-	data: {
-		selected_checkboxes: [],
-		search: ''
-	},
+var checkboxesMethods = function checkboxesMethods(options) {
+	return {
+		props: ['currentPage'],
 
-	ready: function ready() {
-		this.selected_checkboxes = this.currentPage.sections_ids;
-	},
-
-
-	methods: {
-		openModal: _simpleCrudHelpers.openModal,
-
-		makePost: _simpleCrudHelpers.makePost,
-
-		updateSelectedCheckboxes: function updateSelectedCheckboxes() {
-			this.selected_checkboxes = _ramda2.default.map(function (elem) {
-				return elem.id + '';
-			}, this.selectedElems || []);
+		data: {
+			selected_checkboxes: [],
+			search: ''
 		},
-		is_checked: function is_checked(id) {
-			return _ramda2.default.contains(id, this.selected_checkboxes) ? true : false;
-		}
-	}
+
+		ready: function ready() {
+			this.selected_checkboxes = _ramda2.default.map(function (n) {
+				return n + '';
+			}, this.currentPage.sections_ids);
+		},
+
+
+		methods: _ramda2.default.merge({
+			openModal: _simpleCrudHelpers.openModal,
+
+			makePost: _simpleCrudHelpers.makePost,
+
+			updateSelectedCheckboxes: function updateSelectedCheckboxes() {
+				this.selected_checkboxes = _ramda2.default.map(function (elem) {
+					return elem.id + '';
+				}, this.selectedElems || []);
+			},
+			is_checked: function is_checked(id) {
+				return _ramda2.default.contains(Number(id), toNumberMap(this.selected_checkboxes)) ? true : false;
+			}
+		}, options.methods || {})
+	};
 };
 
 var relatedProductsFilter = {
@@ -23672,26 +23936,50 @@ var form_id = function form_id() {
 	return _ramda2.default.replace('{{item_on_edit.id}}', this.id, this.formId);
 };
 
-var pagesGroup = exports.pagesGroup = (0, _simpleCrudComponentMakers.simpleCrud)('#pages-group-template', { props: ['label', 'index'], mixins: [_sortable.sortable] });
-var pages = exports.pages = (0, _simpleCrudComponentMakers.simpleCrud)('#pages-template', { components: { pagesGroup: pagesGroup }, mixins: [_multilistSortable.multilistSortable] });
+//para pagesectionsSort
+var addedCheckboxElem = function addedCheckboxElem(section) {
+	this.sortable_list = _ramda2.default.append(section, this.sortable_list);
+};
 
+//para pagesectionsSort
+var removedCheckboxId = function removedCheckboxId(section_id) {
+	var index = _ramda2.default.findIndex(_ramda2.default.propEq('id', section_id), this.sortable_list);
+	this.sortable_list = _ramda2.default.remove(index, 1, this.sortable_list);
+};
+
+var pageSectionsCheckboxUpdateSuccess = function pageSectionsCheckboxUpdateSuccess(body) {
+	var is_associated = _ramda2.default.pathOr(false, ['data', 'is_associated'], body);
+	var id = _ramda2.default.pathOr(false, ['data', 'section_id'], body);
+	if (is_associated === true) {
+		var selected = _ramda2.default.filter(function (elem) {
+			return elem.id === id;
+		}, this.list)[0];
+		this.$dispatch('onAssociatedCheckbox', selected);
+	} else {
+		this.$dispatch('onDissociatedCheckbox', id);
+	}
+};
+
+//pages
+var pagesGroup = exports.pagesGroup = (0, _simpleCrudComponentMakers.simpleCrud)('#pages-group-template', { props: ['label', 'index'], mixins: [_sortableListByClick.sortableListByClick] });
+var pages = exports.pages = (0, _simpleCrudComponentMakers.simpleCrud)('#pages-template', { components: { pagesGroup: pagesGroup }, mixins: [_multilistSortable.multilistSortable] });
 var pagesectionsModalCreate = exports.pagesectionsModalCreate = (0, _simpleCrudComponentMakers.simpleModalCrud)('#pagesections-modal-create-template', { data: { item_on_create: { description: '' } } });
 var pagesectionsModalEdit = exports.pagesectionsModalEdit = (0, _simpleCrudComponentMakers.simpleModalCrud)('#pagesections-modal-edit-template', { props: ['edit-index'] });
 var pagesections = exports.pagesections = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-template', { methods: { openModal: _simpleCrudHelpers.openModal }, components: { pagesectionsModalCreate: pagesectionsModalCreate, pagesectionsModalEdit: pagesectionsModalEdit } });
+var pagesectionsCheckbox = exports.pagesectionsCheckbox = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-checkbox-template', checkboxesMethods({ methods: { onUpdateSuccess: pageSectionsCheckboxUpdateSuccess } }));
+var pagesectionsSort = exports.pagesectionsSort = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-sort-template', { props: ['currentPage'], mixins: [_sortableListByClick.sortableListByClick], events: { addedCheckboxElem: addedCheckboxElem, removedCheckboxId: removedCheckboxId } });
 
-var pagesectionsCheckbox = exports.pagesectionsCheckbox = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-checkbox-template', checkboxesMethods);
-var pagesectionsSort = exports.pagesectionsSort = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-sort-template', { props: ['currentPage'], mixins: [_sortable.sortable] });
-
+//component
 var componentForm = exports.componentForm = (0, _simpleCrudComponentMakers.simpleCrud)('#component-form-template', { props: ['section', 'component'] });
 
+//section
 var sectionProtected = exports.sectionProtected = (0, _simpleCrudComponentMakers.simpleCrud)('#section-protected-template', { props: ['section'] });
 var sectionMultipleUnlimited = exports.sectionMultipleUnlimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-unlimited-template', { props: ['section'], components: { componentForm: componentForm }, mixins: [_sortable.sortable] });
 var sectionMultipleLimited = exports.sectionMultipleLimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-limited-template', { props: ['section'], components: { componentForm: componentForm }, mixins: [_sortable.sortable] });
 var sectionMultipleFixed = exports.sectionMultipleFixed = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-fixed-template', { props: ['section'], components: { componentForm: componentForm } });
-
 var currentPageSections = exports.currentPageSections = (0, _simpleCrudComponentMakers.simpleCrud)('#current-page-sections-template', { props: ['currentPage'], mixins: [_multilistSortable.multilistSortable], components: { sectionProtected: sectionProtected, sectionMultipleUnlimited: sectionMultipleUnlimited, sectionMultipleLimited: sectionMultipleLimited, sectionMultipleFixed: sectionMultipleFixed } });
 
-},{"../../functions/dom":11,"../../functions/pure":12,"../components/g-map":16,"../factories/simple-crud-component-makers.js":21,"../mixins/mexico-states-and-municipalities":27,"../mixins/multilist-sortable":28,"../mixins/number-filters":29,"../mixins/sortable":31,"./helpers/simple-crud-helpers":17,"ramda":3,"vue":7}],20:[function(require,module,exports){
+},{"../../functions/dom":12,"../../functions/pure":13,"../components/g-map":17,"../factories/simple-crud-component-makers.js":22,"../mixins/mexico-states-and-municipalities":29,"../mixins/multilist-sortable":30,"../mixins/number-filters":31,"../mixins/sortable":34,"../mixins/sortable-list-by-click":33,"./helpers/simple-crud-helpers":18,"ramda":4,"vue":8}],21:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23707,7 +23995,7 @@ var singleImage = exports.singleImage = Vue.extend({
 	mixins: [_singleImageMixin.singleImageMixin]
 });
 
-},{"../mixins/single-image-mixin":30,"vue":7}],21:[function(require,module,exports){
+},{"../mixins/single-image-mixin":32,"vue":8}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23777,6 +24065,8 @@ var simpleCrud = exports.simpleCrud = _ramda2.default.curry(function (template) 
 		mixins: [_crudAjax.crudAjax, _vForFilters.vForFilters].concat(options.mixins || []),
 
 		filters: options.filters || {},
+
+		events: options.events || {},
 
 		computed: _ramda2.default.merge({
 			list_with_langs: function list_with_langs() {
@@ -23858,6 +24148,7 @@ var simpleModalCrud = exports.simpleModalCrud = _ramda2.default.curry(function (
 		mixins: [].concat(config.mixins || []),
 
 		props: ['editIndex', 'list'].concat(config.props || []),
+		events: config.events || {},
 
 		data: _ramda2.default.merge({
 			modal: $(name),
@@ -23888,7 +24179,7 @@ var simpleModalCrud = exports.simpleModalCrud = _ramda2.default.curry(function (
 	return simpleCrud(template, modalOptions);
 });
 
-},{"../../functions/pure":12,"../helpers":22,"../mixins/crud-ajax":25,"../mixins/single-image-mixin":30,"../mixins/v-for-filters.js":32,"ramda":3,"vue":7,"vue-resource":5}],22:[function(require,module,exports){
+},{"../../functions/pure":13,"../helpers":23,"../mixins/crud-ajax":27,"../mixins/single-image-mixin":32,"../mixins/v-for-filters.js":35,"ramda":4,"vue":8,"vue-resource":6}],23:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23927,7 +24218,7 @@ var turnInputTypeIntoNumber = exports.turnInputTypeIntoNumber = function turnInp
 	}, inputs);
 };
 
-},{"../functions/pure":12,"ramda":3}],23:[function(require,module,exports){
+},{"../functions/pure":13,"ramda":4}],24:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24044,7 +24335,7 @@ var mainVue = exports.mainVue = function mainVue() {
 
 		mixins: mixins,
 
-		events: {
+		events: _ramda2.default.merge({
 			'toggle-menu': function toggleMenu(menu_name) {
 				var _this2 = this;
 
@@ -24061,7 +24352,7 @@ var mainVue = exports.mainVue = function mainVue() {
 					this.store.menus[menu_name].isOpen = !this.store.menus[menu_name].isOpen;
 				}
 			}
-		},
+		}, config.events || {}),
 
 		watch: config.watch || {},
 
@@ -24069,7 +24360,39 @@ var mainVue = exports.mainVue = function mainVue() {
 	});
 };
 
-},{"../functions/dom":11,"../functions/pure":12,"../logoManipulations":13,"../menu-tree-toggler":14,"./mixins/crud-ajax":25,"./mixins/menus":26,"ramda":3,"vue":7,"vue-resource":5}],24:[function(require,module,exports){
+},{"../functions/dom":12,"../functions/pure":13,"../logoManipulations":14,"../menu-tree-toggler":15,"./mixins/crud-ajax":27,"./mixins/menus":28,"ramda":4,"vue":8,"vue-resource":6}],25:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.adminVue = undefined;
+
+var _ramda = require('ramda');
+
+var _ramda2 = _interopRequireDefault(_ramda);
+
+var _mexicoStatesAndMunicipalities = require('../mixins/mexico-states-and-municipalities');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var adminVue = exports.adminVue = {
+	el: '#admin-vue',
+	mixins: [_mexicoStatesAndMunicipalities.mexicoStatesAndMunicipalities],
+	methods: {},
+	events: {
+		onAssociatedCheckbox: function onAssociatedCheckbox(elem) {
+			console.log('elem', elem);
+			this.$broadcast('addedCheckboxElem', elem);
+		},
+		onDissociatedCheckbox: function onDissociatedCheckbox(id) {
+			console.log('id', id);
+			this.$broadcast('removedCheckboxId', id);
+		}
+	}
+};
+
+},{"../mixins/mexico-states-and-municipalities":29,"ramda":4}],26:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24084,7 +24407,7 @@ var componentInteractionsWithMediaManager = exports.componentInteractionsWithMed
 	}
 };
 
-},{}],25:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24257,7 +24580,7 @@ var crudAjax = exports.crudAjax = {
 	}
 };
 
-},{"../../alerts-controller.js":8,"../../functions/pure":12,"ramda":3}],26:[function(require,module,exports){
+},{"../../alerts-controller.js":9,"../../functions/pure":13,"ramda":4}],28:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24291,7 +24614,7 @@ var menusMixin = exports.menusMixin = {
 	}
 };
 
-},{}],27:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24347,7 +24670,7 @@ var mexicoStatesAndMunicipalities = exports.mexicoStatesAndMunicipalities = {
 	}
 };
 
-},{"ramda":3}],28:[function(require,module,exports){
+},{"ramda":4}],30:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24417,7 +24740,7 @@ var multilistSortable = exports.multilistSortable = {
 
 _vue2.default.use(_vueSortable2.default);
 
-},{"../../functions/pure":12,"ramda":3,"vue":7,"vue-sortable":6}],29:[function(require,module,exports){
+},{"../../functions/pure":13,"ramda":4,"vue":8,"vue-sortable":7}],31:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24442,7 +24765,7 @@ var numberFilters = exports.numberFilters = {
 	}
 };
 
-},{}],30:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24567,7 +24890,44 @@ var singleImageMixin = exports.singleImageMixin = {
 	}
 };
 
-},{"../helpers":22,"./component-interactions-with-media-manager.js":24,"./crud-ajax":25,"ramda":3,"vue":7}],31:[function(require,module,exports){
+},{"../helpers":23,"./component-interactions-with-media-manager.js":26,"./crud-ajax":27,"ramda":4,"vue":8}],33:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.sortableListByClick = undefined;
+
+var _pure = require('../../functions/pure');
+
+var sortableListByClick = exports.sortableListByClick = {
+	data: function data() {
+		return {
+			sortable_list: []
+		};
+	},
+	ready: function ready() {
+		this.sortable_list = this.list;
+	},
+
+
+	computed: {
+		sorted_ids: function sorted_ids() {
+			return this.sortable_list.map(function (page) {
+				return page.id;
+			});
+		}
+	},
+
+	methods: {
+		//Int 1(down) | -1( up:) -> Int -> IO VueData this.sortable_list
+		move: function move(direction, index, list) {
+			this.sortable_list = (0, _pure.nonCyclingMoveInArray)(direction, index, list);
+		}
+	}
+};
+
+},{"../../functions/pure":13}],34:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24615,7 +24975,7 @@ var sortable = exports.sortable = {
 
 _vue2.default.use(_vueSortable2.default);
 
-},{"../../functions/pure":12,"ramda":3,"vue":7,"vue-sortable":6}],32:[function(require,module,exports){
+},{"../../functions/pure":13,"ramda":4,"vue":8,"vue-sortable":7}],35:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24659,6 +25019,6 @@ var vForFilters = exports.vForFilters = {
 	}
 };
 
-},{"../../functions/pure":12,"ramda":3}]},{},[15]);
+},{"../../functions/pure":13,"ramda":4}]},{},[16]);
 
 //# sourceMappingURL=admin-functions.js.map
