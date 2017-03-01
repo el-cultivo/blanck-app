@@ -112,18 +112,18 @@ class Section extends Model
      */
     public function getAllComponentsAttribute()
     {
-        $db_componets = $this->components()->getWithTranslations()->get();
+        $db_components = $this->components()->getWithTranslations()->get();
 
         if (!$this->type->protected && !$this->type->unlimited) {
             $components = [];
             for ($i=0; $i < $this->components_max ; $i++) {
-                $component = $db_componets->where("order",$i)->first();
-                $components[] = $component ? $component : Component::Create(["section_id" => $this->id]);
+                $component = $db_components->where("order",$i)->first();
+                $components[] = $component ? $component : Component::Create(["section_id" => $this->id,"order"=>$i]);
             }
             return collect($components);
         }
 
-        return $db_componets;
+        return $db_components;
     }
 
     /**
