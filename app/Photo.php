@@ -61,7 +61,7 @@ class Photo extends Model
 
     public static $associable_models = [
         // code  => class name
-        'page'                  => "App\Models\Pages\Page",
+        'page_component'     => "App\Models\Pages\Sections\Components\Component",
     ];
 
     /**

@@ -95,7 +95,9 @@ class Component extends Model
         'excerpt',
         'content',
         'iframe',
-        'link'
+        'link',
+        'thumbnail_image',
+        'gallery_images'
     ];
 
     public static $image_uses = [
@@ -107,6 +109,17 @@ class Component extends Model
         'gallery'
     ];
 
+
+    /**
+     * Get the administrator flag for the user.
+     *
+     * @return bool
+     */
+    public function getGalleryImagesAttribute()
+    {
+        $photo = $this->getPhotosTo(["use"=>"gallery"]);
+        return $photo ? $photo : new stdClass;
+    }
 
     /**
      * Get the current language title.
