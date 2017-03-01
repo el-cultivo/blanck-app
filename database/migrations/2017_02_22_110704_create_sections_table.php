@@ -17,6 +17,7 @@ class CreateSectionsTable extends Migration
             $table->increments('id');
             $table->string('index')->unique();
             $table->string('template_path');
+            $table->text('description');
 
             $table->integer('type_id')->unsigned();
             $table->integer('components_max')->unsigned()->nullable();

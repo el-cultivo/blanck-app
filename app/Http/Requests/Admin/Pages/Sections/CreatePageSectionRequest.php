@@ -43,6 +43,7 @@ class CreatePageSectionRequest extends Request
             'components_max'        => 'integer|min:1|required_if:type_id,'.$limited_types->implode("id",","),
             "editable_contents"     => 'array|required_if:type_id,'.$editable_types->implode("id",","),
             "editable_contents.*"   => 'boolean',
+            "description"           => "required|string"
         ];
     }
 }

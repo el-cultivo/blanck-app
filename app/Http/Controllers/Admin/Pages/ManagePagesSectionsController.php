@@ -53,6 +53,8 @@ class ManagePagesSectionsController extends Controller
               "index"               => $input["index"],
               "template_path"       => $input["template_path"],
               "type_id"             => $input["type_id"],
+              "description"         => $input["description"],
+
               "components_max"      => (!$type->unlimited && !$type->protected) ? $input["components_max"] : null ,
               "editable_contents"   => !$type->protected ? $input["editable_contents"] : [],
         ]);
@@ -82,6 +84,7 @@ class ManagePagesSectionsController extends Controller
     {
         $input = $request->all();
         $page_section->template_path = $input["template_path"];
+        $page_section->description = $input["description"];
 
         if (!$page_section->type->protected) {
             $page_section->editable_contents   = $input["editable_contents"];

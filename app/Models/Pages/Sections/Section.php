@@ -39,7 +39,8 @@ class Section extends Model
         'template_path',
         'components_max',
         'type_id',
-        'editable_contents'
+        'editable_contents',
+        'description'
     ];
 
     /**
@@ -102,6 +103,7 @@ class Section extends Model
             'editable_contents'     => $this->all_editable_contents,
             'components'            => $this->all_components,
             'type'                  => $this->type,
+            'description'           => $this->description
         ];
     }
 

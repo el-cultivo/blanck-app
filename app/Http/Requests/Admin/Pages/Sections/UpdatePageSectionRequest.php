@@ -30,6 +30,7 @@ class UpdatePageSectionRequest extends Request
 
         $rules = [
             'template_path'         => 'required|max:255',
+            "description"           => "required|string"
         ];
 
         if (!$page_section->type->protected) {
