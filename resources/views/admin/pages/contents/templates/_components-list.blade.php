@@ -1,12 +1,12 @@
 <ul class="collapsible popout" data-collapsible="accordion"  v-sortable="{onUpdate: onUpdate, onMove: onMove, handle: '.handle', group: label}" >
-    <li v-for="component in list" >
+    <li v-for="component in sortable_list" >
         <div class="collapsible-header">
 
-            <div class="pull-left" v-if="section.type.sortable && list.length > 1" >
-                <span class="btn-floating waves-effect waves-light">
+            <div class="pull-left" v-if="section.type.sortable && sortable_list.length > 1" >
+                <span class="btn-floating waves-effect waves-light" @click.stop="move(-1, $index, sortable_list)">
                     <i class="small">&uarr;</i>
                 </span>
-                <span class="btn-floating waves-effect waves-light">
+                <span class="btn-floating waves-effect waves-light" @click.stop="move(-1, $index, sortable_list)">
                     <i class="small">
                         &darr;
                     </i>
@@ -23,7 +23,7 @@
 					'v-on:submit.prevent'	=> 'post'
 				]) !!}
 
-					<button type="submit" class=" btn-floating waves-effect waves-light deep-orange accent-2" form ="delete_compoment-&#123;&#123; component.id &#125;&#125;_form">
+					<button type="submit" class=" btn-floating waves-effect waves-light deep-orange accent-2" form ="delete_compoment-&#123;&#123; component.id &#125;&#125;_form" @click.stop="">
 						<i class="material-icons">delete</i>
 					</button>
 

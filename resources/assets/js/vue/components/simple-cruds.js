@@ -95,7 +95,7 @@ export const componentForm = simpleCrud('#component-form-template',{props: ['sec
 
 //section
 export const sectionProtected = simpleCrud('#section-protected-template',{props: ['section']} );
-export const sectionMultipleUnlimited = simpleCrud('#section-multiple-unlimited-template',{props: ['section'],components:{componentForm}, mixins:[sortable]} );
+export const sectionMultipleUnlimited = simpleCrud('#section-multiple-unlimited-template',{props: ['section'],components:{componentForm}, mixins:[sortableListByClick]} );
 export const sectionMultipleLimited = simpleCrud('#section-multiple-limited-template',{props: ['section'],components:{componentForm}, mixins:[sortable]} );
 export const sectionMultipleFixed = simpleCrud('#section-multiple-fixed-template',{props: ['section'],components:{componentForm}} );
 export const currentPageSections = simpleCrud('#current-page-sections-template',{props: ['currentPage'],  mixins:[multilistSortable],components:{sectionProtected,sectionMultipleUnlimited, sectionMultipleLimited,sectionMultipleFixed} } );
