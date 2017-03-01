@@ -2,7 +2,7 @@
     <li v-for="component in list" >
         <div class="collapsible-header">
 
-            <div class="pull-left">
+            <div class="pull-left" v-if="section.type.sortable && list.length > 1" >
                 <span class="btn-floating waves-effect waves-light">
                     <i class="small">&uarr;</i>
                 </span>
@@ -38,3 +38,7 @@
         </div>
     </li>
 </ul>
+
+<div v-if="list.length == 0">
+    Seccion vacia 
+</div>
