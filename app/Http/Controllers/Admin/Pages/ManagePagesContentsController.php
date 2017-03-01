@@ -75,54 +75,6 @@ class ManagePagesContentsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request,Page $page)
-    {
-        $input = $request->all();
-
-        dd("karen",$input);
-
-        $page->order    = $input['order'];
-        $page->page_id  = isset($input['page_id']) && !empty($input['page_id']) ? $input['page_id'] : null;
-
-        $page->tblank = isset($input['tblank']) && !empty($input['tblank']) ? $input['tblank'] : false;
-        $page->header = isset($input['header']) && !empty($input['header']) ? $input['header'] : false;
-        $page->footer = isset($input['footer']) && !empty($input['footer']) ? $input['footer'] : false;
-
-        $page->publish_id = $input['publish_id'];
-
-        if ($input['publish_id'] == Publish::getPublish()->id) {
-            $page->publish_at = Carbon::now();
-        }else {
-            $page->publish_at = null;
-        }
-
-        foreach ($this->languages as $language) {
-
-            $page->updateTranslationByIso( $language->iso6391, [
-                'name'          => $input["name"][$language->iso6391],
-                'slug'          => $page->updateUniqueSlug( $input['slug'][$language->iso6391], $language->iso6391),
-                'content'       => $input['content'][$language->iso6391],
-            ]);
-
-        }
-
-        if (!$page->save()) {
-            return Redirect::back()->withErrors(["La página no pudo ser actualizada"]); //Enviar el mensaje con el idioma que corresponde
-        }
-
-        return Redirect::route( 'admin::pages.edit', [ $page->id ])->with('status', "La página fue correctamente actualizada");
-
-
-        dd($input);
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -142,7 +94,7 @@ class ManagePagesContentsController extends Controller
             }
         }
 
-        return Redirect::route('admin::pages.content.index')->with('status', "El orden se actualizó correctamente");
+        return Redirect::route('admin::pages.contents.index')->with('status', "El orden se actualizó correctamente");
     }
 
 }

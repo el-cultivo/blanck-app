@@ -177,7 +177,7 @@ class Page extends Model
      */
     public function getEditContentUrlAttribute()
     {
-        return route("admin::pages.content.edit",$this->id);
+        return route("admin::pages.contents.edit",$this->id);
     }
 
     /**

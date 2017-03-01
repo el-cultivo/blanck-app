@@ -67,7 +67,8 @@ Route::group(['prefix' => 'pages', "as" => "pages."  ], function(){
     // rutas para editar el content
     Route::group(['middleware' => ['permission:manage_pages_contents']  ], function(){
         Route::patch( "sort" , 'Admin\Pages\ManagePagesContentsController@sort')->name("sort");
-        Route::group([ 'prefix' => 'content', "as" => "content."  ], function(){
+        Route::group([ 'prefix' => 'contents', "as" => "contents."  ], function(){
+
             Route::resource('/','Admin\Pages\ManagePagesContentsController',[
                 'only' 			=> ['index', 'edit'],
                 'parameters'    => ['' => 'page_edit_content'],
