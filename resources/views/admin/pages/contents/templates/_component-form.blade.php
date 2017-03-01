@@ -17,7 +17,8 @@
 
                 thumbnail_img
                 <single-image
-                    v-ref:'"page_componet_thumbnail_image_"+component.id'
+                    v-ref:single-image-list
+                    :ref-path='[]'
                     :current-image="component.thumbnail_image"
                     type="page_component"
                     :photoable-id="component.id"

@@ -23332,12 +23332,11 @@ var _simpleCruds = require('./vue/components/simple-cruds');
 
 var _mediaManager = require('./vue/components/media-manager');
 
-var _singleImage = require('./vue/components/single-image');
+require('./vue/components/single-image');
 
 _constants.w.on('load', function () {
 	(0, _dom.ifElementExistsThenLaunch)([[], ['#admin-vue', _mainVue.mainVue, undefined, [_admin.adminVue, {
 		mediaManager: _mediaManager.mediaManager,
-		singleImage: _singleImage.singleImage,
 		pages: _simpleCruds.pages,
 		pagesectionsModalCreate: _simpleCruds.pagesectionsModalCreate,
 		pagesectionsModalEdit: _simpleCruds.pagesectionsModalEdit,
@@ -23974,7 +23973,7 @@ var componentForm = exports.componentForm = (0, _simpleCrudComponentMakers.simpl
 
 //section
 var sectionProtected = exports.sectionProtected = (0, _simpleCrudComponentMakers.simpleCrud)('#section-protected-template', { props: ['section'] });
-var sectionMultipleUnlimited = exports.sectionMultipleUnlimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-unlimited-template', { props: ['section'], components: { componentForm: componentForm }, mixins: [_sortable.sortable] });
+var sectionMultipleUnlimited = exports.sectionMultipleUnlimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-unlimited-template', { props: ['section'], components: { componentForm: componentForm }, mixins: [_sortableListByClick.sortableListByClick] });
 var sectionMultipleLimited = exports.sectionMultipleLimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-limited-template', { props: ['section'], components: { componentForm: componentForm }, mixins: [_sortable.sortable] });
 var sectionMultipleFixed = exports.sectionMultipleFixed = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-fixed-template', { props: ['section'], components: { componentForm: componentForm } });
 var currentPageSections = exports.currentPageSections = (0, _simpleCrudComponentMakers.simpleCrud)('#current-page-sections-template', { props: ['currentPage'], mixins: [_multilistSortable.multilistSortable], components: { sectionProtected: sectionProtected, sectionMultipleUnlimited: sectionMultipleUnlimited, sectionMultipleLimited: sectionMultipleLimited, sectionMultipleFixed: sectionMultipleFixed } });
@@ -23990,7 +23989,7 @@ exports.singleImage = undefined;
 var _singleImageMixin = require('../mixins/single-image-mixin');
 
 var Vue = require('vue');
-var singleImage = exports.singleImage = Vue.extend({
+var singleImage = exports.singleImage = Vue.component('single-image', {
 	template: '#single-image-template',
 	mixins: [_singleImageMixin.singleImageMixin]
 });

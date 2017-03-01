@@ -20,14 +20,13 @@ import {
 		currentPageSections
 	} from './vue/components/simple-cruds';
 import {mediaManager} from './vue/components/media-manager';
-import {singleImage} from './vue/components/single-image';
+import './vue/components/single-image';
 
 w.on('load', () => {
 	ifElementExistsThenLaunch([
 		[],
 		['#admin-vue', mainVue, undefined, [adminVue, {
 			mediaManager,
-			singleImage,
 			pages,
 			pagesectionsModalCreate,
 			pagesectionsModalEdit,
