@@ -4,7 +4,7 @@
         'method'                => "PATCH",
         'route'                 => 'admin::pages.sort',
         'role'                  => 'form' ,
-        'id'                    => '&#123;&#123;section.index+"_sort_components_form"&#125;&#125;',
+        'id'                    => '&#123;&#123;"update_component_"+component.id+"_form"&#125;&#125;',
 
         // 'class'                 => 'pageslists--sort-form',
         ]) !!}
@@ -13,7 +13,7 @@
 
             {!! Form::submit("Guardar", [
                 'class' => 'btn waves-effect waves-light',
-                'form'  => '&#123;&#123;section.index+"_sort_components_form"&#125;&#125;'
+                'form'  => '&#123;&#123;"update_component_"+component.id+"_form"&#125;&#125;'
             ]) !!}
         </div>
     {!! Form::close() !!}
