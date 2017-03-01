@@ -131,29 +131,22 @@ class ManagePagesComponentsController extends Controller
     {
         $input = $request->all();
 
-        $order_array =  $page_edit->sections()->orderBy("pivot_order","ASC")->get()->keyBy(function($section){
-                            return $section->pivot->order;
-                        })->map(function($section){
-                            return $section->id;
-                        })->toArray();
-
-        foreach ($order_array as $section_id) {
-            $page_edit->sections()
-                ->updateExistingPivot($section_id, ["order" => null ]);
+        if (!Component::whereIn("id",$input["components"])->update(["order" => null])) {
+            return Response::json([
+                'error' => ["El nuevo orden no pudo ser actualizado"]
+            ], 422);
         }
 
-        foreach ($input["sections"] as $section_new_order => $section_id) {
-            $new_orders[] = [
-                "order"         => $section_new_order,
-                "section_id"    => $section_id
-            ];
-
-            $page_edit->sections()
-                ->updateExistingPivot($section_id, ["order" => $section_new_order ]);
+        foreach ($input["components"] as $order => $id) {
+            if (!Component::where(["id"=>$id ])->update(["order" => $order])) {
+                return Response::json([
+                    'error' => ["El nuevo orden no pudo ser actualizado"]
+                ], 422);
+            }
         }
 
         return Response::json([ // todo bien
-            "data"    => $page_edit->load("sections")->sections_order,
+            "data"    => $page_section->load("components")->components->pluck("id","order"),
             'message' => ["Orden correctamente guardado"],
             'success' => true
         ]);
