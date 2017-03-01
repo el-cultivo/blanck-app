@@ -55,4 +55,14 @@ class Type extends Model
         return $this->hasMany(Section::class);
     }
 
+    /**
+     * Get type label + descriotion.
+     *
+     * @return bool
+     */
+    public function getLabelDescriptionAttribute()
+    {
+        return $this->label.( " (".$this->description.")" );
+    }
+
 }

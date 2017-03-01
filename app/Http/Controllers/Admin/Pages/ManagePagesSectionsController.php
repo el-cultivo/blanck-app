@@ -20,7 +20,7 @@ class ManagePagesSectionsController extends Controller
     public function indexView()
     {
         $data = [
-            'types_list'     => Type::get()->pluck('label','id'),
+            'types_list'     => Type::get()->pluck('label_description','id'),
             'editable_parts' => Component::EDITABLE_CONTENTS,
         ];
 
