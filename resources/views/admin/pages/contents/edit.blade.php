@@ -24,7 +24,7 @@
 
     @include('admin.pages._basic-info-form',[
         "form_id"       => 'edit_page_contents_form',
-        "form_route"   => ['admin::pages.content.update',$page_edit->id],
+        "form_route"   => ['admin::pages.contents.update',$page_edit->id],
         "form_method"   => 'PATCH'
     ])
 
