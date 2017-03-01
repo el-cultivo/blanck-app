@@ -4,6 +4,7 @@ import {alertsController} from './alerts-controller';
 
 //Vue
 import {mainVue} from './vue/main-vue';
+import {adminVue} from './vue/main/admin';
 import {
 		pages,
 		pagesectionsModalCreate,
@@ -18,14 +19,13 @@ import {
 		componentForm,
 		currentPageSections
 	} from './vue/components/simple-cruds';
-import {mexicoStatesAndMunicipalities} from './vue/mixins/mexico-states-and-municipalities';
 import {mediaManager} from './vue/components/media-manager';
 import {singleImage} from './vue/components/single-image';
 
 w.on('load', () => {
 	ifElementExistsThenLaunch([
 		[],
-		['#admin-vue', mainVue, undefined, [{mixins:[mexicoStatesAndMunicipalities]}, {
+		['#admin-vue', mainVue, undefined, [adminVue, {
 			mediaManager,
 			singleImage,
 			pages,

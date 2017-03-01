@@ -5,38 +5,43 @@ import {gMap} from '../components/g-map';
 import {numberFilters} from '../mixins/number-filters';
 import {sortable} from '../mixins/sortable';
 import {multilistSortable} from '../mixins/multilist-sortable';
+import {sortableListByClick} from '../mixins/sortable-list-by-click';
 import {mexicoStatesAndMunicipalities} from '../mixins/mexico-states-and-municipalities';
-import {sortByNestedProp, toArray, objTextFilter, tapLog} from '../../functions/pure';
+import {sortByNestedProp, toArray, objTextFilter, tapLog, nonCyclingMoveInArray} from '../../functions/pure';
 import {preSelectOption} from '../../functions/dom';
 import {makePost, openModal, openModalFromSimpleImageCrud, postWithMaterialNote} from './helpers/simple-crud-helpers';
 
 
-const checkboxesMethods = {
-	props:['currentPage'],
+const toNumberMap = R.map(n => Number(n))
 
-	data: {
-		selected_checkboxes: [],
-		search: ''
-	},
+const checkboxesMethods = function(options) {
+	return {
+		props:['currentPage'],
 
-	ready() {
-		this.selected_checkboxes = this.currentPage.sections_ids;
-	},
+		data: {
+			selected_checkboxes: [],
+			search: ''
+		},
 
-	methods: {
-		openModal,
+		ready() {
+			this.selected_checkboxes = R.map(n => n+'', this.currentPage.sections_ids);
+		},
 
-		makePost,
+		methods: R.merge({
+			openModal,
 
-   		updateSelectedCheckboxes() {
-			this.selected_checkboxes = R.map(elem => elem.id+'', this.selectedElems || []);
-   		},
+			makePost,
 
-		is_checked(id) {
-			return R.contains(id, this.selected_checkboxes) ? true : false;
-		}
+	   		updateSelectedCheckboxes() {
+				this.selected_checkboxes = R.map(elem => elem.id+'', this.selectedElems || []);
+	   		},
+
+			is_checked(id) {
+				return R.contains(Number(id), toNumberMap(this.selected_checkboxes)) ? true : false;
+			}
+		}, options.methods || {})
 	}
-};
+}
 
 const relatedProductsFilter = {
 	props: ['products', 'relatedProductsIds'],
@@ -56,21 +61,41 @@ const relatedProductsFilter = {
 
 const form_id  = function() {return R.replace('{{item_on_edit.id}}', this.id, this.formId)}
 
-export const pagesGroup = simpleCrud('#pages-group-template',{props: ['label','index'], mixins:[sortable]});
-export const pages = simpleCrud('#pages-template', { components:{pagesGroup}, mixins:[multilistSortable]});
+//para pagesectionsSort
+const addedCheckboxElem = function(section) { this.sortable_list = R.append(section, this.sortable_list);}
 
-export const pagesectionsModalCreate = simpleModalCrud('#pagesections-modal-create-template',{data: { item_on_create: {description: '' } }});
+//para pagesectionsSort
+const removedCheckboxId = function(section_id) {
+	let index = R.findIndex(R.propEq('id', section_id), this.sortable_list);
+	this.sortable_list = R.remove(index, 1, this.sortable_list);
+}
+
+const pageSectionsCheckboxUpdateSuccess = function(body) {
+		let is_associated = R.pathOr(false, ['data','is_associated'], body);
+		let id = R.pathOr(false, ['data','section_id'], body);
+		if (is_associated === true) {
+			let selected = R.filter(elem => elem.id === id, this.list)[0];
+			this.$dispatch('onAssociatedCheckbox', selected)
+		} else {
+			this.$dispatch('onDissociatedCheckbox', id)
+		}
+}
+
+//pages
+export const pagesGroup = simpleCrud('#pages-group-template',{props: ['label','index'], mixins:[sortableListByClick]});
+export const pages = simpleCrud('#pages-template', { components:{pagesGroup}, mixins:[multilistSortable]});
+export const pagesectionsModalCreate = simpleModalCrud('#pagesections-modal-create-template', {data: { item_on_create: {description: '' } }});
 export const pagesectionsModalEdit = simpleModalCrud('#pagesections-modal-edit-template',{props:['edit-index']});
 export const pagesections = simpleCrud('#pagesections-template', {methods: {openModal}, components:{pagesectionsModalCreate, pagesectionsModalEdit}});
+export const pagesectionsCheckbox = simpleCrud('#pagesections-checkbox-template', checkboxesMethods({methods: {onUpdateSuccess: pageSectionsCheckboxUpdateSuccess}}));
+export const pagesectionsSort = simpleCrud('#pagesections-sort-template',{props: ['currentPage'], mixins:[sortableListByClick], events: {addedCheckboxElem, removedCheckboxId}});
 
-export const pagesectionsCheckbox = simpleCrud('#pagesections-checkbox-template', checkboxesMethods);
-export const pagesectionsSort = simpleCrud('#pagesections-sort-template',{props: ['currentPage'], mixins:[sortable]});
-
+//component
 export const componentForm = simpleCrud('#component-form-template',{props: ['section','component']} );
 
+//section
 export const sectionProtected = simpleCrud('#section-protected-template',{props: ['section']} );
 export const sectionMultipleUnlimited = simpleCrud('#section-multiple-unlimited-template',{props: ['section'],components:{componentForm}, mixins:[sortable]} );
 export const sectionMultipleLimited = simpleCrud('#section-multiple-limited-template',{props: ['section'],components:{componentForm}, mixins:[sortable]} );
 export const sectionMultipleFixed = simpleCrud('#section-multiple-fixed-template',{props: ['section'],components:{componentForm}} );
-
 export const currentPageSections = simpleCrud('#current-page-sections-template',{props: ['currentPage'],  mixins:[multilistSortable],components:{sectionProtected,sectionMultipleUnlimited, sectionMultipleLimited,sectionMultipleFixed} } );

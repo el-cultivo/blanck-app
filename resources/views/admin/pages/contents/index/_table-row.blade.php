@@ -11,13 +11,15 @@
                 </tr>
             </thead>
 
-            <tbody class="" v-sortable="{onUpdate: onUpdate, onMove: onMove, handle: '.handle', group: label}">
-                <tr :class="index"  v-for="page in list" >
+            <tbody class="">
+                <tr :class="index"  v-for="page in sortable_list" >
                     <td>
-                        <span class="btn-floating waves-effect waves-light">
+                        <span class="btn-floating waves-effect waves-light"
+                            @click="move(-1, $index, sortable_list)">
                             <i class="small">&uarr;</i>
                         </span>
-                        <span class="btn-floating waves-effect waves-light">
+                        <span class="btn-floating waves-effect waves-light"
+                            @click="move(1, $index, sortable_list)">
                             <i class="small">
                                 &darr;
                             </i>

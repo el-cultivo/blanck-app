@@ -77,6 +77,16 @@ export const lensPropMaker = lens_arr => R.mergeAll(R.map((elem) =>  ({[elem]: R
  */
 export const moveInArray = (direction, index, array) => R.insert(index+direction, array[index], R.remove(index, 1, array));
 
+//same a moveInArray, but prevents the first element of the array from becoming the last one when direction + index is less than  0
+export const nonCyclingMoveInArray = (direction, index, array) => {
+	if(index + direction < 0 || index+direction > array.length -1) {
+		return array
+	} else {
+		return moveInArray(direction, index, array);
+	}
+
+}
+
 // A different API for the same operation as moveInArray. 
 // removeAndInsert :: event {oldIndex, newIndex} -> [] -> []
 export const removeAndInsert = R.curry((event, list) => {
