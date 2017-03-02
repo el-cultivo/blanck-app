@@ -25,13 +25,38 @@ class PagesController extends ClientController
      */
     public function index()
     {
-    	return view('index');
+        $main_page = Page::getMainPage();
+        if (!$main_page || $main_page->is_publish) {
 
-        // if (!env("CLTVO_DEV_MODE")) {
-    	// 	return view('welcome');
-    	// }
-    	dd('Página de Inicio de Blank App');
-        //return Redirect::route('client::login:get');
+            $data = [
+                "main_page"  => $main_page,
+            ];
+
+            return view("client.pages.index",$data);
+        }
+
+        return view("client.pages.splash");
+    }
+
+    public function show(Page $public_page)
+    {
+        $data = [
+            "public_page"  => $public_page,
+        ];
+
+        return view("client.pages.show",$data);
+    }
+
+    public function showChild(Page $public_page, Page $public_child_page)
+    {
+
+        $data = [
+            "public_page"  => $public_page,
+            "public_child_page"  => $public_child_page,
+        ];
+
+        return view("client.pages.show",$data);
+
     }
 
     public function contact(CreateContactRequest $request)
@@ -66,29 +91,5 @@ class PagesController extends ClientController
         return Redirect::back()->with('status', "¡Muchas gracias! Hemos recibido tu mensaje correctamente, pronto recibirás un correo de confirmación.");
 
     }
-
-    public function show(Page $public_page)
-    {
-        $view = 'client.pages.'.$public_page->translation('es')->slug;
-
-        if (!View::exists($view)) {
-            $view = 'client.pages.template';
-        }
-
-        return view($view);
-    }
-
-    public function showChild(Page $public_page, Page $public_child_page)
-    {
-
-        $view = 'client.pages.'.$public_page->translation('es')->slug;
-
-        if (!View::exists($view)) {
-            $view = 'client.pages.template';
-        }
-
-        return view($view);
-    }
-
 
 }
