@@ -13,24 +13,16 @@ trait PublishableTrait {
         return $this->belongsTo(Publish::class, 'publish_id');
     }
 
-    public function getPublishDate()
-    {
-        if ($this->is_publish) {
-            $date = $this->publish_at;
-            return is_null($date) ? null : new Carbon($date);
-        }
-
-        return null;
-    }
-
-    public function isPublish()
-    {
-        return $this->publish ? $this->publish->is_publish : null;
-    }
 
     public function getIsPublishAttribute()
     {
-        return $this->isPublish();
+        if ($this->publish) {
+            $ahora = Carbon::now();
+            $publish_date = Carbon::parse($this->publish_at);
+            return $this->publish->is_publish && $ahora->gte($publish_date);
+        }
+
+        return false;
     }
 
     public function associatePublish(Publish $publish, $date )
@@ -71,7 +63,7 @@ trait PublishableTrait {
     public function scopePublished($query)
     {
         // dd(date('Y-m-d H:m:s'));
-        return $query->with('publish')
+        return $query->with('publish')->where('publish_at',"<=",date("Y-m-d"))
         ->whereHas('publish', function($q){
             $q->onlyPublished();
         })
