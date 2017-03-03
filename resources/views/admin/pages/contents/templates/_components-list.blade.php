@@ -12,6 +12,10 @@
                     </i>
                 </span>
             </div>
+                <div>
+                    <h4  v-if="editing_title === false" v-text='component.index ? component.index : "Pónme un nombre" '   @click="editing_title = true"></h3>
+                    <input v-else type="text"  v-model="component.index" @change="editing_title = false" @keyup.enter.prevent="editing_title = false">
+                </div>
             <div class="pull-right" v-if="section.type.unlimited">
                 {!! Form::open([
     		'method'				=> 'DELETE',
@@ -35,6 +39,7 @@
             :section="section"
             :component= "component"
             :index="index"
+            :component-name="component.index"
             ></component-form>
         </div>
     </li>

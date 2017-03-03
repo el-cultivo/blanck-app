@@ -23974,11 +23974,11 @@ var pagesectionsCheckbox = exports.pagesectionsCheckbox = (0, _simpleCrudCompone
 var pagesectionsSort = exports.pagesectionsSort = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-sort-template', { props: ['currentPage'], mixins: [_sortableListByClick.sortableListByClick], methods: { onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess }, events: { addedCheckboxElem: addedCheckboxElem, removedCheckboxId: removedCheckboxId } });
 
 //component
-var componentForm = exports.componentForm = (0, _simpleCrudComponentMakers.simpleCrud)('#component-form-template', { props: ['section', 'component', 'index'] });
+var componentForm = exports.componentForm = (0, _simpleCrudComponentMakers.simpleCrud)('#component-form-template', { props: ['section', 'component', 'index', 'componentName'] });
 
 //section
 var sectionProtected = exports.sectionProtected = (0, _simpleCrudComponentMakers.simpleCrud)('#section-protected-template', { props: ['section', 'index'] });
-var sectionMultipleUnlimited = exports.sectionMultipleUnlimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-unlimited-template', { props: ['section', 'index'], components: { componentForm: componentForm }, mixins: [_sortableListByClick.sortableListByClick], methods: { onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess } });
+var sectionMultipleUnlimited = exports.sectionMultipleUnlimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-unlimited-template', { props: ['section', 'index'], data: { editing_title: false, title: [] }, components: { componentForm: componentForm }, mixins: [_sortableListByClick.sortableListByClick], methods: { onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess } });
 var sectionMultipleLimited = exports.sectionMultipleLimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-limited-template', { props: ['section', 'index'], components: { componentForm: componentForm }, mixins: [_sortable.sortable] });
 var sectionMultipleFixed = exports.sectionMultipleFixed = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-fixed-template', { props: ['section', 'index'], components: { componentForm: componentForm } });
 var currentPageSections = exports.currentPageSections = (0, _simpleCrudComponentMakers.simpleCrud)('#current-page-sections-template', { props: ['currentPage'], mixins: [_multilistSortable.multilistSortable], components: { sectionProtected: sectionProtected, sectionMultipleUnlimited: sectionMultipleUnlimited, sectionMultipleLimited: sectionMultipleLimited, sectionMultipleFixed: sectionMultipleFixed } });
