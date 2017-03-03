@@ -17,11 +17,11 @@
 
                 thumbnail_img
                 <single-image
-                    v-ref:'"page_componet_thumbnail_image_"+component.id'
+                    :ref-path='[component.id, index]'
                     :current-image="component.thumbnail_image"
                     type="page_component"
                     :photoable-id="component.id"
-                    :photoable-type="page_component"
+                    photoable-type="page_component"
                     use="thumbnail"
                     class=""
                     default-order="null"
@@ -102,6 +102,7 @@
                         ]) !!}
                     </div>
                 @endforeach
+                <input type="hidden" name="component_name" v-model="componentName">
 
             </div>
 

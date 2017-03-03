@@ -20,10 +20,15 @@ export const nestedPropToUpperLevel = R.curry((prop_path, return_map_as, obj) =>
 });
 
 //doubleMapNestedAndReturnInUpperLevel:: [paths] -> [paths] -> String -> [{prop: nested_target:[{finaltarget:'value'}]}] -> [{String:[mapped_values]}]
-export const doubleMapNestedAndReturnInUpperLevel = R.curry((prop_path, mapped_prop_path, return_map_as, obj_array) => R.map(obj => {
-	obj[return_map_as] = R.map(mapped_prop => R.pathOr([], mapped_prop_path, mapped_prop), R.pathOr([], prop_path, obj));
-	return obj;
-})(obj_array || []));
+export const doubleMapNestedAndReturnInUpperLevel = R.curry((prop_path, mapped_prop_path, return_map_as, obj_array) => 
+	R.map(obj => {
+		obj[return_map_as] = 
+			R.map(mapped_prop => 
+				R.pathOr([], mapped_prop_path, mapped_prop), 
+				R.pathOr([], prop_path, obj)
+			);
+		return obj;
+	})(obj_array || []));
 
 export const pairWith = R.curry((id_prop, prop, obj) => [obj[id_prop], obj[prop]]);
 export const pairWithObj = R.curry((id_prop, props, obj) => [obj[id_prop],R.pick(props, obj)]);
@@ -52,7 +57,11 @@ export const provisionedFromPairs = function(arr_of_arrs) {
 };
 
 //idsByParentIds :: [{parent_id, id}] -> {some_parent_id: [ids], another_parent_id: [ids]}
-export const idsByParentIds = (parent_id_prop, id_prop, arr) => R.compose(provisionedFromPairs, R.map(pairWith(parent_id_prop, id_prop)))(arr)
+export const idsByParentIds = (parent_id_prop, id_prop, arr) => 
+	R.compose(
+		provisionedFromPairs, 
+		R.map( pairWith(parent_id_prop, id_prop) )
+	)(arr)
 
 export const logEach = R.forEach((el)=> console.log(el));
 
@@ -144,9 +153,14 @@ export const alphabeticalObjSort = R.curry((path_arr, sortable_objs) =>
  * @return {array}          sorted array
  */
 export const numericalObjSort = R.curry((path_arr, asc_or_desc, sortable_objs) =>
-	R.isArrayLike(path_arr) && path_arr.length > 0 ?
-	 	R.compose(sortingOrder(asc_or_desc), R.sortBy(R.path(path_arr)))(sortable_objs) :
-	 	logAndReturnSomething(`the first argument of numericalObjSort must be and array of length > 0, '${path_arr}' given`, sortable_objs)
+	R.isArrayLike(path_arr) && path_arr.length > 0 
+		? R.compose(
+	 		sortingOrder(asc_or_desc),
+	 		 R.sortBy(
+	 		 	R.path(path_arr)
+	 		 )
+	 	)(sortable_objs) 
+	 	: logAndReturnSomething(`the first argument of numericalObjSort must be and array of length > 0, '${path_arr}' given`, sortable_objs)
 );
 
 export const sortingOrder =  R.curry((asc_or_desc, arr) => {
@@ -159,7 +173,11 @@ export const sortingOrder =  R.curry((asc_or_desc, arr) => {
 });
 
 
-export const defaultTo1 = val => val === null || val === undefined ? 1 : val;
+export const defaultTo1 = val => 
+	val === null || 
+	val === undefined 
+	? 1 
+	: val;
 
 /**
  * If quantity is missing it defaults to 1
@@ -170,12 +188,19 @@ export const defaultIndexTo1 = index => R.over(R.lensIndex(index), defaultTo1);
 
 
 //sumTotal:: String prop -> String prop ->[{Number price, Int quantity}] -> Number price
-export const sumTotal = R.curry((quantity_prop, sumable_prop) => R.compose(R.sum, R.map (
-																				R.compose(
-																					R.product,
-																					R.map(Number),
-																					defaultIndexTo1(0),
-																					R.props([quantity_prop, sumable_prop]) ))));
+export const sumTotal = R.curry((quantity_prop, sumable_prop) => 
+	R.compose(
+		R.sum, 
+		R.map (
+			R.compose(
+				R.product,
+				R.map(Number),
+				defaultIndexTo1(0),
+				R.props([quantity_prop, sumable_prop])
+			)
+		)
+	)
+);
 
 /**
  * Calculates the total price of an array of objects with props price and quantity.
@@ -191,36 +216,71 @@ export const sumTotalPrice = sumTotal('price', 'quantity');
 
 
 
-// additiveFilter:: Path [a] -> [b] -> [{Path [a] : [c]}] ->[{Path [a] : [c]}]
+// additiveFilter:: ['path'] -> [b] -> [{ ['path'] : [b], ...}] -> [{ Path [a] : [b], ...}]
 export const additiveFilter = R.curry((filter_prop_path, categories, categorizable_objs)=> {
-	let objOrUndefinedIfNotCategories = obj => R.intersection( R.path(filter_prop_path, obj), categories).length > 0 ? obj : undefined;
-	return categories.length === 0 ? categorizable_objs : R.compose(R.filter(obj => objOrUndefinedIfNotCategories(obj) !== undefined ))(categorizable_objs);
+	let notEmpty = obj => 
+		R.intersection(
+			R.path(filter_prop_path, obj),
+			categories
+		).length > 0 
+			? true 
+			: false;
+	
+	if(categories.length === 0 ) 
+		return categorizable_objs;
+	else 
+		return R.filter(notEmpty, categorizable_objs);
 });
 
-// rangeFilter:: Path [a] ->  Pair [number] -> [{Path [a] : [b]}] ->[{Path [a] : [b]}]
+// rangeFilter::  ['path'] ->  [num, num] -> [{ ['path'] : num }] ->[{ ['path'] : num }]
 export const rangeFilter = R.curry((filter_prop_path, from_to_arr, filterable_objs) => {
-	let both_ends_are_0 = from_to_arr[0] == 0 && from_to_arr[1] == 0;
-	let range_is_numerical = isNumber(from_to_arr[0]) &&  isNumber(from_to_arr[1])
-	let inverted_range = from_to_arr[1] < from_to_arr[0];
-	let range_is_incomplete = from_to_arr.length !== 2;
-	let inRange = obj => R.path(filter_prop_path, obj) >= from_to_arr[0] && R.path(filter_prop_path, obj) <= from_to_arr[1];
-	return R.filter(obj => R.path(filter_prop_path, obj) === undefined ||
-			both_ends_are_0 ||
-			!range_is_numerical ||
-			inverted_range ||
-			range_is_incomplete 	?
-			obj 					:
-			 inRange(obj), filterable_objs)
+	let 	both_ends_are_0 = from_to_arr[0] == 0 && from_to_arr[1] == 0,
+		range_is_numerical = isNumber(from_to_arr[0]) &&  isNumber(from_to_arr[1]),
+		inverted_range = from_to_arr[1] < from_to_arr[0],
+		range_is_incomplete = from_to_arr.length !== 2,
+		inRange = obj => 
+			R.path(filter_prop_path, obj) >= from_to_arr[0] && 
+			R.path(filter_prop_path, obj) <= from_to_arr[1];
+
+	if(//si no debe filtrarse por alguna razón
+		both_ends_are_0 ||
+		!range_is_numerical ||
+		inverted_range ||
+		range_is_incomplete) {
+
+		 return filterable_objs;
+
+	} else  {
+		return R.filter(obj => 
+			R.path(filter_prop_path, obj) === undefined 
+				? obj 
+				:  inRange(obj), 
+		filterable_objs)
+	}
 });
 
-export const isNumber = n => typeof Number(n) !== NaN && n !== '' && n !== null && n !== undefined;
+//isNumber :: a -> Bool
+export const isNumber = n => 
+	typeof !isNaN(Number(n)) && 
+	n !== '' && 
+	n !== null && 
+	n !== undefined;
 
-export const inString = R.curry((test_string, string) => R.test(new RegExp(test_string, 'i'), string));
+export const inString = R.curry((test_string, string) => 
+	R.test(
+		new RegExp(test_string, 'i'), 
+		string)
+	);
 
 export const objTextFilter = R.curry((filter_prop_path, string, filterable_objs) =>
-	string !== '' 		?
-		R.filter(obj => inString(string, R.path(filter_prop_path, obj)))(filterable_objs) :
-		filterable_objs
+	string !== '' 
+		? R.filter(obj => 
+				inString(
+					string, 
+					R.path(filter_prop_path, obj)
+				)
+		  )(filterable_objs) 
+		: filterable_objs
 );
 
 //validateEmail :: String email -> Bool

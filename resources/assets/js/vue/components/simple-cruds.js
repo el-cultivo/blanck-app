@@ -81,21 +81,29 @@ const pageSectionsCheckboxUpdateSuccess = function(body) {
 		}
 }
 
+const sortableListOnDeleteSuccess = function(body, input) {
+	let index = input.target.dataset.index;
+	this.sortable_list.splice(index, 1);
+}
+
+const sortableListOnCreateSuccess = function(body, input) {
+	this.sortable_list.push(body.data);
+}
 //pages
-export const pagesGroup = simpleCrud('#pages-group-template',{props: ['label','index'], mixins:[sortableListByClick]});
+export const pagesGroup = simpleCrud('#pages-group-template',{props: ['label','index'], mixins:[sortableListByClick], methods: {onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess}});
 export const pages = simpleCrud('#pages-template', { components:{pagesGroup}, mixins:[multilistSortable]});
 export const pagesectionsModalCreate = simpleModalCrud('#pagesections-modal-create-template', {data: { item_on_create: {description: '' } }});
 export const pagesectionsModalEdit = simpleModalCrud('#pagesections-modal-edit-template',{props:['edit-index']});
 export const pagesections = simpleCrud('#pagesections-template', {methods: {openModal}, components:{pagesectionsModalCreate, pagesectionsModalEdit}});
 export const pagesectionsCheckbox = simpleCrud('#pagesections-checkbox-template', checkboxesMethods({methods: {onUpdateSuccess: pageSectionsCheckboxUpdateSuccess}}));
-export const pagesectionsSort = simpleCrud('#pagesections-sort-template',{props: ['currentPage'], mixins:[sortableListByClick], events: {addedCheckboxElem, removedCheckboxId}});
+export const pagesectionsSort = simpleCrud('#pagesections-sort-template',{props: ['currentPage'], mixins:[sortableListByClick], methods: {onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess}, events: {addedCheckboxElem, removedCheckboxId}});
 
 //component
-export const componentForm = simpleCrud('#component-form-template',{props: ['section','component']} );
+export const componentForm = simpleCrud('#component-form-template',{props: ['section','component', 'index', 'componentName']} );
 
 //section
-export const sectionProtected = simpleCrud('#section-protected-template',{props: ['section']} );
-export const sectionMultipleUnlimited = simpleCrud('#section-multiple-unlimited-template',{props: ['section'],components:{componentForm}, mixins:[sortable]} );
-export const sectionMultipleLimited = simpleCrud('#section-multiple-limited-template',{props: ['section'],components:{componentForm}, mixins:[sortable]} );
-export const sectionMultipleFixed = simpleCrud('#section-multiple-fixed-template',{props: ['section'],components:{componentForm}} );
-export const currentPageSections = simpleCrud('#current-page-sections-template',{props: ['currentPage'],  mixins:[multilistSortable],components:{sectionProtected,sectionMultipleUnlimited, sectionMultipleLimited,sectionMultipleFixed} } );
+export const sectionProtected = simpleCrud('#section-protected-template',{props: ['section', 'index']} );
+export const sectionMultipleUnlimited = simpleCrud('#section-multiple-unlimited-template',{props: ['section', 'index'],  data:{editing_title: false, title: []},  components:{componentForm}, mixins:[sortableListByClick], methods: {onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess}} );
+export const sectionMultipleLimited = simpleCrud('#section-multiple-limited-template',{props: ['section', 'index'],components:{componentForm}, mixins:[sortable]} );
+export const sectionMultipleFixed = simpleCrud('#section-multiple-fixed-template',{props: ['section', 'index'],components:{componentForm}} );
+export const currentPageSections = simpleCrud('#current-page-sections-template',{props: ['currentPage'], mixins:[multilistSortable],components:{sectionProtected,sectionMultipleUnlimited, sectionMultipleLimited,sectionMultipleFixed} } );

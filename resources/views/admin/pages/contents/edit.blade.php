@@ -29,10 +29,14 @@
     ])
 
     <current-page-sections :list="store.current_page.sections_maped" :current-page="store.current_page"></current-page-sections-checkbox>
+
+@endsection
+
+@section('modals')
+        <media-manager v-ref:media_manager></media-manager>
 @endsection
 
 @section('vue_templates')
-
     <template id="current-page-sections-template">
         <div class="">
             <div class="" v-if="list.length > 0" >
@@ -50,24 +54,24 @@
                     v-for="section in list"
                     :section="section"
                     :list= "section.components"
+                    :index="$index"
                 ></component>
 
             </div>
         </div>
 
     </template>
-
+    @include('admin.media_manager.vue._modal-media_manager')
+    @include('admin.media_manager.vue.single-image-template')
     @include('admin.pages.contents.templates.protected')
     @include('admin.pages.contents.templates.multiple-unlimited')
     @include('admin.pages.contents.templates.multiple-limited')
     @include('admin.pages.contents.templates.multiple-fixed')
-
     @include('admin.pages.contents.templates._component-form')
-
 @endsection
 
 @section('vue_store')
-	<script>
+    <script>
         mainVueStore.current_page = {!! $page_edit !!};
-	</script>
+    </script>
 @endsection
