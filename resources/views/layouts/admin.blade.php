@@ -29,10 +29,6 @@
 
 		@yield('modals')
 		
-		@if ( isset($media_manager) && $media_manager )
-		@include('admin.media_manager._mediaManager')
-		@endif
-
 		@include('admin.general.scripts')
 
 		@yield('vue_templates')
