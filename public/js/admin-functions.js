@@ -23215,32 +23215,39 @@ var sumTotal = exports.sumTotal = _ramda2.default.curry(function (quantity_prop,
 //sumTotalPrice:: [{Number price, Int quantity}] -> Number price
 var sumTotalPrice = exports.sumTotalPrice = sumTotal('price', 'quantity');
 
-// additiveFilter:: Path [a] -> [b] -> [{Path [a] : [c]}] ->[{Path [a] : [c]}]
+// additiveFilter:: ['path'] -> [b] -> [{ ['path'] : [b], ...}] -> [{ Path [a] : [b], ...}]
 var additiveFilter = exports.additiveFilter = _ramda2.default.curry(function (filter_prop_path, categories, categorizable_objs) {
-	var objOrUndefinedIfNotCategories = function objOrUndefinedIfNotCategories(obj) {
-		return _ramda2.default.intersection(_ramda2.default.path(filter_prop_path, obj), categories).length > 0 ? obj : undefined;
+	var notEmpty = function notEmpty(obj) {
+		return _ramda2.default.intersection(_ramda2.default.path(filter_prop_path, obj), categories).length > 0 ? true : false;
 	};
-	return categories.length === 0 ? categorizable_objs : _ramda2.default.compose(_ramda2.default.filter(function (obj) {
-		return objOrUndefinedIfNotCategories(obj) !== undefined;
-	}))(categorizable_objs);
+
+	if (categories.length === 0) return categorizable_objs;else return _ramda2.default.filter(notEmpty, categorizable_objs);
 });
 
-// rangeFilter:: Path [a] ->  Pair [number] -> [{Path [a] : [b]}] ->[{Path [a] : [b]}]
+// rangeFilter::  ['path'] ->  [num, num] -> [{ ['path'] : num }] ->[{ ['path'] : num }]
 var rangeFilter = exports.rangeFilter = _ramda2.default.curry(function (filter_prop_path, from_to_arr, filterable_objs) {
-	var both_ends_are_0 = from_to_arr[0] == 0 && from_to_arr[1] == 0;
-	var range_is_numerical = isNumber(from_to_arr[0]) && isNumber(from_to_arr[1]);
-	var inverted_range = from_to_arr[1] < from_to_arr[0];
-	var range_is_incomplete = from_to_arr.length !== 2;
-	var inRange = function inRange(obj) {
+	var both_ends_are_0 = from_to_arr[0] == 0 && from_to_arr[1] == 0,
+	    range_is_numerical = isNumber(from_to_arr[0]) && isNumber(from_to_arr[1]),
+	    inverted_range = from_to_arr[1] < from_to_arr[0],
+	    range_is_incomplete = from_to_arr.length !== 2,
+	    inRange = function inRange(obj) {
 		return _ramda2.default.path(filter_prop_path, obj) >= from_to_arr[0] && _ramda2.default.path(filter_prop_path, obj) <= from_to_arr[1];
 	};
-	return _ramda2.default.filter(function (obj) {
-		return _ramda2.default.path(filter_prop_path, obj) === undefined || both_ends_are_0 || !range_is_numerical || inverted_range || range_is_incomplete ? obj : inRange(obj);
-	}, filterable_objs);
+
+	if ( //si no debe filtrarse por alguna razón
+	both_ends_are_0 || !range_is_numerical || inverted_range || range_is_incomplete) {
+
+		return filterable_objs;
+	} else {
+		return _ramda2.default.filter(function (obj) {
+			return _ramda2.default.path(filter_prop_path, obj) === undefined ? obj : inRange(obj);
+		}, filterable_objs);
+	}
 });
 
+//isNumber :: a -> Bool
 var isNumber = exports.isNumber = function isNumber(n) {
-	return _typeof(Number(n)) !== NaN && n !== '' && n !== null && n !== undefined;
+	return _typeof(!isNaN(Number(n))) && n !== '' && n !== null && n !== undefined;
 };
 
 var inString = exports.inString = _ramda2.default.curry(function (test_string, string) {
@@ -23655,8 +23662,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.mediaManager = undefined;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _ramda = require('ramda');
 
 var _ramda2 = _interopRequireDefault(_ramda);
@@ -23699,8 +23704,11 @@ var mediaManager = exports.mediaManager = Vue.extend({
 				class: '',
 				order: ''
 			},
+			callee: {
+				dummy: function dummy() {}
+			},
+			callee_cb: 'dummy',
 			active_calling_component: {
-				ref: undefined,
 				photoable_type: undefined,
 				photoable_id: undefined,
 				use: undefined,
@@ -23720,8 +23728,9 @@ var mediaManager = exports.mediaManager = Vue.extend({
 		}
 	},
 
+	init: function init() {},
+	create: function create() {},
 	ready: function ready() {
-		this.getPhotos();
 		if (document.getElementById('modal__drop-container') !== undefined) {
 			// exists('modal__drop-container', fileDnD); var exists = (elem, constructor) => document.getElemetById(elem) !== undefined ? constructor : {};
 			this.DnDEvents = (0, _fileDnd.fileDnD)({
@@ -23775,20 +23784,12 @@ var mediaManager = exports.mediaManager = Vue.extend({
 			this.chosen_img = { src: '', id: '', en: {}, es: {}, index: '', photoable_id: '', photoable_type: '', use: '', class: '', order: '' };
 		},
 		onAssociateSuccess: function onAssociateSuccess(body, elem) {
-			//De momento, este evento sólo cubre dos casos:
-			//1. El componente que llama es hijo directo del papá. i.e. singleImage
-			//2. El componente que llama es hijo de un hijo del papá y es producto de un v-for. i.e singleImage en multiImages
-			if (_ramda2.default.isArrayLike(this.active_calling_component.ref)) {
-				var component = _ramda2.default.path(this.active_calling_component.ref, this.$root);
-				component.onSelectedMedia({ src: this.chosen_img.src, id: this.chosen_img.id });
-			} else if (typeof this.active_calling_component.ref === 'string') {
-				this.$root.$refs[this.active_calling_component.ref].onSelectedMedia({ src: this.chosen_img.src, id: this.chosen_img.id });
-			} else if (_typeof(this.active_calling_component.ref) === 'object') {
-				this.$root.$refs[this.active_calling_component.ref.parent].$refs[this.active_calling_component.ref.list][this.active_calling_component.ref.index].onSelectedMedia({ src: this.chosen_img.src, id: this.chosen_img.id });
-			}
-			//cleanup
-			this.active_calling_component = { ref: undefined, photoable_type: undefined, photoable_id: undefined, use: undefined, class: undefined, order: undefined };
+			this.callee[this.callee_cb](this.chosen_img);
 			this.close();
+			this.callee = {
+				dummy: function dummy() {}
+			};
+			this.callee_cb = 'dummy';
 		},
 		onChosenImage: function onChosenImage($event) {
 			var img = this._weHaveAnImageUrl($event.target),
@@ -23802,10 +23803,6 @@ var mediaManager = exports.mediaManager = Vue.extend({
 		},
 		onGetChosenImageDataSuccess: function onGetChosenImageDataSuccess(body) {
 			this.chosen_img = body;
-			// this.chosen_img.id = body.id;
-			// this.chosen_img.src = body.src;
-			// this.chosen_img.en = body.en;
-			// this.chosen_img.es = body.es;
 		},
 		_weHaveAnImageUrl: function _weHaveAnImageUrl(e_target) {
 			if (e_target.dataset.imageUrl !== undefined) {
@@ -23959,23 +23956,31 @@ var pageSectionsCheckboxUpdateSuccess = function pageSectionsCheckboxUpdateSucce
 	}
 };
 
+var sortableListOnDeleteSuccess = function sortableListOnDeleteSuccess(body, input) {
+	var index = input.target.dataset.index;
+	this.sortable_list.splice(index, 1);
+};
+
+var sortableListOnCreateSuccess = function sortableListOnCreateSuccess(body, input) {
+	this.sortable_list.push(body.data);
+};
 //pages
-var pagesGroup = exports.pagesGroup = (0, _simpleCrudComponentMakers.simpleCrud)('#pages-group-template', { props: ['label', 'index'], mixins: [_sortableListByClick.sortableListByClick] });
+var pagesGroup = exports.pagesGroup = (0, _simpleCrudComponentMakers.simpleCrud)('#pages-group-template', { props: ['label', 'index'], mixins: [_sortableListByClick.sortableListByClick], methods: { onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess } });
 var pages = exports.pages = (0, _simpleCrudComponentMakers.simpleCrud)('#pages-template', { components: { pagesGroup: pagesGroup }, mixins: [_multilistSortable.multilistSortable] });
 var pagesectionsModalCreate = exports.pagesectionsModalCreate = (0, _simpleCrudComponentMakers.simpleModalCrud)('#pagesections-modal-create-template', { data: { item_on_create: { description: '' } } });
 var pagesectionsModalEdit = exports.pagesectionsModalEdit = (0, _simpleCrudComponentMakers.simpleModalCrud)('#pagesections-modal-edit-template', { props: ['edit-index'] });
 var pagesections = exports.pagesections = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-template', { methods: { openModal: _simpleCrudHelpers.openModal }, components: { pagesectionsModalCreate: pagesectionsModalCreate, pagesectionsModalEdit: pagesectionsModalEdit } });
 var pagesectionsCheckbox = exports.pagesectionsCheckbox = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-checkbox-template', checkboxesMethods({ methods: { onUpdateSuccess: pageSectionsCheckboxUpdateSuccess } }));
-var pagesectionsSort = exports.pagesectionsSort = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-sort-template', { props: ['currentPage'], mixins: [_sortableListByClick.sortableListByClick], events: { addedCheckboxElem: addedCheckboxElem, removedCheckboxId: removedCheckboxId } });
+var pagesectionsSort = exports.pagesectionsSort = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-sort-template', { props: ['currentPage'], mixins: [_sortableListByClick.sortableListByClick], methods: { onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess }, events: { addedCheckboxElem: addedCheckboxElem, removedCheckboxId: removedCheckboxId } });
 
 //component
-var componentForm = exports.componentForm = (0, _simpleCrudComponentMakers.simpleCrud)('#component-form-template', { props: ['section', 'component'] });
+var componentForm = exports.componentForm = (0, _simpleCrudComponentMakers.simpleCrud)('#component-form-template', { props: ['section', 'component', 'index'] });
 
 //section
-var sectionProtected = exports.sectionProtected = (0, _simpleCrudComponentMakers.simpleCrud)('#section-protected-template', { props: ['section'] });
-var sectionMultipleUnlimited = exports.sectionMultipleUnlimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-unlimited-template', { props: ['section'], components: { componentForm: componentForm }, mixins: [_sortableListByClick.sortableListByClick] });
-var sectionMultipleLimited = exports.sectionMultipleLimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-limited-template', { props: ['section'], components: { componentForm: componentForm }, mixins: [_sortable.sortable] });
-var sectionMultipleFixed = exports.sectionMultipleFixed = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-fixed-template', { props: ['section'], components: { componentForm: componentForm } });
+var sectionProtected = exports.sectionProtected = (0, _simpleCrudComponentMakers.simpleCrud)('#section-protected-template', { props: ['section', 'index'] });
+var sectionMultipleUnlimited = exports.sectionMultipleUnlimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-unlimited-template', { props: ['section', 'index'], components: { componentForm: componentForm }, mixins: [_sortableListByClick.sortableListByClick], methods: { onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess } });
+var sectionMultipleLimited = exports.sectionMultipleLimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-limited-template', { props: ['section', 'index'], components: { componentForm: componentForm }, mixins: [_sortable.sortable] });
+var sectionMultipleFixed = exports.sectionMultipleFixed = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-fixed-template', { props: ['section', 'index'], components: { componentForm: componentForm } });
 var currentPageSections = exports.currentPageSections = (0, _simpleCrudComponentMakers.simpleCrud)('#current-page-sections-template', { props: ['currentPage'], mixins: [_multilistSortable.multilistSortable], components: { sectionProtected: sectionProtected, sectionMultipleUnlimited: sectionMultipleUnlimited, sectionMultipleLimited: sectionMultipleLimited, sectionMultipleFixed: sectionMultipleFixed } });
 
 },{"../../functions/dom":12,"../../functions/pure":13,"../components/g-map":17,"../factories/simple-crud-component-makers.js":22,"../mixins/mexico-states-and-municipalities":29,"../mixins/multilist-sortable":30,"../mixins/number-filters":31,"../mixins/sortable":34,"../mixins/sortable-list-by-click":33,"./helpers/simple-crud-helpers":18,"ramda":4,"vue":8}],21:[function(require,module,exports){
@@ -24805,87 +24810,54 @@ var singleImageMixin = exports.singleImageMixin = {
 	create: function create() {},
 	ready: function ready() {
 		_helpers.initPropsFromJSON.call(this, this.$options.props);
-		this.setRef();
 		this.image.src = _ramda2.default.pathOr('', ['thumbnail_url'], this.currentImage);
 		this.image.id = _ramda2.default.pathOr('', ['id'], this.currentImage);
 		this.order = _ramda2.default.pathOr(this.defaultOrder || 0, ['currentImage', 'order'], this);
+		this.printable_ref = Array.isArray(this.refPath) ? this.refPath.join('-') : this.printable_ref;
 	},
 
 
 	mixins: [_crudAjax.crudAjax],
 
 	methods: {
-		setRef: function setRef() {
-			if (this.refPath) {
-				this.ref = this.refPath;
-				return;
-			}
-			if (this.parentRef !== undefined) {
-				this.ref = {
-					parent: this.parentRef,
-					list: this.$options._ref,
-					index: this.index
-				};
-				this.printable_ref = this.ref.parent + '_' + this.ref.index;
-				return;
-			}
-			this.ref = this.$options._ref;
-		},
 		initAddMediaProcess: function initAddMediaProcess(media_manager_ref, e) {
 			if (this.image.src !== '') {
 				return;
 			}
 			var mediaManager = this.$root.$refs.media_manager;
-			mediaManager.active_calling_component.ref = this.ref;
 			mediaManager.active_calling_component.photoable_id = this.photoableId;
 			mediaManager.active_calling_component.photoable_type = this.photoableType;
-			//TODO pasar estos datos (use, class, order) de otra manera,
-			//ésta dudosamente funcionará, creo que se tienen que generar
-			//dentro del mismo componente,
-			//además creo que sólo son útiles en el multiImages
-			//habrá que esperar para ver los casos de uso
 			mediaManager.active_calling_component.use = this.use;
 			mediaManager.active_calling_component.class = this.class;
 			mediaManager.active_calling_component.order = this.order;
+			mediaManager.callee = this;
+			mediaManager.callee_cb = 'onSelectedMedia';
 			if (mediaManager.active_calling_component.photoable_id !== undefined) {
 				mediaManager.open();
-			} else {
-				console.error('[singleImageMixin] To open the media manager you need to define the photoable-id');
 			}
 		},
-		onSelectedMedia: function onSelectedMedia() {
-			var _this = this;
-
-			var media_data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-			console.log('media_data', media_data, this.index);
-			_ramda2.default.forEach(function (prop) {
-				return _this.image[prop] = media_data[prop];
-			}, _ramda2.default.keysIn(media_data));
-			this.$dispatch('reupdateChildrenWithImageOrder');
+		onSelectedMedia: function onSelectedMedia(image) {
+			this.image = image;
+			// this.$dispatch('reupdateChildrenWithImageOrder');
 		},
 		onDisassociateSuccess: function onDisassociateSuccess() {
+			console.log('dissoc');
 			this.image.src = '';
 			this.image.id = '';
-			this.$dispatch('reupdateChildrenWithImageOrder');
+			// this.$dispatch('reupdateChildrenWithImageOrder');
 		}
 	},
 
 	watch: {
 		'image.id': function imageId() {
-			this.$dispatch('reupdateChildrenWithImageOrder');
-		},
-		index: function index() {
-			console.log(this.index);
-			this.setRef();
-			console.log(this.index);
+			// this.$dispatch('reupdateChildrenWithImageOrder');
 		}
 	},
 
 	events: {
-		updateRef: function updateRef() {
-			this.setRef();
-		}
+		// updateRef(){
+		// 	this.setRef();
+		// }
 	}
 };
 

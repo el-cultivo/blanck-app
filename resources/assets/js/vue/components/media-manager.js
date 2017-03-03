@@ -16,6 +16,7 @@ export var mediaManager = Vue.extend({
 				container: '',
 				bin:''
 			},
+			display: 'none',
 			thumbnail_container: undefined,
 			file_input: '',
 			file_input_form:'',
@@ -84,12 +85,12 @@ export var mediaManager = Vue.extend({
 
 	methods: {
 		open() {
-			$('#media-manager').modal('show');
+			this.display = 'block';
 			this.getPhotos();
 		},
 
 		close() {
-			$('#media-manager').modal('hide');
+			this.display = 'none';
 		},
 
 		onDragOver() {
