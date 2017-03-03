@@ -22979,7 +22979,7 @@ var preSelectOption = exports.preSelectOption = function preSelectOption(select_
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.validateEmail = exports.objTextFilter = exports.inString = exports.isNumber = exports.rangeFilter = exports.additiveFilter = exports.sumTotalPrice = exports.sumTotal = exports.defaultIndexTo1 = exports.defaultTo1 = exports.sortingOrder = exports.numericalObjSort = exports.alphabeticalObjSort = exports.logAndReturnSomething = exports.tapLog = exports.sortByFirstItem = exports.orderAscending = exports.diff = exports.uppercaseFirst = exports.removeAndInsert = exports.nonCyclingMoveInArray = exports.moveInArray = exports.lensPropMaker = exports.removeNullsAndUndefineds = exports.deundefinedify = exports.denullify = exports.toNumber = exports.logEach = exports.idsByParentIds = exports.provisionedFromPairs = exports.objFromPairs = exports.concatValuesToArrayIfDuplicateKeys = exports.toArrIfNotArr = exports.arrsIntoObjs = exports.mergeObj = exports.objsById = exports.pairObjToIdProp = exports.pairWithObj = exports.pairWith = exports.doubleMapNestedAndReturnInUpperLevel = exports.nestedPropToUpperLevel = exports.toArray = exports.JsonParseOrFalse = undefined;
+exports.validateEmail = exports.objTextFilter = exports.inString = exports.isNumber = exports.rangeFilter = exports.additiveFilter = exports.sumTotalPrice = exports.sumTotal = exports.defaultIndexTo1 = exports.defaultTo1 = exports.sortingOrder = exports.numericalObjSort = exports.alphabeticalObjSort = exports.logAndReturnSomething = exports.tapLog = exports.sortByFirstItem = exports.orderAscending = exports.diff = exports.uppercaseFirst = exports.removeAndInsert = exports.moveInArray = exports.lensPropMaker = exports.removeNullsAndUndefineds = exports.deundefinedify = exports.denullify = exports.toNumber = exports.logEach = exports.idsByParentIds = exports.provisionedFromPairs = exports.objFromPairs = exports.concatValuesToArrayIfDuplicateKeys = exports.toArrIfNotArr = exports.arrsIntoObjs = exports.mergeObj = exports.objsById = exports.pairObjToIdProp = exports.pairWithObj = exports.pairWith = exports.doubleMapNestedAndReturnInUpperLevel = exports.nestedPropToUpperLevel = exports.toArray = exports.JsonParseOrFalse = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -23104,15 +23104,6 @@ var moveInArray = exports.moveInArray = function moveInArray(direction, index, a
 	return _ramda2.default.insert(index + direction, array[index], _ramda2.default.remove(index, 1, array));
 };
 
-//same a moveInArray, but prevents the first element of the array from becoming the last one when direction + index is less than  0
-var nonCyclingMoveInArray = exports.nonCyclingMoveInArray = function nonCyclingMoveInArray(direction, index, array) {
-	if (index + direction < 0 || index + direction > array.length - 1) {
-		return array;
-	} else {
-		return moveInArray(direction, index, array);
-	}
-};
-
 // A different API for the same operation as moveInArray. 
 // removeAndInsert :: event {oldIndex, newIndex} -> [] -> []
 var removeAndInsert = exports.removeAndInsert = _ramda2.default.curry(function (event, list) {
@@ -23215,39 +23206,32 @@ var sumTotal = exports.sumTotal = _ramda2.default.curry(function (quantity_prop,
 //sumTotalPrice:: [{Number price, Int quantity}] -> Number price
 var sumTotalPrice = exports.sumTotalPrice = sumTotal('price', 'quantity');
 
-// additiveFilter:: ['path'] -> [b] -> [{ ['path'] : [b], ...}] -> [{ Path [a] : [b], ...}]
+// additiveFilter:: Path [a] -> [b] -> [{Path [a] : [c]}] ->[{Path [a] : [c]}]
 var additiveFilter = exports.additiveFilter = _ramda2.default.curry(function (filter_prop_path, categories, categorizable_objs) {
-	var notEmpty = function notEmpty(obj) {
-		return _ramda2.default.intersection(_ramda2.default.path(filter_prop_path, obj), categories).length > 0 ? true : false;
+	var objOrUndefinedIfNotCategories = function objOrUndefinedIfNotCategories(obj) {
+		return _ramda2.default.intersection(_ramda2.default.path(filter_prop_path, obj), categories).length > 0 ? obj : undefined;
 	};
-
-	if (categories.length === 0) return categorizable_objs;else return _ramda2.default.filter(notEmpty, categorizable_objs);
+	return categories.length === 0 ? categorizable_objs : _ramda2.default.compose(_ramda2.default.filter(function (obj) {
+		return objOrUndefinedIfNotCategories(obj) !== undefined;
+	}))(categorizable_objs);
 });
 
-// rangeFilter::  ['path'] ->  [num, num] -> [{ ['path'] : num }] ->[{ ['path'] : num }]
+// rangeFilter:: Path [a] ->  Pair [number] -> [{Path [a] : [b]}] ->[{Path [a] : [b]}]
 var rangeFilter = exports.rangeFilter = _ramda2.default.curry(function (filter_prop_path, from_to_arr, filterable_objs) {
-	var both_ends_are_0 = from_to_arr[0] == 0 && from_to_arr[1] == 0,
-	    range_is_numerical = isNumber(from_to_arr[0]) && isNumber(from_to_arr[1]),
-	    inverted_range = from_to_arr[1] < from_to_arr[0],
-	    range_is_incomplete = from_to_arr.length !== 2,
-	    inRange = function inRange(obj) {
+	var both_ends_are_0 = from_to_arr[0] == 0 && from_to_arr[1] == 0;
+	var range_is_numerical = isNumber(from_to_arr[0]) && isNumber(from_to_arr[1]);
+	var inverted_range = from_to_arr[1] < from_to_arr[0];
+	var range_is_incomplete = from_to_arr.length !== 2;
+	var inRange = function inRange(obj) {
 		return _ramda2.default.path(filter_prop_path, obj) >= from_to_arr[0] && _ramda2.default.path(filter_prop_path, obj) <= from_to_arr[1];
 	};
-
-	if ( //si no debe filtrarse por alguna razón
-	both_ends_are_0 || !range_is_numerical || inverted_range || range_is_incomplete) {
-
-		return filterable_objs;
-	} else {
-		return _ramda2.default.filter(function (obj) {
-			return _ramda2.default.path(filter_prop_path, obj) === undefined ? obj : inRange(obj);
-		}, filterable_objs);
-	}
+	return _ramda2.default.filter(function (obj) {
+		return _ramda2.default.path(filter_prop_path, obj) === undefined || both_ends_are_0 || !range_is_numerical || inverted_range || range_is_incomplete ? obj : inRange(obj);
+	}, filterable_objs);
 });
 
-//isNumber :: a -> Bool
 var isNumber = exports.isNumber = function isNumber(n) {
-	return _typeof(!isNaN(Number(n))) && n !== '' && n !== null && n !== undefined;
+	return _typeof(Number(n)) !== NaN && n !== '' && n !== null && n !== undefined;
 };
 
 var inString = exports.inString = _ramda2.default.curry(function (test_string, string) {
@@ -23333,29 +23317,49 @@ var _alertsController = require('./alerts-controller');
 
 var _mainVue = require('./vue/main-vue');
 
-var _admin = require('./vue/main/admin');
-
 var _simpleCruds = require('./vue/components/simple-cruds');
+
+var _mexicoStatesAndMunicipalities = require('./vue/mixins/mexico-states-and-municipalities');
 
 var _mediaManager = require('./vue/components/media-manager');
 
-require('./vue/components/single-image');
+var _singleImage = require('./vue/components/single-image');
 
 _constants.w.on('load', function () {
-	(0, _dom.ifElementExistsThenLaunch)([[], ['#admin-vue', _mainVue.mainVue, undefined, [_admin.adminVue, {
+	(0, _dom.ifElementExistsThenLaunch)([[], ['#admin-vue', _mainVue.mainVue, undefined, [{ mixins: [_mexicoStatesAndMunicipalities.mexicoStatesAndMunicipalities] }, {
 		mediaManager: _mediaManager.mediaManager,
-		pages: _simpleCruds.pages,
-		pagesectionsModalCreate: _simpleCruds.pagesectionsModalCreate,
-		pagesectionsModalEdit: _simpleCruds.pagesectionsModalEdit,
-		pagesections: _simpleCruds.pagesections,
-		pagesectionsCheckbox: _simpleCruds.pagesectionsCheckbox,
-		pagesectionsSort: _simpleCruds.pagesectionsSort,
-		sectionProtected: _simpleCruds.sectionProtected,
-		sectionMultipleUnlimited: _simpleCruds.sectionMultipleUnlimited,
-		sectionMultipleLimited: _simpleCruds.sectionMultipleLimited,
-		sectionMultipleFixed: _simpleCruds.sectionMultipleFixed,
-		componentForm: _simpleCruds.componentForm,
-		currentPageSections: _simpleCruds.currentPageSections
+		singleImage: _singleImage.singleImage,
+		allytypes: _simpleCruds.allytypes,
+		allytypesModalCreate: _simpleCruds.allytypesModalCreate,
+		allytypesModalEdit: _simpleCruds.allytypesModalEdit,
+		allies: _simpleCruds.allies,
+		allytypesSelect: _simpleCruds.allytypesSelect,
+		// alliesModalEdit,
+		// alliesModalCreate,
+		locationtypesModalCreate: _simpleCruds.locationtypesModalCreate,
+		locationtypesModalEdit: _simpleCruds.locationtypesModalEdit,
+		locationtypes: _simpleCruds.locationtypes,
+		locationtypesSelect: _simpleCruds.locationtypesSelect,
+		locationsModalCreate: _simpleCruds.locationsModalCreate,
+		locationsModalEdit: _simpleCruds.locationsModalEdit,
+		locations: _simpleCruds.locations,
+		categoriesModalCreate: _simpleCruds.categoriesModalCreate,
+		categoriesModalEdit: _simpleCruds.categoriesModalEdit,
+		categories: _simpleCruds.categories,
+		topicsModalCreate: _simpleCruds.topicsModalCreate,
+		topicsModalEdit: _simpleCruds.topicsModalEdit,
+		topics: _simpleCruds.topics,
+		registrationtypesModalCreate: _simpleCruds.registrationtypesModalCreate,
+		registrationtypesModalEdit: _simpleCruds.registrationtypesModalEdit,
+		registrationtypes: _simpleCruds.registrationtypes,
+		speakersModalCreate: _simpleCruds.speakersModalCreate,
+		speakersModalEdit: _simpleCruds.speakersModalEdit,
+		speakers: _simpleCruds.speakers,
+		registrationtypesSelect: _simpleCruds.registrationtypesSelect,
+		topicsSelect: _simpleCruds.topicsSelect,
+		speakersSelect: _simpleCruds.speakersSelect,
+		categoriesSelect: _simpleCruds.categoriesSelect,
+		locationsSelect: _simpleCruds.locationsSelect
 	}]], ['#alert__container', _alertsController.alertsController, 'init', []]]);
 });
 
@@ -23461,7 +23465,7 @@ console.log('Hola, estás bien sabroso de tu micorriza');
 	});
 })(jQuery);
 
-},{"./alerts-controller":9,"./cltvo/constants.js":10,"./functions/dom":12,"./vue/components/media-manager":19,"./vue/components/simple-cruds":20,"./vue/components/single-image":21,"./vue/main-vue":24,"./vue/main/admin":25}],17:[function(require,module,exports){
+},{"./alerts-controller":9,"./cltvo/constants.js":10,"./functions/dom":12,"./vue/components/media-manager":18,"./vue/components/simple-cruds":19,"./vue/components/single-image":20,"./vue/main-vue":23,"./vue/mixins/mexico-states-and-municipalities":27}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23623,44 +23627,9 @@ var gMap = exports.gMap = _vue2.default.extend({
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-var makePost = exports.makePost = function makePost($event) {
-	this.post($event.target.form);
-};
-
-var openModal = exports.openModal = function openModal(name, $index) {
-	if ($index === undefined) {
-		return;
-	}
-	this.edit_index = $index;
-	$(name).modal('open');
-};
-
-var openModalFromSimpleImageCrud = exports.openModalFromSimpleImageCrud = function openModalFromSimpleImageCrud(name, $index) {
-	if ($index === undefined) {
-		return;
-	}
-	this.$parent.$data.edit_index = $index;
-	$(name).modal('open');
-};
-
-var postWithMaterialNote = exports.postWithMaterialNote = function postWithMaterialNote($event) {
-	var mn = $($event.target).find('.materialnote_JS');
-	mn.each(function () {
-		var $this = $(this),
-		    note = $this.siblings('.note-editor').find('.note-editable');
-
-		$this.text(note.html());
-	});
-	this.post($event);
-};
-
-},{}],19:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
 exports.mediaManager = undefined;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _ramda = require('ramda');
 
@@ -23704,11 +23673,8 @@ var mediaManager = exports.mediaManager = Vue.extend({
 				class: '',
 				order: ''
 			},
-			callee: {
-				dummy: function dummy() {}
-			},
-			callee_cb: 'dummy',
 			active_calling_component: {
+				ref: undefined,
 				photoable_type: undefined,
 				photoable_id: undefined,
 				use: undefined,
@@ -23728,9 +23694,8 @@ var mediaManager = exports.mediaManager = Vue.extend({
 		}
 	},
 
-	init: function init() {},
-	create: function create() {},
 	ready: function ready() {
+		this.getPhotos();
 		if (document.getElementById('modal__drop-container') !== undefined) {
 			// exists('modal__drop-container', fileDnD); var exists = (elem, constructor) => document.getElemetById(elem) !== undefined ? constructor : {};
 			this.DnDEvents = (0, _fileDnd.fileDnD)({
@@ -23784,12 +23749,20 @@ var mediaManager = exports.mediaManager = Vue.extend({
 			this.chosen_img = { src: '', id: '', en: {}, es: {}, index: '', photoable_id: '', photoable_type: '', use: '', class: '', order: '' };
 		},
 		onAssociateSuccess: function onAssociateSuccess(body, elem) {
-			this.callee[this.callee_cb](this.chosen_img);
+			//De momento, este evento sólo cubre dos casos:
+			//1. El componente que llama es hijo directo del papá. i.e. singleImage
+			//2. El componente que llama es hijo de un hijo del papá y es producto de un v-for. i.e singleImage en multiImages
+			if (_ramda2.default.isArrayLike(this.active_calling_component.ref)) {
+				var component = _ramda2.default.path(this.active_calling_component.ref, this.$root);
+				component.onSelectedMedia({ src: this.chosen_img.src, id: this.chosen_img.id });
+			} else if (typeof this.active_calling_component.ref === 'string') {
+				this.$root.$refs[this.active_calling_component.ref].onSelectedMedia({ src: this.chosen_img.src, id: this.chosen_img.id });
+			} else if (_typeof(this.active_calling_component.ref) === 'object') {
+				this.$root.$refs[this.active_calling_component.ref.parent].$refs[this.active_calling_component.ref.list][this.active_calling_component.ref.index].onSelectedMedia({ src: this.chosen_img.src, id: this.chosen_img.id });
+			}
+			//cleanup
+			this.active_calling_component = { ref: undefined, photoable_type: undefined, photoable_id: undefined, use: undefined, class: undefined, order: undefined };
 			this.close();
-			this.callee = {
-				dummy: function dummy() {}
-			};
-			this.callee_cb = 'dummy';
 		},
 		onChosenImage: function onChosenImage($event) {
 			var img = this._weHaveAnImageUrl($event.target),
@@ -23803,6 +23776,10 @@ var mediaManager = exports.mediaManager = Vue.extend({
 		},
 		onGetChosenImageDataSuccess: function onGetChosenImageDataSuccess(body) {
 			this.chosen_img = body;
+			// this.chosen_img.id = body.id;
+			// this.chosen_img.src = body.src;
+			// this.chosen_img.en = body.en;
+			// this.chosen_img.es = body.es;
 		},
 		_weHaveAnImageUrl: function _weHaveAnImageUrl(e_target) {
 			if (e_target.dataset.imageUrl !== undefined) {
@@ -23829,13 +23806,13 @@ var mediaManager = exports.mediaManager = Vue.extend({
 	}
 });
 
-},{"../../file-dnd.js":11,"../../functions/pure":13,"../mixins/crud-ajax":27,"ramda":4,"vue":8,"vue-resource":6}],20:[function(require,module,exports){
+},{"../../file-dnd.js":11,"../../functions/pure":13,"../mixins/crud-ajax":25,"ramda":4,"vue":8,"vue-resource":6}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.currentPageSections = exports.sectionMultipleFixed = exports.sectionMultipleLimited = exports.sectionMultipleUnlimited = exports.sectionProtected = exports.componentForm = exports.pagesectionsSort = exports.pagesectionsCheckbox = exports.pagesections = exports.pagesectionsModalEdit = exports.pagesectionsModalCreate = exports.pages = exports.pagesGroup = undefined;
+exports.categoriesSelect = exports.speakersSelect = exports.topicsSelect = exports.registrationtypesSelect = exports.locationsSelect = exports.speakers = exports.speakersRow = exports.speakersModalEdit = exports.speakersModalCreate = exports.registrationtypes = exports.registrationtypesRow = exports.registrationtypesModalEdit = exports.registrationtypesModalCreate = exports.topics = exports.topicsModalEdit = exports.topicsModalCreate = exports.categories = exports.categoriesModalEdit = exports.categoriesModalCreate = exports.locations = exports.locationsModalEdit = exports.locationsModalCreate = exports.locationtypes = exports.locationtypesSelect = exports.locationtypesModalEdit = exports.locationtypesModalCreate = exports.allies = exports.allyList = exports.allytypesSelect = exports.allytypes = exports.allytypesModalEdit = exports.allytypesModalCreate = undefined;
 
 var _ramda = require('ramda');
 
@@ -23855,53 +23832,53 @@ var _sortable = require('../mixins/sortable');
 
 var _multilistSortable = require('../mixins/multilist-sortable');
 
-var _sortableListByClick = require('../mixins/sortable-list-by-click');
-
 var _mexicoStatesAndMunicipalities = require('../mixins/mexico-states-and-municipalities');
 
 var _pure = require('../../functions/pure');
 
 var _dom = require('../../functions/dom');
 
-var _simpleCrudHelpers = require('./helpers/simple-crud-helpers');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var toNumberMap = _ramda2.default.map(function (n) {
-	return Number(n);
-});
+var checkboxesMethods = {
+	props: ['selectedElems', 'relatedProducts'],
 
-var checkboxesMethods = function checkboxesMethods(options) {
-	return {
-		props: ['currentPage'],
+	data: {
+		selected_checkboxes: [],
+		search: ''
+	},
 
-		data: {
-			selected_checkboxes: [],
-			search: ''
+	computed: {
+		filterable_elems: function filterable_elems() {
+			return (0, _pure.objTextFilter)(['title'], this.search, this.list);
+		}
+	},
+	methods: {
+		makePost: function makePost($event) {
+			this.post($event.target.form);
 		},
-
-		ready: function ready() {
-			this.selected_checkboxes = _ramda2.default.map(function (n) {
-				return n + '';
-			}, this.currentPage.sections_ids);
+		updateSelectedCheckboxes: function updateSelectedCheckboxes() {
+			this.selected_checkboxes = _ramda2.default.map(function (elem) {
+				return elem.id + '';
+			}, this.selectedElems || []);
+			this.relatedProducts = this.selected_checkboxes;
 		},
+		onUpdaterelatedproductsSuccess: function onUpdaterelatedproductsSuccess(body) {
+			this.relatedProducts = _ramda2.default.map(function (prod) {
+				return prod.id;
+			}, _ramda2.default.pathOr([], ['data', 'related_products'], body));
+		}
+	},
 
+	watch: {
+		selectedElems: function selectedElems() {
+			this.updateSelectedCheckboxes();
+		},
+		list: function list() {
+			this.updateSelectedCheckboxes();
+		}
+	}
 
-		methods: _ramda2.default.merge({
-			openModal: _simpleCrudHelpers.openModal,
-
-			makePost: _simpleCrudHelpers.makePost,
-
-			updateSelectedCheckboxes: function updateSelectedCheckboxes() {
-				this.selected_checkboxes = _ramda2.default.map(function (elem) {
-					return elem.id + '';
-				}, this.selectedElems || []);
-			},
-			is_checked: function is_checked(id) {
-				return _ramda2.default.contains(Number(id), toNumberMap(this.selected_checkboxes)) ? true : false;
-			}
-		}, options.methods || {})
-	};
 };
 
 var relatedProductsFilter = {
@@ -23928,62 +23905,84 @@ var relatedProductsFilter = {
 	}
 };
 
+var openModal = function openModal(name, $index) {
+	if ($index === undefined) {
+		return;
+	}
+	this.edit_index = $index;
+	$(name).modal('open');
+};
+
+var openModalFromSimpleImageCrud = function openModalFromSimpleImageCrud(name, $index) {
+	if ($index === undefined) {
+		return;
+	}
+	this.$parent.$data.edit_index = $index;
+	$(name).modal('open');
+};
+
+var allytypesModalCreate = exports.allytypesModalCreate = (0, _simpleCrudComponentMakers.simpleModalCrud)('#allytypes-modal-create-template');
+var allytypesModalEdit = exports.allytypesModalEdit = (0, _simpleCrudComponentMakers.simpleModalCrud)('#allytypes-modal-edit-template', { props: ['edit-index'] });
+var allytypes = exports.allytypes = (0, _simpleCrudComponentMakers.simpleCrud)('#allytypes-template', { methods: { openModal: openModal }, components: { allytypesModalCreate: allytypesModalCreate, allytypesModalEdit: allytypesModalEdit }, mixins: [_sortable.sortable] });
+var allytypesSelect = exports.allytypesSelect = (0, _simpleCrudComponentMakers.simpleCrud)('#allytypes-select-template', { props: ['current-ally'], methods: { openModal: openModal }, components: { allytypesModalCreate: allytypesModalCreate } });
+
+// export const alliesModalCreate = simpleModalCrud('#allies-modal-create-template');
+// export const alliesModalEdit = simpleModalCrud('#allies-modal-edit-template',{props:['edit-index']});
+var allyList = exports.allyList = (0, _simpleCrudComponentMakers.simpleCrud)('#ally-list-template', { props: ['label'], mixins: [_sortable.sortable] });
+var allies = exports.allies = (0, _simpleCrudComponentMakers.simpleCrud)('#allies-template', { methods: { openModal: openModal }, components: {
+		allyList: allyList
+		// alliesModalCreate,
+		// alliesModalEdit
+	}, mixins: [_multilistSortable.multilistSortable] });
+
 var form_id = function form_id() {
 	return _ramda2.default.replace('{{item_on_edit.id}}', this.id, this.formId);
 };
+var locationtypesModalCreate = exports.locationtypesModalCreate = (0, _simpleCrudComponentMakers.simpleModalCrud)('#locationtypes-modal-create-template');
+var locationtypesModalEdit = exports.locationtypesModalEdit = (0, _simpleCrudComponentMakers.simpleModalCrud)('#locationtypes-modal-edit-template', { props: ['edit-index'] });
+var locationtypesSelect = exports.locationtypesSelect = (0, _simpleCrudComponentMakers.simpleCrud)('#locationtypes-select-template', { props: ['current-location', 'formId', 'id'], computed: { form_id: form_id }, methods: { openModal: openModal }, components: { locationtypesModalCreate: locationtypesModalCreate } });
+var locationtypes = exports.locationtypes = (0, _simpleCrudComponentMakers.simpleCrud)('#locationtypes-template', { methods: { openModal: openModal }, components: { locationtypesModalCreate: locationtypesModalCreate, locationtypesModalEdit: locationtypesModalEdit } });
 
-//para pagesectionsSort
-var addedCheckboxElem = function addedCheckboxElem(section) {
-	this.sortable_list = _ramda2.default.append(section, this.sortable_list);
-};
+var locationsModalCreate = exports.locationsModalCreate = (0, _simpleCrudComponentMakers.simpleModalCrud)('#locations-modal-create-template', { data: { form_id: '' }, props: ['store'], mixins: [_mexicoStatesAndMunicipalities.mexicoStatesAndMunicipalities], components: { locationtypesSelect: locationtypesSelect, gMap: _gMap.gMap } });
+var locationsModalEdit = exports.locationsModalEdit = (0, _simpleCrudComponentMakers.simpleModalCrud)('#locations-modal-edit-template', { data: { form_id: '' }, props: ['edit-index', 'store'], mixins: [_mexicoStatesAndMunicipalities.mexicoStatesAndMunicipalities], components: { locationtypesSelect: locationtypesSelect, gMap: _gMap.gMap } });
+var locations = exports.locations = (0, _simpleCrudComponentMakers.simpleCrud)('#locations-template', { props: ['store'], methods: { openModal: openModal }, components: { locationsModalCreate: locationsModalCreate, locationsModalEdit: locationsModalEdit, locationtypesSelect: locationtypesSelect, locationtypesModalCreate: locationtypesModalCreate } });
 
-//para pagesectionsSort
-var removedCheckboxId = function removedCheckboxId(section_id) {
-	var index = _ramda2.default.findIndex(_ramda2.default.propEq('id', section_id), this.sortable_list);
-	this.sortable_list = _ramda2.default.remove(index, 1, this.sortable_list);
-};
+var categoriesModalCreate = exports.categoriesModalCreate = (0, _simpleCrudComponentMakers.simpleModalCrud)('#categories-modal-create-template');
+var categoriesModalEdit = exports.categoriesModalEdit = (0, _simpleCrudComponentMakers.simpleModalCrud)('#categories-modal-edit-template', { props: ['edit-index'] });
+var categories = exports.categories = (0, _simpleCrudComponentMakers.simpleCrud)('#categories-template', { methods: { openModal: openModal }, components: { categoriesModalCreate: categoriesModalCreate, categoriesModalEdit: categoriesModalEdit } });
 
-var pageSectionsCheckboxUpdateSuccess = function pageSectionsCheckboxUpdateSuccess(body) {
-	var is_associated = _ramda2.default.pathOr(false, ['data', 'is_associated'], body);
-	var id = _ramda2.default.pathOr(false, ['data', 'section_id'], body);
-	if (is_associated === true) {
-		var selected = _ramda2.default.filter(function (elem) {
-			return elem.id === id;
-		}, this.list)[0];
-		this.$dispatch('onAssociatedCheckbox', selected);
-	} else {
-		this.$dispatch('onDissociatedCheckbox', id);
-	}
-};
+var topicsModalCreate = exports.topicsModalCreate = (0, _simpleCrudComponentMakers.simpleModalCrud)('#topics-modal-create-template');
+var topicsModalEdit = exports.topicsModalEdit = (0, _simpleCrudComponentMakers.simpleModalCrud)('#topics-modal-edit-template', { props: ['edit-index'] });
+var topics = exports.topics = (0, _simpleCrudComponentMakers.simpleCrud)('#topics-template', { methods: { openModal: openModal }, components: { topicsModalCreate: topicsModalCreate, topicsModalEdit: topicsModalEdit } });
 
-var sortableListOnDeleteSuccess = function sortableListOnDeleteSuccess(body, input) {
-	var index = input.target.dataset.index;
-	this.sortable_list.splice(index, 1);
-};
+var registrationtypesModalCreate = exports.registrationtypesModalCreate = (0, _simpleCrudComponentMakers.simpleModalCrud)('#registrationtypes-modal-create-template');
+var registrationtypesModalEdit = exports.registrationtypesModalEdit = (0, _simpleCrudComponentMakers.simpleModalCrud)('#registrationtypes-modal-edit-template', { props: ['edit-index'] });
+var registrationtypesRow = exports.registrationtypesRow = (0, _simpleCrudComponentMakers.simpleCrudWithImage)('#registrationtypes-row-template', { props: ['registrationtype'], methods: { openModalFromSimpleImageCrud: openModalFromSimpleImageCrud } });
+var registrationtypes = exports.registrationtypes = (0, _simpleCrudComponentMakers.simpleCrud)('#registrationtypes-template', { methods: { openModal: openModal }, components: { registrationtypesModalCreate: registrationtypesModalCreate, registrationtypesModalEdit: registrationtypesModalEdit, registrationtypesRow: registrationtypesRow } });
 
-var sortableListOnCreateSuccess = function sortableListOnCreateSuccess(body, input) {
-	this.sortable_list.push(body.data);
-};
-//pages
-var pagesGroup = exports.pagesGroup = (0, _simpleCrudComponentMakers.simpleCrud)('#pages-group-template', { props: ['label', 'index'], mixins: [_sortableListByClick.sortableListByClick], methods: { onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess } });
-var pages = exports.pages = (0, _simpleCrudComponentMakers.simpleCrud)('#pages-template', { components: { pagesGroup: pagesGroup }, mixins: [_multilistSortable.multilistSortable] });
-var pagesectionsModalCreate = exports.pagesectionsModalCreate = (0, _simpleCrudComponentMakers.simpleModalCrud)('#pagesections-modal-create-template', { data: { item_on_create: { description: '' } } });
-var pagesectionsModalEdit = exports.pagesectionsModalEdit = (0, _simpleCrudComponentMakers.simpleModalCrud)('#pagesections-modal-edit-template', { props: ['edit-index'] });
-var pagesections = exports.pagesections = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-template', { methods: { openModal: _simpleCrudHelpers.openModal }, components: { pagesectionsModalCreate: pagesectionsModalCreate, pagesectionsModalEdit: pagesectionsModalEdit } });
-var pagesectionsCheckbox = exports.pagesectionsCheckbox = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-checkbox-template', checkboxesMethods({ methods: { onUpdateSuccess: pageSectionsCheckboxUpdateSuccess } }));
-var pagesectionsSort = exports.pagesectionsSort = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-sort-template', { props: ['currentPage'], mixins: [_sortableListByClick.sortableListByClick], methods: { onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess }, events: { addedCheckboxElem: addedCheckboxElem, removedCheckboxId: removedCheckboxId } });
+var speakersModalCreate = exports.speakersModalCreate = (0, _simpleCrudComponentMakers.simpleModalCrud)('#speakers-modal-create-template');
+var speakersModalEdit = exports.speakersModalEdit = (0, _simpleCrudComponentMakers.simpleModalCrud)('#speakers-modal-edit-template', { props: ['edit-index'] });
+var speakersRow = exports.speakersRow = (0, _simpleCrudComponentMakers.simpleCrudWithImage)('#speakers-row-template', { props: ['speaker'], methods: { openModalFromSimpleImageCrud: openModalFromSimpleImageCrud } });
+var speakers = exports.speakers = (0, _simpleCrudComponentMakers.simpleCrud)('#speakers-template', { methods: { openModal: openModal }, components: { speakersModalCreate: speakersModalCreate, speakersModalEdit: speakersModalEdit, speakersRow: speakersRow } });
 
-//component
-var componentForm = exports.componentForm = (0, _simpleCrudComponentMakers.simpleCrud)('#component-form-template', { props: ['section', 'component', 'index'] });
+var locationsSelect = exports.locationsSelect = (0, _simpleCrudComponentMakers.simpleCrud)('#locations-select-template', { props: ['current-film'], methods: { openModal: openModal }, components: { locationsModalCreate: locationsModalCreate } });
 
-//section
-var sectionProtected = exports.sectionProtected = (0, _simpleCrudComponentMakers.simpleCrud)('#section-protected-template', { props: ['section', 'index'] });
-var sectionMultipleUnlimited = exports.sectionMultipleUnlimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-unlimited-template', { props: ['section', 'index'], components: { componentForm: componentForm }, mixins: [_sortableListByClick.sortableListByClick], methods: { onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess } });
-var sectionMultipleLimited = exports.sectionMultipleLimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-limited-template', { props: ['section', 'index'], components: { componentForm: componentForm }, mixins: [_sortable.sortable] });
-var sectionMultipleFixed = exports.sectionMultipleFixed = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-fixed-template', { props: ['section', 'index'], components: { componentForm: componentForm } });
-var currentPageSections = exports.currentPageSections = (0, _simpleCrudComponentMakers.simpleCrud)('#current-page-sections-template', { props: ['currentPage'], mixins: [_multilistSortable.multilistSortable], components: { sectionProtected: sectionProtected, sectionMultipleUnlimited: sectionMultipleUnlimited, sectionMultipleLimited: sectionMultipleLimited, sectionMultipleFixed: sectionMultipleFixed } });
+var registrationtypesSelect = exports.registrationtypesSelect = (0, _simpleCrudComponentMakers.simpleCrud)('#registrationtypes-select-template', { props: ['current-film'], methods: { openModal: openModal }, components: { registrationtypesModalCreate: registrationtypesModalCreate } });
 
-},{"../../functions/dom":12,"../../functions/pure":13,"../components/g-map":17,"../factories/simple-crud-component-makers.js":22,"../mixins/mexico-states-and-municipalities":29,"../mixins/multilist-sortable":30,"../mixins/number-filters":31,"../mixins/sortable":34,"../mixins/sortable-list-by-click":33,"./helpers/simple-crud-helpers":18,"ramda":4,"vue":8}],21:[function(require,module,exports){
+var topicsSelect = exports.topicsSelect = (0, _simpleCrudComponentMakers.simpleCrud)('#topics-select-template', { props: ['current-film'], methods: { openModal: openModal }, components: { topicsModalCreate: topicsModalCreate } });
+
+var speakersSelect = exports.speakersSelect = (0, _simpleCrudComponentMakers.simpleCrud)('#speakers-select-template', { props: ['current-film'], methods: { openModal: openModal }, components: { speakersModalCreate: speakersModalCreate } });
+
+var categoriesSelect = exports.categoriesSelect = (0, _simpleCrudComponentMakers.simpleCrud)('#categories-select-template', { props: ['current-film'], methods: { openModal: openModal }, components: { categoriesModalCreate: categoriesModalCreate } });
+
+// // export var userCards = simpleCrudComponentMaker('#user-cards-template');
+// // export var sizes = simpleCrudComponentMaker('#size-inputs-template');
+// // export var colors  = simpleCrudComponentMaker('#color-inputs-template');
+// // export var categoriesModal = simpleCrudComponentMaker('#categories-modal-template', simpleModalCrud('categories', categoriesModalConfig));
+// // export var colorsModal = simpleCrudComponentMaker('#colors-modal-template', simpleModalCrud('colors'));
+// // export var sizesModal = simpleCrudComponentMaker('#sizes-modal-template', simpleModalCrud('sizes'));
+
+},{"../../functions/dom":12,"../../functions/pure":13,"../components/g-map":17,"../factories/simple-crud-component-makers.js":21,"../mixins/mexico-states-and-municipalities":27,"../mixins/multilist-sortable":28,"../mixins/number-filters":29,"../mixins/sortable":31,"ramda":4,"vue":8}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23994,12 +23993,12 @@ exports.singleImage = undefined;
 var _singleImageMixin = require('../mixins/single-image-mixin');
 
 var Vue = require('vue');
-var singleImage = exports.singleImage = Vue.component('single-image', {
+var singleImage = exports.singleImage = Vue.extend({
 	template: '#single-image-template',
 	mixins: [_singleImageMixin.singleImageMixin]
 });
 
-},{"../mixins/single-image-mixin":32,"vue":8}],22:[function(require,module,exports){
+},{"../mixins/single-image-mixin":30,"vue":8}],21:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24069,8 +24068,6 @@ var simpleCrud = exports.simpleCrud = _ramda2.default.curry(function (template) 
 		mixins: [_crudAjax.crudAjax, _vForFilters.vForFilters].concat(options.mixins || []),
 
 		filters: options.filters || {},
-
-		events: options.events || {},
 
 		computed: _ramda2.default.merge({
 			list_with_langs: function list_with_langs() {
@@ -24152,7 +24149,6 @@ var simpleModalCrud = exports.simpleModalCrud = _ramda2.default.curry(function (
 		mixins: [].concat(config.mixins || []),
 
 		props: ['editIndex', 'list'].concat(config.props || []),
-		events: config.events || {},
 
 		data: _ramda2.default.merge({
 			modal: $(name),
@@ -24183,7 +24179,7 @@ var simpleModalCrud = exports.simpleModalCrud = _ramda2.default.curry(function (
 	return simpleCrud(template, modalOptions);
 });
 
-},{"../../functions/pure":13,"../helpers":23,"../mixins/crud-ajax":27,"../mixins/single-image-mixin":32,"../mixins/v-for-filters.js":35,"ramda":4,"vue":8,"vue-resource":6}],23:[function(require,module,exports){
+},{"../../functions/pure":13,"../helpers":22,"../mixins/crud-ajax":25,"../mixins/single-image-mixin":30,"../mixins/v-for-filters.js":32,"ramda":4,"vue":8,"vue-resource":6}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24222,7 +24218,7 @@ var turnInputTypeIntoNumber = exports.turnInputTypeIntoNumber = function turnInp
 	}, inputs);
 };
 
-},{"../functions/pure":13,"ramda":4}],24:[function(require,module,exports){
+},{"../functions/pure":13,"ramda":4}],23:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24255,11 +24251,6 @@ var _logoManipulations = require('../logoManipulations');
 var _menuTreeToggler = require('../menu-tree-toggler');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-_vue2.default.use(VueHtml5Editor, {
-	name: 'v-editor',
-	visibleModules: ["text", "font", "list", "link", "unlink", "hr", "eraser", "undo"]
-});
 
 _vue2.default.use(_vueResource2.default);
 
@@ -24306,8 +24297,6 @@ var mainVue = exports.mainVue = function mainVue() {
 		},
 		ready: function ready() {
 			console.log('main-vue', this);
-			$('.collapsible').collapsible(); // borrar y colocarlo donde sea  nencesario
-			console.log("borrar esta linea");
 			(0, _dom.ifElementExistsThenLaunch)([['#header__logo', _logoManipulations.logoSwitch, 'init', []]]);
 			if (typeof config.ready === 'function') return config.ready.call(this);
 		},
@@ -24339,7 +24328,7 @@ var mainVue = exports.mainVue = function mainVue() {
 
 		mixins: mixins,
 
-		events: _ramda2.default.merge({
+		events: {
 			'toggle-menu': function toggleMenu(menu_name) {
 				var _this2 = this;
 
@@ -24356,7 +24345,7 @@ var mainVue = exports.mainVue = function mainVue() {
 					this.store.menus[menu_name].isOpen = !this.store.menus[menu_name].isOpen;
 				}
 			}
-		}, config.events || {}),
+		},
 
 		watch: config.watch || {},
 
@@ -24364,39 +24353,7 @@ var mainVue = exports.mainVue = function mainVue() {
 	});
 };
 
-},{"../functions/dom":12,"../functions/pure":13,"../logoManipulations":14,"../menu-tree-toggler":15,"./mixins/crud-ajax":27,"./mixins/menus":28,"ramda":4,"vue":8,"vue-resource":6}],25:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.adminVue = undefined;
-
-var _ramda = require('ramda');
-
-var _ramda2 = _interopRequireDefault(_ramda);
-
-var _mexicoStatesAndMunicipalities = require('../mixins/mexico-states-and-municipalities');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var adminVue = exports.adminVue = {
-	el: '#admin-vue',
-	mixins: [_mexicoStatesAndMunicipalities.mexicoStatesAndMunicipalities],
-	methods: {},
-	events: {
-		onAssociatedCheckbox: function onAssociatedCheckbox(elem) {
-			console.log('elem', elem);
-			this.$broadcast('addedCheckboxElem', elem);
-		},
-		onDissociatedCheckbox: function onDissociatedCheckbox(id) {
-			console.log('id', id);
-			this.$broadcast('removedCheckboxId', id);
-		}
-	}
-};
-
-},{"../mixins/mexico-states-and-municipalities":29,"ramda":4}],26:[function(require,module,exports){
+},{"../functions/dom":12,"../functions/pure":13,"../logoManipulations":14,"../menu-tree-toggler":15,"./mixins/crud-ajax":25,"./mixins/menus":26,"ramda":4,"vue":8,"vue-resource":6}],24:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24411,7 +24368,7 @@ var componentInteractionsWithMediaManager = exports.componentInteractionsWithMed
 	}
 };
 
-},{}],27:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24584,7 +24541,7 @@ var crudAjax = exports.crudAjax = {
 	}
 };
 
-},{"../../alerts-controller.js":9,"../../functions/pure":13,"ramda":4}],28:[function(require,module,exports){
+},{"../../alerts-controller.js":9,"../../functions/pure":13,"ramda":4}],26:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24618,7 +24575,7 @@ var menusMixin = exports.menusMixin = {
 	}
 };
 
-},{}],29:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24674,7 +24631,7 @@ var mexicoStatesAndMunicipalities = exports.mexicoStatesAndMunicipalities = {
 	}
 };
 
-},{"ramda":4}],30:[function(require,module,exports){
+},{"ramda":4}],28:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24744,7 +24701,7 @@ var multilistSortable = exports.multilistSortable = {
 
 _vue2.default.use(_vueSortable2.default);
 
-},{"../../functions/pure":13,"ramda":4,"vue":8,"vue-sortable":7}],31:[function(require,module,exports){
+},{"../../functions/pure":13,"ramda":4,"vue":8,"vue-sortable":7}],29:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24769,7 +24726,7 @@ var numberFilters = exports.numberFilters = {
 	}
 };
 
-},{}],32:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24861,44 +24818,7 @@ var singleImageMixin = exports.singleImageMixin = {
 	}
 };
 
-},{"../helpers":23,"./component-interactions-with-media-manager.js":26,"./crud-ajax":27,"ramda":4,"vue":8}],33:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.sortableListByClick = undefined;
-
-var _pure = require('../../functions/pure');
-
-var sortableListByClick = exports.sortableListByClick = {
-	data: function data() {
-		return {
-			sortable_list: []
-		};
-	},
-	ready: function ready() {
-		this.sortable_list = this.list;
-	},
-
-
-	computed: {
-		sorted_ids: function sorted_ids() {
-			return this.sortable_list.map(function (page) {
-				return page.id;
-			});
-		}
-	},
-
-	methods: {
-		//Int 1(down) | -1( up:) -> Int -> IO VueData this.sortable_list
-		move: function move(direction, index, list) {
-			this.sortable_list = (0, _pure.nonCyclingMoveInArray)(direction, index, list);
-		}
-	}
-};
-
-},{"../../functions/pure":13}],34:[function(require,module,exports){
+},{"../helpers":22,"./component-interactions-with-media-manager.js":24,"./crud-ajax":25,"ramda":4,"vue":8}],31:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24946,7 +24866,7 @@ var sortable = exports.sortable = {
 
 _vue2.default.use(_vueSortable2.default);
 
-},{"../../functions/pure":13,"ramda":4,"vue":8,"vue-sortable":7}],35:[function(require,module,exports){
+},{"../../functions/pure":13,"ramda":4,"vue":8,"vue-sortable":7}],32:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
