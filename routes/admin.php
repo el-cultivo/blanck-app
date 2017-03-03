@@ -15,6 +15,10 @@
 Route::get('/', 'Admin\AdminController@index')->name('index');
 Route::get('manuals', 'Admin\AdminController@manuals')->name('manuals');
 
+//mapa de rutas
+Route::group(['middleware' => ['permission:routes_view'] ], function(){
+    Route::get('site-map', 'Admin\AdminController@siteMap')->name('site_map');
+});
 //administrador de settings
 Route::group(['middleware' => ['permission:system_config'] ,'prefix' => 'settings', "as" => "settings." ], function(){
 
