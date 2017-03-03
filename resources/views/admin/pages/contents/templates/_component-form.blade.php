@@ -17,12 +17,11 @@
 
                 thumbnail_img
                 <single-image
-                    v-ref:single-image
-                    :ref-path='[]'
+                    :ref-path='[component.id, index]'
                     :current-image="component.thumbnail_image"
                     type="page_component"
                     :photoable-id="component.id"
-                    :photoable-type="page_component"
+                    photoable-type="page_component"
                     use="thumbnail"
                     class=""
                     default-order="null"

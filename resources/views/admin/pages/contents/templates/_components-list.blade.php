@@ -6,7 +6,7 @@
                 <span class="btn-floating waves-effect waves-light" @click.stop="move(-1, $index, sortable_list)">
                     <i class="small">&uarr;</i>
                 </span>
-                <span class="btn-floating waves-effect waves-light" @click.stop="move(-1, $index, sortable_list)">
+                <span class="btn-floating waves-effect waves-light" @click.stop="move(1, $index, sortable_list)">
                     <i class="small">
                         &darr;
                     </i>
@@ -14,26 +14,27 @@
             </div>
             <div class="pull-right" v-if="section.type.unlimited">
                 {!! Form::open([
-					'method'				=> 'DELETE',
-					'route'					=> ['admin::pages.sections.ajax.components.destroy','&#123;&#123;section.id&#125;&#125;','&#123;&#123;component.id&#125;&#125;'],
-					'role'					=> 'form' ,
-					'id'					=> 'delete_compoment-&#123;&#123;component.id&#125;&#125;_form',
-					'class'					=> '',
-					'data-index'			=> '&#123;&#123;$index&#125;&#125;',
-					'v-on:submit.prevent'	=> 'post'
-				]) !!}
+    		'method'				=> 'DELETE',
+    		'route'					=> ['admin::pages.sections.ajax.components.destroy','&#123;&#123;section.id&#125;&#125;','&#123;&#123;component.id&#125;&#125;'],
+    		'role'					=> 'form' ,
+    		'id'					=> 'delete_compoment-&#123;&#123;component.id&#125;&#125;_form',
+    		'class'					=> '',
+    		'data-index'			=> '&#123;&#123;$index&#125;&#125;',
+    		'v-on:submit.prevent'	=> 'post'
+    	]) !!}
 
-					<button type="submit" class=" btn-floating waves-effect waves-light deep-orange accent-2" form ="delete_compoment-&#123;&#123; component.id &#125;&#125;_form" @click.stop="">
-						<i class="material-icons">delete</i>
-					</button>
+    		<button type="submit" class=" btn-floating waves-effect waves-light deep-orange accent-2" form ="delete_compoment-&#123;&#123; component.id &#125;&#125;_form" @click.stop="">
+    			<i class="material-icons">delete</i>
+    		</button>
 
-				{!!Form::close()!!}
+    	{!!Form::close()!!}
             </div>
         </div>
         <div class="collapsible-body">
             <component-form
             :section="section"
             :component= "component"
+            :index="index"
             ></component-form>
         </div>
     </li>
