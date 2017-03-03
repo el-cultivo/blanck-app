@@ -18,7 +18,53 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        $data = [
+			'items' => [
+				[
+					'icon'  		=> 'perm_identity',
+					'label' 		=> 'Usuarios',
+					'route_name' 	=> 'users.index',
+					'permission'	=> 'manage_users',
+				],
+				[
+					'icon'  => 'perm_media',
+					'label' => 'Imágenes',
+					'route_name' => 'photos.index',
+					'permission'	=> 'photos_view',
+				],
+                [
+                    'icon'  => 'mode_edit',
+                    'label' => 'Páginas',
+                    'route_name' => 'pages.contents.index',
+                    'permission'	=> 'manage_pages_contents',
+                ],
+                [
+                    'icon'  => 'web',
+                    'label' => 'Páginas',
+                    'route_name' => 'pages.index',
+                    'permission'	=> 'manage_pages',
+                ],
+				[
+					'icon'  => 'settings',
+					'label' => 'Ajustes del Sistema',
+					'route_name' => 'settings.index',
+					'permission'	=> 'system_config',
+				],
+                [
+                    'icon'  => 'http',
+                    'label' => 'Rutas',
+                    'route_name' => 'site_map',
+                    'permission'	=> 'manage_pages',
+                ],
+				[
+					'icon'  => 'library_books',
+					'label' => 'Manuales',
+					'route_name' => 'manuals',
+					'permission'	=> 'admin_access',
+				],
+			]
+		];
+        return view('admin.index',$data);
     }
 
     /**
