@@ -58,7 +58,7 @@
                         ]) !!}
                     </div>
                 @endforeach
-                <input type="hidden" name="component_name" v-model="componentName">
+                <input type="hidden" name="index" v-model="componentName">
 
             </div>
 
