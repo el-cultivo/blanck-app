@@ -17,7 +17,7 @@
 
                 thumbnail_img
                 <single-image
-                    v-ref:single-image-list
+                    v-ref:single-image
                     :ref-path='[]'
                     :current-image="component.thumbnail_image"
                     type="page_component"
