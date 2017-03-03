@@ -16,7 +16,6 @@ export var mediaManager = Vue.extend({
 				container: '',
 				bin:''
 			},
-			display: 'none',
 			thumbnail_container: undefined,
 			file_input: '',
 			file_input_form:'',
@@ -33,8 +32,9 @@ export var mediaManager = Vue.extend({
 				class:'',
 				order:''
 			},
+			callee: {dummy() {}},
+			callee_cb: 'dummy',
 			active_calling_component: {
-				ref: undefined,
 				photoable_type:undefined,
 				photoable_id:undefined,
 				use:undefined,
@@ -57,8 +57,13 @@ export var mediaManager = Vue.extend({
 		}
 	},
 
+	init() {
+	},
+
+	create() {
+	},
+
 	ready() {
-		this.getPhotos();
 		if (document.getElementById('modal__drop-container') !== undefined) { // exists('modal__drop-container', fileDnD); var exists = (elem, constructor) => document.getElemetById(elem) !== undefined ? constructor : {};
 			this.DnDEvents = fileDnD({
 				onDragOver: this.onDragOver,
@@ -79,12 +84,12 @@ export var mediaManager = Vue.extend({
 
 	methods: {
 		open() {
-			this.display = 'block';
+			$('#media-manager').modal('show');
 			this.getPhotos();
 		},
 
 		close() {
-			this.display = 'none';
+			$('#media-manager').modal('hide');
 		},
 
 		onDragOver() {
@@ -120,20 +125,10 @@ export var mediaManager = Vue.extend({
 		},
 
 		onAssociateSuccess(body, elem) {
-			//De momento, este evento sólo cubre dos casos:
-			//1. El componente que llama es hijo directo del papá. i.e. singleImage
-			//2. El componente que llama es hijo de un hijo del papá y es producto de un v-for. i.e singleImage en multiImages
-			if(R.isArrayLike(this.active_calling_component.ref)) {
-				let component = R.path(this.active_calling_component.ref, this.$root);
-				component.onSelectedMedia({src: this.chosen_img.src, id: this.chosen_img.id});
-			} else if (typeof this.active_calling_component.ref === 'string') {
-				this.$root.$refs[this.active_calling_component.ref].onSelectedMedia({src: this.chosen_img.src, id: this.chosen_img.id});
-			} else if (typeof this.active_calling_component.ref === 'object') {
-				this.$root.$refs[this.active_calling_component.ref.parent].$refs[this.active_calling_component.ref.list][this.active_calling_component.ref.index].onSelectedMedia({src: this.chosen_img.src, id: this.chosen_img.id})
-			}
-			//cleanup
-			this.active_calling_component = { ref: undefined, photoable_type:undefined, photoable_id:undefined, use:undefined, class:undefined, order: undefined};
+			this.callee[this.callee_cb](this.chosen_img);
 			this.close();
+			this.callee = {dummy() {}};
+			this.callee_cb = 'dummy';
 		},
 
 		onChosenImage($event) {
@@ -147,10 +142,6 @@ export var mediaManager = Vue.extend({
 
 		onGetChosenImageDataSuccess(body){
 			this.chosen_img = body;
-			// this.chosen_img.id = body.id;
-			// this.chosen_img.src = body.src;
-			// this.chosen_img.en = body.en;
-			// this.chosen_img.es = body.es;
 		},
 
 		_weHaveAnImageUrl(e_target) {
