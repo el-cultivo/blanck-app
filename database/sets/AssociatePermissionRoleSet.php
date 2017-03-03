@@ -39,9 +39,6 @@ class AssociatePermissionRoleSet extends CltvoSet
 
                     "manage_pages_contents",
 
-                    "manage_films",
-
-                    "manage_clicks",
                 ]
             ],
         ];

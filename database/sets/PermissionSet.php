@@ -41,7 +41,14 @@ class PermissionSet extends CltvoSet
                 "slug"  => "associate_photos",
                 "label" => "asociar imagenes"
             ],
-
+            [
+                "slug"  => "photos_view",
+                "label" => "Ver imagenes"
+            ],
+            [
+                "slug"  => "routes_view",
+                "label" => "Ver rutas"
+            ],
 
             [
                 "slug"  => "manage_pages",
@@ -51,15 +58,6 @@ class PermissionSet extends CltvoSet
             [
                 "slug"  => "manage_pages_contents",
                 "label" => "Manejo del contenido de las páginas"
-            ],
-
-            [
-                "slug"  => "manage_films",
-                "label" => "Manejo de películas"
-            ],
-            [
-                "slug"  => "manage_clicks",
-                "label" => "Manejo de clics"
             ],
 
         ];
