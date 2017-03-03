@@ -58,6 +58,7 @@
                         ]) !!}
                     </div>
                 @endforeach
+                <input type="hidden" name="component_name" v-model="componentName">
 
             </div>
 

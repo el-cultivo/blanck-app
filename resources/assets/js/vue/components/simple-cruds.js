@@ -99,11 +99,11 @@ export const pagesectionsCheckbox = simpleCrud('#pagesections-checkbox-template'
 export const pagesectionsSort = simpleCrud('#pagesections-sort-template',{props: ['currentPage'], mixins:[sortableListByClick], methods: {onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess}, events: {addedCheckboxElem, removedCheckboxId}});
 
 //component
-export const componentForm = simpleCrud('#component-form-template',{props: ['section','component', 'index']} );
+export const componentForm = simpleCrud('#component-form-template',{props: ['section','component', 'index', 'componentName']} );
 
 //section
 export const sectionProtected = simpleCrud('#section-protected-template',{props: ['section', 'index']} );
-export const sectionMultipleUnlimited = simpleCrud('#section-multiple-unlimited-template',{props: ['section', 'index'],components:{componentForm}, mixins:[sortableListByClick], methods: {onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess}} );
+export const sectionMultipleUnlimited = simpleCrud('#section-multiple-unlimited-template',{props: ['section', 'index'],  data:{editing_title: false, title: []},  components:{componentForm}, mixins:[sortableListByClick], methods: {onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess}} );
 export const sectionMultipleLimited = simpleCrud('#section-multiple-limited-template',{props: ['section', 'index'],components:{componentForm}, mixins:[sortable]} );
 export const sectionMultipleFixed = simpleCrud('#section-multiple-fixed-template',{props: ['section', 'index'],components:{componentForm}} );
-export const currentPageSections = simpleCrud('#current-page-sections-template',{props: ['currentPage'],  mixins:[multilistSortable],components:{sectionProtected,sectionMultipleUnlimited, sectionMultipleLimited,sectionMultipleFixed} } );
+export const currentPageSections = simpleCrud('#current-page-sections-template',{props: ['currentPage'], mixins:[multilistSortable],components:{sectionProtected,sectionMultipleUnlimited, sectionMultipleLimited,sectionMultipleFixed} } );
