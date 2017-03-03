@@ -15,6 +15,7 @@ class CreateComponetsTable extends Migration
     {
         Schema::create('components', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('index')->nullable();
             $table->integer('section_id')->unsigned();
             $table->unsignedInteger('order')->nullable();
             $table->unique(['order', 'section_id']);
@@ -37,7 +38,7 @@ class CreateComponetsTable extends Migration
 
             $table->text('content')->nullable();
             $table->text('iframe')->nullable();
-            
+
             $table->string('link')->nullable();
 
             $table->primary(['language_id', 'component_id']);

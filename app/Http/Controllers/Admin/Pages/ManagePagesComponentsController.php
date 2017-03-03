@@ -61,8 +61,15 @@ class ManagePagesComponentsController extends Controller
     {
         $input = $request->all();
 
-        $editables   = $page_section->all_editable_contents;
+        $section_component->index = $input['index'];
 
+        if (!$section_component->save()) {
+            return Response::json([
+                'error' => ["El componente no pudo ser actualizado"]
+            ], 422);
+        }
+
+        $editables   = $page_section->all_editable_contents;
 
         foreach ($this->languages as $language) {
 

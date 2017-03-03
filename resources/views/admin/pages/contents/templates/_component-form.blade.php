@@ -36,7 +36,7 @@
                         {!! Form::text("title[".$language->iso6391."]", null, [
                             'class'       => 'validate',
                             'placeholder' => "título (".$language->label.")",
-                            'required'    => 'required',
+                            // 'required'    => 'required',
                             'v-model'     => 'component.'.$language->iso6391.'_title',
                             'form'        => '&#123;&#123;"update_component_"+component.id+"_form"&#125;&#125;'
                         ]) !!}
@@ -52,7 +52,7 @@
                         {!! Form::text("subtitle[".$language->iso6391."]", null, [
                             'class'       => 'validate',
                             'placeholder' => "subtítulo (".$language->label.")",
-                            'required'    => 'required',
+                            // 'required'    => 'required',
                             'v-model'     => 'component.'.$language->iso6391.'_subtitle',
                             'form'        => '&#123;&#123;"update_component_"+component.id+"_form"&#125;&#125;'
                         ]) !!}
@@ -96,13 +96,13 @@
                         {!! Form::textarea("iframe[".$language->iso6391."]", null, [
                             'class'       => 'validate materialize-textarea',
                             'placeholder' => "iframe (".$language->label.")",
-                            'required'    => 'required',
+                            // 'required'    => 'required',
                             'v-model'     => 'component.'.$language->iso6391.'_iframe',
                             'form'        => '&#123;&#123;"update_component_"+component.id+"_form"&#125;&#125;'
                         ]) !!}
                     </div>
                 @endforeach
-                <input type="hidden" name="index" v-model="componentName">
+
 
             </div>
 
@@ -114,7 +114,7 @@
                         {!! Form::url("link[".$language->iso6391."]", null, [
                             'class'       => 'validate',
                             'placeholder' => "Link (".$language->label.")",
-                            'required'    => 'required',
+                            // 'required'    => 'required',
                             'v-model'     => 'component.'.$language->iso6391.'_link',
                             'form'        => '&#123;&#123;"update_component_"+component.id+"_form"&#125;&#125;'
                         ]) !!}
@@ -125,6 +125,7 @@
 
             <div class="col s12">
                 <div class=" pull-right">
+                    <input type="hidden" name="index" :form='"update_component_"+component.id+"_form"' v-model="componentName">
                     {!! Form::submit("Guardar", [
                         'class' => 'btn waves-effect waves-light',
                         'form'  => '&#123;&#123;"update_component_"+component.id+"_form"&#125;&#125;'

@@ -35,6 +35,7 @@ class UpdatePageComponentRequest extends Request
             'link'          => 'array',
             'subtitle'      => 'array',
             'title'         => 'array',
+            'index'         => 'present|string',
         ];
 
         foreach ($this->languages_isos as $key => $lang_iso) {
