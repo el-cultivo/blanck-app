@@ -23339,8 +23339,11 @@ var _simpleCruds = require('./vue/components/simple-cruds');
 
 var _mediaManager = require('./vue/components/media-manager');
 
+require('./vue/components/multi-images');
+
 require('./vue/components/single-image');
 
+//Vue
 _constants.w.on('load', function () {
 	(0, _dom.ifElementExistsThenLaunch)([[], ['#admin-vue', _mainVue.mainVue, undefined, [_admin.adminVue, {
 		mediaManager: _mediaManager.mediaManager,
@@ -23358,9 +23361,6 @@ _constants.w.on('load', function () {
 		currentPageSections: _simpleCruds.currentPageSections
 	}]], ['#alert__container', _alertsController.alertsController, 'init', []]]);
 });
-
-//Vue
-
 
 console.log('Hola, estás bien sabroso de tu micorriza');
 
@@ -23461,7 +23461,7 @@ console.log('Hola, estás bien sabroso de tu micorriza');
 	});
 })(jQuery);
 
-},{"./alerts-controller":9,"./cltvo/constants.js":10,"./functions/dom":12,"./vue/components/media-manager":19,"./vue/components/simple-cruds":20,"./vue/components/single-image":21,"./vue/main-vue":24,"./vue/main/admin":25}],17:[function(require,module,exports){
+},{"./alerts-controller":9,"./cltvo/constants.js":10,"./functions/dom":12,"./vue/components/media-manager":19,"./vue/components/multi-images":20,"./vue/components/simple-cruds":21,"./vue/components/single-image":22,"./vue/main-vue":25,"./vue/main/admin":26}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23829,7 +23829,130 @@ var mediaManager = exports.mediaManager = Vue.extend({
 	}
 });
 
-},{"../../file-dnd.js":11,"../../functions/pure":13,"../mixins/crud-ajax":27,"ramda":4,"vue":8,"vue-resource":6}],20:[function(require,module,exports){
+},{"../../file-dnd.js":11,"../../functions/pure":13,"../mixins/crud-ajax":28,"ramda":4,"vue":8,"vue-resource":6}],20:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.multiImages = undefined;
+
+var _ramda = require('ramda');
+
+var _ramda2 = _interopRequireDefault(_ramda);
+
+var _crudAjax = require('../mixins/crud-ajax');
+
+var _pure = require('../../functions/pure');
+
+var _singleImage = require('./single-image');
+
+var _vueSortable = require('vue-sortable');
+
+var _vueSortable2 = _interopRequireDefault(_vueSortable);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * MultiImages Vue Component 
+ * version 2.0.0-BestBuddies
+ */
+var Vue = require('vue');
+var VueResource = Vue.use(require('vue-resource'));
+
+Vue.use(_vueSortable2.default);
+
+var multiImages = exports.multiImages = Vue.component('multi-images', {
+	template: '#multi-images-template',
+
+	data: function data() {
+		return {
+			children_with_image_order: [],
+			ref: this.$options._ref,
+			images: [],
+			ordered_ids: [],
+			type: 'multi-image'
+		};
+	},
+
+	props: ['allPhotos', 'photoableType', 'photoableId', 'use', 'defaultOrder', 'class', 'title'],
+
+	ready: function ready() {
+		var _this = this;
+
+		this.images = _ramda2.default.sortBy(_ramda2.default.prop('pivot_order'), _ramda2.default.filter(function (photo) {
+			return photo.pivot_use === _this.use;
+		}, this.allPhotos));
+	},
+
+
+	mixins: [_crudAjax.crudAjax],
+
+	methods: {
+		onUpdate: function onUpdate($event) {
+			var _this2 = this;
+
+			var o = $event.oldIndex;
+			var n = $event.newIndex;
+			this.sort(n - o, o);
+			this.$nextTick(function () {
+				return _this2.getOrders();
+			});
+		},
+		sort: function sort(direction, $index, $event) {
+			var _this3 = this;
+
+			this.images = (0, _pure.moveInArray)(direction, $index, this.images);
+
+			Vue.nextTick(function () {
+				_this3.$broadcast('updateRef, $index');
+			});
+		},
+		getOrders: function getOrders($event) {
+			var images = document.querySelectorAll('.singleImage--gallery_JS');
+			this.ordered_ids = _ramda2.default.filter(function (id) {
+				return id !== '';
+			}, _ramda2.default.map(function (image) {
+				return image.dataset.id;
+			}, images));
+		},
+		postOrders: function postOrders($event) {
+			var _this4 = this;
+
+			this.getOrders();
+			this.$nextTick(function () {
+				return _this4.post($event);
+			});
+		},
+		onSortSuccess: function onSortSuccess(body) {
+			//sólo tiene que estar registrado
+		},
+		remove: function remove(index) {
+			this.images.splice(index, 1);
+		},
+		addSingleImageComponent: function addSingleImageComponent() {
+			this.images.push({});
+		},
+		onSelectedMedia: function onSelectedMedia(data) {
+			this.images.unshift(_ramda2.default.merge({ type: 'single' }, data));
+		}
+	},
+
+	events: {
+		reupdateChildrenWithImageOrder: function reupdateChildrenWithImageOrder(index, image) {
+			this.images[index].currentImage = {
+				thumbnail_url: image.src,
+				id: image.id
+			};
+		}
+	},
+
+	components: {
+		'single-image': _singleImage.singleImage
+	}
+});
+
+},{"../../functions/pure":13,"../mixins/crud-ajax":28,"./single-image":22,"ramda":4,"vue":8,"vue-resource":6,"vue-sortable":7}],21:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23983,7 +24106,7 @@ var sectionMultipleLimited = exports.sectionMultipleLimited = (0, _simpleCrudCom
 var sectionMultipleFixed = exports.sectionMultipleFixed = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-fixed-template', { props: ['section', 'index'], components: { componentForm: componentForm } });
 var currentPageSections = exports.currentPageSections = (0, _simpleCrudComponentMakers.simpleCrud)('#current-page-sections-template', { props: ['currentPage'], mixins: [_multilistSortable.multilistSortable], components: { sectionProtected: sectionProtected, sectionMultipleUnlimited: sectionMultipleUnlimited, sectionMultipleLimited: sectionMultipleLimited, sectionMultipleFixed: sectionMultipleFixed } });
 
-},{"../../functions/dom":12,"../../functions/pure":13,"../components/g-map":17,"../factories/simple-crud-component-makers.js":22,"../mixins/mexico-states-and-municipalities":29,"../mixins/multilist-sortable":30,"../mixins/number-filters":31,"../mixins/sortable":34,"../mixins/sortable-list-by-click":33,"./helpers/simple-crud-helpers":18,"ramda":4,"vue":8}],21:[function(require,module,exports){
+},{"../../functions/dom":12,"../../functions/pure":13,"../components/g-map":17,"../factories/simple-crud-component-makers.js":23,"../mixins/mexico-states-and-municipalities":30,"../mixins/multilist-sortable":31,"../mixins/number-filters":32,"../mixins/sortable":35,"../mixins/sortable-list-by-click":34,"./helpers/simple-crud-helpers":18,"ramda":4,"vue":8}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23999,7 +24122,7 @@ var singleImage = exports.singleImage = Vue.component('single-image', {
 	mixins: [_singleImageMixin.singleImageMixin]
 });
 
-},{"../mixins/single-image-mixin":32,"vue":8}],22:[function(require,module,exports){
+},{"../mixins/single-image-mixin":33,"vue":8}],23:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24183,7 +24306,7 @@ var simpleModalCrud = exports.simpleModalCrud = _ramda2.default.curry(function (
 	return simpleCrud(template, modalOptions);
 });
 
-},{"../../functions/pure":13,"../helpers":23,"../mixins/crud-ajax":27,"../mixins/single-image-mixin":32,"../mixins/v-for-filters.js":35,"ramda":4,"vue":8,"vue-resource":6}],23:[function(require,module,exports){
+},{"../../functions/pure":13,"../helpers":24,"../mixins/crud-ajax":28,"../mixins/single-image-mixin":33,"../mixins/v-for-filters.js":36,"ramda":4,"vue":8,"vue-resource":6}],24:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24222,7 +24345,7 @@ var turnInputTypeIntoNumber = exports.turnInputTypeIntoNumber = function turnInp
 	}, inputs);
 };
 
-},{"../functions/pure":13,"ramda":4}],24:[function(require,module,exports){
+},{"../functions/pure":13,"ramda":4}],25:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24364,7 +24487,7 @@ var mainVue = exports.mainVue = function mainVue() {
 	});
 };
 
-},{"../functions/dom":12,"../functions/pure":13,"../logoManipulations":14,"../menu-tree-toggler":15,"./mixins/crud-ajax":27,"./mixins/menus":28,"ramda":4,"vue":8,"vue-resource":6}],25:[function(require,module,exports){
+},{"../functions/dom":12,"../functions/pure":13,"../logoManipulations":14,"../menu-tree-toggler":15,"./mixins/crud-ajax":28,"./mixins/menus":29,"ramda":4,"vue":8,"vue-resource":6}],26:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24396,7 +24519,7 @@ var adminVue = exports.adminVue = {
 	}
 };
 
-},{"../mixins/mexico-states-and-municipalities":29,"ramda":4}],26:[function(require,module,exports){
+},{"../mixins/mexico-states-and-municipalities":30,"ramda":4}],27:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24411,7 +24534,7 @@ var componentInteractionsWithMediaManager = exports.componentInteractionsWithMed
 	}
 };
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24584,7 +24707,7 @@ var crudAjax = exports.crudAjax = {
 	}
 };
 
-},{"../../alerts-controller.js":9,"../../functions/pure":13,"ramda":4}],28:[function(require,module,exports){
+},{"../../alerts-controller.js":9,"../../functions/pure":13,"ramda":4}],29:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24618,7 +24741,7 @@ var menusMixin = exports.menusMixin = {
 	}
 };
 
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24674,7 +24797,7 @@ var mexicoStatesAndMunicipalities = exports.mexicoStatesAndMunicipalities = {
 	}
 };
 
-},{"ramda":4}],30:[function(require,module,exports){
+},{"ramda":4}],31:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24744,7 +24867,7 @@ var multilistSortable = exports.multilistSortable = {
 
 _vue2.default.use(_vueSortable2.default);
 
-},{"../../functions/pure":13,"ramda":4,"vue":8,"vue-sortable":7}],31:[function(require,module,exports){
+},{"../../functions/pure":13,"ramda":4,"vue":8,"vue-sortable":7}],32:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24769,7 +24892,7 @@ var numberFilters = exports.numberFilters = {
 	}
 };
 
-},{}],32:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24861,7 +24984,7 @@ var singleImageMixin = exports.singleImageMixin = {
 	}
 };
 
-},{"../helpers":23,"./component-interactions-with-media-manager.js":26,"./crud-ajax":27,"ramda":4,"vue":8}],33:[function(require,module,exports){
+},{"../helpers":24,"./component-interactions-with-media-manager.js":27,"./crud-ajax":28,"ramda":4,"vue":8}],34:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24898,7 +25021,7 @@ var sortableListByClick = exports.sortableListByClick = {
 	}
 };
 
-},{"../../functions/pure":13}],34:[function(require,module,exports){
+},{"../../functions/pure":13}],35:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24946,7 +25069,7 @@ var sortable = exports.sortable = {
 
 _vue2.default.use(_vueSortable2.default);
 
-},{"../../functions/pure":13,"ramda":4,"vue":8,"vue-sortable":7}],35:[function(require,module,exports){
+},{"../../functions/pure":13,"ramda":4,"vue":8,"vue-sortable":7}],36:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

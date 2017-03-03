@@ -2,7 +2,14 @@
 
     <div class="row">
         <div class="col s12" v-if="section.editable_contents.gallery_img">
-                la galleria va aqui
+                <multi-images
+                    :ref-path='[component.id, "gallery", index]'
+                    :all-photos="component.gallery_images"
+                    :photoable-id="component.id"
+                    photoable-type="page_component"
+                    default-order="null"
+                    use='gallery'
+                ></multi-images>
         </div>
 
         {!! Form::open([
@@ -15,9 +22,8 @@
 
             <div class="col s4" v-if="section.editable_contents.thumbnail_img">
 
-                thumbnail_img
                 <single-image
-                    :ref-path='[component.id, index]'
+                    :ref-path='[component.id, "single-image", index]'
                     :current-image="component.thumbnail_image"
                     type="page_component"
                     :photoable-id="component.id"

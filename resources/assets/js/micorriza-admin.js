@@ -20,6 +20,7 @@ import {
 		currentPageSections
 	} from './vue/components/simple-cruds';
 import {mediaManager} from './vue/components/media-manager';
+import './vue/components/multi-images';
 import './vue/components/single-image';
 
 w.on('load', () => {

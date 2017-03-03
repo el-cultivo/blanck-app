@@ -61,6 +61,7 @@
         </div>
 
     </template>
+    @include('admin.media_manager.vue.multi-images-template')
     @include('admin.media_manager.vue._modal-media_manager')
     @include('admin.media_manager.vue.single-image-template')
     @include('admin.pages.contents.templates.protected')
