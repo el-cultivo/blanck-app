@@ -48,6 +48,10 @@ class AdminMainMenuComposer
 				$this->setSubMenuItem("settings.index", "system_config","Ajustes del sistema"),
 			]),
 
+			$this->setMenuItem("Rutas",[
+				$this->setSubMenuItem("site_map", "routes_view","Lista de rutas"),
+			]),
+
 			$this->setMenuItem("Manuales",[
 				$this->setSubMenuItem("manuals", "admin_access","Videos"),
 			]),
