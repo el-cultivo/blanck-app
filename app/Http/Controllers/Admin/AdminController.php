@@ -41,18 +41,30 @@ class AdminController extends Controller
         $data =[
             "route_groups"  => collect(Route::getRoutes())
                 ->sortBy(function($route){
-                    return $route->getName();
+                    $route_name_parts =  explode(".",$route->getName());
+
+                    if (isset($route_name_parts[1])) {
+                        return str_replace(".".end($route_name_parts), "", $route->getName() );
+                    }
+
+                    $route_name_parts =  explode("::",$route->getName());
+
+                    return isset($route_name_parts[1]) ? $route_name_parts[0] : $route->getName();
                 })
                 ->groupBy(function($route,$key){
                     $route_name_parts =  explode(".",$route->getName());
 
                     if (isset($route_name_parts[1])) {
-                        return $route_name_parts[0];
+                        return str_replace(".".end($route_name_parts), "", $route->getName() );
                     }
 
                     $route_name_parts =  explode("::",$route->getName());
 
                     return isset($route_name_parts[1]) ? $route_name_parts[0] : "errores";
+                })->map(function($route_group){
+                    return $route_group->sortBy(function($route){
+                        return $route->getName();
+                    });
                 })
         ];
         return view('admin.site-map',$data);
