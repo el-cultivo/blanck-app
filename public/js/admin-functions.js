@@ -23335,7 +23335,7 @@ var _mainVue = require('./vue/main-vue');
 
 var _admin = require('./vue/main/admin');
 
-var _simpleCruds = require('./vue/components/simple-cruds');
+var _pagesSimpleCruds = require('./vue/components/pages-simple-cruds');
 
 var _mediaManager = require('./vue/components/media-manager');
 
@@ -23347,18 +23347,18 @@ require('./vue/components/single-image');
 _constants.w.on('load', function () {
 	(0, _dom.ifElementExistsThenLaunch)([[], ['#admin-vue', _mainVue.mainVue, undefined, [_admin.adminVue, {
 		mediaManager: _mediaManager.mediaManager,
-		pages: _simpleCruds.pages,
-		pagesectionsModalCreate: _simpleCruds.pagesectionsModalCreate,
-		pagesectionsModalEdit: _simpleCruds.pagesectionsModalEdit,
-		pagesections: _simpleCruds.pagesections,
-		pagesectionsCheckbox: _simpleCruds.pagesectionsCheckbox,
-		pagesectionsSort: _simpleCruds.pagesectionsSort,
-		sectionProtected: _simpleCruds.sectionProtected,
-		sectionMultipleUnlimited: _simpleCruds.sectionMultipleUnlimited,
-		sectionMultipleLimited: _simpleCruds.sectionMultipleLimited,
-		sectionMultipleFixed: _simpleCruds.sectionMultipleFixed,
-		componentForm: _simpleCruds.componentForm,
-		currentPageSections: _simpleCruds.currentPageSections
+		pages: _pagesSimpleCruds.pages,
+		pagesectionsModalCreate: _pagesSimpleCruds.pagesectionsModalCreate,
+		pagesectionsModalEdit: _pagesSimpleCruds.pagesectionsModalEdit,
+		pagesections: _pagesSimpleCruds.pagesections,
+		pagesectionsCheckbox: _pagesSimpleCruds.pagesectionsCheckbox,
+		pagesectionsSort: _pagesSimpleCruds.pagesectionsSort,
+		sectionProtected: _pagesSimpleCruds.sectionProtected,
+		sectionMultipleUnlimited: _pagesSimpleCruds.sectionMultipleUnlimited,
+		sectionMultipleLimited: _pagesSimpleCruds.sectionMultipleLimited,
+		sectionMultipleFixed: _pagesSimpleCruds.sectionMultipleFixed,
+		componentForm: _pagesSimpleCruds.componentForm,
+		currentPageSections: _pagesSimpleCruds.currentPageSections
 	}]], ['#alert__container', _alertsController.alertsController, 'init', []]]);
 });
 
@@ -23461,7 +23461,7 @@ console.log('Hola, estás bien sabroso de tu micorriza');
 	});
 })(jQuery);
 
-},{"./alerts-controller":9,"./cltvo/constants.js":10,"./functions/dom":12,"./vue/components/media-manager":19,"./vue/components/multi-images":20,"./vue/components/simple-cruds":21,"./vue/components/single-image":22,"./vue/main-vue":25,"./vue/main/admin":26}],17:[function(require,module,exports){
+},{"./alerts-controller":9,"./cltvo/constants.js":10,"./functions/dom":12,"./vue/components/media-manager":20,"./vue/components/multi-images":21,"./vue/components/pages-simple-cruds":22,"./vue/components/single-image":23,"./vue/main-vue":26,"./vue/main/admin":27}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23623,6 +23623,52 @@ var gMap = exports.gMap = _vue2.default.extend({
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+exports.pageSectionsCheckboxUpdateSuccess = exports.removedCheckboxId = exports.addedCheckboxElem = undefined;
+
+var _ramda = require('ramda');
+
+var _ramda2 = _interopRequireDefault(_ramda);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//para pagesectionsSort
+var addedCheckboxElem = exports.addedCheckboxElem = function addedCheckboxElem(section) {
+	this.sortable_list = _ramda2.default.append(section, this.sortable_list);
+};
+
+//para pagesectionsSort
+var removedCheckboxId = exports.removedCheckboxId = function removedCheckboxId(section_id) {
+	var index = _ramda2.default.findIndex(_ramda2.default.propEq('id', section_id), this.sortable_list);
+	this.sortable_list = _ramda2.default.remove(index, 1, this.sortable_list);
+};
+
+var pageSectionsCheckboxUpdateSuccess = exports.pageSectionsCheckboxUpdateSuccess = function pageSectionsCheckboxUpdateSuccess(body) {
+	var is_associated = _ramda2.default.pathOr(false, ['data', 'is_associated'], body);
+	var id = _ramda2.default.pathOr(false, ['data', 'section_id'], body);
+	if (is_associated === true) {
+		var selected = _ramda2.default.filter(function (elem) {
+			return elem.id === id;
+		}, this.list)[0];
+		this.$dispatch('onAssociatedCheckbox', selected);
+	} else {
+		this.$dispatch('onDissociatedCheckbox', id);
+	}
+};
+
+},{"ramda":4}],19:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.checkboxesMethods = exports.postWithMaterialNote = exports.openModalFromSimpleImageCrud = exports.openModal = exports.makePost = undefined;
+
+var _ramda = require('ramda');
+
+var _ramda2 = _interopRequireDefault(_ramda);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var makePost = exports.makePost = function makePost($event) {
 	this.post($event.target.form);
 };
@@ -23654,7 +23700,44 @@ var postWithMaterialNote = exports.postWithMaterialNote = function postWithMater
 	this.post($event);
 };
 
-},{}],19:[function(require,module,exports){
+var checkboxesMethods = exports.checkboxesMethods = function checkboxesMethods(options) {
+	var toNumberMap = _ramda2.default.map(function (n) {
+		return Number(n);
+	});
+
+	return {
+		props: ['currentPage'],
+
+		data: {
+			selected_checkboxes: [],
+			search: ''
+		},
+
+		ready: function ready() {
+			this.selected_checkboxes = _ramda2.default.map(function (n) {
+				return n + '';
+			}, this.currentPage.sections_ids);
+		},
+
+
+		methods: _ramda2.default.merge({
+			openModal: openModal,
+
+			makePost: makePost,
+
+			updateSelectedCheckboxes: function updateSelectedCheckboxes() {
+				this.selected_checkboxes = _ramda2.default.map(function (elem) {
+					return elem.id + '';
+				}, this.selectedElems || []);
+			},
+			is_checked: function is_checked(id) {
+				return _ramda2.default.contains(Number(id), toNumberMap(this.selected_checkboxes)) ? true : false;
+			}
+		}, options.methods || {})
+	};
+};
+
+},{"ramda":4}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23829,7 +23912,7 @@ var mediaManager = exports.mediaManager = Vue.extend({
 	}
 });
 
-},{"../../file-dnd.js":11,"../../functions/pure":13,"../mixins/crud-ajax":28,"ramda":4,"vue":8,"vue-resource":6}],20:[function(require,module,exports){
+},{"../../file-dnd.js":11,"../../functions/pure":13,"../mixins/crud-ajax":29,"ramda":4,"vue":8,"vue-resource":6}],21:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23954,7 +24037,7 @@ var multiImages = exports.multiImages = Vue.component('multi-images', {
 	}
 });
 
-},{"../../functions/pure":13,"../mixins/crud-ajax":28,"./single-image":22,"ramda":4,"vue":8,"vue-resource":6,"vue-sortable":7}],21:[function(require,module,exports){
+},{"../../functions/pure":13,"../mixins/crud-ajax":29,"./single-image":23,"ramda":4,"vue":8,"vue-resource":6,"vue-sortable":7}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23990,125 +24073,38 @@ var _dom = require('../../functions/dom');
 
 var _simpleCrudHelpers = require('./helpers/simple-crud-helpers');
 
+var _pagesSimpleCrudHelpers = require('./helpers/pages-simple-crud-helpers');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var toNumberMap = _ramda2.default.map(function (n) {
-	return Number(n);
-});
-
-var checkboxesMethods = function checkboxesMethods(options) {
-	return {
-		props: ['currentPage'],
-
-		data: {
-			selected_checkboxes: [],
-			search: ''
-		},
-
-		ready: function ready() {
-			this.selected_checkboxes = _ramda2.default.map(function (n) {
-				return n + '';
-			}, this.currentPage.sections_ids);
-		},
-
-
-		methods: _ramda2.default.merge({
-			openModal: _simpleCrudHelpers.openModal,
-
-			makePost: _simpleCrudHelpers.makePost,
-
-			updateSelectedCheckboxes: function updateSelectedCheckboxes() {
-				this.selected_checkboxes = _ramda2.default.map(function (elem) {
-					return elem.id + '';
-				}, this.selectedElems || []);
-			},
-			is_checked: function is_checked(id) {
-				return _ramda2.default.contains(Number(id), toNumberMap(this.selected_checkboxes)) ? true : false;
-			}
-		}, options.methods || {})
-	};
+var sectionConfig = {
+	props: ['section', 'index'],
+	data: { editing_title: false, title: [] },
+	components: { componentForm: componentForm },
+	mixins: [_sortableListByClick.sortableListByClick],
+	methods: _sortableListByClick.sortableOnClickCbs
 };
 
-var relatedProductsFilter = {
-	props: ['products', 'relatedProductsIds'],
-	computed: {
-		related_products: function related_products() {
-			var related_ids_to_string = _ramda2.default.map(function (id) {
-				return id + '';
-			})(this.relatedProductsIds || []);
-			var with_default_sku = _ramda2.default.filter(function (prod) {
-				return prod.default_sku !== null;
-			});
-			var related = _ramda2.default.filter(function (prod) {
-				return _ramda2.default.contains(prod.id + '', related_ids_to_string);
-			});
-			return _ramda2.default.map(function (prod) {
-				return {
-					title: prod.title,
-					img_url: _ramda2.default.pathOr('', ['default_sku', 'thumbnail_image', 'url'], prod),
-					alt: _ramda2.default.pathOr('', ['default_sku', 'thumbnail_image', 'alt'], prod)
-				};
-			}, _ramda2.default.compose(related, with_default_sku)(this.products || []));
-		}
-	}
-};
-
-var form_id = function form_id() {
-	return _ramda2.default.replace('{{item_on_edit.id}}', this.id, this.formId);
-};
-
-//para pagesectionsSort
-var addedCheckboxElem = function addedCheckboxElem(section) {
-	this.sortable_list = _ramda2.default.append(section, this.sortable_list);
-};
-
-//para pagesectionsSort
-var removedCheckboxId = function removedCheckboxId(section_id) {
-	var index = _ramda2.default.findIndex(_ramda2.default.propEq('id', section_id), this.sortable_list);
-	this.sortable_list = _ramda2.default.remove(index, 1, this.sortable_list);
-};
-
-var pageSectionsCheckboxUpdateSuccess = function pageSectionsCheckboxUpdateSuccess(body) {
-	var is_associated = _ramda2.default.pathOr(false, ['data', 'is_associated'], body);
-	var id = _ramda2.default.pathOr(false, ['data', 'section_id'], body);
-	if (is_associated === true) {
-		var selected = _ramda2.default.filter(function (elem) {
-			return elem.id === id;
-		}, this.list)[0];
-		this.$dispatch('onAssociatedCheckbox', selected);
-	} else {
-		this.$dispatch('onDissociatedCheckbox', id);
-	}
-};
-
-var sortableListOnDeleteSuccess = function sortableListOnDeleteSuccess(body, input) {
-	var index = input.target.dataset.index;
-	this.sortable_list.splice(index, 1);
-};
-
-var sortableListOnCreateSuccess = function sortableListOnCreateSuccess(body, input) {
-	this.sortable_list.push(body.data);
-};
 //pages
-var pagesGroup = exports.pagesGroup = (0, _simpleCrudComponentMakers.simpleCrud)('#pages-group-template', { props: ['label', 'index'], mixins: [_sortableListByClick.sortableListByClick], methods: { onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess } });
-var pages = exports.pages = (0, _simpleCrudComponentMakers.simpleCrud)('#pages-template', { components: { pagesGroup: pagesGroup }, mixins: [_multilistSortable.multilistSortable] });
+var pagesGroup = exports.pagesGroup = (0, _simpleCrudComponentMakers.simpleCrud)('#pages-group-template', { props: ['label', 'index'], mixins: [_sortableListByClick.sortableListByClick], methods: _sortableListByClick.sortableOnClickCbs });
+var pages = exports.pages = (0, _simpleCrudComponentMakers.simpleCrud)('#pages-template', { components: { pagesGroup: pagesGroup } });
 var pagesectionsModalCreate = exports.pagesectionsModalCreate = (0, _simpleCrudComponentMakers.simpleModalCrud)('#pagesections-modal-create-template', { data: { item_on_create: { description: '' } } });
 var pagesectionsModalEdit = exports.pagesectionsModalEdit = (0, _simpleCrudComponentMakers.simpleModalCrud)('#pagesections-modal-edit-template', { props: ['edit-index'] });
 var pagesections = exports.pagesections = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-template', { methods: { openModal: _simpleCrudHelpers.openModal }, components: { pagesectionsModalCreate: pagesectionsModalCreate, pagesectionsModalEdit: pagesectionsModalEdit } });
-var pagesectionsCheckbox = exports.pagesectionsCheckbox = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-checkbox-template', checkboxesMethods({ methods: { onUpdateSuccess: pageSectionsCheckboxUpdateSuccess } }));
-var pagesectionsSort = exports.pagesectionsSort = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-sort-template', { props: ['currentPage'], mixins: [_sortableListByClick.sortableListByClick], methods: { onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess }, events: { addedCheckboxElem: addedCheckboxElem, removedCheckboxId: removedCheckboxId } });
+var pagesectionsCheckbox = exports.pagesectionsCheckbox = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-checkbox-template', (0, _simpleCrudHelpers.checkboxesMethods)({ methods: { onUpdateSuccess: _pagesSimpleCrudHelpers.pageSectionsCheckboxUpdateSuccess } }));
+var pagesectionsSort = exports.pagesectionsSort = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-sort-template', { props: ['currentPage'], mixins: [_sortableListByClick.sortableListByClick], methods: _sortableListByClick.sortableOnClickCbs, events: { addedCheckboxElem: _pagesSimpleCrudHelpers.addedCheckboxElem, removedCheckboxId: _pagesSimpleCrudHelpers.removedCheckboxId } });
 
-//componen
+//component
 var componentForm = exports.componentForm = (0, _simpleCrudComponentMakers.simpleCrud)('#component-form-template', { props: ['section', 'component', 'index', 'componentName'] });
 
 //section
 var sectionProtected = exports.sectionProtected = (0, _simpleCrudComponentMakers.simpleCrud)('#section-protected-template', { props: ['section', 'index'] });
-var sectionMultipleUnlimited = exports.sectionMultipleUnlimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-unlimited-template', { props: ['section', 'index'], data: { editing_title: false, title: [] }, components: { componentForm: componentForm }, mixins: [_sortableListByClick.sortableListByClick], methods: { onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess } });
-var sectionMultipleLimited = exports.sectionMultipleLimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-limited-template', { props: ['section', 'index'], components: { componentForm: componentForm }, mixins: [_sortable.sortable] });
-var sectionMultipleFixed = exports.sectionMultipleFixed = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-fixed-template', { props: ['section', 'index'], components: { componentForm: componentForm } });
-var currentPageSections = exports.currentPageSections = (0, _simpleCrudComponentMakers.simpleCrud)('#current-page-sections-template', { props: ['currentPage'], mixins: [_multilistSortable.multilistSortable], components: { sectionProtected: sectionProtected, sectionMultipleUnlimited: sectionMultipleUnlimited, sectionMultipleLimited: sectionMultipleLimited, sectionMultipleFixed: sectionMultipleFixed } });
+var sectionMultipleUnlimited = exports.sectionMultipleUnlimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-unlimited-template', sectionConfig);
+var sectionMultipleLimited = exports.sectionMultipleLimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-limited-template', sectionConfig);
+var sectionMultipleFixed = exports.sectionMultipleFixed = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-fixed-template', sectionConfig);
+var currentPageSections = exports.currentPageSections = (0, _simpleCrudComponentMakers.simpleCrud)('#current-page-sections-template', { props: ['currentPage'], components: { sectionProtected: sectionProtected, sectionMultipleUnlimited: sectionMultipleUnlimited, sectionMultipleLimited: sectionMultipleLimited, sectionMultipleFixed: sectionMultipleFixed } });
 
-},{"../../functions/dom":12,"../../functions/pure":13,"../components/g-map":17,"../factories/simple-crud-component-makers.js":23,"../mixins/mexico-states-and-municipalities":30,"../mixins/multilist-sortable":31,"../mixins/number-filters":32,"../mixins/sortable":35,"../mixins/sortable-list-by-click":34,"./helpers/simple-crud-helpers":18,"ramda":4,"vue":8}],22:[function(require,module,exports){
+},{"../../functions/dom":12,"../../functions/pure":13,"../components/g-map":17,"../factories/simple-crud-component-makers.js":24,"../mixins/mexico-states-and-municipalities":31,"../mixins/multilist-sortable":32,"../mixins/number-filters":33,"../mixins/sortable":36,"../mixins/sortable-list-by-click":35,"./helpers/pages-simple-crud-helpers":18,"./helpers/simple-crud-helpers":19,"ramda":4,"vue":8}],23:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24124,7 +24120,7 @@ var singleImage = exports.singleImage = Vue.component('single-image', {
 	mixins: [_singleImageMixin.singleImageMixin]
 });
 
-},{"../mixins/single-image-mixin":33,"vue":8}],23:[function(require,module,exports){
+},{"../mixins/single-image-mixin":34,"vue":8}],24:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24308,7 +24304,7 @@ var simpleModalCrud = exports.simpleModalCrud = _ramda2.default.curry(function (
 	return simpleCrud(template, modalOptions);
 });
 
-},{"../../functions/pure":13,"../helpers":24,"../mixins/crud-ajax":28,"../mixins/single-image-mixin":33,"../mixins/v-for-filters.js":36,"ramda":4,"vue":8,"vue-resource":6}],24:[function(require,module,exports){
+},{"../../functions/pure":13,"../helpers":25,"../mixins/crud-ajax":29,"../mixins/single-image-mixin":34,"../mixins/v-for-filters.js":37,"ramda":4,"vue":8,"vue-resource":6}],25:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24347,7 +24343,7 @@ var turnInputTypeIntoNumber = exports.turnInputTypeIntoNumber = function turnInp
 	}, inputs);
 };
 
-},{"../functions/pure":13,"ramda":4}],25:[function(require,module,exports){
+},{"../functions/pure":13,"ramda":4}],26:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24489,7 +24485,7 @@ var mainVue = exports.mainVue = function mainVue() {
 	});
 };
 
-},{"../functions/dom":12,"../functions/pure":13,"../logoManipulations":14,"../menu-tree-toggler":15,"./mixins/crud-ajax":28,"./mixins/menus":29,"ramda":4,"vue":8,"vue-resource":6}],26:[function(require,module,exports){
+},{"../functions/dom":12,"../functions/pure":13,"../logoManipulations":14,"../menu-tree-toggler":15,"./mixins/crud-ajax":29,"./mixins/menus":30,"ramda":4,"vue":8,"vue-resource":6}],27:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24521,7 +24517,7 @@ var adminVue = exports.adminVue = {
 	}
 };
 
-},{"../mixins/mexico-states-and-municipalities":30,"ramda":4}],27:[function(require,module,exports){
+},{"../mixins/mexico-states-and-municipalities":31,"ramda":4}],28:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24536,7 +24532,7 @@ var componentInteractionsWithMediaManager = exports.componentInteractionsWithMed
 	}
 };
 
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24709,7 +24705,7 @@ var crudAjax = exports.crudAjax = {
 	}
 };
 
-},{"../../alerts-controller.js":9,"../../functions/pure":13,"ramda":4}],29:[function(require,module,exports){
+},{"../../alerts-controller.js":9,"../../functions/pure":13,"ramda":4}],30:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24743,7 +24739,7 @@ var menusMixin = exports.menusMixin = {
 	}
 };
 
-},{}],30:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24799,7 +24795,7 @@ var mexicoStatesAndMunicipalities = exports.mexicoStatesAndMunicipalities = {
 	}
 };
 
-},{"ramda":4}],31:[function(require,module,exports){
+},{"ramda":4}],32:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24869,7 +24865,7 @@ var multilistSortable = exports.multilistSortable = {
 
 _vue2.default.use(_vueSortable2.default);
 
-},{"../../functions/pure":13,"ramda":4,"vue":8,"vue-sortable":7}],32:[function(require,module,exports){
+},{"../../functions/pure":13,"ramda":4,"vue":8,"vue-sortable":7}],33:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24894,7 +24890,7 @@ var numberFilters = exports.numberFilters = {
 	}
 };
 
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24986,13 +24982,13 @@ var singleImageMixin = exports.singleImageMixin = {
 	}
 };
 
-},{"../helpers":24,"./component-interactions-with-media-manager.js":27,"./crud-ajax":28,"ramda":4,"vue":8}],34:[function(require,module,exports){
+},{"../helpers":25,"./component-interactions-with-media-manager.js":28,"./crud-ajax":29,"ramda":4,"vue":8}],35:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.sortableListByClick = undefined;
+exports.sortableOnClickCbs = exports.sortableListByClick = undefined;
 
 var _pure = require('../../functions/pure');
 
@@ -25023,7 +25019,18 @@ var sortableListByClick = exports.sortableListByClick = {
 	}
 };
 
-},{"../../functions/pure":13}],35:[function(require,module,exports){
+//agregar o hacer merge en metodos del objeto, si se quiereon estos callbacks, no agregar desde el mixin porque n algun momento podr'ian verse sobreescritos
+var sortableOnClickCbs = exports.sortableOnClickCbs = {
+	onCreateSuccess: function onCreateSuccess(body, input) {
+		this.sortable_list.push(body.data);
+	},
+	onDeleteSuccess: function onDeleteSuccess(body, input) {
+		var index = input.target.dataset.index;
+		this.sortable_list.splice(index, 1);
+	}
+};
+
+},{"../../functions/pure":13}],36:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25071,7 +25078,7 @@ var sortable = exports.sortable = {
 
 _vue2.default.use(_vueSortable2.default);
 
-},{"../../functions/pure":13,"ramda":4,"vue":8,"vue-sortable":7}],36:[function(require,module,exports){
+},{"../../functions/pure":13,"ramda":4,"vue":8,"vue-sortable":7}],37:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

@@ -257,19 +257,19 @@ class ManagePhotosController extends Controller
 		$photos =  $photoable->getPhotosTo(["use" => $input["use"]]);
 
 		foreach ($photos as $photo) {
-			$photoable->photo()
+			$photoable->photos()
 				->wherePivot('use', $input["use"])
 				->updateExistingPivot($photo->id, ["order" => null]);
 		}
 
 		foreach ($input["photos"] as $photo_new_order => $photo_id) {
-            $page_edit->photos()
+            $photoable->photos()
 				->wherePivot('use', $input["use"])
                 ->updateExistingPivot($photo_id, ["order" => $photo_new_order ]);
         }
 
         return Response::json([ // todo bien
-            "data"    => $new_orders ,
+            "data"    => $input["photos"] ,
             'message' => ["Orden correctamente guardado"],
             'success' => true
         ]);

@@ -18,7 +18,7 @@ import {
 		sectionMultipleFixed,
 		componentForm,
 		currentPageSections
-	} from './vue/components/simple-cruds';
+	} from './vue/components/pages-simple-cruds';
 import {mediaManager} from './vue/components/media-manager';
 import './vue/components/multi-images';
 import './vue/components/single-image';

@@ -160,7 +160,7 @@ trait TranslationTrait {
         $select = [];
         foreach (Language::get()  as  $language) {
             foreach ($this->translatable as $translatable) {
-                $select[]= " max(if(".$this->translation_table.".language_id = ".$language->id.",".$this->translation_table.".".$translatable.",null))"." as $language->iso6391"."_".$translatable;
+                $select[]= " max(if(".$this->translation_table.".language_id = ".$language->id.",if(".$this->translation_table.".".$translatable." is NULL, '', ".$this->translation_table.".".$translatable." ) ,''))"." as $language->iso6391"."_".$translatable;
             }
         }
         return $select;
