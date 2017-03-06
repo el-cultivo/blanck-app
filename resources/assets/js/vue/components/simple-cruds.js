@@ -98,7 +98,7 @@ export const pagesections = simpleCrud('#pagesections-template', {methods: {open
 export const pagesectionsCheckbox = simpleCrud('#pagesections-checkbox-template', checkboxesMethods({methods: {onUpdateSuccess: pageSectionsCheckboxUpdateSuccess}}));
 export const pagesectionsSort = simpleCrud('#pagesections-sort-template',{props: ['currentPage'], mixins:[sortableListByClick], methods: {onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess}, events: {addedCheckboxElem, removedCheckboxId}});
 
-//component
+//componen
 export const componentForm = simpleCrud('#component-form-template',{props: ['section','component', 'index', 'componentName']} );
 
 //section

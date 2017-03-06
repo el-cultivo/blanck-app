@@ -24098,7 +24098,7 @@ var pagesections = exports.pagesections = (0, _simpleCrudComponentMakers.simpleC
 var pagesectionsCheckbox = exports.pagesectionsCheckbox = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-checkbox-template', checkboxesMethods({ methods: { onUpdateSuccess: pageSectionsCheckboxUpdateSuccess } }));
 var pagesectionsSort = exports.pagesectionsSort = (0, _simpleCrudComponentMakers.simpleCrud)('#pagesections-sort-template', { props: ['currentPage'], mixins: [_sortableListByClick.sortableListByClick], methods: { onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess }, events: { addedCheckboxElem: addedCheckboxElem, removedCheckboxId: removedCheckboxId } });
 
-//component
+//componen
 var componentForm = exports.componentForm = (0, _simpleCrudComponentMakers.simpleCrud)('#component-form-template', { props: ['section', 'component', 'index', 'componentName'] });
 
 //section
