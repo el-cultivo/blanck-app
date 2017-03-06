@@ -104,6 +104,6 @@ export const componentForm = simpleCrud('#component-form-template',{props: ['sec
 //section
 export const sectionProtected = simpleCrud('#section-protected-template',{props: ['section', 'index']} );
 export const sectionMultipleUnlimited = simpleCrud('#section-multiple-unlimited-template',{props: ['section', 'index'],  data:{editing_title: false, title: []},  components:{componentForm}, mixins:[sortableListByClick], methods: {onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess}} );
-export const sectionMultipleLimited = simpleCrud('#section-multiple-limited-template',{props: ['section', 'index'],components:{componentForm}, mixins:[sortable]} );
-export const sectionMultipleFixed = simpleCrud('#section-multiple-fixed-template',{props: ['section', 'index'],components:{componentForm}} );
+export const sectionMultipleLimited = simpleCrud('#section-multiple-limited-template',{props: ['section', 'index'],components:{componentForm}, mixins:[sortableListByClick], methods: {onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess}} );
+export const sectionMultipleFixed = simpleCrud('#section-multiple-fixed-template',{props: ['section', 'index'],components:{componentForm}, mixins:[sortableListByClick], methods: {onCreateSuccess: sortableListOnCreateSuccess, onDeleteSuccess: sortableListOnDeleteSuccess}} );
 export const currentPageSections = simpleCrud('#current-page-sections-template',{props: ['currentPage'], mixins:[multilistSortable],components:{sectionProtected,sectionMultipleUnlimited, sectionMultipleLimited,sectionMultipleFixed} } );
