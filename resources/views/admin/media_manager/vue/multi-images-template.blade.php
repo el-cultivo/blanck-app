@@ -12,7 +12,7 @@
 				<div class="" v-sortable="{onUpdate: onUpdate, onMove: onMove, group: label}">
 					<div v-for="image in images" class='multiimages-image' style="width: 25%;float: left;">	
 						<single-image
-							:ref-path="['$refs',  ref,  '$children', $index]"
+							:ref-path="refPath"
 							:index="$index"
 							:parent-ref="ref"
 							:type="type"
@@ -45,33 +45,33 @@
 			'method' => 'PATCH',
 			'route' => ['admin::photos.ajax.sort'],
 			'role' => 'form' ,
-			'id' => 'sort-multi-images-&#123;&#123; ref &#125;&#125;_form',
+			':id' => " 'sort-multi-images_'+printable_ref+'_form' ",
 			'class'	=> '',
 			'v-on:submit.prevent'	=> 'postOrders'
 			]) !!}
 			
-			{!! Form::submit('Guardar Orden', ['class' => 'btn btn-primary button', 'form'=> "sort-multi-images-&#123;&#123; ref &#125;&#125;_form"]) !!}
+			{!! Form::submit('Guardar Orden', ['class' => 'btn btn-primary button', ':form'=> "'sort-multi-images_'+printable_ref+'_form'"]) !!}
 			
-			    <input type="hidden" form="sort-multi-images-&#123;&#123; ref &#125;&#125;_form" name="photos[]" :value="id" v-for="id in ordered_ids">
+			    <input type="hidden" :form="'sort-multi-images_'+printable_ref+'_form'" name="photos[]" :value="id" v-for="id in ordered_ids">
 
 			{!! Form::hidden("class", null, [
 				'required' => 'required',
-				'form' => 'sort-multi-images-&#123;&#123; ref &#125;&#125;_form',
+				':form' => " 'sort-multi-images_'+printable_ref+'_form' ",
 				'v-model' => 'class'
 				]) !!}
 			{!! Form::hidden("use", null, [
 				'required' => 'required',
-				'form'	 => 'sort-multi-images-&#123;&#123; ref &#125;&#125;_form',
+				':form'	 => " 'sort-multi-images_'+printable_ref+'_form' ",
 				'v-model' =>  'use'
 				]) !!}
 			{!! Form::hidden("photoable_type", null, [
 				'required' => 'required',
-				'form' => 'sort-multi-images-&#123;&#123; ref &#125;&#125;_form',
+				':form' => " 'sort-multi-images_'+printable_ref+'_form' ",
 				'v-model' =>  'photoableType'
 				]) !!}
 			{!! Form::hidden("photoable_id", null, [
 				'required' => 'required',
-				'form' => 'sort-multi-images-&#123;&#123; ref &#125;&#125;_form',
+				':form' => " 'sort-multi-images_'+printable_ref+'_form' ",
 				'v-model' =>  'photoableId'
 				]) !!}
 		{!! Form::close()!!}

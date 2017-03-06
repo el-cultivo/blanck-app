@@ -25,17 +25,20 @@ export var multiImages = Vue.component('multi-images', {
 	},
 
 	props: [
+		'printable_ref',
 		'allPhotos', 
 		'photoableType', 
 		'photoableId', 
 		'use', 
 		'defaultOrder', 
 		'class', 
-		'title'
+		'title',
+		'refPath'
 	],
 
 	ready() {
 		this.images = _.sortBy(_.prop('pivot_order'), _.filter(photo => photo.pivot_use === this.use, this.allPhotos));
+		this.printable_ref = Array.isArray(this.refPath) ? this.refPath.join('-') : this.printable_ref;
 	},
 
 	mixins: [crudAjax],
@@ -58,12 +61,9 @@ export var multiImages = Vue.component('multi-images', {
 		},
 
 		getOrders($event) {
-			let images = document.querySelectorAll('.singleImage--gallery_JS')
-			this.ordered_ids  = _.filter(
-				id => id !== '',
-				 _.map(image => image.dataset.id, 
-				 images)
-			) 
+			let images = document.querySelectorAll(`.singleImage--${this.printable_ref}_JS`)
+			let ids =  _.map(image => image.dataset.id, images)
+			this.ordered_ids  = _.filter( id => id !== '',	ids) 
 		},
 
 		postOrders($event) {

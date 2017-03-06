@@ -1,4 +1,4 @@
-<div class="image__col--@{{type}} image__col camera-blue">
+<div class="image__col--@{{type}} image__col camera-blue handle singleImage--@{{printable_ref}}_JS" :data-id="image.id">
 	<slot name="title"></slot>
 	<slot name="description"></slot>
 	<div class="image--@{{type}}">
@@ -62,8 +62,8 @@
 				</div>
 				<div v-if="image.src">
 					<slot name="permutation-arrows"></slot>
-					<slot name="remove" v-if="!image.src"></slot>
 				</div>
+				<slot name="remove" v-if="!image.src"></slot>
 
 			</div>
 		</div>

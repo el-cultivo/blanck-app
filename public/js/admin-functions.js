@@ -23875,7 +23875,7 @@ var multiImages = exports.multiImages = Vue.component('multi-images', {
 		};
 	},
 
-	props: ['allPhotos', 'photoableType', 'photoableId', 'use', 'defaultOrder', 'class', 'title'],
+	props: ['printable_ref', 'allPhotos', 'photoableType', 'photoableId', 'use', 'defaultOrder', 'class', 'title', 'refPath'],
 
 	ready: function ready() {
 		var _this = this;
@@ -23883,6 +23883,7 @@ var multiImages = exports.multiImages = Vue.component('multi-images', {
 		this.images = _ramda2.default.sortBy(_ramda2.default.prop('pivot_order'), _ramda2.default.filter(function (photo) {
 			return photo.pivot_use === _this.use;
 		}, this.allPhotos));
+		this.printable_ref = Array.isArray(this.refPath) ? this.refPath.join('-') : this.printable_ref;
 	},
 
 
@@ -23909,12 +23910,13 @@ var multiImages = exports.multiImages = Vue.component('multi-images', {
 			});
 		},
 		getOrders: function getOrders($event) {
-			var images = document.querySelectorAll('.singleImage--gallery_JS');
+			var images = document.querySelectorAll('.singleImage--' + this.printable_ref + '_JS');
+			var ids = _ramda2.default.map(function (image) {
+				return image.dataset.id;
+			}, images);
 			this.ordered_ids = _ramda2.default.filter(function (id) {
 				return id !== '';
-			}, _ramda2.default.map(function (image) {
-				return image.dataset.id;
-			}, images));
+			}, ids);
 		},
 		postOrders: function postOrders($event) {
 			var _this4 = this;
