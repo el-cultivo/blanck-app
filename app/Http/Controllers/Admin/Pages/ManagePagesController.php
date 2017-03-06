@@ -238,23 +238,14 @@ class ManagePagesController extends Controller
     {
         $input = $request->all();
 
-        $order_array =  $page_edit->sections()->orderBy("pivot_order","ASC")->get()->keyBy(function($section){
-                            return $section->pivot->order;
-                        })->map(function($section){
-                            return $section->id;
-                        })->toArray();
+        $sections =  $page_edit->sections()->orderBy("pivot_order","ASC")->get();
 
-        foreach ($order_array as $section_id) {
+        foreach ($sections as $section) {
             $page_edit->sections()
-                ->updateExistingPivot($section_id, ["order" => null ]);
+                ->updateExistingPivot($section->id, ["order" => null ]);
         }
 
         foreach ($input["sections"] as $section_new_order => $section_id) {
-            $new_orders[] = [
-                "order"         => $section_new_order,
-                "section_id"    => $section_id
-            ];
-
             $page_edit->sections()
                 ->updateExistingPivot($section_id, ["order" => $section_new_order ]);
         }

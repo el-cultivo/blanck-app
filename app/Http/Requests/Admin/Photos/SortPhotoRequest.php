@@ -59,8 +59,8 @@ class SortPhotoRequest extends Request
 
             $rules["photos_associated.*"] =  "exists:photoables,photo_id,photoable_id,".$photoable_id.",photoable_type,".Photo::$associable_models[$photoable_type].",use,".$use;
 
-            $photoable_class = Photo::$associable_models[$photoable_type]; 
-            $rules['use'] .= '|in:' . implode(',', $photoable_class::$image_galleries); 
+            $photoable_class = Photo::$associable_models[$photoable_type];
+            $rules['use'] .= '|in:' . implode(',', $photoable_class::$image_galleries);
         }
         return $rules;
     }
