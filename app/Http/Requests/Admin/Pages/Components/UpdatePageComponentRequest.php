@@ -29,13 +29,15 @@ class UpdatePageComponentRequest extends Request
         $editables   = $this->route()->parameters()["page_section"]->all_editable_contents;
 
         $rules = [
+            'index'         => 'present|string',
             'content'       => 'array',
             'excerpt'       => 'array',
             'iframe'        => 'array',
-            'link'          => 'array',
             'subtitle'      => 'array',
             'title'         => 'array',
-            'index'         => 'present|string',
+            'link_url'      => 'array',
+            'link_title'    => 'array',
+            'link_tblank'   => 'array',
         ];
 
         foreach ($this->languages_isos as $key => $lang_iso) {
@@ -44,7 +46,9 @@ class UpdatePageComponentRequest extends Request
             $rules['excerpt.'.$lang_iso ]  = $editables->excerpt ? 'present|string' : '';
             $rules['content.'.$lang_iso ]  = $editables->content ? 'present|string' : '';
             $rules['iframe.'.$lang_iso  ]  = $editables->iframe ? 'present|string' : '';
-            $rules['link.'.$lang_iso    ]  = $editables->link ? 'present|url' : '';
+            $rules['link_url.'.$lang_iso]  = $editables->link ? 'present|url' : '';
+            $rules['link_title.'.$lang_iso]  = $editables->link ? 'present|string' : '';
+            $rules['link_tblank.'.$lang_iso]  = $editables->link ? 'boolean' : '';
         }
 
         return $rules;

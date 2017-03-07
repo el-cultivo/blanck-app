@@ -39,7 +39,9 @@ class CreateComponetsTable extends Migration
             $table->text('content')->nullable();
             $table->text('iframe')->nullable();
 
-            $table->string('link')->nullable();
+            $table->string('link_url')->nullable();
+            $table->string('link_title')->nullable();
+            $table->boolean('link_tblank')->nullable();
 
             $table->primary(['language_id', 'component_id']);
 

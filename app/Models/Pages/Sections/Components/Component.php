@@ -71,8 +71,10 @@ class Component extends Model
      * @var array
      */
     protected $casts = [
-        'order'         => 'integer',
-        'section_id'    => 'integer',
+        'order'             => 'integer',
+        'section_id'        => 'integer',
+        'es_link_tblank'    => 'boolean', // corregir 
+        'en_link_tblank'    => 'boolean' // corregir 
     ];
 
     protected  $translatable = [
@@ -81,7 +83,9 @@ class Component extends Model
         'excerpt',
         'content',
         'iframe',
-        'link'
+        'link_url',
+        'link_title',
+        'link_tblank',
     ];
 
     /**
@@ -95,7 +99,9 @@ class Component extends Model
         'excerpt',
         'content',
         'iframe',
-        'link',
+        'link_url',
+        'link_title',
+        'link_tblank',
         'thumbnail_image',
         'gallery_images'
     ];
@@ -117,8 +123,7 @@ class Component extends Model
      */
     public function getGalleryImagesAttribute()
     {
-        $photo = $this->getPhotosTo(["use"=>"gallery"]);
-        return $photo ? $photo : new stdClass;
+        return $this->getPhotosTo(["use"=>"gallery"]);
     }
 
     /**
@@ -172,13 +177,31 @@ class Component extends Model
     }
 
     /**
-     * Get the current language link.
+     * Get the current language link_url.
      *
      * @return bool
      */
-    public function getLinkAttribute()
+    public function getLinkUrlAttribute()
     {
-        return $this->translation()->link;
+        return $this->translation()->link_url;
+    }
+    /**
+     * Get the current language link title.
+     *
+     * @return bool
+     */
+    public function getLinkTitleAttribute()
+    {
+        return $this->translation()->link_title;
+    }
+    /**
+     * Get the current language link tblank.
+     *
+     * @return bool
+     */
+    public function getLinkTblankAttribute()
+    {
+        return $this->translation()->link_tblank;
     }
 
     /**
