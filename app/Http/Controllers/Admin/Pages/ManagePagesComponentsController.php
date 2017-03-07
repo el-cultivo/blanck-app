@@ -91,7 +91,9 @@ class ManagePagesComponentsController extends Controller
                 $update['iframe']  = $input["iframe"][$language->iso6391];
             }
             if ($editables->link) {
-                $update['link']  = $input["link"][$language->iso6391];
+                $update['link_url']  = $input["link_url"][$language->iso6391];
+                $update['link_title']  = $input["link_title"][$language->iso6391];
+                $update['link_tblank']  = isset($input["link_tblank"]) && isset($input["link_tblank"][$language->iso6391]);
             }
 
             $section_component->updateTranslationByIso($language->iso6391,$update);

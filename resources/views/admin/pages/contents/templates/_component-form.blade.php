@@ -112,16 +112,46 @@
 
             </div>
 
-            <div class="col s12" >
+            <div class="" v-if="section.editable_contents.link" >
 
                 @foreach($languages as $language)
-                    <div class="input-field" v-if="section.editable_contents.link">
-                        {!! Form::label("link[".$language->iso6391."]", 'Link ('.$language->label.'):', ['class' => 'input-label active']) !!}
-                        {!! Form::url("link[".$language->iso6391."]", null, [
+                    <div class="input-field col s8">
+                        {!! Form::label("link_title[".$language->iso6391."]", 'Título de link ('.$language->label.'):', ['class' => 'input-label active']) !!}
+                        {!! Form::text("link_title[".$language->iso6391."]", null, [
                             'class'       => 'validate',
                             'placeholder' => "Link (".$language->label.")",
                             // 'required'    => 'required',
-                            'v-model'     => 'component.'.$language->iso6391.'_link',
+                            'v-model'     => 'component.'.$language->iso6391.'_link_title',
+                            'form'        => '&#123;&#123;"update_component_"+component.id+"_form"&#125;&#125;'
+                        ]) !!}
+                    </div>
+                    <div class="col s4">
+                        <div class="pull-right">
+                            <label for="{{ '&#123;&#123;"tblank_link_'.$language->iso6391.'"+component.id&#125;&#125;' }}">
+                                Abrir en nueva ventana ({{$language->label}}) ?
+                            </label>
+                            <div class=" switch ">
+                                No
+                                <label>
+                                    {!! Form::checkbox("link_tblank[".$language->iso6391."]", true , null, [
+                                        'class'     => 'input__checkbox',
+                                        'form'      => '&#123;&#123;"update_component_"+component.id+"_form"&#125;&#125;',
+                                        'id'        => '&#123;&#123;"tblank_link_'.$language->iso6391.'"+component.id&#125;&#125;',
+                                        'v-model'   => 'component.'.$language->iso6391.'_link_tblank',
+                                    ]) !!}
+                                    <span class="lever"></span>
+                                </label>
+                                Sí
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-field col s12">
+                        {!! Form::label("link_url[".$language->iso6391."]", 'Link ('.$language->label.'):', ['class' => 'input-label active']) !!}
+                        {!! Form::url("link_url[".$language->iso6391."]", null, [
+                            'class'       => 'validate',
+                            'placeholder' => "Link (".$language->label.")",
+                            // 'required'    => 'required',
+                            'v-model'     => 'component.'.$language->iso6391.'_link_url',
                             'form'        => '&#123;&#123;"update_component_"+component.id+"_form"&#125;&#125;'
                         ]) !!}
                     </div>

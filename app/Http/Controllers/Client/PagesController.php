@@ -55,7 +55,7 @@ class PagesController extends ClientController
             "public_child_page"  => $public_child_page,
         ];
 
-        return view("client.pages.show",$data);
+        return view("client.pages.show-child",$data);
 
     }
 
