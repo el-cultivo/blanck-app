@@ -13,13 +13,6 @@ import {makePost, openModal, openModalFromSimpleImageCrud, postWithMaterialNote,
 import {addedCheckboxElem, removedCheckboxId, pageSectionsCheckboxUpdateSuccess} from './helpers/pages-simple-crud-helpers';
 
 
-const sectionConfig = {
-	props: ['section', 'index'],  
-	data:{editing_title: false, title: []},  
-	components:{componentForm}, 
-	mixins:[sortableListByClick], 
-	methods: sortableOnClickCbs
-}
 
 
 //pages
@@ -33,6 +26,14 @@ export const pagesectionsSort = simpleCrud('#pagesections-sort-template',{props:
 
 //component
 export const componentForm = simpleCrud('#component-form-template',{props: ['section','component', 'index', 'componentName']} );
+
+const sectionConfig = {//tiene que ir después de componentForm
+	props: ['section', 'index'],  
+	data:{editing_title: false, title: []},  
+	components:{componentForm}, 
+	mixins:[sortableListByClick], 
+	methods: sortableOnClickCbs
+}
 
 //section
 export const sectionProtected = simpleCrud('#section-protected-template',{props: ['section', 'index']} );
