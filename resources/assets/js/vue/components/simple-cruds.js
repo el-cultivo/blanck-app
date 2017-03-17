@@ -32,13 +32,6 @@ const pageSectionsCheckboxUpdateSuccess = function(body) {
 		}
 }
 
-
-const sectionConfig = {
-	props: ['section', 'index'],  
-	data:{editing_title: false, title: []},  
-	components:{componentForm}, 
-	mixins:[sortableListByClick], methods: sortableOnClickCbs
-}
 //pages
 export const pagesGroup = simpleCrud('#pages-group-template',{props: ['label','index'], mixins:[sortableListByClick], methods: sortableOnClickCbs});
 export const pages = simpleCrud('#pages-template', { components:{pagesGroup}});
@@ -48,8 +41,16 @@ export const pagesections = simpleCrud('#pagesections-template', {methods: {open
 export const pagesectionsCheckbox = simpleCrud('#pagesections-checkbox-template', checkboxesMethods({methods: {onUpdateSuccess: pageSectionsCheckboxUpdateSuccess}}));
 export const pagesectionsSort = simpleCrud('#pagesections-sort-template',{props: ['currentPage'], mixins:[sortableListByClick], methods: sortableOnClickCbs, events: {addedCheckboxElem, removedCheckboxId}});
 
-//componen
+//component
 export const componentForm = simpleCrud('#component-form-template',{props: ['section','component', 'index', 'componentName']} );
+
+// Tiene que ir después de componentForm
+const sectionConfig = {
+	props: ['section', 'index'],  
+	data:{editing_title: false, title: []},  
+	components:{componentForm}, 
+	mixins:[sortableListByClick], methods: sortableOnClickCbs
+}
 
 //section
 export const sectionProtected = simpleCrud('#section-protected-template',{props: ['section', 'index']} );
