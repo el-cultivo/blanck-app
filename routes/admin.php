@@ -29,6 +29,16 @@ Route::group(['middleware' => ['permission:system_config'] ,'prefix' => 'setting
 
 });
 
+//administrador de settings
+Route::group(['middleware' => ['permission:system_config'] ,'prefix' => 'copies', "as" => "copies." ], function(){
+
+    Route::resource('/','Admin\Settings\ManageCopiesController',
+        ['only' => [ 'index', 'update'],
+        'parameters' => ['' => 'copy']
+    ]);
+
+});
+
 //administracion de usuarios
 Route::group(['middleware' => ['permission:manage_users'] ,'prefix' => 'users', "as" => "users."  ], function(){
 

@@ -43,8 +43,8 @@ class AdminMainMenuComposer
 				$this->setSubMenuItem("pages.sections.index", "manage_pages","Administrar secciones"),
 			]),
 
-
 			$this->setMenuItem("Ajustes",[
+				$this->setSubMenuItem("copies.index", "system_config","Copies del sistema"),
 				$this->setSubMenuItem("settings.index", "system_config","Ajustes del sistema"),
 			]),
 
