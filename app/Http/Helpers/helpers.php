@@ -9,6 +9,25 @@ function is_page($route_name)
     return Route::currentRouteName() == $route_name;
 }
 
+/**
+ * verifica que si la  futa contiene el string buscado
+ * @param  string  $page_slug slug de la pagina a pasar
+ * @return boolean            si se encuentra en la fruta o no
+ */
+function in_pages(array $route_names)
+{
+    return in_array(Route::currentRouteName(), $route_names);
+}
+
+/**
+ * verifica que si la  futa contiene el string buscado
+ * @param  string  $page_slug slug de la pagina a pasar
+ * @return boolean            si se encuentra en la fruta o no
+ */
+function is_exact_page($route_name,array $parameters)
+{
+    return Request::url() == route($route_name,$parameters);
+}
 
 /**
  * encrypta el mail
