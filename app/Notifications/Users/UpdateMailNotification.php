@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-use App\Setting;
+use App\Models\Settings\Setting;
 
 class UpdateMailNotification extends Notification
 {

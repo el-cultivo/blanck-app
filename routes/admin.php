@@ -22,7 +22,7 @@ Route::group(['middleware' => ['permission:routes_view'] ], function(){
 //administrador de settings
 Route::group(['middleware' => ['permission:system_config'] ,'prefix' => 'settings', "as" => "settings." ], function(){
 
-    Route::resource('/','Admin\Settings\ManageSettingController',
+    Route::resource('/','Admin\Settings\ManageSettingsController',
         ['only' => [ 'index', 'update'],
         'parameters' => ['' => 'setting_key']
     ]);
