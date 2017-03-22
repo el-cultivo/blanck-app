@@ -37,7 +37,7 @@ class ManagePagesContentsController extends Controller
             ->orderBy('order', 'ASC')
             ->get()
             ->groupBy(Function($page){
-                return $page->parent_index  ;
+                return $page->main ? "00-main-page" : ($page->parent_index ? $page->parent_index : "00-principal-page") ;
             })->mapWithKeys(Function($pages){
                 $page = $pages->first();
                 return [

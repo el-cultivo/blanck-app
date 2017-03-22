@@ -3,7 +3,7 @@
     'route'                 => 'admin::pages.sort',
     'role'                  => 'form' ,
     'id'                    => '&#123;&#123;index+"_sort_page_form"&#125;&#125;',
-    // 'class'                 => 'pageslists--sort-form',
+    'v-if'                  => 'list.length > 1',
     ]) !!}
     <input
         type="hidden"

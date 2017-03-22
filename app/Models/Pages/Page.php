@@ -207,7 +207,7 @@ class Page extends Model
      */
     public function getParentLabelAttribute()
     {
-        return $this->parent ? $this->parent->complete_label :"Sin página padre";
+        return $this->main ? "Principal" : ($this->parent ? $this->parent->complete_label :"Sin padre");
     }
 
     /**

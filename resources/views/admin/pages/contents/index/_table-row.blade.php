@@ -15,11 +15,13 @@
                 <tr :class="index"  v-for="page in sortable_list" >
                     <td>
                         <span class="btn-floating waves-effect waves-light"
-                            @click="move(-1, $index, sortable_list)">
+                            @click="move(-1, $index, sortable_list)"
+                            v-if = 'list.length > 1'>
                             <i class="small">&uarr;</i>
                         </span>
                         <span class="btn-floating waves-effect waves-light"
-                            @click="move(1, $index, sortable_list)">
+                            @click="move(1, $index, sortable_list)"
+                            v-if = 'list.length > 1'>
                             <i class="small">
                                 &darr;
                             </i>
