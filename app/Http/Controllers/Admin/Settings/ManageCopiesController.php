@@ -30,7 +30,7 @@ class ManageCopiesController extends Controller
             }),
         ];
 
-        return view('admin.copies.index', $data);
+        return view('admin.settings.copies.index', $data);
     }
 
     /**
