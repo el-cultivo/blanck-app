@@ -45,6 +45,7 @@ class AdminMainMenuComposer
 
 			$this->setMenuItem("Ajustes",[
 				$this->setSubMenuItem("copies.index", "system_config","Copies del sistema"),
+				$this->setSubMenuItem("shapes.index", "system_config","Imágenes del sistema"),
 				$this->setSubMenuItem("settings.index", "system_config","Ajustes del sistema"),
 			]),
 

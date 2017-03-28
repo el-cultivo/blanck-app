@@ -29,7 +29,7 @@ Route::group(['middleware' => ['permission:system_config'] ,'prefix' => 'setting
 
 });
 
-//administrador de settings
+//administrador de copies
 Route::group(['middleware' => ['permission:system_config'] ,'prefix' => 'copies', "as" => "copies." ], function(){
 
     Route::resource('/','Admin\Settings\ManageCopiesController',
@@ -37,6 +37,14 @@ Route::group(['middleware' => ['permission:system_config'] ,'prefix' => 'copies'
         'parameters' => ['' => 'copy']
     ]);
 
+});
+
+//administrador de shapes
+Route::group(['middleware' => ['permission:system_config'] ,'prefix' => 'shapes', "as" => "shapes." ], function(){
+    Route::resource('/','Admin\Settings\ManageShapesController',
+        ['only' => [ 'index'],
+        // 'parameters' => ['' => 'shape']
+    ]);
 });
 
 //administracion de usuarios
