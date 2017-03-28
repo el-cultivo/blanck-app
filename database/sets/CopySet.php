@@ -52,8 +52,6 @@ class CopySet extends CltvoSet
             'key'           => $model_args["key"],
         ])->first();
 
-        $reference_label = $model_args["route_name"]."_".$model_args["key"]."_copy";
-
         $reference_label = Copy::getVariableName($model_args["route_name"],$model_args["key"]);
 
         if(!$model){

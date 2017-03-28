@@ -16,7 +16,7 @@ class ManageCopiesBind extends CltvoBind
     public static function Bind(){
         // para las fotos
             Route::bind('copy', function ($copy_id) {
-                return Copy::GetWithTranslations()->with("languages","photos")->find($copy_id);
+                return Copy::GetWithTranslations()->with("languages")->find($copy_id);
             });
 
     }

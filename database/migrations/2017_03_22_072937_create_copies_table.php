@@ -42,28 +42,6 @@ class CreateCopiesTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('copy_photo', function (Blueprint $table) {
-            $table->integer('photo_id')->unsigned();
-            $table->integer('copy_id')->unsigned();
-
-            $table->string('use')->default('thumbnail');
-            $table->unsignedInteger('order')->nullable();
-            $table->string('class')->nullable();
-
-            $table->unique(['use', 'order', 'copy_id']);
-            $table->unique(['photo_id', 'use', 'copy_id']);
-
-            $table  ->foreign('photo_id')
-                    ->references('id')
-                    ->on('photos')
-                    ->onDelete('RESTRICT');
-            $table  ->foreign('copy_id')
-                    ->references('id')
-                    ->on('copies')
-                    ->onDelete('RESTRICT');
-
-            $table->timestamps();
-        });
     }
 
     /**
@@ -73,7 +51,6 @@ class CreateCopiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('copy_photo');
         Schema::dropIfExists('copy_language');
         Schema::dropIfExists('copies');
     }
