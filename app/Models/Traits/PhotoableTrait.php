@@ -123,7 +123,13 @@ trait PhotoableTrait {
     public function getThumbnailImageAttribute()
     {
         $photo = $this->getFirstPhotoTo(["use"=>"thumbnail"]);
-        return $photo ? $photo : new stdClass;
+        return $photo ? $photo : (object) [
+            'url'           => "",
+
+            'title'         => "",
+            'alt'           => "",
+            'description'   => "",
+        ];
     }
 
 
