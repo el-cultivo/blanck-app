@@ -66,6 +66,16 @@ class Section extends Model
     ];
 
     /**
+     * Get label.
+     *
+     * @return bool
+     */
+    public function getLabelAttribute()
+    {
+        return trans('pages.sections.'.$this->index. '.title');
+    }
+
+    /**
      * Get type label.
      *
      * @return bool
@@ -103,7 +113,8 @@ class Section extends Model
             'editable_contents'     => $this->all_editable_contents,
             'components'            => $this->all_components,
             'type'                  => $this->type,
-            'description'           => $this->description
+            'description'           => $this->description,
+            'label'                 => $this->label
         ];
     }
 
