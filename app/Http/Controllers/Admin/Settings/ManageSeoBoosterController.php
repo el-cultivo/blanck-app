@@ -16,7 +16,11 @@ class ManageSeoBoosterController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'seo_boosters' => SeoBooster::get()
+        ];
+
+        return view('admin.settings.seo_booster.index', $data);
     }
 
     /**
