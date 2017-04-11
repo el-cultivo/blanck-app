@@ -13,6 +13,11 @@
     <div class="col s10 offset-s1">
         <div class="row">
             @foreach ($seo_boosters as $seo_booster)
+                {{-- Imágen --}}
+                <div class="input-field col s6">
+                    <img src="{{ asset($seo_booster->photos()->first()->url) }}">
+                </div>
+
                 {{-- Title --}}
                 @foreach($seo_booster->languages()->get() as $language)
                     <div class="input-field col s12">
