@@ -1,5 +1,6 @@
 <?php
 
 return [
-	'title'	=> 'Title [English]'
+	'title'			=> 'Title',
+	'description'	=> 'Description'
 ];

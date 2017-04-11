@@ -13,14 +13,23 @@
     <div class="col s10 offset-s1">
         <div class="row">
             @foreach ($seo_boosters as $seo_booster)
-                @foreach($languages as $language)
-                    <div class="col-xs-12 col-md-6">
-                        <div class="form-group">
-                            {!! Form::label($seo_booster->route_name . '[' . $language->iso6391 . ']', trans('manage_seo_booster.title'), ['class' => 'input-label']) !!}
-                            {!! Form::text($seo_booster->route_name . '[' . $language->iso6391 . ']', $seo_booster->title, [
-                                'class' => 'form-control summernote_JS'
-                            ]) !!}
-                        </div>
+                {{-- Title --}}
+                @foreach($seo_booster->languages()->get() as $language)
+                    <div class="input-field col s12">
+                        {!! Form::label($seo_booster->route_name . '[' . $language->iso6391 . ']', trans('manage_seo_booster.title') . ' [' . $language->language_label . ']', ['class' => 'input-label']) !!}
+                        {!! Form::text($seo_booster->route_name . '[' . $language->iso6391 . ']', $language->pivot->title, [
+                            'class' => 'form-control'
+                        ]) !!}
+                    </div>
+                @endforeach
+
+                {{-- Description --}}
+                @foreach($seo_booster->languages()->get() as $language)
+                    <div class="input-field col s12">
+                        {!! Form::label($seo_booster->description . '[' . $language->iso6391 . ']', trans('manage_seo_booster.description') . ' [' . $language->language_label . ']', ['class' => 'input-label']) !!}
+                        {!! Form::text($seo_booster->description . '[' . $language->iso6391 . ']', $language->pivot->description, [
+                            'class' => 'form-control'
+                        ]) !!}
                     </div>
                 @endforeach
             @endforeach
