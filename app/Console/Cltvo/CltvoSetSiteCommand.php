@@ -23,8 +23,7 @@ class CltvoSetSiteCommand extends Command
         'PageSectionTypeSet',
         'PageSet',
         'CopySet',
-        'ShapeSet',
-        'SeoBoosterSet'
+        'ShapeSet'
     ];
 
     /**

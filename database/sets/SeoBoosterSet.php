@@ -3,6 +3,7 @@
 use Illuminate\Console\Command;
 use App\Models\Pages\Page;
 use App\Language;
+use App\Photo;
 
 class SeoBoosterSet extends CltvoSet
 {
@@ -94,6 +95,7 @@ class SeoBoosterSet extends CltvoSet
             return false;
         }
 
+        // Translations
         foreach (Language::get() as $language)
         {
             $translation = [
@@ -102,6 +104,14 @@ class SeoBoosterSet extends CltvoSet
             ];
 
             $seo_booster->updateTranslation($language, $translation);
+        }
+
+        // Photos
+        $photos = Photo::get();
+
+        if(!$photos->isEmpty())
+        {
+            $seo_booster->associateImage($photos->random(1), ['use' => 'thumbnail']);
         }
 
         return true;
