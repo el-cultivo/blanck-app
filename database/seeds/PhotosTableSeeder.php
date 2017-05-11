@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Language;
+use App\Models\Language;
 
 use Illuminate\Http\File;
 
@@ -16,7 +16,7 @@ class PhotosTableSeeder extends Seeder
      */
     public function run()
     {
-        $thunmbail_width = App\Photo::THUMBNAILS_SIZE;
+        $thunmbail_width = App\Models\Photo::THUMBNAILS_SIZE;
 
         $faker = Faker\Factory::create();
 
@@ -30,7 +30,7 @@ class PhotosTableSeeder extends Seeder
 		$proportion  = env('CLTVO_BASE_SEED' , 1);
 		$proportion = $proportion <= static::PROPORTION_BASE ? $proportion : static::PROPORTION_BASE;
 
-        factory( App\Photo::class, intval($proportion*$total_images/static::PROPORTION_BASE) )->create()->each(function($photo,$key) use ($languages,$faker,$thunmbail_width,$images){
+        factory( App\Models\Photo::class, intval($proportion*$total_images/static::PROPORTION_BASE) )->create()->each(function($photo,$key) use ($languages,$faker,$thunmbail_width,$images){
 
             if (!array_has($images,$key)) { // si la foto no existe borramos el modelo
                 dump("no source found");
@@ -38,7 +38,7 @@ class PhotosTableSeeder extends Seeder
                 return ;
             }
 
-            $file_path = Storage::putFile( App\Photo::STORAGE_PATH , $images[$key]);
+            $file_path = Storage::putFile( App\Models\Photo::STORAGE_PATH , $images[$key]);
 
             if (!$file_path) {
                 dump("no save file");
@@ -63,7 +63,7 @@ class PhotosTableSeeder extends Seeder
             }
 
             try {
-                 $imageFile->save( App\Photo::getImagesThumbnailsPath()."/".$imageFile->basename );
+                 $imageFile->save( App\Models\Photo::getImagesThumbnailsPath()."/".$imageFile->basename );
             } catch (Exception $e) {
                 dump("No se pudo crear el thumbnail");
                 Storage::delete($file_path);

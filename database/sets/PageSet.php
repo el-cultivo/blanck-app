@@ -5,9 +5,9 @@ use Illuminate\Console\Command;
 use App\Models\Settings\SeoBooster;
 use App\Models\Pages\Page;
 
-use App\Language;
-use App\Publish;
-use App\Photo;
+use App\Models\Language;
+use App\Models\Publish;
+use App\Models\Photo;
 
 class PageSet extends CltvoSet
 {

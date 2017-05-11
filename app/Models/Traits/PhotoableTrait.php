@@ -1,6 +1,6 @@
 <?php namespace App\Models\Traits;
 
-use App\Photo;
+use App\Models\Photo;
 
 use Image;
 use Response;

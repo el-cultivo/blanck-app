@@ -32,7 +32,7 @@ $factory->define(App\Models\Users\User::class, function (Faker\Generator $faker)
 /**
  * factory photos
  */
-$factory->define(App\Photo::class, function ($faker) use ($factory) {
+$factory->define(App\Models\Photo::class, function ($faker) use ($factory) {
     return [
             'filename' => $faker->unique()->slug
         ,   'type'      => ""

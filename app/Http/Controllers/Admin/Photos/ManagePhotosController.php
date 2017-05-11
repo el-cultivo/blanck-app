@@ -13,7 +13,7 @@ use App\Http\Requests\Admin\Photos\SortPhotoRequest;
 use App\Http\Requests\Admin\Photos\CreatePhotoRequest;
 use App\Http\Requests\Admin\Photos\UpdatePhotoRequest;
 
-use App\Photo;
+use App\Models\Photo;
 
 use Response;
 

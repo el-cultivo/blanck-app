@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\Users\User;
-use App\Language;
+use App\Models\Language;
 
 use App;
 use Image;

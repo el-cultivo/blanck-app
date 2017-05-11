@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Auth;
 use View;
 
-use App\Language;
+use App\Models\Language;
 use Carbon\Carbon;
 
 
