@@ -1,5 +1,6 @@
 <?php
-use App\Models\Locations\Locationtype;
+
+use App\Models\Users\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,26 +16,16 @@ use App\Models\Locations\Locationtype;
 /**
  * factory de usuarios
  */
-$factory->define(App\Models\Users\User::class, function (Faker\Generator $faker) {
+$factory->define(User::class, function (Faker\Generator $faker) {
     $firstName = $faker->firstName;
     $lastName = $faker->lastName;
     return [
-        'name'              => App\Models\Users\User::createUniqueUsername($firstName,$lastName),
+        'name'              => User::createUniqueUsername($firstName,$lastName),
         'first_name'        => $firstName,
         'last_name'         => $lastName,
         'email'             => $faker->unique()->email,
         'password'          => bcrypt(str_random(10)),
         'remember_token'    => str_random(10),
         'active'            => mt_rand(1, 10000) <= 1/10 * 10000 //rand(1,10) <= 1 ? 0 : 1
-    ];
-});
-
-/**
- * factory photos
- */
-$factory->define(App\Models\Photo::class, function ($faker) use ($factory) {
-    return [
-            'filename' => $faker->unique()->slug
-        ,   'type'      => ""
     ];
 });
