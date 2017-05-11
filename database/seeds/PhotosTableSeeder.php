@@ -7,6 +7,8 @@ use Illuminate\Http\File;
 
 class PhotosTableSeeder extends Seeder
 {
+
+	const PROPORTION_BASE = 5;
     /**
      * Run the database seeds.
      *
@@ -24,7 +26,11 @@ class PhotosTableSeeder extends Seeder
         });
 
         $total_images = $images->count();
-        factory( App\Photo::class,$total_images )->create()->each(function($photo,$key) use ($languages,$faker,$thunmbail_width,$images){
+
+		$proportion  = env('CLTVO_BASE_SEED' , 1);
+		$proportion = $proportion <= static::PROPORTION_BASE ? $proportion : static::PROPORTION_BASE;
+
+        factory( App\Photo::class, intval($proportion*$total_images/static::PROPORTION_BASE) )->create()->each(function($photo,$key) use ($languages,$faker,$thunmbail_width,$images){
 
             if (!array_has($images,$key)) { // si la foto no existe borramos el modelo
                 dump("no source found");
