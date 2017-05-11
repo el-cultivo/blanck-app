@@ -1,9 +1,9 @@
 <?php
 namespace App\Models\Traits\User;
 
-use App\Role;
+use App\Models\Users\Role;
 use Auth;
-use App\User;
+use App\Models\Users\User;
 
 trait PermissionRoleTrait {
 

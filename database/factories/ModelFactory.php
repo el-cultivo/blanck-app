@@ -15,11 +15,11 @@ use App\Models\Locations\Locationtype;
 /**
  * factory de usuarios
  */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Users\User::class, function (Faker\Generator $faker) {
     $firstName = $faker->firstName;
     $lastName = $faker->lastName;
     return [
-        'name'              => App\User::createUniqueUsername($firstName,$lastName),
+        'name'              => App\Models\Users\User::createUniqueUsername($firstName,$lastName),
         'first_name'        => $firstName,
         'last_name'         => $lastName,
         'email'             => $faker->unique()->email,

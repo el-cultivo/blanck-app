@@ -13,7 +13,7 @@ use App\Http\Requests\Users\UpdatePasswordRequest;
 use App\Notifications\Users\UpdatePasswordNotification;
 use App\Notifications\Users\UpdateMailNotification;
 
-use App\User;
+use App\Models\Users\User;
 
 use App\Models\Users\Card;
 use App\Models\Users\BankAccount;

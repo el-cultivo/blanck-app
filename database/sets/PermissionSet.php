@@ -14,7 +14,7 @@ class PermissionSet extends CltvoSet
      */
     protected function CltvoGetModelClass()
     {
-        return 'App\Permission';
+        return 'App\Models\Users\Permission';
     }
 
     /**

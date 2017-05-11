@@ -1,7 +1,7 @@
 <?php namespace App\Models\Traits;
 
 use Illuminate\Database\Eloquent\Collection;
-use App\User;
+use App\Models\Users\User;
 use App\Language;
 
 use App;

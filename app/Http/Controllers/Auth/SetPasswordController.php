@@ -9,7 +9,7 @@ use App\Http\Controllers\ClientController;
 
 use App\Http\Requests\Auth\SetPasswordRequest;
 
-use App\User;
+use App\Models\Users\User;
 
 use Auth;
 

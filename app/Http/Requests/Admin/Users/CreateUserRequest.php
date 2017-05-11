@@ -3,8 +3,8 @@
 namespace App\Http\Requests\Admin\Users;
 
 use App\Http\Requests\Request;
-use App\User;
-use App\Role;
+use App\Models\Users\User;
+use App\Models\Users\Role;
 
 class CreateUserRequest extends Request
 {

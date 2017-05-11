@@ -8,7 +8,7 @@ use Validator;
 
 use App\Models\Products\Product;
 use App\Models\Skus\Sku;
-use App\User;
+use App\Models\Users\User;
 use App\Models\Shop\Bag;
 use App\Models\Events\Event;
 use App\Models\Shop\BagUser;
