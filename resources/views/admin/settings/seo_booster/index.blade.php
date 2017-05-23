@@ -15,7 +15,7 @@
             @foreach ($seo_boosters as $seo_booster)
                 {{-- Imágen --}}
                 <div class="input-field col s6">
-                    <img src="{{ asset($seo_booster->photos()->first()->url) }}">
+                    <img src="{{ $seo_booster->thumbnail_image->url }}">
                 </div>
 
                 {{-- Title --}}
