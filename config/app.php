@@ -188,7 +188,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\ViewComposerServiceProvider::class,
         App\Providers\CustomValidationRulesServiceProvider::class,
-
+        Bkwld\LaravelPug\ServiceProvider::class
     ],
 
     /*
