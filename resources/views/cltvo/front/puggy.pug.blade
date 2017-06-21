@@ -1,4 +1,5 @@
-extends /layouts/admin.pug.blade
+extends /layouts/pug-admin.pug
+
 mixin list
   ul
     li no
@@ -23,7 +24,7 @@ block content
 		+list
 
 		h3 un mixin importado:
-		+cuasi-form('que')
+		+cuasi_form('que')
 		+cuasi-form('se')
 		+cuasi-form('repite')
 		+cuasi-form('en')
@@ -31,3 +32,5 @@ block content
 		+cuasi-form('lugares')
 		+cuasi-form('y si me incluyes en un layout')
 		+cuasi-form('tu vida sera más fácil')
+		p
+			include puggy-include
