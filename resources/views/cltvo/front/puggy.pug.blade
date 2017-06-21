@@ -1,6 +1,34 @@
 @extends('layouts/admin')
 @section('content')
+include /cltvo/front/puggy-mixins.pug
+mixin list
+  ul
+    li no
+    li mas
+    li repeticion 
+    li innecesaria
 div
 	h1 hola
-	<a href="#"><h2>{{'Adios'}}</h2></a>
+	<a href="#"><h2>{{'Html y Blade'}}</h2></a>
+	p {{$test_var}}
+	
+	div
+		h3 Un include de blade:
+		@include('cltvo/front/pug-blade-include')
+	
+	h3 un mixin de pug:
+	+list
+	+list
+	+list
+	+list
+
+	h3 un mixin importado:
+	+cuasi-form('que')
+	+cuasi-form('se')
+	+cuasi-form('repite')
+	+cuasi-form('en')
+	+cuasi-form('varios')
+	+cuasi-form('lugares')
+	+cuasi-form('y si me incluyes en un layout')
+	+cuasi-form('tu vida sera más fácil')
 @endsection

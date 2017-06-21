@@ -1,7 +1,7 @@
 # Cltvo Blank app
 
 
-### env
+## env
 
 ´´´
 APP_ENV=
@@ -47,3 +47,23 @@ CLTVO_USER_PASS=
 CLTVO_ENCRYPTION_KEY=
 
 ´´´
+## Pug
+EL Blank App tiene soporte para pug dentro de los templates de blade.  
+
+El paquete utilizado es https://github.com/BKWLD/laravel-pug y permite utilizar diferentes tipos de sintaxis, sólo pug, blade y pug, php y pug, y blade, php y pug.
+
+Por lo cual es posible hacer cosas así dentro de los templates
+```
+@extends('layouts/admin')
+@section('content')
+div
+	h1 hola
+	<a href="#"><h2>{{'Adios'}}</h2></a>
+@endsection
+```
+
+La documentación oficial de pug es https://pugjs.org/api/getting-started.html.
+
+Para cualquier duda al respecto, consultar primero ambas documentaciones.
+
+Pug permite el uso de HTML

@@ -36,7 +36,7 @@ class CltvoTestPagesController extends ClientController
     public function show($test_view)
     {
         if (View::exists('cltvo.front.'.$test_view)) {
-            return view('cltvo.front.'.$test_view);
+            return view('cltvo.front.'.$test_view, ['test_var' => 'Soy una variable que viene desde el controlador']);
         }
 		abort('404');
     }
