@@ -11400,6 +11400,17 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   width: calc(100% - 80px);
 }
 
+.flex {
+  display: -webkit-box !important;
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
+.image {
+  background-color: lightgray;
+}
+
 /* variables
 =================================================================================*/
 .editorDialogs .modal, .note-editor .modal {
