@@ -11411,6 +11411,10 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   background-color: lightgray;
 }
 
+.collapsible-header i {
+  width: inherit;
+}
+
 /* variables
 =================================================================================*/
 .editorDialogs .modal, .note-editor .modal {

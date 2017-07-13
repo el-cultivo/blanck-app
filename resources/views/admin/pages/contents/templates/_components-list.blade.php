@@ -12,11 +12,11 @@
                     </i>
                 </span>
             </div>
-                <div>
-                    <h4  v-if="editing_title === false" v-text='component.index ? component.index : "Pónme un nombre" '   @click="editing_title = true"></h3>
-                    <input v-else type="text"  v-model="component.index" @change="editing_title = false" @keyup.enter.prevent="editing_title = false">
-                </div>
-            <div class="pull-right" v-if="section.type.unlimited">
+            <div  style="display: inline-block; width: calc(100% - 160px);">
+                <h4  v-if="editing_title === false" v-text='component.index ? component.index : "Pónme un nombre" '   @click="editing_title = true"></h3>
+                <input v-else type="text"  v-model="component.index" @change="editing_title = false" @keyup.enter.prevent="editing_title = false">
+            </div>
+            <div class="pull-right" v-if="section.type.unlimited" style="margin-top: 10px;">
                 {!! Form::open([
     		'method'				=> 'DELETE',
     		'route'					=> ['admin::pages.sections.ajax.components.destroy','&#123;&#123;section.id&#125;&#125;','&#123;&#123;component.id&#125;&#125;'],
@@ -46,5 +46,5 @@
 </ul>
 
 <div v-if="list.length == 0">
-    Sección vacía 
+    Sección vacía
 </div>
