@@ -46,5 +46,5 @@
 </ul>
 
 <div v-if="list.length == 0">
-    Seccion vacia 
+    Sección vacía 
 </div>
