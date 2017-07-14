@@ -11415,6 +11415,64 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   width: inherit;
 }
 
+.welcome {
+  margin: 0 auto;
+  max-width: 550px;
+  margin-bottom: 5%;
+}
+
+.welcome *:hover {
+  text-decoration: none;
+}
+
+.welcome__item {
+  color: #37474f;
+  border: 10px solid #fff;
+  height: 100%;
+  min-height: 180px !important;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  text-align: center;
+  border-radius: 15px;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-pack: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .welcome__item {
+    min-height: 120px !important;
+  }
+}
+
+.welcome__item:hover {
+  color: #fff;
+  background-color: #37474f;
+}
+
+.welcome__item--icon {
+  display: inline-block;
+  font-size: 50px !important;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .welcome__item--icon {
+    font-size: 40px !important;
+  }
+}
+
 /* variables
 =================================================================================*/
 .editorDialogs .modal, .note-editor .modal {
