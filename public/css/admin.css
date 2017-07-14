@@ -11092,9 +11092,10 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 }
 
 .media-manager__modal {
-  top: 29px;
+  margin-top: 29px;
   width: calc(100% - 241px);
   padding: 20px;
+  height: auto;
   -webkit-transform: initial;
       -ms-transform: initial;
           transform: initial;
@@ -11110,7 +11111,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 5;
+  z-index: 5000;
   background: rgba(0, 0, 0, 0.5);
 }
 
@@ -11185,11 +11186,12 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 
 .media-manager__manage-img-details {
   opacity: 0;
-  padding: 20px;
-  position: absolute;
-  max-height: 650px;
+  max-height: 473px;
   overflow-y: auto;
-  background-color: lightgrey;
+  padding-bottom: 20px;
+  padding-top: 30px;
+  padding-right: 20px;
+  background-color: #F1F2F2;
   -webkit-transform: translateX(2000px);
       -ms-transform: translateX(2000px);
           transform: translateX(2000px);
@@ -11413,6 +11415,18 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 
 .collapsible-header i {
   width: inherit;
+}
+
+.no-top {
+  top: 0 !important;
+}
+
+.mt-5 {
+  margin-top: 5%;
+}
+
+.mb-5 {
+  margin-bottom: 5%;
 }
 
 .welcome {

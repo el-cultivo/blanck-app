@@ -1,7 +1,7 @@
 <template id="multi-images-template">
 	<div>
 
-		<div class="row">
+		<div class="row mb-5">
 			<div class="col s10">
 				<h5 class="">@{{title || 'Galería'}}</h5>
 			</div>
