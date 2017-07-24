@@ -31,7 +31,7 @@
 
 	<div class="row">
 		<div class="col s12">
-			<div class="divisor"></div>
+			<div class="divider"></div>
 		</div>
 	</div>
 
@@ -46,62 +46,68 @@
 
 		<div class="col s12">
 			<div class="row">
-				<div class="col s5">
+				<div class="col s12">
 					<span class="text">Título</span>
 				</div>
 
 				@foreach ($languages as $language)
-					<div class="col s7 media-manager__col-form ">
+					<div class="col s12 media-manager__col-form ">
 						{!! Form::text('title['.$language->iso6391.']', '', [
 							'class' => 'form-control input-sm input',
 							// 'required' => 'required',
 							'form'  => 'update_photo_form',
 							'v-model' => 'chosen_img.'.$language->iso6391.'_title',
-							'placeholder'   => $language->name
+							'placeholder'   => $language->label
 						]) !!}
 					</div>
 				@endforeach
 			</div>
 
 			<div class="row">
-				<div class="col s5">
+				<div class="col s12">
 					<span class="text">Texto alternativo</span>
 				</div>
 
 				@foreach ($languages as $language)
-					<div class="col s7 media-manager__col-form ">
+					<div class="col s12 media-manager__col-form ">
 						{!! Form::text('alt['.$language->iso6391.']', '', [
 							'class' => 'form-control input-sm input',
 							'required' => 'required',
 							'form'  => 'update_photo_form',
 							'v-model' => 'chosen_img.'.$language->iso6391.'_alt',
-							'placeholder'   => $language->name
+							'placeholder'   => $language->label
 						]) !!}
 					</div>
 				@endforeach
 			</div>
 
 			<div class="row">
-				<div class="col s5">
+				<div class="col s12">
 					<span class="text">Descripción</span>
 				</div>
 
 				@foreach ($languages as $language)
-					<div class="col s7 media-manager__col-form ">
+					<div class="col s12 media-manager__col-form ">
 						{!! Form::textarea('description['.$language->iso6391.']', '', [
-							'class' => 'form-control input',
+							'class' => 'form-control input materialize-textarea',
 							// 'required' => 'required',
 							'form'  => 'update_photo_form',
 							'rows' => '2',
 							'v-model'	=>  'chosen_img.'.$language->iso6391.'_description',
-							'placeholder'   => $language->name
+							'placeholder'   => $language->label
 						]) !!}
 					</div>
 				@endforeach
 			</div>
 		</div>
-		<br><br>
-		<div class="col col6 center-align">
+
+		<div class="row">
+			<div class="col s12">
+				<div class="divider"></div>
+			</div>
+		</div>
+		
+		<div class="col s6 center-align">
 			{!! Form::submit('guardar', [
 				'class' => 'btn btn-primary input-sm input input__submit',
 				'form'  => 'update_photo_form'

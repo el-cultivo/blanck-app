@@ -24,7 +24,7 @@ class PageSectionTypeSet extends CltvoSet
         return [
             [
                 "label"             => "Especial",
-                "description"       => "Seccion que requiere informacion de modelos diferentes a los componenetes",
+                "description"       => "Sección que requiere información de modelos diferentes a los componentes",
                 "admin_view_path"   => "protected",
                 "protected"         => true,
                 "unlimited"         => false,
@@ -32,23 +32,23 @@ class PageSectionTypeSet extends CltvoSet
             ],
             [
                 "label"             => "Fija",
-                "description"       => "Seccion que requiere informacion de una cantidad exacta de componentes",
+                "description"       => "Sección que requiere información de una cantidad exacta de componentes",
                 "admin_view_path"   => "multiple-fixed",
                 "protected"         => false,
                 "unlimited"         => false,
                 'sortable'          => false
             ],
             [
-                "label"             => "Miltiple limitada",
-                "description"       => "Seccion que requiere informacion de una cantidad exacta de componentes que pueden ordenarse",
+                "label"             => "Múltiple limitada",
+                "description"       => "Sección que requiere información de una cantidad exacta de componentes que pueden ordenarse",
                 "admin_view_path"   => "multiple-limited",
                 "protected"         => false,
                 "unlimited"         => false,
                 'sortable'          => true
             ],
             [
-                "label"             => "Miltiple ilimitada",
-                "description"       => "Seccion que requiere informacion de una cantidad ilimitada de componentes que pueden ordenarse",
+                "label"             => "Múltiple ilimitada",
+                "description"       => "Sección que requiere información de una cantidad ilimitada de componentes que pueden ordenarse",
                 "admin_view_path"   => "multiple-unlimited",
                 "protected"         => false,
                 "unlimited"         => true,
