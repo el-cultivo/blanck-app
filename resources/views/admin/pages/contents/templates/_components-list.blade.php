@@ -1,4 +1,4 @@
-<ul class="collapsible popout" data-collapsible="accordion"  v-sortable="{onUpdate: onUpdate, onMove: onMove, handle: '.handle', group: label}" >
+<ul class="collapsible popout" data-collapsible="accordion">
     <li v-for="component in sortable_list" >
         <div class="collapsible-header">
 
