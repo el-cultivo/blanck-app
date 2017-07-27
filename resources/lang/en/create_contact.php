@@ -27,30 +27,30 @@ return [
 	],
 
 	'address' =>	[
-		'required'	=>	'',
-		'array'	=>	'',
+		'required'	=>	'You forgot to enter your address',
+		'array'	=>	'You forgot to enter your address',
 		'street1' =>	[
-			'present'	=>	'',
-			'string'	=>	''
+			'present'	=>	'Street 1 field must be present',
+			'string'	=>	'There is something wrong in your street 1'
 		],
 		'street2' =>	[
-			'present'	=>	'',
-			'string'	=>	''
+			'present'	=>	'Street 2 field must be present',
+			'string'	=>	'There is something wrong in your street 2'
 		],
 		'city' =>	[
-			'present'	=>	'',
-			'string'	=>	''
+			'present'	=>	'City field must be present',
+			'string'	=>	'There is something wrong in your city'
 		],
 		'state' =>	[
-			'present'	=>	'',
-			'string'	=>	''
+			'present'	=>	'State field must be present',
+			'string'	=>	'There is something wrong in your state'
 		],
 		'country' =>	[
-			'present'	=>	'',
-			'string'	=>	''
+			'present'	=>	'Country field must be present',
+			'string'	=>	'There is something wrong in your country'
 		],
 		'zip' =>	[
-			'present'	=>	'',
+			'present'	=>	'Zip field must be present',
 		],
 
 	]

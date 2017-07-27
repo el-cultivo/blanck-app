@@ -22,30 +22,30 @@ return [
    ],
 
    'address' =>	[
-       'required'	=>	'',
-       'array'	=>	'',
+       'required'	=>	'Es necesario que ingreses una dirección',
+       'array'	=>	'Es necesario que ingreses una dirección',
        'street1' =>	[
-           'present'	=>	'',
-           'string'	=>	''
+           'present'	=>	'Encontramos un problema en el campo calle',
+           'string'	=>	'Hay algo mal con la calle que ingresaste'
        ],
        'street2' =>	[
-           'present'	=>	'',
-           'string'	=>	''
+           'present'	=>	'Encontramos un problema en el campo colonia',
+           'string'	=>	'Hay algo mal con la colonia que ingresaste'
        ],
        'city' =>	[
-           'present'	=>	'',
-           'string'	=>	''
+           'present'	=>	'Encontramos un problema en el campo ciudad',
+           'string'	=>	'Hay algo mal con la ciudad que ingresaste'
        ],
        'state' =>	[
-           'present'	=>	'',
-           'string'	=>	''
+           'present'	=>	'Encontramos un problema en el campo estado',
+           'string'	=>	'Hay algo mal con el estado que ingresaste'
        ],
        'country' =>	[
-           'present'	=>	'',
-           'string'	=>	''
+           'present'	=>	'Encontramos un problema en el campo país',
+           'string'	=>	'Hay algo mal con el país que ingresaste'
        ],
        'zip' =>	[
-           'present'	=>	'',
+           'present'	=>	'Encontramos un problema en el campo código postal',
        ],
 
    ]
