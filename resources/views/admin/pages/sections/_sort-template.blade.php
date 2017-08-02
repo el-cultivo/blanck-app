@@ -42,7 +42,7 @@
 		        :form="sort_page_sections_form"
 		        name="sections[]"
 		        :value="id">
-		    <div class="pull-right pageslists--save-button">
+		    <div class="pull-right pageslists--save-button mt-5">
 		        {!! Form::submit("Guardar orden", [
 		            'class' => 'btn waves-effect waves-light',
 		            'form'  => 'sort_page_sections_form'

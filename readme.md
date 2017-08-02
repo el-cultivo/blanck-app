@@ -36,6 +36,7 @@ SEND_MAIL_AS=
 CLTVO_MANUAL_URL="https://www.youtube.com/"
 
 CLTVO_DEV_MODE=true
+CLTVO_OPEN_SITE=false
 CLTVO_DEV_SEED=true
 CLTVO_BASE_SEED=1
 

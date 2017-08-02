@@ -159,7 +159,7 @@
 
             </div>
 
-            <div class="col s12">
+            <div class="col s12 mt-5">
                 <div class=" pull-right">
                     <input type="hidden" name="index" :form='"update_component_"+component.id+"_form"' v-model="componentName">
                     {!! Form::submit("Guardar", [

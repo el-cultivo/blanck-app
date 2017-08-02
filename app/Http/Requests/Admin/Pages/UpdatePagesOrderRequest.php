@@ -37,9 +37,9 @@ class UpdatePagesOrderRequest extends Request
     public function messages()
     {
         return [
-            'pages.required'    => 'Las páginas son obligatorios.',
-            'pages.*.required'  => 'Las páginas es obligatorio.',
-            'pages.*.exist'     => 'Las páginas no existe.',
+            'pages.required'    => trans('pages.pages.required'),
+            'pages.*.required'  => trans('pages.pages.required'),
+            'pages.*.exist'     => trans('pages.pages.exist'),
         ];
     }
 }
