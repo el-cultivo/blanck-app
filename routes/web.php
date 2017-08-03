@@ -15,11 +15,11 @@
 	Route::post('login', 'Auth\LoginController@login')->name('login:post');
 	Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-// if (env("CLTVO_DEV_MODE")){
-// // Registration Routes...
-// 	Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register:get');
-// 	Route::post('register', 'Auth\RegisterController@register')->name('register:post');
-// }
+if (env("CLTVO_OPEN_SITE")){
+	// Registration Routes...
+	Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register:get');
+	Route::post('register', 'Auth\RegisterController@register')->name('register:post');
+}
 
 // Password Reset Routes...
 	Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('pass_reset:get');

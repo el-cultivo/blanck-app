@@ -20,8 +20,7 @@ export const postWithMaterialNote = function($event) {
 	let mn = $($event.target).find('.materialnote_JS')
 	mn.each(function() {
 		let $this = $(this),
-		     note = $this.siblings('.note-editor').find('.note-editable');	
-	     
+		     note = $this.siblings('.note-editor').find('.note-editable');
 	     $this.text(note.html())
 	});
 	this.post($event)

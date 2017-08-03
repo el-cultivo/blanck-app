@@ -1,16 +1,16 @@
 <template id="multi-images-template">
 	<div>
 
-		<div class="row">
+		<div class="row mb-5">
 			<div class="col s10">
-				<h5 class="">@{{title || 'Galeria'}}</h5>
+				<h5 class="">@{{title || 'Galería'}}</h5>
 			</div>
 		</div>
 
 		<div class="">
 			<div class="row" >
 				<div class="" v-sortable="{onUpdate: onUpdate, onMove: onMove, group: label}">
-					<div v-for="image in images" class='multiimages-image' style="width: 25%;float: left;">	
+					<div v-for="image in images" class='multiimages-image' style="width: 25%;float: left; margin-bottom: 5%;">
 						<single-image
 							:ref-path="refPath"
 							:index="$index"
@@ -23,7 +23,7 @@
 							:current-image="image"
 							:default-order="defaultOrder"
 							>
-							<div slot="remove">
+							<div slot="remove" style="margin-top: 5%; cursor: pointer;">
 								<a class="button__as-link" v-on:click.stop="remove($index)">Remover</a>
 							</div>
 						</single-image>
@@ -34,7 +34,7 @@
 
 		<div class="row">
 			<div class="col s10 ">
-				<div class="" v-on:click="addSingleImageComponent">
+				<div class="pull-left btn" v-on:click="addSingleImageComponent">
 					<span class="icon-plus fa fa-plus"></span>
 					<span class="icon-text-plus">Agregar</span>
 				</div>
@@ -49,9 +49,9 @@
 			'class'	=> '',
 			'v-on:submit.prevent'	=> 'postOrders'
 			]) !!}
-			
-			{!! Form::submit('Guardar Orden', ['class' => 'btn btn-primary button', ':form'=> "'sort-multi-images_'+printable_ref+'_form'"]) !!}
-			
+
+			{!! Form::submit('Guardar Orden', ['style' => 'margin-bottom: 10%;', 'class' => 'btn btn-primary button pull-right', ':form'=> "'sort-multi-images_'+printable_ref+'_form'"]) !!}
+
 			    <input type="hidden" :form="'sort-multi-images_'+printable_ref+'_form'" name="photos[]" :value="id" v-for="id in ordered_ids">
 
 			{!! Form::hidden("class", null, [

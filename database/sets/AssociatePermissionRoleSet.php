@@ -2,8 +2,8 @@
 
 use Illuminate\Console\Command;
 
-use App\Role;
-use App\Permission;
+use App\Models\Users\Role;
+use App\Models\Users\Permission;
 
 class AssociatePermissionRoleSet extends CltvoSet
 {

@@ -3,7 +3,7 @@
 namespace App\Http\Binds;
 
 use App\Http\Binds\CltvoBind;
-use App\Photo;
+use App\Models\Photo;
 
 use Route;
 

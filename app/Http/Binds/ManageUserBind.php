@@ -4,8 +4,8 @@ namespace App\Http\Binds;
 
 use App\Http\Binds\CltvoBind;
 
-use App\User;
-use App\Role;
+use App\Models\Users\User;
+use App\Models\Users\Role;
 
 use Route;
 

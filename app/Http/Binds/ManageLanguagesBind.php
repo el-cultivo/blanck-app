@@ -3,7 +3,7 @@
 namespace App\Http\Binds;
 
 use App\Http\Binds\CltvoBind;
-use App\Language;
+use App\Models\Language;
 use Route;
 
 class ManageLanguagesBind extends CltvoBind

@@ -2,8 +2,8 @@
 
 use Illuminate\Console\Command;
 use App\Models\Pages\Page;
-use App\Language;
-use App\Photo;
+use App\Models\Language;
+use App\Models\Photo;
 
 class SeoBoosterSet extends CltvoSet
 {

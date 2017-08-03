@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-use App\Language;
+use App\Models\Language;
 use Auth;
 
 abstract class Request extends FormRequest

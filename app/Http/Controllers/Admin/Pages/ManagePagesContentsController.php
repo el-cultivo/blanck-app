@@ -13,7 +13,7 @@ use View;
 use Response;
 use Redirect;
 use App\Models\Pages\Page;
-use App\Publish;
+use App\Models\Publish;
 
 use Carbon\Carbon;
 

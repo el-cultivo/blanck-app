@@ -12,8 +12,8 @@ use App\Http\Requests\Admin\Users\UpdateUserRequest;
 
 use App\Notifications\Users\ActivationAccountNotification;
 
-use App\User;
-use App\Role;
+use App\Models\Users\User;
+use App\Models\Users\Role;
 
 use Redirect;
 

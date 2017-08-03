@@ -27,4 +27,16 @@ class SetPasswordRequest extends FormRequest
             'password' => 'required|confirmed|min:6'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'password.required'          =>  trans('passwordRequest.name.required'),
+
+            'password.confirmed'         =>  trans('passwordRequest.name.confirmed'),
+
+            'password.min'               =>  trans('passwordRequest.name.min'),
+
+        ];
+    }
 }

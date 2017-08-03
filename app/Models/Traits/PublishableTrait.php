@@ -1,6 +1,6 @@
 <?php namespace App\Models\Traits;
 
-use App\Publish;
+use App\Models\Publish;
 use Carbon\Carbon;
 
 trait PublishableTrait {

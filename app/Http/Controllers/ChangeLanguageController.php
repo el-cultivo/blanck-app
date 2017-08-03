@@ -12,7 +12,7 @@ use Config;
 use Session;
 use Lang;
 
-use App\Language;
+use App\Models\Language;
 // use Request;
 
 

@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Auth;
 use View;
 
-use App\Language;
+use App\Models\Language;
 use Carbon\Carbon;
 
 
@@ -20,14 +20,14 @@ class Controller extends BaseController
 
     /**
      * autenficacion de usuario
-     * @var \App\User|null
+     * @var \App\Models\Users\User|null
      */
     protected $user;
 
     /**
      * 	si el usuario esta logeado
      *
-     * @var \App\User|null
+     * @var \App\Models\Users\User|null
      */
     protected $signedIn;
 
