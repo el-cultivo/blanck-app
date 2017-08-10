@@ -22,6 +22,8 @@ class CltvoSetSiteCommand extends Command
 
         'PageSectionTypeSet',
         'PageSet',
+		'PageSectionSet',
+		'AssociatePageSectionPageSet',
         'CopySet',
         'ShapeSet'
     ];

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ config("app.locale") }}">
 
 	{{-- Head --}}
 	@include('client.general.head')
