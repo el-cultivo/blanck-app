@@ -4,7 +4,7 @@
 	{{-- Head --}}
 	@include('client.general.head')
 
-	<body id="{{isset($body_id) ? $body_id : 'main-vue'}}" :class="{noScroll_JS: bodyScrollIsDisabled}" v-cloak>
+	<body id="{{isset($body_id) ? $body_id : 'main-vue'}}" :class="{noScroll_JS: bodyScrollIsDisabled}" >
 		{{-- Analytics --}}
 	    @include('client.general.analytics')
 
