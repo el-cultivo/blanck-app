@@ -83,7 +83,6 @@ class Controller extends BaseController
 
     // idiomas
 
-		dd(config("app.locale"));
         $current_lang_iso =  session("lang") ? session("lang") : config("app.locale") ;
         View::share("current_lang_iso",$current_lang_iso); // pasar a todas las vistas
 
