@@ -24,7 +24,7 @@ trait TranslationTrait {
         //     }
         // }
         // dd($select,"muere");
-        return $this->belongsToMany(Language::class)
+        return $this->belongsToMany(Language::class, $this->translation_table)
             ->select('languages.id','languages.iso6391','languages.label as language_label',$this->translation_table.".*")
             // ->groupBy("languages.id")
             ->withPivot($this->translatable)
