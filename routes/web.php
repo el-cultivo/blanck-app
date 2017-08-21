@@ -15,7 +15,7 @@
 	Route::post('login', 'Auth\LoginController@login')->name('login:post');
 	Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-if (env("CLTVO_OPEN_SITE")){
+if (config("cltvo.open_register") && config("cltvo.open_site")){
 	// Registration Routes...
 	Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register:get');
 	Route::post('register', 'Auth\RegisterController@register')->name('register:post');

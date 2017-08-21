@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
     {
         $roles = Role::all();
 
-        factory(User::class, env('CLTVO_BASE_SEED' , 1)*5 )->create()->each(function($user) use ($roles){
+        factory(User::class, config( "cltvo.base_seed")*5 )->create()->each(function($user) use ($roles){
 
 		// role association
 			if ( mt_rand(0, 9) <= 2 ) {

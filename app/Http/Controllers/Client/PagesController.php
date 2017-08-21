@@ -26,8 +26,8 @@ class PagesController extends ClientController
     public function index()
     {
         $main_page = Page::getMainPage();
-        if (!$main_page || !$main_page->is_publish || !env("CLTVO_OPEN_SITE")) {
-                
+        if (!$main_page || !$main_page->is_publish || !config("cltvo.open_site")) {
+
             return view("client.pages.splash");
         }
 

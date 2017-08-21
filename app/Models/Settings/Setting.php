@@ -83,7 +83,7 @@ class Setting extends Model
     {
         $mail = self::getMail();
         if (!$mail || !array_has($mail,$key) ) {
-            return env('SEND_MAIL_AS');
+            return config( "mail.from.address");
         }
         return $mail[$key];
     }

@@ -37,6 +37,7 @@ CLTVO_MANUAL_URL="https://www.youtube.com/"
 
 CLTVO_DEV_MODE=true
 CLTVO_OPEN_SITE=false
+CLTVO_OPEN_REGISTER=false
 CLTVO_DEV_SEED=true
 CLTVO_BASE_SEED=1
 

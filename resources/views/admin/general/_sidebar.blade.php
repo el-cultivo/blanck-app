@@ -1,13 +1,13 @@
 <div class="sidebar__main">
 
-	<a class="sidebar__main--logo" href="{{ route("client::pages.index") }}" alt="{{ env('APP_NAME') }}" style="background-image:url({{ asset('images/logo.svg') }});">
+	<a class="sidebar__main--logo" href="{{ route("client::pages.index") }}" alt="{{ config( "app.name") }}" style="background-image:url({{ asset('images/logo.svg') }});">
 	</a>
 
 	<div class="sidebar__main--profile">
 
 		<!-- Dropdown Trigger -->
 		<div class='dropdown-button sidebar__main--profile--dropDown' href='#' data-activates='dropdown1'>
-			<span class="sidebar__main--profile--app-name">{{ env('APP_NAME') }}</span>
+			<span class="sidebar__main--profile--app-name">{{ config( "app.name") }}</span>
 			<span class="sidebar__main--profile--profile-name">{{ $user->full_name }}</span>
 		</div>
 

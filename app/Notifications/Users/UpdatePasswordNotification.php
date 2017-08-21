@@ -45,7 +45,7 @@ class UpdatePasswordNotification extends Notification
     {
 
         return (new MailMessage)
-                    ->from( Setting::getEmail('notifications'), env('APPNOMBRE') )
+                    ->from( Setting::getEmail('notifications'), config( "mail.from.name") )
                     ->view('vendor.notifications.email')
                     ->subject( trans('notifications.UpdatePasswordNotification.subject') )
                     ->greeting( Setting::getEmailGreeting() )

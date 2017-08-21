@@ -51,7 +51,7 @@ class ResetPasswordNotification extends Notification
     {
 
         return (new MailMessage)
-                    ->from( Setting::getEmail('notifications'), env('APPNOMBRE') )
+                    ->from( Setting::getEmail('notifications'), config( "mail.from.name") )
                     ->success()
                     ->view('vendor.notifications.email')
                     ->subject( trans('notifications.ResetPasswordNotification.subject') )
