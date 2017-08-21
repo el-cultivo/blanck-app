@@ -57,16 +57,41 @@ class PageSectionSet extends CltvoSet
         return [
 		// main
             // [
-            //     'index'             => 'home-splash',
-            //     'template_path'     => 'home.splash',
-            //     'components_max'    =>   1,
-            //     'type_id'           => $fija->id,
+            //     'index'             => 'home-slider',
+            //     'template_path'     => 'home.slider',
+            //     'components_max'    =>  null,
+            //     'type_id'           => $ilimitada->id,
             //     'editable_contents' => [
-            //         'thumbnail_img' => true,
-            //         'content'       => true
+			// 		'gallery_img'   => false,
+			//         'thumbnail_img' => true,
+			//
+			//         'title'         => false,
+			//         'subtitle'      => false,
+			//         'excerpt'       => true,
+			//         'content'       => false,
+			//         'iframe'        => true,
+			//         'link'          => false
             //     ],
-            //     'description'       => '' // debe ser un tml que se va a mostrar a los usuarios como intrucciones
+            //     'description'       => 'Slider de prueba' // debe ser un tml que se va a mostrar a los usuarios como intrucciones
             // ],
+			// [
+			// 	'index'             => 'home-logos',
+			// 	'template_path'     => 'home.logos',
+			// 	'components_max'    => null,
+			// 	'type_id'           => $ilimitada->id,
+			// 	'editable_contents' => [
+			// 		'gallery_img'   => false,
+			// 		'thumbnail_img' => true,
+			//
+			// 		'title'         => false,
+			// 		'subtitle'      => false,
+			// 		'excerpt'       => false,
+			// 		'content'       => false,
+			// 		'iframe'        => false,
+			// 		'link'          => true
+			// 	],
+			// 	'description'       => 'reticula de logos de prueba' // debe ser un tml que se va a mostrar a los usuarios como intrucciones
+			// ],
         ];
     }
 	/**

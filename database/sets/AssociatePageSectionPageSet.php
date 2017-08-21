@@ -26,12 +26,13 @@ class AssociatePageSectionPageSet extends CltvoSet
      */
     protected function CltvoGetItems(){
         return [
-            // [
-            //     'page'       => 'main', // index de pagina
-            //     'sections'   => [
-			// 		'home-splash'	// index de la seccion
-			// 	]
-			// ],
+            [
+                'page'       => 'main', // index de pagina
+                'sections'   => [
+					// 'home-slider',	// index de la seccion
+					// 'home-logos',	// index de la seccion
+				]
+			],
         ];
     }
 
