@@ -22734,7 +22734,7 @@ var preSelectOption = exports.preSelectOption = function preSelectOption(select_
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.validateEmail = exports.objTextFilter = exports.inString = exports.isNumber = exports.rangeFilter = exports.additiveFilter = exports.sumTotalPrice = exports.sumTotal = exports.defaultIndexTo1 = exports.defaultTo1 = exports.sortingOrder = exports.numericalObjSort = exports.alphabeticalObjSort = exports.logAndReturnSomething = exports.tapLog = exports.sortByFirstItem = exports.orderAscending = exports.diff = exports.uppercaseFirst = exports.removeAndInsert = exports.nonCyclingMoveInArray = exports.moveInArray = exports.lensPropMaker = exports.removeNullsAndUndefineds = exports.deundefinedify = exports.denullify = exports.toNumber = exports.logEach = exports.idsByParentIds = exports.provisionedFromPairs = exports.objFromPairs = exports.concatValuesToArrayIfDuplicateKeys = exports.toArrIfNotArr = exports.arrsIntoObjs = exports.mergeObj = exports.objsById = exports.pairObjToIdProp = exports.pairWithObj = exports.pairWith = exports.doubleMapNestedAndReturnInUpperLevel = exports.nestedPropToUpperLevel = exports.toArray = exports.JsonParseOrFalse = undefined;
+exports.substringInStringArray = exports.stringInPathOfObjArray = exports.pathHasString = exports.validateEmail = exports.multiTextFilter2 = exports.objTextFilter = exports.inString = exports.isNumber = exports.rangeFilter = exports.additiveFilter = exports.sumTotalPrice = exports.sumTotal = exports.defaultIndexTo1 = exports.defaultTo1 = exports.sortingOrder = exports.numericalObjSort = exports.alphabeticalObjSort = exports.logAndReturnSomething = exports.tapLog = exports.sortByFirstItem = exports.orderAscending = exports.diff = exports.uppercaseFirst = exports.removeAndInsert = exports.nonCyclingMoveInArray = exports.moveInArray = exports.lensPropMaker = exports.removeNullsAndUndefineds = exports.deundefinedify = exports.denullify = exports.toNumber = exports.logEach = exports.idsByParentIds = exports.provisionedFromPairs = exports.objFromPairs = exports.concatValuesToArrayIfDuplicateKeys = exports.toArrIfNotArr = exports.arrsIntoObjs = exports.mergeObj = exports.objsById = exports.pairObjToIdProp = exports.pairWithObj = exports.pairWith = exports.doubleMapNestedAndReturnInUpperLevel = exports.nestedPropToUpperLevel = exports.toArray = exports.JsonParseOrFalse = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -22868,7 +22868,7 @@ var nonCyclingMoveInArray = exports.nonCyclingMoveInArray = function nonCyclingM
 	}
 };
 
-// A different API for the same operation as moveInArray. 
+// A different API for the same operation as moveInArray.
 // removeAndInsert :: event {oldIndex, newIndex} -> [] -> []
 var removeAndInsert = exports.removeAndInsert = _ramda2.default.curry(function (event, list) {
 	var moved_elem = list[event.oldIndex];
@@ -23015,10 +23015,36 @@ var objTextFilter = exports.objTextFilter = _ramda2.default.curry(function (filt
 	})(filterable_objs) : filterable_objs;
 });
 
+var multiTextFilter2 = exports.multiTextFilter2 = _ramda2.default.curry(function (filters, string, filterable_objs) {
+	return _ramda2.default.filter(function (obj) {
+		return _ramda2.default.reduce(function (bool, filter) {
+			return filter(string, obj) || bool;
+		}, false, filters);
+	}, filterable_objs);
+});
 //validateEmail :: String email -> Bool
 var validateEmail = exports.validateEmail = function validateEmail(email) {
 	return _ramda2.default.test(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, email);
 };
+
+// pathHasString :: Path [string] -> String search -> Obj {path: String} -> Bool
+var pathHasString = exports.pathHasString = _ramda2.default.curry(function (prop_path, string, obj) {
+	return inString(string, _ramda2.default.path(prop_path, obj));
+});
+
+// stringInPathOfObjArray :: [Path string] -> [Path string] -> String -> {path_to_array: [ {path_to_text: String} ]} -> Bool
+var stringInPathOfObjArray = exports.stringInPathOfObjArray = _ramda2.default.curry(function (path_to_array, path_to_text, string, obj) {
+	return _ramda2.default.compose(_ramda2.default.any(_ramda2.default.equals(true)), _ramda2.default.map(pathHasString(path_to_text, string)), _ramda2.default.pathOr([], path_to_array))(obj);
+});
+
+// substringInStringArray :: { path: [String], * } -> Bool
+var substringInStringArray = exports.substringInStringArray = _ramda2.default.curry(function (path, string, obj) {
+	return _ramda2.default.compose(inString(string), //buscamos
+	_ramda2.default.join(''), //unimos
+	//R.map(s => typeof s === 'string' ? s : ''), //TODO aseguramos que sea un string... mejor implementarlo con un Maybe
+	_ramda2.default.pathOr([], path) //buscamos el array
+	)(obj);
+});
 
 }).call(this,require('_process'))
 },{"_process":2,"ramda":3}],13:[function(require,module,exports){
@@ -23449,7 +23475,6 @@ var postWithMaterialNote = exports.postWithMaterialNote = function postWithMater
 	mn.each(function () {
 		var $this = $(this),
 		    note = $this.siblings('.note-editor').find('.note-editable');
-
 		$this.text(note.html());
 	});
 	this.post($event);
@@ -24132,10 +24157,12 @@ var _menuTreeToggler = require('../menu-tree-toggler');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_vue2.default.use(VueHtml5Editor, {
-	name: 'v-editor',
-	visibleModules: ["text", "font", "list", "link", "unlink", "hr", "eraser", "undo"]
-});
+if (window.VueHtml5Editor) {
+	_vue2.default.use(VueHtml5Editor, {
+		name: 'v-editor',
+		visibleModules: ["text", "font", "list", "link", "unlink", "hr", "eraser", "undo"]
+	});
+}
 
 _vue2.default.use(_vueResource2.default);
 
@@ -24145,7 +24172,7 @@ var mainVue = exports.mainVue = function mainVue() {
 
 	var store = mainVueStore,
 	    data = config.data || {},
-	    mixins = _ramda2.default.concat([_crudAjax.crudAjax], config.mixins || []);
+	    mixins = _ramda2.default.concat([_crudAjax.crudAjax, _menus.menusMixin], config.mixins || []);
 
 	data.store = _ramda2.default.mergeAll([store, data.store || {}, _menus.menusStore]);
 
@@ -24181,9 +24208,6 @@ var mainVue = exports.mainVue = function mainVue() {
 			if (typeof config.created === 'function') return config.created.call(this);
 		},
 		ready: function ready() {
-			console.log('main-vue', this);
-			$('.collapsible').collapsible(); // borrar y colocarlo donde sea  nencesario
-			console.log("borrar esta linea");
 			(0, _dom.ifElementExistsThenLaunch)([['#header__logo', _logoManipulations.logoSwitch, 'init', []]]);
 			if (typeof config.ready === 'function') return config.ready.call(this);
 		},
@@ -24191,48 +24215,17 @@ var mainVue = exports.mainVue = function mainVue() {
 
 		data: data,
 
-		computed: _ramda2.default.merge({
-			bodyScrollIsDisabled: function bodyScrollIsDisabled() {
-				return _ramda2.default.pathOr(false, ['store', 'menus', 'main', 'isOpen'], this) || _ramda2.default.pathOr(false, ['store', 'menus', 'shop', 'isOpen'], this) || _ramda2.default.pathOr(false, ['store', 'menus', 'filters', 'isOpen'], this);
-			}
-		}, config.computed || {}),
+		computed: _ramda2.default.merge({}, config.computed || {}),
 
 		methods: _ramda2.default.merge({
 			onGetSuccess: function onGetSuccess(body, data) {
 				this.store[data.callee].data = body;
-			},
-			closeOpenStuff: function closeOpenStuff(args) {
-				this.$emit('toggle-menu', undefined);
-				if (config.closeOpenStuff === 'function') {
-					config.closeOpenStuff(args);
-				}
-			},
-			toggleMenu: function toggleMenu(menu_name) {
-				console.log('menu_name', menu_name);
-				this.$emit('toggle-menu', menu_name);
 			}
 		}, config.methods || {}),
 
 		mixins: mixins,
 
-		events: _ramda2.default.merge({
-			'toggle-menu': function toggleMenu(menu_name) {
-				var _this2 = this;
-
-				var other_menus_names = _ramda2.default.filter(function (menu) {
-					return menu !== menu_name;
-				}, _ramda2.default.keys(this.store.menus));
-
-				_ramda2.default.forEach(function (menu_name) {
-					if (_ramda2.default.path(['store', 'menus', menu_name], _this2)) {
-						_this2.store.menus[menu_name].isOpen = false;
-					}
-				}, other_menus_names);
-				if (_ramda2.default.path(['store', 'menus', menu_name], this)) {
-					this.store.menus[menu_name].isOpen = !this.store.menus[menu_name].isOpen;
-				}
-			}
-		}, config.events || {}),
+		events: _ramda2.default.merge({}, config.events || {}),
 
 		watch: config.watch || {},
 
@@ -24466,35 +24459,67 @@ var crudAjax = exports.crudAjax = {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+exports.menusMixin = exports.menusStore = undefined;
+
+var _ramda = require('ramda');
+
+var _ramda2 = _interopRequireDefault(_ramda);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var menusStore = exports.menusStore = {
 	menus: {
-		userAccount: {
-			isOpen: false
-		},
-		shoppingBag: {
-			isOpen: false
-		},
-		filters: {
-			isOpen: false
-		},
-		shop: {
-			isOpen: false
-		},
 		main: {
-			isOpen: false
+			isOpen: false,
+			preventBodyScroll: true //when open
 		}
 	}
 };
 
 var menusMixin = exports.menusMixin = {
+	data: {
+		store: menusStore
+	},
+	computed: {
+		bodyScrollIsDisabled: function bodyScrollIsDisabled() {
+			return _ramda2.default.compose(_ramda2.default.any(_ramda2.default.equals(true)), _ramda2.default.values, _ramda2.default.map(function (menu) {
+				return menu.isOpen && menu.preventBodyScroll;
+			}))(menusStore.menus);
+		}
+	},
 	methods: {
+		closeOpenStuff: function closeOpenStuff(args) {
+			this.$emit('toggle-menu', undefined);
+			if (config.closeOpenStuff === 'function') {
+				config.closeOpenStuff(args);
+			}
+		},
 		toggleMenu: function toggleMenu(menu_name) {
-			this.$dispatch('toggle-menu', menu_name);
+			this.$emit('toggle-menu', menu_name);
+		}
+	},
+
+	events: {
+		'toggle-menu': function toggleMenu(menu_name) {
+			var _this = this;
+
+			var other_menus_names = _ramda2.default.filter(function (menu) {
+				return menu !== menu_name;
+			}, _ramda2.default.keys(this.store.menus));
+
+			_ramda2.default.forEach(function (menu_name) {
+				if (_ramda2.default.path(['store', 'menus', menu_name], _this)) {
+					_this.store.menus[menu_name].isOpen = false;
+				}
+			}, other_menus_names);
+			if (_ramda2.default.path(['store', 'menus', menu_name], this)) {
+				this.store.menus[menu_name].isOpen = !this.store.menus[menu_name].isOpen;
+			}
 		}
 	}
 };
 
-},{}],30:[function(require,module,exports){
+},{"ramda":3}],30:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

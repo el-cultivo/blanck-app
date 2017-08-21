@@ -82,7 +82,8 @@ class Controller extends BaseController
         $this->userIsSuperAdmin = $this->user ? $this->user->isSuperAdmin() : false;
 
     // idiomas
-        $current_lang_iso =  session("lang") ? session("lang") : "en"  ;
+
+        $current_lang_iso =  session("lang") ? session("lang") : config("app.locale") ;
         View::share("current_lang_iso",$current_lang_iso); // pasar a todas las vistas
 
         Carbon::setLocale($current_lang_iso);

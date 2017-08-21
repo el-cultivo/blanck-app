@@ -6,6 +6,16 @@ use DB;
 
 trait UniqueTranslatableSlugTrait
 {
+	public function getColSlugName()
+	{
+		return "slug";
+	}
+
+	public function getColLabelName()
+	{
+		return "label";
+	}
+
     /**
      * genera un nombre de usuario unico a partir del nombre y apellido
      * @param  string $name     nombre
@@ -38,7 +48,7 @@ trait UniqueTranslatableSlugTrait
     public function scopeGetModelBySlug($query, $slug)
     {
         return $query->whereHas('languages', function($pivot_query) use($slug) {
-            $pivot_query->where('slug', $slug);
+            $pivot_query->where($this->getColSlugName(), $slug);
         })->with('languages');
     }
 
@@ -50,8 +60,8 @@ trait UniqueTranslatableSlugTrait
 
     public function updateUniqueSlug( $new_name, $language_iso )
     {
-        if (trim(strtolower($new_name))  == trim(strtolower($this->translation($language_iso)->label)) ) {
-            return $this->translation($language_iso)->slug;
+        if (trim(strtolower($new_name)) == trim(strtolower($this->translation($language_iso)->{$this->getColLabelName()})) ) {
+            return $this->translation($language_iso)->{$this->getColSlugName()};
         }
 
         return static::generateUniqueSlug($new_name);
@@ -59,6 +69,6 @@ trait UniqueTranslatableSlugTrait
 
     public function getSlugAttribute()
     {
-        return $this->translation()->slug;
+        return $this->translation()->{$this->getColSlugName()};
     }
 }

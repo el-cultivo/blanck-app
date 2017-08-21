@@ -4,6 +4,17 @@ namespace App\Models\Traits;
 
 trait UniqueSlugTrait
 {
+
+	public function getColSlugName()
+    {
+        return "slug";
+    }
+
+    public function getColLabelName()
+    {
+        return "label";
+    }
+
     /**
      * genera un nombre de usuario unico a partir del nombre y apellido
      * @param  string $name     nombre
@@ -27,6 +38,8 @@ trait UniqueSlugTrait
         return $slug;
     }
 
+
+
     public static function slugExist($slug)
     {
         return static::getModelBySlug($slug)->count() > 0;
@@ -34,8 +47,10 @@ trait UniqueSlugTrait
 
     public function scopeGetModelBySlug($query, $slug)
     {
-        return $query->where('slug', $slug);
+        return $query->where($this->getColSlugName(), $slug);
     }
+
+
 
     public static function getObjectBySlug($slug)
     {
@@ -45,8 +60,8 @@ trait UniqueSlugTrait
 
     public function updateUniqueSlug( $new_name )
     {
-        if (trim(strtolower($new_name))  == trim(strtolower($this->label)) ) {
-            return $this->slug;
+        if (trim(strtolower($new_name))  == trim(strtolower($this->{$this->getColLabelName()})) ) {
+            return $this->{$this->getColSlugName()};
         }
 
         return static::generateUniqueSlug($new_name);

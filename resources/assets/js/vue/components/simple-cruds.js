@@ -6,6 +6,7 @@ import {numberFilters} from '../mixins/number-filters';
 import {sortable} from '../mixins/sortable';
 import {multilistSortable} from '../mixins/multilist-sortable';
 import {sortableListByClick, sortableOnClickCbs} from '../mixins/sortable-list-by-click';
+import {listFilters, isPath, isPathInObjArray, isStringArray} from '../mixins/list-filters';
 import {mexicoStatesAndMunicipalities} from '../mixins/mexico-states-and-municipalities';
 import {sortByNestedProp, toArray, objTextFilter, tapLog, nonCyclingMoveInArray} from '../../functions/pure';
 import {preSelectOption} from '../../functions/dom';
@@ -46,9 +47,9 @@ export const componentForm = simpleCrud('#component-form-template',{props: ['sec
 
 // Tiene que ir después de componentForm
 const sectionConfig = {
-	props: ['section', 'index'],  
-	data:{editing_title: false, title: []},  
-	components:{componentForm}, 
+	props: ['section', 'index'],
+	data:{editing_title: false, title: []},
+	components:{componentForm},
 	mixins:[sortableListByClick], methods: sortableOnClickCbs
 }
 

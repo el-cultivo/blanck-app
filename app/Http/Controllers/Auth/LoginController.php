@@ -62,7 +62,7 @@ class LoginController extends ClientController
             ]);
         }
 
-        // $lang_iso = session("lang") ? session("lang") : "es";
+        // $lang_iso = session("lang") ? session("lang") : config("app.locale");
 
         // $redirect = session('CltvoPreviousURL') ? session('CltvoPreviousURL') : $lang_iso."/".Lang::get("routes.username",[],$lang_iso)."/".rawurlencode(Auth::User()->id) ;
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ config("app.locale") }}">
 	@include('admin.general.head')
 
 	<body id="admin-vue" class="admin">

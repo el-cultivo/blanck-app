@@ -8,7 +8,7 @@
 				Registrar Nuevo Usuario
 			</div>
 
-			<form class="form" role="form" method="POST" action="{{ route('client::auth:post') }}">
+			<form class="form" role="form" method="POST" action="{{ route('client::register:post') }}">
 				{{ csrf_field() }}
 				<div class="">
 					<input id="first_name" type="text" class="form--input" placeholder="Nombre" name="first_name" value="{{ old('first_name') }}" required autofocus>
