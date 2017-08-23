@@ -10,12 +10,12 @@ import {logoSwitch} from '../logoManipulations';
 import {menuTreeToggler} from '../menu-tree-toggler';
 
 
-if (window.VueHtml5Editor) {	
+if (window.VueHtml5Editor) {
 	Vue.use(VueHtml5Editor, {
 		name: 'v-editor',
 		visibleModules: [
 	        "text",
-	        "font",
+	        // "font",
 	        "list",
 	        "link",
 	        "unlink",
