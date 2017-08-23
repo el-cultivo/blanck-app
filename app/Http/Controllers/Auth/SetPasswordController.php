@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\ClientController;
 
+use App\Http\Helpers\Traits\Auth\RedirectPathTrait;
+
 use App\Http\Requests\Auth\SetPasswordRequest;
 
 use App\Models\Users\User;
@@ -16,6 +18,7 @@ use Auth;
 class SetPasswordController extends ClientController
 {
 
+    use RedirectPathTrait;
     /**
      * Create a new controller instance.
      *

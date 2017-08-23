@@ -116,7 +116,7 @@ class User extends Authenticatable
 
     public function getHomeUrl()
     {
-        return route("user::home", $this->name);
+        return route("user::profile", $this->name);
     }
 
     /**

@@ -7,8 +7,17 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Str;
 use Auth;
 
+use App\Http\Helpers\Traits\Auth\RedirectPathTrait;
+
+
 class ResetPasswordController extends ClientController
 {
+
+
+    use ResetsPasswords,RedirectPathTrait {
+        RedirectPathTrait::redirectPath insteadof ResetsPasswords;
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Password Reset Controller
@@ -19,7 +28,7 @@ class ResetPasswordController extends ClientController
     | explore this trait and override any methods you wish to tweak.
     |
     */
-    use ResetsPasswords;
+
 
     /**
      * Create a new controller instance.
@@ -50,14 +59,4 @@ class ResetPasswordController extends ClientController
         $this->guard()->login($user);
     }
 
-    /**
-     * Get the post register / login redirect path.
-     *
-     * @return string
-     */
-    public function redirectPath()
-    {
-        $user = Auth::user();
-        return $user ? $user->getHomeUrl() : "/";
-    }
 }
