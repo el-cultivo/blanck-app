@@ -115,7 +115,7 @@ trait PhotoableTrait {
     }
 
 
-    /**
+	/**
      * Get the administrator flag for the user.
      *
      * @return bool
@@ -123,14 +123,20 @@ trait PhotoableTrait {
     public function getThumbnailImageAttribute()
     {
         $photo = $this->getFirstPhotoTo(["use"=>"thumbnail"]);
-        return $photo ? $photo : (object) [
+        return $photo ? $photo : $this->getEmptyPhoto();
+    }
+
+
+	protected function getEmptyPhoto()
+	{
+		return (object) [
             'url'           => "",
 
             'title'         => "",
             'alt'           => "",
             'description'   => "",
         ];
-    }
+	}
 
 
 }
