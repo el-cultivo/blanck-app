@@ -41,11 +41,11 @@ export const mergeObj = (k, l, r) =>  R.merge(l, r);
 
 export const arrsIntoObjs = R.map(x => R.fromPairs([x]));
 
-export const toArrIfNotArr = (x) => R.not(R.isArrayLike(x)) ? R.of(x) : x;
+export const toArrIfNotArr = (x) => R.not(Array.isArray(x)) ? R.of(x) : x;
 
 export const concatValuesToArrayIfDuplicateKeys = (k, l, r) => {
-  if(!R.isArrayLike(l)){l = [l];}
-  if(!R.isArrayLike(r)){r = [r];}
+  if(!Array.isArray(l)){l = [l];}
+  if(!Array.isArray(r)){r = [r];}
     return  R.concat(l,r);
 };
 
@@ -138,7 +138,7 @@ export const logAndReturnSomething = (message, something) => {
  * @return {array}          sorted array
  */
 export const alphabeticalObjSort = R.curry((path_arr, sortable_objs) =>
-	 R.isArrayLike(path_arr) && path_arr.length > 0 ?
+	 Array.isArray(path_arr) && path_arr.length > 0 ?
 	 	R.sortBy(R.compose(R.toLower, R.path(path_arr)))(sortable_objs) :
 	 	logAndReturnSomething(`the first argument of alphabeticalObjSort must be and array of length > 0, '${path_arr}' given`, sortable_objs)
 );
@@ -153,7 +153,7 @@ export const alphabeticalObjSort = R.curry((path_arr, sortable_objs) =>
  * @return {array}          sorted array
  */
 export const numericalObjSort = R.curry((path_arr, asc_or_desc, sortable_objs) =>
-	R.isArrayLike(path_arr) && path_arr.length > 0
+	Array.isArray(path_arr) && path_arr.length > 0
 		? R.compose(
 	 		sortingOrder(asc_or_desc),
 	 		 R.sortBy(
