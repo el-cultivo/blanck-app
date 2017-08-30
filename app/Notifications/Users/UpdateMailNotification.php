@@ -47,9 +47,9 @@ class UpdateMailNotification extends Notification
         return (new MailMessage)
                     ->from( Setting::getEmail('notifications'), config( "mail.from.name") )
                     ->view('vendor.notifications.email')
-                    ->subject( trans('notifications.UpdateMailNotification.subject') )
+                    ->subject( trans('notifications.user.update_mail.subject') )
                     ->greeting( Setting::getEmailGreeting() )
-                    ->line( trans('notifications.UpdateMailNotification.copy') )
+                    ->line( trans('notifications.user.update_mail.copy') )
                     ->line( Setting::getEmailFarewell() );
     }
 

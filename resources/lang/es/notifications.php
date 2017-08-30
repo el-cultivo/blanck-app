@@ -1,52 +1,44 @@
 <?php
 
 return [
-    'ResetPasswordNotification' => [
-        'subject'   => 'Restablecer contraseña',
-        'greeting'  => 'saludo!',
-        'copy'      => '<strong> texto de setting </strong>',
-        'action'    => 'Restablecer contraseña',
-        'farewell'  => 'despedida!',
-    ],
+	'user' =>[
+		'reset_password' => [
+			'subject'   => 'Restablecer contraseña',
+	        'copy'      => 'Recientemente notamos que has perdido tu contraseña, para restablecer da click en el boton',
+	        'action'    => 'Restablecer contraseña',
+		],
 
-    'ActivationAccountNotification' => [
-        'subject'   => 'Registro en El Cultivo',
-        'greeting'  => 'saludo!',
-        'copy'      => '<strong> texto de setting </strong>',
-        'action'    => 'Activar cuenta',
-        'farewell'  => 'despedida!',
-    ],
+		'update_password'    => [
+			'subject'   => 'Tu contraseña ha cambiado',
+	        'copy'      => 'Recientemente notamos que tu contraseña ha cambiado, si no reconoces este cambio por favor contacta a soporte técnico',
+		],
 
-    'UpdatePasswordNotification'    => [
-        'subject'   => 'Tu contraseña ha cambiado',
-        'greeting'  => 'Hola!',
-        'copy'      => 'Recientemente notamos que tu contraseña ha cambiado, si no reconoces este cambio por favor contacta a soporte técnico',
-        'action'    => '',
-        'farewell'  => 'Adios!',
-    ],
+		'update_mail'    => [
+			'subject'   => 'Tu email ha cambiado',
+	        'copy'      => 'Recientemente notamos que has hecho un cambio en tu mail, si no fuiste tu por favor contacta a soporte técnico, en caso contrario ignora este mensaje',
+		]
+	],
 
-    'UpdateMailNotification'    => [
-        'subject'   => 'Tu email ha cambiado',
-        'greeting'  => 'hello!',
-        'copy'      => 'Recientemente notamos que has hecho un cambio en tu mail, si no fuiste tu por favor contacta a soporte técnico, en caso contrario ignora este mensaje',
-        'action'    => '',
-        'farewell'  => 'Adios!',
-    ],
+	'admin' => [
+		'users'	=> [
+			'activation_account' => [
+				'subject'   => 'Registro en El Cultivo',
+				'action'    => 'Activar cuenta',
+			],
+		]
+	],
 
-    'BuySuccessNotification'    => [
-        'subject'   => 'Tu pedido elcultivo.mx #:BAG_KEY',
-        'greeting'  => 'Confirmación de pedido',
-        'copy'      => '',
-        'action'    => 'Detalles del pedido',
-        'farewell'  => '',
-    ],
+	'general'=> [
+		'success'			=> 'Hola!',
+		'error'				=> 'Whoops!',
+		'salutation'		=> 'Saludos',
+		'button_problems'	=> 'Si tienes problemas dando click al botón ":button", copia y pega el siguiente URL en tu navegador.',
+		'rights_reserved'	=> 'Todos los derechos reservados',
 
-    'PresentNotification'       => [
-        'subject'   => 'elcultivo.mx tiene una sorpresa para ti.',
-        'greeting'  => '¡Felicidades :Name!',
-        'copy'      => ':User_name te ha hecho un regalo a través de elcultivo.mx, haz click en el siguiente enlace y mira lo que muy pronto recibirás.',
-        'action'    => '¡Quiero ver mis regalos!',
-        'farewell'  => '',
-    ],
+	],
+
+	'client'=> [
+
+	],
 
 ];

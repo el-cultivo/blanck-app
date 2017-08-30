@@ -49,15 +49,13 @@ class ResetPasswordNotification extends Notification
      */
     public function toMail($notifiable)
     {
-
         return (new MailMessage)
                     ->from( Setting::getEmail('notifications'), config( "mail.from.name") )
-                    ->success()
                     ->view('vendor.notifications.email')
-                    ->subject( trans('notifications.ResetPasswordNotification.subject') )
+                    ->subject( trans('notifications.user.reset_password.subject') )
                     ->greeting( Setting::getEmailGreeting() )
-                    ->line( trans('notifications.ResetPasswordNotification.copy') )
-                    ->action( trans('notifications.ResetPasswordNotification.action'), route('client::pass_reset_token',[$this->token,"email"=>$notifiable->email]) )
+                    ->line( trans('notifications.user.reset_password.copy') )
+                    ->action( trans('notifications.user.reset_password.action'), route('client::pass_reset_token',[$this->token,"email"=>$notifiable->email]) )
                     ->line( Setting::getEmailFarewell() );
     }
 

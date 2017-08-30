@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Notifications\Users;
+namespace App\Notifications\Admin\Users;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
@@ -47,10 +47,10 @@ class ActivationAccountNotification extends Notification
                     ->from( Setting::getEmail('notifications'), config( "mail.from.name") )
                     ->success()
                     ->view('vendor.notifications.email')
-                    ->subject( trans('notifications.ActivationAccountNotification.subject') )
+                    ->subject( trans('notifications.admin.users.activation_account.subject') )
                     ->greeting( Setting::getEmailGreeting() )
-                    ->line( trans('notifications.ActivationAccountNotification.copy') )
-                    ->action( trans('notifications.ActivationAccountNotification.action'), $notifiable->getActivationAcountUrl() )
+                    ->line( Setting::getEmailCopy("register") )
+                    ->action( trans('notifications.admin.users.activation_account.action'), $notifiable->getActivationAcountUrl() )
                     ->line( Setting::getEmailFarewell() );
     }
 
