@@ -168,7 +168,7 @@ trait TranslationTrait {
 
     public function scopeOrderedBy($query, $column)
     {
-        $lang_iso = session("lang") ? session("lang") : config("app.locale");
+        $lang_iso = cltvoCurrentLanguageIso();
 
         $same = new static;
         $table = with($same)->getTable();

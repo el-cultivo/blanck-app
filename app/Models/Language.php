@@ -67,20 +67,20 @@ class Language extends Model
         return static::getLanguagesIso()->implode($gluter);
     }
 
-    /**
-     * Genera la lista de los nombres de los paises del sistema
-     * @return array lsita de los nombres de los idiomas
-     */
-    public static function getCurrentLanguage()
-    {
-        $currentLanguage = session('lang');
-
-        if (!static::languageExist($currentLanguage)) {
-            $currentLanguage = App::getLocale();
-        }
-
-        return  static::getLanguageByIso($currentLanguage);
-    }
+    // /**
+    //  * Genera la lista de los nombres de los paises del sistema
+    //  * @return array lsita de los nombres de los idiomas
+    //  */
+    // public static function getCurrentLanguage()
+    // {
+    //     $currentLanguage = cltvoCurrentLanguageIso();
+	//
+    //     if (!static::languageExist($currentLanguage)) {
+    //         $currentLanguage = config("app.locale");
+    //     }
+	//
+    //     return  static::getLanguageByIso($currentLanguage);
+    // }
 
     public static function languageExist($iso)
     {

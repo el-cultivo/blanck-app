@@ -90,7 +90,7 @@ class Setting extends Model
 
     public static function getEmailCopy($key, $iso = null):string
     {
-        $iso = is_null($iso) ? session('lang') : $iso;
+        $iso = is_null($iso) ? cltvoCurrentLanguageIso() : $iso;
 
         $key = $key.'_copy';
 
@@ -103,7 +103,7 @@ class Setting extends Model
 
     public static function getEmailGreeting($iso = null):string
     {
-        $iso = is_null($iso) ? session('lang') : $iso;
+        $iso = is_null($iso) ? cltvoCurrentLanguageIso() : $iso;
 
         $mail = self::getMail();
         if (!$mail || !array_has($mail, 'mail_greeting.'.$iso) ) {
@@ -114,7 +114,7 @@ class Setting extends Model
 
     public static function getEmailFarewell($iso = null):string
     {
-        $iso = is_null($iso) ? session('lang') : $iso;
+        $iso = is_null($iso) ? cltvoCurrentLanguageIso() : $iso;
 
         $mail = self::getMail();
         if (!$mail || !array_has($mail, 'mail_farewell.'.$iso) ) {

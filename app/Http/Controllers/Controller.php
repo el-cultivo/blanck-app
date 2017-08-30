@@ -83,7 +83,7 @@ class Controller extends BaseController
 
     // idiomas
 
-        $current_lang_iso =  session("lang") ? session("lang") : config("app.locale") ;
+        $current_lang_iso =  cltvoCurrentLanguageIso();
         View::share("current_lang_iso",$current_lang_iso); // pasar a todas las vistas
 
         Carbon::setLocale($current_lang_iso);
