@@ -12,7 +12,7 @@
 				<div class="" v-sortable="{onUpdate: onUpdate, onMove: onMove, group: label}">
 					<div v-for="image in images" class='multiimages-image' style="width: 25%;float: left; margin-bottom: 5%;">
 						<single-image
-							:ref-path="refPath"
+							:ref-path="refPath.concat($index)"
 							:index="$index"
 							:parent-ref="ref"
 							:type="type"
