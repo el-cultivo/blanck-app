@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Users\CreateUserRequest;
 use App\Http\Requests\Admin\Users\UpdateUserRequest;
 
-use App\Notifications\Users\ActivationAccountNotification;
+use App\Notifications\Admin\Users\ActivationAccountNotification;
 
 use App\Models\Users\User;
 use App\Models\Users\Role;
