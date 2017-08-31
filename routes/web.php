@@ -34,8 +34,8 @@ if (config("cltvo.open_register") && config("cltvo.open_site")){
 // cambio de idiomas
     Route::get('lang/{language}','ChangeLanguageController@changeLang')->name('language');
 
-// // Contact
-//     Route::post('contact', 'Client\PagesController@contact')->name('contact');
+// Contact
+    Route::post('contact', 'Client\PagesController@contact')->name('contact');
 
 	Route::group([ "as" => "pages."  ], function(){
 		Route::resource('/','Client\PagesController',

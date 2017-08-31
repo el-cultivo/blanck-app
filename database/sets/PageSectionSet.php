@@ -55,6 +55,24 @@ class PageSectionSet extends CltvoSet
 			->first();
 
         return [
+			[
+				'index'             => 'contact-form',
+				'template_path'     => 'contact_form',
+				'components_max'    => null,
+				'type_id'           => $especial->id,
+				'editable_contents' => [
+					'gallery_img'   => false,
+					'thumbnail_img' => false,
+
+					'title'         => false,
+					'subtitle'      => false,
+					'excerpt'       => false,
+					'content'       => false,
+					'iframe'        => false,
+					'link'          => false
+				],
+				'description'       => 'Formulario de contacto',
+			],
 		// main
             // [
             //     'index'             => 'home-slider',
