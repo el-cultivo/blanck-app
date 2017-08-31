@@ -2,38 +2,12 @@
 
 namespace App\Notifications\Users;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-use App\Models\Settings\Setting;
+use App\Notifications\CltvoNotification;
 
-class UpdatePasswordNotification extends Notification
+class UpdatePasswordNotification extends CltvoNotification
 {
-    use Queueable;
-
-
-    /**
-     * Create a new notification instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function via($notifiable)
-    {
-        return ['mail'];
-    }
 
     /**
      * Get the mail representation of the notification.
@@ -45,12 +19,12 @@ class UpdatePasswordNotification extends Notification
     {
 
         return (new MailMessage)
-                    ->from( Setting::getEmail('notifications'), config( "mail.from.name") )
-                    ->view('vendor.notifications.email')
-                    ->subject( trans('notifications.user.update_password.subject') )
-                    ->greeting( Setting::getEmailGreeting() )
-                    ->line( trans('notifications.user.update_password.copy') )
-                    ->line( Setting::getEmailFarewell() );
+                    ->from( $this->from_email, $this->from_name )
+                    ->view($this->email_view)
+                    ->subject( $this->trans('subject'))
+                    ->greeting(  $this->mail_greeting )
+                    ->line( $this->trans('copy') )
+                    ->line( $this->mail_farawell  );
     }
 
     /**

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Models\Traits\User\PermissionRoleTrait;
 
-use App\Notifications\Users\ResetPasswordNotification;
+use App\Notifications\Client\ResetPasswordNotification;
 
 class User extends Authenticatable
 {

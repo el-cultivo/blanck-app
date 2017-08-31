@@ -2,12 +2,6 @@
 
 return [
 	'user' =>[
-		'reset_password' => [
-			'subject'   => 'Restablecer contraseña',
-	        'copy'      => 'Recientemente notamos que has perdido tu contraseña, para restablecer da click en el boton',
-	        'action'    => 'Restablecer contraseña',
-		],
-
 		'update_password'    => [
 			'subject'   => 'Tu contraseña ha cambiado',
 	        'copy'      => 'Recientemente notamos que tu contraseña ha cambiado, si no reconoces este cambio por favor contacta a soporte técnico',
@@ -38,6 +32,11 @@ return [
 	],
 
 	'client'=> [
+		'reset_password' => [
+			'subject'   => 'Restablecer contraseña',
+	        'copy'      => 'Recientemente notamos que has perdido tu contraseña, para restablecer da click en el boton',
+	        'action'    => 'Restablecer contraseña',
+		],
 
 	],
 

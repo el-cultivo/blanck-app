@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Notifications\Users;
+namespace App\Notifications\Client;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
+use App\Notifications\CltvoNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
 use App\Models\Settings\Setting;
 
-class ResetPasswordNotification extends Notification
+class ContactNotification extends CltvoNotification
 {
     use Queueable;
 
@@ -52,10 +52,10 @@ class ResetPasswordNotification extends Notification
         return (new MailMessage)
                     ->from( Setting::getEmail('notifications'), config( "mail.from.name") )
                     ->view('vendor.notifications.email')
-                    ->subject( trans('notifications.user.reset_password.subject') )
+                    ->subject( trans('notifications.client.contact.subject') )
                     ->greeting( Setting::getEmailGreeting() )
-                    ->line( trans('notifications.user.reset_password.copy') )
-                    ->action( trans('notifications.user.reset_password.action'), route('client::pass_reset_token',[$this->token,"email"=>$notifiable->email]) )
+                    ->line( trans('notifications.client.contact.copy') )
+                    ->action( trans('notifications.client.contact.action'), route('client::pass_reset_token',[$this->token,"email"=>$notifiable->email]) )
                     ->line( Setting::getEmailFarewell() );
     }
 

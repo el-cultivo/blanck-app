@@ -2,40 +2,12 @@
 
 namespace App\Notifications\Users;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Notifications\CltvoNotification;
 use Illuminate\Notifications\Messages\MailMessage;
 
-use App\Models\Settings\Setting;
-
-class UpdateMailNotification extends Notification
+class UpdateMailNotification extends CltvoNotification
 {
-    use Queueable;
-
-
-    /**
-     * Create a new notification instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function via($notifiable)
-    {
-        return ['mail'];
-    }
-
-    /**
+	/**
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
@@ -43,14 +15,13 @@ class UpdateMailNotification extends Notification
      */
     public function toMail($notifiable)
     {
-
         return (new MailMessage)
-                    ->from( Setting::getEmail('notifications'), config( "mail.from.name") )
-                    ->view('vendor.notifications.email')
-                    ->subject( trans('notifications.user.update_mail.subject') )
-                    ->greeting( Setting::getEmailGreeting() )
-                    ->line( trans('notifications.user.update_mail.copy') )
-                    ->line( Setting::getEmailFarewell() );
+                    ->from( $this->from_email, $this->from_name )
+                    ->view( $this->email_view )
+                    ->subject(  $this->trans('subject') )
+                    ->greeting( $this->mail_greeting )
+                    ->line( $this->trans('copy')  )
+                    ->line( $this->mail_farawell  );
     }
 
     /**

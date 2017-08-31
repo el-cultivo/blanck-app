@@ -2,12 +2,6 @@
 
 return [
 	'user' =>[
-		'reset_password' => [
-			'subject'   => 'Restore password',
-			'copy'      => 'We recently noticed that you have lost your password, to restore click on the button',
-			'action'    => 'Restore password',
-		],
-
 		'update_password'    => [
 			'subject'   => 'Your password has changed',
 			'copy'      => 'Recently your password was changed. If it was you ignore this message on the contrary call techincal support',
@@ -38,7 +32,11 @@ return [
 	],
 
 	'client'=> [
-
+		'reset_password' => [
+			'subject'   => 'Restore password',
+			'copy'      => 'We recently noticed that you have lost your password, to restore click on the button',
+			'action'    => 'Restore password',
+		],
 	],
 
 ];
