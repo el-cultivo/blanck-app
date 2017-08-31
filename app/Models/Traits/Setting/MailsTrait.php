@@ -17,9 +17,9 @@ trait MailsTrait {
     *
     * @return string with email,
     */
-    public static function getEmail($key):string
+    public static function getEmail($key, $mail=null):string
     {
-        $mail = self::getMail();
+         $mail = $mail ? $mail :self::getMail();
         if (!$mail || !array_has($mail,$key) ) {
             return config( "mail.from.address");
         }
@@ -31,11 +31,11 @@ trait MailsTrait {
     *
     * @return string with email,
     */
-    public static function getEmailLine($key,$iso = null ):string
+    public static function getEmailLine($key,$iso = null, $mail=null ):string
     {
         $iso = is_null($iso) ? cltvoCurrentLanguageIso() : $iso;
 
-       $mail = self::getMail();
+       $mail = $mail ? $mail :self::getMail();
         if (!$mail || !array_has($mail, $key.'.'.$iso) ) {
             return '';
         }
@@ -47,9 +47,9 @@ trait MailsTrait {
     *
     * @return string with email,
     */
-    public static function getEmailCopy($key, $iso = null):string
+    public static function getEmailCopy($key, $iso = null, $mail=null):string
     {
-        return static::getEmailLine($key.'_copy',$iso);
+        return static::getEmailLine($key.'_copy',$iso, $mail);
     }
 
     /**
@@ -57,9 +57,9 @@ trait MailsTrait {
     *
     * @return string with email,
     */
-    public static function getEmailGreeting($iso = null):string
+    public static function getEmailGreeting($iso = null, $mail=null):string
     {
-        return static::getEmailLine('mail_greeting',$iso);
+        return static::getEmailLine('mail_greeting',$iso, $mail);
     }
 
     /**
@@ -67,9 +67,9 @@ trait MailsTrait {
     *
     * @return string with email,
     */
-    public static function getEmailFarewell($iso = null):string
+    public static function getEmailFarewell($iso = null, $mail=null):string
     {
-        return static::getEmailLine('mail_farewell',$iso);
+        return static::getEmailLine('mail_farewell',$iso, $mail);
     }
-	
+
 }

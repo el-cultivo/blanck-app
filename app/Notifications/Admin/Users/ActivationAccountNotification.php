@@ -5,6 +5,7 @@ namespace App\Notifications\Admin\Users;
 use Illuminate\Notifications\Messages\MailMessage;
 
 use App\Notifications\CltvoNotification;
+use App\Models\Settings\Setting;
 
 class ActivationAccountNotification extends CltvoNotification
 {
@@ -23,7 +24,7 @@ class ActivationAccountNotification extends CltvoNotification
                     ->view($this->email_view)
                     ->subject(  $this->trans('subject') )
                     ->greeting(   $this->mail_greeting  )
-                    ->line( $this->trans('copy')  )
+                    ->line( $this->getSettingCopy("register") )
                     ->action( $this->trans('action'), $notifiable->getActivationAcountUrl() )
                     ->line( $this->mail_farawell  );
     }

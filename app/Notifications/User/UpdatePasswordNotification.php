@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Notifications\Users;
+namespace App\Notifications\User;
 
-use App\Notifications\CltvoNotification;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class UpdateMailNotification extends CltvoNotification
+use App\Notifications\CltvoNotification;
+
+class UpdatePasswordNotification extends CltvoNotification
 {
-	/**
+
+    /**
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
@@ -15,12 +17,13 @@ class UpdateMailNotification extends CltvoNotification
      */
     public function toMail($notifiable)
     {
+
         return (new MailMessage)
                     ->from( $this->from_email, $this->from_name )
-                    ->view( $this->email_view )
-                    ->subject(  $this->trans('subject') )
-                    ->greeting( $this->mail_greeting )
-                    ->line( $this->trans('copy')  )
+                    ->view($this->email_view)
+                    ->subject( $this->trans('subject'))
+                    ->greeting(  $this->mail_greeting )
+                    ->line( $this->trans('copy') )
                     ->line( $this->mail_farawell  );
     }
 

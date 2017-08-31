@@ -17,6 +17,10 @@ abstract class CltvoNotification extends Notification
     protected $mail_greeting;
     protected $mail_farawell;
 
+	protected $mail_setting;
+	protected $language_iso;
+
+
     protected $email_view = 'vendor.notifications.email';
 
     /**
@@ -26,10 +30,14 @@ abstract class CltvoNotification extends Notification
      */
     public function __construct()
     {
+		$this->mail_setting = Setting::getMail();
+		$this->language_iso = cltvoCurrentLanguageIso();
+
         $this->from_name 		= config( "mail.from.name");
-        $this->from_email 		= Setting::getEmail('system');
-        $this->mail_greeting 	= Setting::getEmailGreeting();
-        $this->mail_farawell 	= Setting::getEmailFarewell();
+        $this->from_email 		= Setting::getEmail('system',$this->mail_setting);
+        $this->mail_greeting 	= Setting::getEmailGreeting($this->language_iso,$this->mail_setting);
+        $this->mail_farawell 	= Setting::getEmailFarewell($this->language_iso,$this->mail_setting);
+
 		$this->trasnlation_path	= collect(explode("\\",str_replace(["App\\Notifications\\","Notification"], ["",""], static::class )))->map(function($part){
 			return snake_case($part);
 		})->implode(".");
@@ -50,5 +58,10 @@ abstract class CltvoNotification extends Notification
     {
         return trans('notifications.'.$this->trasnlation_path.'.'.$key ,$args );
     }
+
+	protected function getSettingCopy($key)
+	{
+		return Setting::getEmailCopy($key,$this->language_iso,$this->mail_setting);
+	}
 
 }
