@@ -37,6 +37,16 @@ return [
 			'copy'      => 'We recently noticed that you have lost your password, to restore click on the button',
 			'action'    => 'Restore password',
 		],
+		
+		'contact' => [
+			'subject'   => 'Contact information: :email (:name)',
+			'copy'      => ':name with mail :email leave the following message <br/> :message',
+		],
+
+		'thanks_for_contact' => [
+			'subject'   => 'Contact confirmation',
+			'copy'      => 'Thank you for your message. We will contact you soon.',
+		],
 	],
 
 ];

@@ -37,7 +37,16 @@ return [
 	        'copy'      => 'Recientemente notamos que has perdido tu contraseña, para restablecer da click en el boton',
 	        'action'    => 'Restablecer contraseña',
 		],
+		
+		'contact' => [
+			'subject'   => 'Información de contacto: :email (:name)',
+	        'copy'      => ':name con el correo :email dejo el sigiente mensaje <br/> :message',
+		],
 
+		'thanks_for_contact' => [
+			'subject'   => 'Confirmación de contacto',
+			'copy'      => 'Gracias por tu mensaje. Nos comunicaremos contigo pronto.',
+		],
 	],
 
 ];

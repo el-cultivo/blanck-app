@@ -6,7 +6,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 
 use App\Notifications\CltvoNotification;
 
-class ContactNotification extends CltvoNotification
+class ThanksForContactNotification extends CltvoNotification
 {
 
     /**
@@ -39,7 +39,7 @@ class ContactNotification extends CltvoNotification
                     ->from( $this->from_email, $this->from_name )
                     ->success()
                     ->view($this->email_view)
-                    ->subject( $this->trans('subject',$this->args) )
+                    ->subject( $this->trans('subject') )
                     ->greeting( $this->mail_greeting )
                     ->line( $this->trans('copy',$this->args)  )
                     ->line( $this->mail_farawell );
