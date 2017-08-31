@@ -5,6 +5,7 @@
 	@include('client.general.head')
 
 	<body id="{{isset($body_id) ? $body_id : 'main-vue'}}" :class="{noScroll_JS: bodyScrollIsDisabled}" >
+		{{-- @include('general._alerts') --}}
 		{{-- Analytics --}}
 	    @include('client.general.analytics')
 
