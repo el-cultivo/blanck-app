@@ -3,7 +3,7 @@
 namespace App\Notifications\Traits;
 
 use App\Models\Settings\Setting;
-use App\User;
+use App\Models\Users\User;
 
 use Notification;
 
@@ -15,12 +15,18 @@ trait AdminNotificationsTrait {
 		if (!empty($admin_users)) {
 			Notification::send(collect($admin_users),  new static( $args ) );
 		}else{
-			$notify_user = new User([
-				"email"	=> Setting::getEmail('notifications')
-			]);
-			$notify_user->notify( new static( $args ));
+			static::SystemNotify($args);
 		}
 
 	}
+
+	public static function SystemNotify(array $args)
+	{
+		$notify_user = new User([
+			"email"	=> Setting::getEmail('notifications')
+		]);
+		$notify_user->notify( new static( $args ));
+	}
+
 
 }
