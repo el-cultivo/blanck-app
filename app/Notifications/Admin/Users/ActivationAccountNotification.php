@@ -5,7 +5,6 @@ namespace App\Notifications\Admin\Users;
 use Illuminate\Notifications\Messages\MailMessage;
 
 use App\Notifications\CltvoNotification;
-use App\Models\Settings\Setting;
 
 class ActivationAccountNotification extends CltvoNotification
 {
@@ -17,7 +16,6 @@ class ActivationAccountNotification extends CltvoNotification
      */
     public function toMail($notifiable)
     {
-
         return (new MailMessage)
                     ->from( $this->from_email, $this->from_name )
                     ->success()

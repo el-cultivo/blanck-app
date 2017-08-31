@@ -4,12 +4,17 @@ namespace App\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 
+use App\Notifications\Traits\AdminNotificationsTrait;
+use App\Notifications\Traits\NotUserNotificationsTrait;
+
 use App\Models\Settings\Setting;
 
 
 abstract class CltvoNotification extends Notification
 {
     use Queueable;
+	use AdminNotificationsTrait;
+	use NotUserNotificationsTrait;
 
     protected $from_email;
     protected $from_name;
@@ -56,7 +61,7 @@ abstract class CltvoNotification extends Notification
 
     protected function trans($key,array $args = [])
     {
-        return trans('notifications.'.$this->trasnlation_path.'.'.$key ,$args );
+        return trans('notifications.'.$this->trasnlation_path.'.'.$key ,$args,$this->language_iso );
     }
 
 	protected function getSettingCopy($key)
