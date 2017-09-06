@@ -5,15 +5,14 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
         <style>
-			.splash {
+			splash {
 				height: 100%;
 				width: 100%;
 				margin: 0px auto;
 				background-image: url("images/logo.svg");
-				background-size: cover;
 				background-position: center;
 				background-repeat: no-repeat;
-				background-size: cover;
+				background-size: 40%;
 			}
 			.splash__svg {
 				z-index: 1;
@@ -38,6 +37,7 @@
 				padding-right: 20px;
 				padding-left: 20px;
 				text-align: center;
+				box-sizing: border-box;
 			}
 			.splash__footer ul {
 				width: 100%;
