@@ -176,8 +176,10 @@ class Section extends Model
     public function getImplodeEditableContentsAttribute()
     {
         $editable_contents = collect($this->editable_contents ? $this->editable_contents : []);
-
-        return $editable_contents->map(function($true,$key){
+        return $editable_contents->filter(function($true){
+            return $true;
+        })
+        ->map(function($true,$key){
             return $true && isset(Component::EDITABLE_CONTENTS[$key]) ? Component::EDITABLE_CONTENTS[$key] : null;
         })->implode(",<br/>");
     }

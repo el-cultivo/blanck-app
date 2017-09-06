@@ -1,5 +1,8 @@
 # Cltvo Blank app
 
+## Instalación de la parte del front
+`npm i`
+Luego es necesario ir a las carpetas `resources/assets/sass/` y `resources/assets/js/` y seguir los pasos de sus respectivos readmes. Finalmente para probar que todo funcione correctamente y el proyecto compile `gulp watch`
 
 ### env
 
@@ -33,6 +36,8 @@ SEND_MAIL_AS=
 CLTVO_MANUAL_URL="https://www.youtube.com/"
 
 CLTVO_DEV_MODE=true
+CLTVO_OPEN_SITE=false
+CLTVO_OPEN_REGISTER=false
 CLTVO_DEV_SEED=true
 CLTVO_BASE_SEED=1
 

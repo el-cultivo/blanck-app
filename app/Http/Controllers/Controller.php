@@ -86,7 +86,7 @@ class Controller extends BaseController
 
         // Language of the session page
         // Get current Language object of the site
-        $current_lang_iso = session("lang") ? session("lang") : "en";
+        $current_lang_iso =  cltvoCurrentLanguageIso();
         $this->current_language = $this->languages->where('iso6391', $current_lang_iso)->first();
 
         View::share("user", $this->user); // pasar a todas las vistas

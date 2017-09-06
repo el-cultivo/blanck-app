@@ -152,4 +152,18 @@ trait PermissionRoleTrait {
         return $query;
 
     }
+
+    public function scopeWhereDoesntHavePermission($query,$permission_slug)
+    {
+        return $query->whereDoesntHave('roles', function($query) use ($permission_slug){
+            $query->whereHasPermission($permission_slug);
+        });
+    }
+
+    public function scopeWhereHasPermission($query,$permission_slug)
+    {
+        return $query->whereHas('roles', function($query) use ($permission_slug){
+            $query->whereHasPermission($permission_slug);
+        });
+    }
 }

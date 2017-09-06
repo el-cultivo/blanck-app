@@ -38,7 +38,7 @@ function is_exact_page($route_name,array $parameters)
  {
      $iv = getIVKey();
 
-     $key = env("CLTVO_ENCRYPTION_KEY=") ? env("CLTVO_ENCRYPTION_KEY=") : '#&$sdfx2s7sffgg4';
+     $key = config( "cltvo.encryption_key");
 
      return  base64url_encode( openssl_encrypt( $mail, Config::get('app.cipher'), md5($key), OPENSSL_RAW_DATA, $iv));
  }
@@ -53,14 +53,14 @@ function is_exact_page($route_name,array $parameters)
  {
      $iv = getIVKey();
 
-     $key = env("CLTVO_ENCRYPTION_KEY=") ? env("CLTVO_ENCRYPTION_KEY=") : '#&$sdfx2s7sffgg4';
+     $key = config( "cltvo.encryption_key");
 
      return openssl_decrypt( base64url_decode($mail_encoded), Config::get('app.cipher'), md5($key), OPENSSL_RAW_DATA, $iv);
  }
 
  function getIVKey()
 {
-    $app_key    = env('APP_KEY');
+    $app_key    = config('app.key');
     $cipher     = Config::get('app.cipher');
     $iv_lenght  = openssl_cipher_iv_length($cipher);
     $iv_base64  = explode(':', $app_key)[1];
@@ -126,4 +126,10 @@ function csvToArray($filename='', $delimiter=','){
         fclose($handle);
     }
     return $data;
+}
+
+
+function cltvoCurrentLanguageIso()
+{
+	return session('Lang') ? session('Lang') : config("app.locale"); 
 }

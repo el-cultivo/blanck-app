@@ -38,7 +38,7 @@
 
                 @foreach($languages as $language)
                     <div class="input-field" v-if="section.editable_contents.title">
-                        {!! Form::label("title[".$language->iso6391."]", 'Título ('.$language->label.'):', ['class' => 'input-label active']) !!}
+                        {!! Form::label("title[".$language->iso6391."]", 'Título ('.$language->label.'):', ['class' => 'input-label active no-top']) !!}
                         {!! Form::text("title[".$language->iso6391."]", null, [
                             'class'       => 'validate',
                             'placeholder' => "título (".$language->label.")",
@@ -53,8 +53,8 @@
             <div class="col s12" >
 
                 @foreach($languages as $language)
-                    <div class="input-field" v-if="section.editable_contents.subtitle">
-                        {!! Form::label("subtitle[".$language->iso6391."]", 'Subtítulo ('.$language->label.'):', ['class' => 'input-label active']) !!}
+                    <div class="input-field mt-5" v-if="section.editable_contents.subtitle">
+                        {!! Form::label("subtitle[".$language->iso6391."]", 'Subtítulo ('.$language->label.'):', ['class' => 'input-label active no-top']) !!}
                         {!! Form::text("subtitle[".$language->iso6391."]", null, [
                             'class'       => 'validate',
                             'placeholder' => "subtítulo (".$language->label.")",
@@ -70,8 +70,8 @@
             <div class="col s12" v-if="section.editable_contents.excerpt">
 
                 @foreach($languages as $language)
-                    <div class="input-field" v-if="section.editable_contents.excerpt">
-                        {!! Form::label("excerpt[".$language->iso6391."]", 'Extracto ('.$language->label.'):', ['class' => 'input-label active']) !!}
+                    <div class="input-field mt-5" v-if="section.editable_contents.excerpt">
+                        {!! Form::label("excerpt[".$language->iso6391."]", 'Extracto ('.$language->label.'):', ['class' => 'input-label active no-top']) !!}
 
                         <v-editor :content.sync='component.{{ $language->iso6391 }}_excerpt '></v-editor>
                         <input type="hidden" v-model="component.{{ $language->iso6391 }}_excerpt" name="excerpt[{{ $language->iso6391 }}]">
@@ -83,8 +83,8 @@
             <div class="col s12" v-if="section.editable_contents.content">
 
                 @foreach($languages as $language)
-                    <div class="input-field" v-if="section.editable_contents.content">
-                        {!! Form::label("content[".$language->iso6391."]", 'Contentido ('.$language->label.'):', ['class' => 'input-label active']) !!}
+                    <div class="input-field mt-5" v-if="section.editable_contents.content">
+                        {!! Form::label("content[".$language->iso6391."]", 'Contentido ('.$language->label.'):', ['class' => 'input-label active no-top']) !!}
 
                         <v-editor :content.sync='component.{{ $language->iso6391 }}_content'></v-editor>
                         <input type="hidden" v-model="component.{{ $language->iso6391 }}_content" name="content[{{ $language->iso6391 }}]">
@@ -97,7 +97,7 @@
             <div class="col s12" v-if="section.editable_contents.iframe">
 
                 @foreach($languages as $language)
-                    <div class="input-field" v-if="section.editable_contents.iframe">
+                    <div class="input-field mt-5" v-if="section.editable_contents.iframe">
                         {!! Form::label("iframe[".$language->iso6391."]", 'iframe ('.$language->label.'):', ['class' => 'input-label active']) !!}
                         {!! Form::textarea("iframe[".$language->iso6391."]", null, [
                             'class'       => 'validate materialize-textarea',
@@ -146,7 +146,7 @@
                         </div>
                     </div>
                     <div class="input-field col s12">
-                        {!! Form::label("link_url[".$language->iso6391."]", 'Link ('.$language->label.'):', ['class' => 'input-label active']) !!}
+                        {!! Form::label("link_url[".$language->iso6391."]", 'Link ('.$language->label.'):', ['class' => 'input-label active no-top']) !!}
                         {!! Form::url("link_url[".$language->iso6391."]", null, [
                             'class'       => 'validate',
                             'placeholder' => "Link (".$language->label.")",
@@ -159,7 +159,7 @@
 
             </div>
 
-            <div class="col s12">
+            <div class="col s12 mt-5">
                 <div class=" pull-right">
                     <input type="hidden" name="index" :form='"update_component_"+component.id+"_form"' v-model="componentName">
                     {!! Form::submit("Guardar", [

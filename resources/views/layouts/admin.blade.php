@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ config("app.locale") }}">
 
 	@include('admin.general.head')
 
@@ -28,7 +28,7 @@
 		</div>
 
 		@yield('modals')
-		
+
 		@include('admin.general.scripts')
 
 		@yield('vue_templates')

@@ -71,8 +71,8 @@ $style = [
                     <tr>
                         <td style="{{ $style['email-masthead'] }}">
                             <a style="{{ $fontFamily }} {{ $style['email-masthead_name'] }}" href="{{ url('/') }}" target="_blank">
-                                <img src="{{ asset('images/logo-min.png')}}" alt="Elcultivo" style="max-width: 52px;display: block;margin: 0 auto;margin-bottom: 10px;">
-                                EL CULTIVO
+                                <img src="{{ asset('images/logo-min.png')}}" alt="{{ config( 'app.name') }}" style="max-width: 52px;display: block;margin: 0 auto;margin-bottom: 10px;">
+                                {{ config( 'app.name') }}
                             </a>
                         </td>
                     </tr>
@@ -86,12 +86,12 @@ $style = [
                                         <!-- Greeting -->
                                         <h1 style="{{ $style['header-1'] }}">
                                             @if (! empty($greeting))
-                                                {{ $greeting }}
+                                                {!! $greeting !!}
                                             @else
                                                 @if ($level == 'error')
-                                                    Whoops!
+                                                    {{ trans('notifications.general.error') }}
                                                 @else
-                                                    Hello!
+                                                    {{ trans('notifications.general.success') }}
                                                 @endif
                                             @endif
                                         </h1>
@@ -99,7 +99,7 @@ $style = [
                                         <!-- Intro -->
                                         @foreach ($introLines as $line)
                                             <p style="{{ $style['paragraph'] }}">
-                                                {{ $line }}
+                                                {!! $line !!}
                                             </p>
                                         @endforeach
 
@@ -135,13 +135,13 @@ $style = [
                                         <!-- Outro -->
                                         @foreach ($outroLines as $line)
                                             <p style="{{ $style['paragraph'] }}">
-                                                {{ $line }}
+                                                {!! $line !!}
                                             </p>
                                         @endforeach
 
                                         <!-- Salutation -->
                                         <p style="{{ $style['paragraph'] }}">
-                                            Saludos,<br> El Cultivo
+                                            {{ trans('notifications.general.salutation') }}<br> {{ config( 'app.name') }}
                                         </p>
 
                                         <!-- Sub Copy -->
@@ -150,8 +150,9 @@ $style = [
                                                 <tr>
                                                     <td style="{{ $fontFamily }}">
                                                         <p style="{{ $style['paragraph-sub'] }}">
-                                                            Si tienes problemas dando click al botón "{{ $actionText }}",
-                                                            copia y pega la URL de aqui debajo en tu navegador.
+															{{ trans('notifications.general.button_problems',[
+																"button"	=> $actionText
+															]) }}
                                                         </p>
 
                                                         <p style="{{ $style['paragraph-sub'] }}">
@@ -177,8 +178,8 @@ $style = [
                                     <td style="{{ $fontFamily }} {{ $style['email-footer_cell'] }}">
                                         <p style="margin-top: 0; color: white; font-size: 12px; line-height: 1.5em;">
                                             &copy; {{ date('Y') }}
-                                            <a style="{{ $style['anchor'] }}; color: white;text-decoration:underline;" href="{{ url('/') }}" target="_blank">El Cultivo</a>.
-                                            All rights reserved.
+                                            <a style="{{ $style['anchor'] }}; color: white;text-decoration:underline;" href="{{ url('/') }}" target="_blank">{{ config( 'app.name') }}</a>.
+											{{ trans('notifications.general.rights_reserved') }}
                                         </p>
                                     </td>
                                 </tr>

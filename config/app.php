@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env("APP_NAME","  Miami Film Festival"),
+    'name' => env("APP_NAME","Cltvo Blank App"),
 
     /*
     |--------------------------------------------------------------------------
@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('URL_SITE', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------

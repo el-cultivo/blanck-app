@@ -16,16 +16,16 @@ class CltvoLang
      */
     public function handle($request, Closure $next)
     {
-        $testLang = $request->segment(1);
+        $testLang = $request->segment(1); // requiere actualizacion 
         $available_langs = Config::get('app.available_langs');
 
         if( isset($available_langs[$testLang]) ) {
-            session(['lang' => $testLang]);
+            session(['Lang' => $testLang]);
         }
 
-        if (session('lang')) {
-            \App::setLocale( session('lang') );
-            \Config::set('app.locale_prefix', session('lang') );
+        if (session('Lang')) {
+            \App::setLocale( session('Lang') );
+            \Config::set('app.locale_prefix', session('Lang') );
         }
 
         return $next($request);

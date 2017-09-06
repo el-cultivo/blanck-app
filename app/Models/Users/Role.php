@@ -154,4 +154,18 @@ class Role extends Model
         return true;
     }
 
+	public function scopeWhereDoesntHavePermission($query,$permission_slug)
+	{
+		return $query->whereDoesntHave('permissions',function($q) use ($permission_slug){
+			$q->where( ["slug"    => $permission_slug]);
+		});
+	}
+
+	public function scopeWhereHasPermission($query,$permission_slug)
+	{
+		return $query->whereHas('permissions',function($q) use ($permission_slug){
+			$q->where( ["slug"    => $permission_slug]);
+		});
+	}
+
 }

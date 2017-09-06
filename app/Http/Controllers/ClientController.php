@@ -17,11 +17,6 @@ class ClientController extends Controller
 
     public function constructClientController()
     {
-    // pagina anterior
-        if (!$this->user && isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] != '/' ) {
-            session(['CltvoPreviousURL' => $_SERVER['REQUEST_URI'] ]);
-        }
-
         $show_empty_copy = Auth::user() && Auth::user()->hasPermission('system_config');
 
     // copies

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Models\Traits\User\PermissionRoleTrait;
 
+use App\Notifications\Client\ResetPasswordNotification;
 
 class User extends Authenticatable
 {
@@ -116,7 +117,7 @@ class User extends Authenticatable
 
     public function getHomeUrl()
     {
-        return route("user::home", $this->name);
+        return route("user::profile", $this->name);
     }
 
     /**
@@ -134,16 +135,16 @@ class User extends Authenticatable
         return route("client::pass_set:get", cltvoMailEncode($this->email));
     }
 
-    // /**
-    //  * Send the password reset notification.
-    //  *
-    //  * @param  string  $token
-    //  * @return void
-    //  */
-    // public function sendPasswordResetNotification($token)
-    // {
-    //     $this->notify(new ResetPasswordNotification($token));
-    // }
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
+    }
 
 
 }
