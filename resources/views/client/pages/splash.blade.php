@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="splash">
     <head>
-        <title>Blank App | El cultivo</title>
+        <title>{{ config('app.name') }} by El cultivo</title>
         <link href="https://fonts.googleapis.com/css?family=Lato:100, 500" rel="stylesheet" type="text/css">
 
         <style>
