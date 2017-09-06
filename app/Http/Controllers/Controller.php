@@ -49,6 +49,7 @@ class Controller extends BaseController
     ];
 
     protected $languages;
+    
     protected $current_language;
 
     /**
@@ -57,6 +58,7 @@ class Controller extends BaseController
     public function __construct(){
 
         $this->middleware(function ($request, $next) {
+            
             $this->reconstructController();
 
             if (method_exists($this,"constructClientController")  ) {
@@ -67,30 +69,30 @@ class Controller extends BaseController
                 $this->constructAdminController();
             }
 
-
             return $next($request);
         });
     }
 
     private function reconstructController()
     {
-    // usuario logueado
+        // User logged
         $this->user = $this->signedIn = Auth::user(); // usuario logueado
-        View::share("user",$this->user); // pasar a todas las vistas
 
-    // super Admin
+        // User is super admin
         $this->userIsSuperAdmin = $this->user ? $this->user->isSuperAdmin() : false;
 
-    // idiomas
-        $current_lang_iso =  session("lang") ? session("lang") : "en"  ;
-        View::share("current_lang_iso",$current_lang_iso); // pasar a todas las vistas
+        // Get all languages for the sites
+        $this->languages = Language::all();
+
+        // Language of the session page
+        // Get current Language object of the site
+        $current_lang_iso = session("lang") ? session("lang") : "en";
+        $this->current_language = $this->languages->where('iso6391', $current_lang_iso)->first();
+
+        View::share("user", $this->user); // pasar a todas las vistas
+        View::share("current_lang_iso", $current_lang_iso); // pasar a todas las vistas
+        View::share("languages", $this->languages); // pasar a todas las vistas
 
         Carbon::setLocale($current_lang_iso);
-
-        $this->languages = Language::all();
-        View::share("languages",$this->languages); // pasar a todas las vistas
-
-        $this->current_language = $this->languages->where('iso6391', $current_lang_iso)->first();
-    //
     }
 }
