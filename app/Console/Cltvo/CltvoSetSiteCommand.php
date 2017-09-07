@@ -6,27 +6,6 @@ use Illuminate\Console\Command;
 
 class CltvoSetSiteCommand extends Command
 {
-    /**
-     * resiter set classes
-     * @var array
-     */
-    protected $set_classes = [
-        'PermissionSet',
-        'RoleSet',
-        'AssociatePermissionRoleSet',
-        'FirstUserSet',
-        'AdminsUserSet',
-        'LanguageSet',
-        'PhotoSet',
-        'PublishSet',
-
-        'PageSectionTypeSet',
-        'PageSet',
-		'PageSectionSet',
-		'AssociatePageSectionPageSet',
-        'CopySet',
-        'ShapeSet'
-    ];
 
     /**
      * The name and signature of the console command.
@@ -69,13 +48,7 @@ class CltvoSetSiteCommand extends Command
             $this->call("migrate:refresh");
         }
 
-
-        foreach ($this->set_classes as $class) {
-
-            $seter = new $class;
-            $seter->CltvoPlow($this);
-            $this->line( '<info>'.$seter->CltvoGetLabel().':</info>'." set successfully." );
-        }
+		(new \DatabaseSeter($this))->run();
 
         if ($this->option("seed") || $this->option("clean")) {
             $this->call("db:seed");
