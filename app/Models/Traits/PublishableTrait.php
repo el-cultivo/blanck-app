@@ -1,18 +1,16 @@
-<?php namespace App\Models\Traits;
+<?php 
+
+namespace App\Models\Traits;
 
 use App\Models\Publish;
 use Carbon\Carbon;
 
-trait PublishableTrait {
-
-    /**
-     *
-     */
+trait PublishableTrait 
+{
     public function publish()
     {
         return $this->belongsTo(Publish::class, 'publish_id');
     }
-
 
     public function getIsPublishAttribute()
     {
@@ -62,14 +60,9 @@ trait PublishableTrait {
 
     public function scopePublished($query)
     {
-        // dd(date('Y-m-d H:m:s'));
-        return $query->with('publish')->where('publish_at',"<=",date("Y-m-d"))
-        ->whereHas('publish', function($q){
+        return $query->with('publish')->where('publish_at', '<=', date('Y-m-d H:m:s'))->whereHas('publish', function($q){
             $q->onlyPublished();
-        })
-        // ->where('publish_at', '<=', Carbon::now()->format('Y-m-d H:m:s') )
-        ;
-
+        });
     }
 
     public function scopeDraft($query)
@@ -78,7 +71,4 @@ trait PublishableTrait {
             $q->notPublished();
         });
     }
-
-
-
 }

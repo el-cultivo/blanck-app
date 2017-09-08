@@ -1,8 +1,11 @@
 <?php
+namespace App\Console\Cltvo\SetSite;
+
+use App\Console\Cltvo\SetSite\CltvoSetInterface;
 
 use Illuminate\Console\Command;
 
-abstract class CltvoSet
+abstract class CltvoSet implements CltvoSetInterface
 {
     /**
      * Etiqueta a desplegarse par ainformar final
