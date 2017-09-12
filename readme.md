@@ -12,7 +12,9 @@ Webpack se puede usar para compilar los archivos de JS aprovechando la funcional
 Los comandos son los siguientes:
 
 `npm run start` Compila archivos de JS asociados a `micorriza.js` y `micorriza-admin.js`
+
 `npm run start:functions` Compila archivos de JS asociados únicamente a `micorriza.js`
+
 `npm run start:admin-functions` Compila archivos de JS asociados únicamente a `micorriza-admin.js`
 
 El segundo y el tercer comando son m'as rápidos
@@ -21,37 +23,49 @@ __Es importante notar que con estos comandos Webpack no crea ningún archivo en 
 
 ### Para hacer un Build
 `npm run build:dev` Compila y guarda el archivo en `public`
+
 `npm run build:prod` Compila, minifica, realiza varias optmizaciones y guarda el archivo en `public`
 
 
-### env
+## .env
 
-´´´
+```
+#App
 APP_ENV=
-APP_DEBUG=
+APP_DEBUG=true
 APP_KEY=
-
 APP_NAME=
+
+#URL donde se muestra el sitio
 URL_SITE=
 
-DB_CONNECTION
+#DB_CONNECTION
 DB_HOST=
 DB_DATABASE=
 DB_USERNAME=
 DB_PASSWORD=
 
+#Datos del usuario
+CLTVO_USER_NAME=
+CLTVO_USER_FIRST_NAME=
+CLTVO_USER_LAST_NAME=
+CLTVO_USER_EMAIL=
+CLTVO_USER_PASS=
+
 CACHE_DRIVER=file
 SESSION_DRIVER=file
 QUEUE_DRIVER=sync
 
+#Cosas que podrían de defaults
 MAIL_DRIVER=
 MAIL_HOST=
 MAIL_PORT=
 MAIL_USERNAME=
 MAIL_PASSWORD=
 MAIL_ENCRYPTION=
-
 SEND_MAIL_AS=
+CLTVO_TEST_VIEW=
+
 
 CLTVO_MANUAL_URL="https://www.youtube.com/"
 
@@ -61,14 +75,7 @@ CLTVO_OPEN_REGISTER=false
 CLTVO_DEV_SEED=true
 CLTVO_BASE_SEED=1
 
-CLTVO_TEST_VIEW=
-
-CLTVO_USER_NAME=
-CLTVO_USER_FIRST_NAME=
-CLTVO_USER_LAST_NAME=
-CLTVO_USER_EMAIL=
-CLTVO_USER_PASS=
 
 CLTVO_ENCRYPTION_KEY=
 
-´´´
+```
