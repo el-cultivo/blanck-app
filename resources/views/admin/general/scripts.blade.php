@@ -71,8 +71,16 @@ mainVueStore.iva = 16;
 
 @yield('vue_store'){{-- debe estar antes del admin functions --}}
 
- {{-- @if($asset_versioning) --}}
-	 {{-- {!! Html::script(elixir('js/admin-functions.js')) !!} --}}
- {{-- @else --}}
-	 {!! Html::script('js/admin-functions.js') !!}
- {{-- @endif --}}
+@if(env('APP_DEBUG') == true) 
+    <script src="http://localhost:8080/admin-functions.js"></script> 
+    <script> 
+        if (window.CLTVO_ENV !== 'webpack') { 
+          	console.log('Estamos en desarollo y sin usar webpack'); 
+            var s = document.createElement( 'script' ); 
+            s.setAttribute( 'src', '{{asset('js/admin-functions.js')}}' ); 
+            document.body.appendChild( s ); 
+        } 
+    </script> 
+@else 
+    <script src="{{asset('js/admin-functions.js')}}"></script> 
+@endif 

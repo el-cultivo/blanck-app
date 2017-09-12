@@ -171,6 +171,10 @@ process.off = noop;
 process.removeListener = noop;
 process.removeAllListeners = noop;
 process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
@@ -881,6 +885,7 @@ var menuTreeToggler = exports.menuTreeToggler = function menuTreeToggler(label, 
 };
 
 },{}],10:[function(require,module,exports){
+(function (process){
 'use strict';
 
 var _dom = require('./functions/dom');
@@ -926,7 +931,16 @@ _constants.w.on('load', function () {
 
 console.log('Hola, estás bien sabroso de tu micorriza');
 
-},{"./alerts-controller":3,"./cltvo/constants.js":4,"./functions/dom":6,"./vue/components/cltvo-v-editor":334,"./vue/components/media-manager":338,"./vue/components/multi-images":339,"./vue/components/pages-simple-cruds":340,"./vue/components/single-image":341,"./vue/main-vue":344,"./vue/main/admin":345}],11:[function(require,module,exports){
+//cosas relacionadas únicamente con la version de desarrollo
+if (process.env.NODE_ENV === 'webpack') {
+	window.CLTVO_ENV = 'webpack';
+} //corre en modo webpack, necesario para hacer HMR
+if (module.hot) {
+	module.hot.accept();
+} //permite hacer Hot Module Replacement
+
+}).call(this,require('_process'))
+},{"./alerts-controller":3,"./cltvo/constants.js":4,"./functions/dom":6,"./vue/components/cltvo-v-editor":334,"./vue/components/media-manager":338,"./vue/components/multi-images":339,"./vue/components/pages-simple-cruds":340,"./vue/components/single-image":341,"./vue/main-vue":344,"./vue/main/admin":345,"_process":2}],11:[function(require,module,exports){
 (function (global){
 /**
  * lodash (Custom Build) <https://lodash.com/>
@@ -26060,10 +26074,9 @@ var sectionConfig = { //tiene que ir después de componentForm
 	components: { componentForm: componentForm },
 	mixins: [_sortableListByClick.sortableListByClick],
 	methods: _sortableListByClick.sortableOnClickCbs
-};
 
-//section
-var sectionProtected = exports.sectionProtected = (0, _simpleCrudComponentMakers.simpleCrud)('#section-protected-template', { props: ['section', 'index'] });
+	//section
+};var sectionProtected = exports.sectionProtected = (0, _simpleCrudComponentMakers.simpleCrud)('#section-protected-template', { props: ['section', 'index'] });
 var sectionMultipleUnlimited = exports.sectionMultipleUnlimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-unlimited-template', sectionConfig);
 var sectionMultipleLimited = exports.sectionMultipleLimited = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-limited-template', sectionConfig);
 var sectionMultipleFixed = exports.sectionMultipleFixed = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-fixed-template', sectionConfig);

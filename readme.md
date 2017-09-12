@@ -2,7 +2,27 @@
 
 ## Instalación de la parte del front
 `npm i`
-Luego es necesario ir a las carpetas `resources/assets/sass/` y `resources/assets/js/` y seguir los pasos de sus respectivos readmes. Finalmente para probar que todo funcione correctamente y el proyecto compile `gulp watch`
+Luego es necesario ir a las carpetas `resources/assets/sass/` y `resources/assets/js/` y seguir los pasos de sus respectivos readmes. Finalmente para comprobar que todo funcione correctamente y el proyecto compile `gulp watch`
+
+## Uso con Webpack
+
+### Para el desarrollo
+Webpack se puede usar para compilar los archivos de JS aprovechando la funcionalidad de Hot Module Replacement (HMR) que Webpack provee y que nos permite desarrollar JS sin tener que recagar la p'agina cada vez que salvamos el archivo.
+
+Los comandos son los siguientes:
+
+`npm run start` Compila archivos de JS asociados a `micorriza.js` y `micorriza-admin.js`
+`npm run start:functions` Compila archivos de JS asociados únicamente a `micorriza.js`
+`npm run start:admin-functions` Compila archivos de JS asociados únicamente a `micorriza-admin.js`
+
+El segundo y el tercer comando son m'as rápidos
+
+__Es importante notar que con estos comandos Webpack no crea ningún archivo en la carpeta `public` y todo sucede en el cache.__
+
+### Para hacer un Build
+`npm run build:dev` Compila y guarda el archivo en `public`
+`npm run build:prod` Compila, minifica, realiza varias optmizaciones y guarda el archivo en `public`
+
 
 ### env
 

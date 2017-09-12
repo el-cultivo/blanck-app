@@ -5,11 +5,8 @@
 import _ from 'ramda';
 import {crudAjax} from '../mixins/crud-ajax';
 var Vue = require('vue');
-var VueResource = Vue.use(require('vue-resource'));
 import {moveInArray, orderAscending, tapLog} from '../../functions/pure';
 import {singleImage} from './single-image';
-import Sortable from 'vue-sortable';
-Vue.use(Sortable);
 
 export var multiImages = Vue.component('multi-images', {
 	template: '#multi-images-template',

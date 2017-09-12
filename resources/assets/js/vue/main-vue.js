@@ -1,7 +1,7 @@
 import R from 'ramda';
 import Vue from 'vue';
 import VueResource from 'vue-resource';
-
+import Sortable from 'vue-sortable';
 import {crudAjax} from './mixins/crud-ajax';
 import {menusStore, menusMixin} from './mixins/menus';
 import {JsonParseOrFalse} from '../functions/pure';
@@ -26,6 +26,7 @@ if (window.VueHtml5Editor) {
 	});
 }
 
+Vue.use(Sortable);
 Vue.use(VueResource);
 
 export const mainVue = function(config ={}, components = {}) {
