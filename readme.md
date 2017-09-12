@@ -56,7 +56,7 @@ CACHE_DRIVER=file
 SESSION_DRIVER=file
 QUEUE_DRIVER=sync
 
-#Cosas que podrían de defaults
+#Cosas que podrían tener defaults
 MAIL_DRIVER=
 MAIL_HOST=
 MAIL_PORT=
@@ -64,16 +64,17 @@ MAIL_USERNAME=
 MAIL_PASSWORD=
 MAIL_ENCRYPTION=
 SEND_MAIL_AS=
+
+#o ser más descriptivas
 CLTVO_TEST_VIEW=
-
-
-CLTVO_MANUAL_URL="https://www.youtube.com/"
-
 CLTVO_DEV_MODE=true
 CLTVO_OPEN_SITE=false
 CLTVO_OPEN_REGISTER=false
 CLTVO_DEV_SEED=true
 CLTVO_BASE_SEED=1
+
+
+CLTVO_MANUAL_URL="https://www.youtube.com/"
 
 
 CLTVO_ENCRYPTION_KEY=
