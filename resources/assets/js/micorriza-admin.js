@@ -20,6 +20,11 @@ import {
 		componentForm,
 		currentPageSections
 	} from './vue/components/pages-simple-cruds';
+
+import {
+	rolesMultiSelect
+} from './vue/components/simple-cruds';
+
 import {mediaManager} from './vue/components/media-manager';
 import './vue/components/multi-images';
 import './vue/components/single-image';
@@ -41,7 +46,8 @@ w.on('load', () => {
 			sectionMultipleLimited,
 			sectionMultipleFixed,
 			componentForm,
-			currentPageSections
+			currentPageSections,
+			rolesMultiSelect
 		}]],
 		['#alert__container', alertsController, 'init', []],
 		['#admin-main-menu', adminMainMenu, undefined, [$,'.nav_JS','.label_JS','.tree_JS', 'label_active']],

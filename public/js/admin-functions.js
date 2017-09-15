@@ -23148,6 +23148,8 @@ var _admin = require('./vue/main/admin');
 
 var _pagesSimpleCruds = require('./vue/components/pages-simple-cruds');
 
+var _simpleCruds = require('./vue/components/simple-cruds');
+
 var _mediaManager = require('./vue/components/media-manager');
 
 require('./vue/components/multi-images');
@@ -23156,6 +23158,7 @@ require('./vue/components/single-image');
 
 require('./vue/components/cltvo-v-editor');
 
+//Vue
 _constants.w.on('load', function () {
 	(0, _dom.ifElementExistsThenLaunch)([[], ['#admin-vue', _mainVue.mainVue, undefined, [_admin.adminVue, {
 		mediaManager: _mediaManager.mediaManager,
@@ -23170,16 +23173,14 @@ _constants.w.on('load', function () {
 		sectionMultipleLimited: _pagesSimpleCruds.sectionMultipleLimited,
 		sectionMultipleFixed: _pagesSimpleCruds.sectionMultipleFixed,
 		componentForm: _pagesSimpleCruds.componentForm,
-		currentPageSections: _pagesSimpleCruds.currentPageSections
+		currentPageSections: _pagesSimpleCruds.currentPageSections,
+		rolesMultiSelect: _simpleCruds.rolesMultiSelect
 	}]], ['#alert__container', _alertsController.alertsController, 'init', []], ['#admin-main-menu', _adminMainMenu.adminMainMenu, undefined, [$, '.nav_JS', '.label_JS', '.tree_JS', 'label_active']]]);
 });
 
-//Vue
-
-
 console.log('Hola, estás bien sabroso de tu micorriza');
 
-},{"./admin-main-menu":8,"./alerts-controller":9,"./cltvo/constants.js":10,"./functions/dom":12,"./vue/components/cltvo-v-editor":17,"./vue/components/media-manager":21,"./vue/components/multi-images":22,"./vue/components/pages-simple-cruds":23,"./vue/components/single-image":24,"./vue/main-vue":27,"./vue/main/admin":28}],17:[function(require,module,exports){
+},{"./admin-main-menu":8,"./alerts-controller":9,"./cltvo/constants.js":10,"./functions/dom":12,"./vue/components/cltvo-v-editor":17,"./vue/components/media-manager":21,"./vue/components/multi-images":22,"./vue/components/pages-simple-cruds":24,"./vue/components/simple-cruds":25,"./vue/components/single-image":26,"./vue/main-vue":29,"./vue/main/admin":30}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23403,7 +23404,7 @@ var pageSectionsCheckboxUpdateSuccess = exports.pageSectionsCheckboxUpdateSucces
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.checkboxesMethods = exports.postWithMaterialNote = exports.openModalFromSimpleImageCrud = exports.openModal = exports.makePost = undefined;
+exports.checkboxesMethods = exports.openMultiSelect = exports.postWithMaterialNote = exports.openModalFromSimpleImageCrud = exports.closeModal = exports.openModal = exports.makePost = undefined;
 
 var _ramda = require('ramda');
 
@@ -23423,6 +23424,14 @@ var openModal = exports.openModal = function openModal(name, $index) {
 	$(name).modal('open');
 };
 
+var closeModal = exports.closeModal = function closeModal(name) {
+	if (this.modal.length > 0) {
+		this.modal.modal('close');
+	} else {
+		$(name).modal('close');
+	}
+};
+
 var openModalFromSimpleImageCrud = exports.openModalFromSimpleImageCrud = function openModalFromSimpleImageCrud(name, $index) {
 	if ($index === undefined) {
 		return;
@@ -23439,6 +23448,20 @@ var postWithMaterialNote = exports.postWithMaterialNote = function postWithMater
 		$this.text(note.html());
 	});
 	this.post($event);
+};
+
+var openMultiSelect = exports.openMultiSelect = function openMultiSelect(selector) {
+
+	$('html').click(function () {
+		$('.container-items_JS').slideUp();
+	});
+	$('.submenu_JS').click(function (event) {
+		event.stopPropagation();
+	});
+	$(".select-wrapper").click(function () {
+		$(".select-wrapper").not(this).next(".container-items_JS").slideUp("slow");
+		$(this).next(".container-items_JS").slideDown("slow");
+	});
 };
 
 var checkboxesMethods = exports.checkboxesMethods = function checkboxesMethods(options) {
@@ -23653,7 +23676,7 @@ var mediaManager = exports.mediaManager = Vue.extend({
 	}
 });
 
-},{"../../file-dnd.js":11,"../../functions/pure":13,"../mixins/crud-ajax":30,"ramda":3,"vue":7,"vue-resource":5}],22:[function(require,module,exports){
+},{"../../file-dnd.js":11,"../../functions/pure":13,"../mixins/crud-ajax":32,"ramda":3,"vue":7,"vue-resource":5}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23778,7 +23801,70 @@ var multiImages = exports.multiImages = Vue.component('multi-images', {
 	}
 });
 
-},{"../../functions/pure":13,"../mixins/crud-ajax":30,"./single-image":24,"ramda":3,"vue":7,"vue-resource":5,"vue-sortable":6}],23:[function(require,module,exports){
+},{"../../functions/pure":13,"../mixins/crud-ajax":32,"./single-image":26,"ramda":3,"vue":7,"vue-resource":5,"vue-sortable":6}],23:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.multiSelect = undefined;
+
+var _ramda = require('ramda');
+
+var _ramda2 = _interopRequireDefault(_ramda);
+
+var _simpleCrudComponentMakers = require('../factories/simple-crud-component-makers.js');
+
+var _simpleCrudHelpers = require('./helpers/simple-crud-helpers');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var toNumberMap = _ramda2.default.map(function (n) {
+	return Number(n);
+});
+
+var multiSelect = exports.multiSelect = _ramda2.default.curry(function (template) {
+
+	var multiSelectConfig = {
+		props: ['itemsIds'],
+		data: { checkedItems: [] },
+		methods: {
+			openMultiSelect: _simpleCrudHelpers.openMultiSelect,
+			openModal: _simpleCrudHelpers.openModal,
+
+			is_checked: function is_checked(id) {
+				return _ramda2.default.contains(Number(id), toNumberMap(this.checkedItems)) ? true : false;
+			},
+			onUpdateSuccess: function onUpdateSuccess(body, input) {
+				this.checkedItems = _ramda2.default.map(function (n) {
+					return n;
+				}, body.data);
+			}
+		},
+		ready: function ready() {
+
+			this.checkedItems = _ramda2.default.map(function (n) {
+				return n;
+			}, this.itemsIds);
+		},
+
+		computed: {
+			labels: function labels() {
+				var _this = this;
+
+				var check = _ramda2.default.filter(function (item) {
+					return _ramda2.default.contains(item.id, _this.checkedItems);
+				}, this.list || []);
+				return _ramda2.default.map(function (item) {
+					return item.label;
+				}, check);
+			}
+		}
+	};
+	return (0, _simpleCrudComponentMakers.simpleCrud)(template, multiSelectConfig);
+});
+
+},{"../factories/simple-crud-component-makers.js":27,"./helpers/simple-crud-helpers":20,"ramda":3}],24:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23845,7 +23931,52 @@ var sectionMultipleLimited = exports.sectionMultipleLimited = (0, _simpleCrudCom
 var sectionMultipleFixed = exports.sectionMultipleFixed = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-fixed-template', sectionConfig);
 var currentPageSections = exports.currentPageSections = (0, _simpleCrudComponentMakers.simpleCrud)('#current-page-sections-template', { props: ['currentPage'], components: { sectionProtected: sectionProtected, sectionMultipleUnlimited: sectionMultipleUnlimited, sectionMultipleLimited: sectionMultipleLimited, sectionMultipleFixed: sectionMultipleFixed } });
 
-},{"../../functions/dom":12,"../../functions/pure":13,"../components/g-map":18,"../factories/simple-crud-component-makers.js":25,"../mixins/mexico-states-and-municipalities":32,"../mixins/multilist-sortable":33,"../mixins/number-filters":34,"../mixins/sortable":37,"../mixins/sortable-list-by-click":36,"./helpers/pages-simple-crud-helpers":19,"./helpers/simple-crud-helpers":20,"ramda":3,"vue":7}],24:[function(require,module,exports){
+},{"../../functions/dom":12,"../../functions/pure":13,"../components/g-map":18,"../factories/simple-crud-component-makers.js":27,"../mixins/mexico-states-and-municipalities":35,"../mixins/multilist-sortable":36,"../mixins/number-filters":37,"../mixins/sortable":40,"../mixins/sortable-list-by-click":39,"./helpers/pages-simple-crud-helpers":19,"./helpers/simple-crud-helpers":20,"ramda":3,"vue":7}],25:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.rolesMultiSelect = undefined;
+
+var _ramda = require('ramda');
+
+var _ramda2 = _interopRequireDefault(_ramda);
+
+var _vue = require('vue');
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _simpleCrudComponentMakers = require('../factories/simple-crud-component-makers.js');
+
+var _multiSelect = require('../components/multi-select');
+
+var _gMap = require('../components/g-map');
+
+var _numberFilters = require('../mixins/number-filters');
+
+var _sortable = require('../mixins/sortable');
+
+var _multilistSortable = require('../mixins/multilist-sortable');
+
+var _sortableListByClick = require('../mixins/sortable-list-by-click');
+
+var _listFilters = require('../mixins/list-filters');
+
+var _mexicoStatesAndMunicipalities = require('../mixins/mexico-states-and-municipalities');
+
+var _pure = require('../../functions/pure');
+
+var _dom = require('../../functions/dom');
+
+var _simpleCrudHelpers = require('./helpers/simple-crud-helpers');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// usuarios
+var rolesMultiSelect = exports.rolesMultiSelect = (0, _multiSelect.multiSelect)('#roles-multi-select-template');
+
+},{"../../functions/dom":12,"../../functions/pure":13,"../components/g-map":18,"../components/multi-select":23,"../factories/simple-crud-component-makers.js":27,"../mixins/list-filters":33,"../mixins/mexico-states-and-municipalities":35,"../mixins/multilist-sortable":36,"../mixins/number-filters":37,"../mixins/sortable":40,"../mixins/sortable-list-by-click":39,"./helpers/simple-crud-helpers":20,"ramda":3,"vue":7}],26:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23861,7 +23992,7 @@ var singleImage = exports.singleImage = Vue.component('single-image', {
 	mixins: [_singleImageMixin.singleImageMixin]
 });
 
-},{"../mixins/single-image-mixin":35,"vue":7}],25:[function(require,module,exports){
+},{"../mixins/single-image-mixin":38,"vue":7}],27:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24045,7 +24176,7 @@ var simpleModalCrud = exports.simpleModalCrud = _ramda2.default.curry(function (
 	return simpleCrud(template, modalOptions);
 });
 
-},{"../../functions/pure":13,"../helpers":26,"../mixins/crud-ajax":30,"../mixins/single-image-mixin":35,"../mixins/v-for-filters.js":38,"ramda":3,"vue":7,"vue-resource":5}],26:[function(require,module,exports){
+},{"../../functions/pure":13,"../helpers":28,"../mixins/crud-ajax":32,"../mixins/single-image-mixin":38,"../mixins/v-for-filters.js":41,"ramda":3,"vue":7,"vue-resource":5}],28:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24084,7 +24215,7 @@ var turnInputTypeIntoNumber = exports.turnInputTypeIntoNumber = function turnInp
 	}, inputs);
 };
 
-},{"../functions/pure":13,"ramda":3}],27:[function(require,module,exports){
+},{"../functions/pure":13,"ramda":3}],29:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24196,7 +24327,7 @@ var mainVue = exports.mainVue = function mainVue() {
 	});
 };
 
-},{"../functions/dom":12,"../functions/pure":13,"../logoManipulations":14,"../menu-tree-toggler":15,"./mixins/crud-ajax":30,"./mixins/menus":31,"ramda":3,"vue":7,"vue-resource":5}],28:[function(require,module,exports){
+},{"../functions/dom":12,"../functions/pure":13,"../logoManipulations":14,"../menu-tree-toggler":15,"./mixins/crud-ajax":32,"./mixins/menus":34,"ramda":3,"vue":7,"vue-resource":5}],30:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24228,7 +24359,7 @@ var adminVue = exports.adminVue = {
 	}
 };
 
-},{"../mixins/mexico-states-and-municipalities":32,"ramda":3}],29:[function(require,module,exports){
+},{"../mixins/mexico-states-and-municipalities":35,"ramda":3}],31:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24243,7 +24374,7 @@ var componentInteractionsWithMediaManager = exports.componentInteractionsWithMed
 	}
 };
 
-},{}],30:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24416,7 +24547,127 @@ var crudAjax = exports.crudAjax = {
 	}
 };
 
-},{"../../alerts-controller.js":9,"../../functions/pure":13,"ramda":3}],31:[function(require,module,exports){
+},{"../../alerts-controller.js":9,"../../functions/pure":13,"ramda":3}],33:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.listFilters = exports.isStringArray = exports.isPathInObjArray = exports.isPath = undefined;
+
+var _lodash = require('lodash.debounce');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _pure = require('../../functions/pure');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var R = require('ramda');
+/**
+ * Mixin: listFilter
+ *
+ * V 1.1.2
+ *
+ * Para información sobre los tipos descritos aquí, revisar list-filter.md
+ * @type {Object}
+ */
+
+// isPath :: Path [string] -> String search -> Obj {path: String} -> Bool
+var isPath = exports.isPath = _pure.pathHasString;
+
+// isPathInObjArray :: Path [String path_to_array]  -> Path [String path_to_text] -> String search -> Obj {path: String} -> Bool
+var isPathInObjArray = exports.isPathInObjArray = _pure.stringInPathOfObjArray;
+
+// isStringArray :: Path [String]  -> String search -> Obj {path: [String]} -> Bool
+var isStringArray = exports.isStringArray = _pure.substringInStringArray;
+
+//Como hacer otros filtros
+//Crear una función que al al menos reciba un String y un Objeto* y devuelva un Booleano, posiblemente también deber'a de recibir paths a las propiedades donde se desee buscar. //	MyFilter :: ?? -> String search -> {*}  ->  Bool
+//	* Nótar que la función no recibe un array, sino uno de los objetos del array, la fución multiTextFilter2 es la que se encarga de habilitar, para esta función la iteración sobre el array
+var listFilters = exports.listFilters = {
+	data: function data() {
+		return {
+			// list: [],//definir en el componenten o si se usa en una instancia Root de Vue
+			filters: {}, // type FilterSpec, to be defined on receiver component
+			filter_by: '', // type FilterBy,
+			previous_filter: '',
+			search: '',
+			previous_search: '',
+			filtered_list: [],
+			memorized_filters: {} //tenemos que generar el key del array usando todos los parametros de la busqueda para poder diferenciar las otras posibilidades, por ahora son filter_by y search, por lo tanto nuesto objeto se debe ver así
+			//{
+			//	filter_by_${this.filter_by}$search_${this.search} : []
+			//}
+		};
+	},
+
+
+	computed: {
+		pre_mapped_list: function pre_mapped_list() {
+			return this.list;
+		}
+	},
+
+	ready: function ready() {
+		this.filterList();
+	},
+
+
+	methods: {
+		filterList: (0, _lodash2.default)(function () {
+			var filters = R.path([this.filter_by, 'filters'], this.filters);
+			//Optimización: memoización
+			var filtered_list = R.pathOr([], ['memorized_filters', 'filter_by_' + this.filter_by + '$search_' + this.search], this);
+			if (filtered_list.length !== 0) {
+				this.filtered_list = filtered_list;
+				return;
+			}
+
+			if (filters !== undefined && this.search !== '' && this.search.length >= 2) {
+
+				//Optimización: usando previous_search y previous_filter
+				var list = this.pre_mapped_list;
+				if (this.search.indexOf(this.previous_search) === 0 && this.previous_search !== '' && this.previous_filter === this.filter_by) {
+					//si la busqueda es un refinamiento de la busqueda anterior i.e. Primero se busca "di" y luego "diego", entonces iteramos sobre la lista previamente filtrada, de otro modo, iteramos sobre la lista original completa
+					list = this.filtered_list;
+				}
+
+				//filtrado
+				filtered_list = (0, _pure.multiTextFilter2)(filters, this.search, list || []);
+				this.filtered_list = filtered_list;
+				this.memorized_filters['filter_by_' + this.filter_by + '$search_' + this.search] = filtered_list;
+			} else {
+				this.filtered_list = this.pre_mapped_list || [];
+			}
+
+			//actualización de la búsqueda previa
+			this.previous_search = this.search;
+			// console.log("this.previous_search", this.previous_search);
+			this.previous_filter = this.filter_by;
+		}, 100)
+	},
+
+	watch: {
+		list: function list() {
+			//al actualizarse la lista original tenemos que resetar todo el estado que nos permite optimizar las búsquedas
+			this.memorized_filters = {};
+			this.previous_search = '';
+			this.filterList();
+		},
+		pre_mapped_list: function pre_mapped_list() {
+			this.filterList();
+		},
+		filter_by: function filter_by() {
+			this.filterList();
+		},
+		search: function search() {
+			this.filterList();
+		}
+	}
+};
+
+},{"../../functions/pure":13,"lodash.debounce":1,"ramda":3}],34:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24482,7 +24733,7 @@ var menusMixin = exports.menusMixin = {
 	}
 };
 
-},{"ramda":3}],32:[function(require,module,exports){
+},{"ramda":3}],35:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24538,7 +24789,7 @@ var mexicoStatesAndMunicipalities = exports.mexicoStatesAndMunicipalities = {
 	}
 };
 
-},{"ramda":3}],33:[function(require,module,exports){
+},{"ramda":3}],36:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24608,7 +24859,7 @@ var multilistSortable = exports.multilistSortable = {
 
 _vue2.default.use(_vueSortable2.default);
 
-},{"../../functions/pure":13,"ramda":3,"vue":7,"vue-sortable":6}],34:[function(require,module,exports){
+},{"../../functions/pure":13,"ramda":3,"vue":7,"vue-sortable":6}],37:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24633,7 +24884,7 @@ var numberFilters = exports.numberFilters = {
 	}
 };
 
-},{}],35:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24725,7 +24976,7 @@ var singleImageMixin = exports.singleImageMixin = {
 	}
 };
 
-},{"../helpers":26,"./component-interactions-with-media-manager.js":29,"./crud-ajax":30,"ramda":3,"vue":7}],36:[function(require,module,exports){
+},{"../helpers":28,"./component-interactions-with-media-manager.js":31,"./crud-ajax":32,"ramda":3,"vue":7}],39:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24773,7 +25024,7 @@ var sortableOnClickCbs = exports.sortableOnClickCbs = {
 	}
 };
 
-},{"../../functions/pure":13}],37:[function(require,module,exports){
+},{"../../functions/pure":13}],40:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24821,7 +25072,7 @@ var sortable = exports.sortable = {
 
 _vue2.default.use(_vueSortable2.default);
 
-},{"../../functions/pure":13,"ramda":3,"vue":7,"vue-sortable":6}],38:[function(require,module,exports){
+},{"../../functions/pure":13,"ramda":3,"vue":7,"vue-sortable":6}],41:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

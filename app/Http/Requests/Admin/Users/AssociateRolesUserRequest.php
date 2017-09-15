@@ -39,7 +39,7 @@ class AssociateRolesUserRequest extends Request
 		}
 
         $rules = [
-            'roles'         => 'required|array',
+            'roles'         => 'array',
             'roles.*'       => 'required|exists:roles,id'
         ];
 
@@ -55,8 +55,10 @@ class AssociateRolesUserRequest extends Request
     {
         return [
 
-            'roles.required' => trans('users.roles.required'),
-			'roles.required' => trans('users.roles.array'),
+			"same_user.required"		=> trans("users.same_user.required"),
+			"same_user.in"			=> trans("users.same_user.in"),
+
+			'roles.array' => trans('users.roles.array'),
 
             'roles.*.required' => trans('users.roles.required'),
             'roles.*.exist' => trans('users.roles.exist'),

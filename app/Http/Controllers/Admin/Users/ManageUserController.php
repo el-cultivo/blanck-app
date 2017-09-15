@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Admin\Users\CreateUserRequest;
 use App\Http\Requests\Admin\Users\UpdateUserRequest;
+use App\Http\Requests\Admin\Users\AssociateRolesUserRequest;
 
 use App\Notifications\Admin\Users\ActivationAccountNotification;
 
@@ -16,6 +17,7 @@ use App\Models\Users\User;
 use App\Models\Users\Role;
 
 use Redirect;
+use Response;
 
 class ManageUserController extends Controller
 {
@@ -41,7 +43,6 @@ class ManageUserController extends Controller
     public function create()
     {
         $data = [
-            "rolesList"     => $this->user->rolesListToSelect(),
             "user_edit"     => new User
         ];
 
@@ -93,8 +94,8 @@ class ManageUserController extends Controller
     public function edit(User $user_editable)
     {
         $data = [
-            "rolesList"      => $this->user->rolesListToSelect(),
-            "user_edit"      => $user_editable
+            "user_edit"      => $user_editable,
+			'roles'         => Role::getForThisUser($this->user)->get(),
         ];
 
         //Regreso a la vista de index la informacion de los usuarios
