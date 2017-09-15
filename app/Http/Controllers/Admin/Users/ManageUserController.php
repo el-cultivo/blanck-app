@@ -121,13 +121,13 @@ class ManageUserController extends Controller
             return Redirect::back()->withErrors([trans('manage_users.edit.error')]); //Enviar el mensaje con el idioma que corresponde
         }
 
-        if( $user_editable->id == $this->user->id   ){
-            if( !( empty( array_diff( $this->user->roleLists(), $input['roles']) ) && empty( array_diff($input['roles'], $this->user->roleLists())  ) ) ){
-                return Redirect::back()->withErrors(["No pudes modificar tus propios roles"]); //Enviar el mensaje con el idioma que corresponde
-            }
-        }else{
-            $user_editable->roles()->sync($input['roles']);
-        }
+        // if( $user_editable->id == $this->user->id   ){
+        //     if( !( empty( array_diff( $this->user->roleLists(), $input['roles']) ) && empty( array_diff($input['roles'], $this->user->roleLists())  ) ) ){
+        //         return Redirect::back()->withErrors(["No pudes modificar tus propios roles"]); //Enviar el mensaje con el idioma que corresponde
+        //     }
+        // }else{
+        //     $user_editable->roles()->sync($input['roles']);
+        // }
 
         return Redirect::route( 'admin::users.edit', [$user_editable->id] )->with('status', trans('manage_users.edit.success'));
     }

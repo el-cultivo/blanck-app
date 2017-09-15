@@ -3,16 +3,14 @@
     'route'              => $form_route,
     'role'               => 'form' ,
     'id'                 => $form_id,
-    'class'              => 'col s10  offset-s1',
+    'class'              => '',
     ]) !!}
     <div class="row">
 
-        <div class="input-field col s6">
+        <div class="input-field col s5  offset-s1">
             {!! Form::label('first_name', "Nombre(s):", [
-                'class' => '',
-
-
-                ]) !!}
+                'class' => 'active',
+            ]) !!}
             {!! Form::text('first_name', $user_edit->first_name, [
                 'class'         => 'validate',
                 'required'      => 'required',
@@ -21,9 +19,9 @@
             ]) !!}
         </div>
 
-        <div class=" input-field col s6">
+        <div class=" input-field col s5">
             {!! Form::label('last_name',"Apellido(s):", [
-                'class' => '',
+                'class' => 'active',
 
 
                 ]) !!}
@@ -35,7 +33,7 @@
             ]) !!}
         </div>
 
-        <div class="input-field col s6">
+        <div class="input-field col s10  offset-s1">
             {!! Form::label('email', "Email:", [
                 'class' => '',
 
@@ -50,23 +48,7 @@
 
         </div>
 
-        <div class="input-field col s6 ">
-
-            {!! Form::select('roles[]', $rolesList, $user_edit->getFirstRoleId(), [
-                'class'         => 'validate users-create__role-select',
-                'required'      => 'required',
-                 'placeholder'   => "Seleccionar",
-                'form'          => $form_id,
-                "id"            => "roles"
-            ])  !!}
-
-            {!! Form::label('roles', "Roles:", [
-
-            ]) !!}
-
-        </div>
-
-        <div class="col s12 ">
+        <div class="col s10  offset-s1 ">
             <div class="pull-right">
                 {!! Form::submit("Guardar", [
                     'class' => 'btn waves-effect waves-light',
