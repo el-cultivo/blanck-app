@@ -64,10 +64,10 @@ class ManageUserController extends Controller
 
         $newUser = User::CltvoCreate($input);
 
-        $newUser->roles()->sync($input['roles']);
-
+        if (!$newUser) {
+            return Redirect::back()->withErrors([trans('manage_users.create.error')]);
+        }
     //enviamos correo de activacion
-        // $this->sendRegisterMail($newUser);
         $newUser->notify( new ActivationAccountNotification);
 
         return Redirect::route( 'admin::users.edit', [$newUser->id] )->with('status', trans('manage_users.create.success'));
