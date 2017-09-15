@@ -70,7 +70,7 @@ class ManageUserController extends Controller
         // $this->sendRegisterMail($newUser);
         $newUser->notify( new ActivationAccountNotification);
 
-        return Redirect::route( 'admin::users.edit', [$newUser->id] )->with('status', trans('manage_users.success.create')); //Enviar el mensaje con el idioma que corresponde
+        return Redirect::route( 'admin::users.edit', [$newUser->id] )->with('status', trans('manage_users.create.success'));
     }
 
     /**
@@ -118,7 +118,7 @@ class ManageUserController extends Controller
         $user_editable->email      =$input['email'];
 
         if (!$user_editable->save()) {
-            return Redirect::back()->withErrors(["El usuario no pudo ser gurdado correctamente"]); //Enviar el mensaje con el idioma que corresponde
+            return Redirect::back()->withErrors([trans('manage_users.edit.error')]); //Enviar el mensaje con el idioma que corresponde
         }
 
         if( $user_editable->id == $this->user->id   ){
@@ -129,7 +129,7 @@ class ManageUserController extends Controller
             $user_editable->roles()->sync($input['roles']);
         }
 
-        return Redirect::route( 'admin::users.edit', [$user_editable->id] )->with('status', "Usuario correctamente actualizado");
+        return Redirect::route( 'admin::users.edit', [$user_editable->id] )->with('status', trans('manage_users.edit.success'));
     }
 
     /**
@@ -142,10 +142,10 @@ class ManageUserController extends Controller
     {
 
         if (!$erasable_user->delete()) {
-            return Redirect::back()->withErrors(["El usuario no pudo ser desactivdo"]); //Enviar el mensaje con el idioma que corresponde
+            return Redirect::back()->withErrors([trans('manage_users.delete.error')]);
         }
 
-        return Redirect::route('admin::users.trash')->with('status', "El usuario fue correctamente desactivado");
+        return Redirect::route('admin::users.trash')->with('status',trans('manage_users.delete.success'));
     }
 
     public function trash()
@@ -160,9 +160,9 @@ class ManageUserController extends Controller
     {
 
         if (!$user_trashed->restore()) {
-            return Redirect::back()->withErrors(["El usuario no pudo ser reactivado"]); //Enviar el mensaje con el idioma que corresponde
+            return Redirect::back()->withErrors([trans('manage_users.recovery.error')]);
         }
 
-        return Redirect::route('admin::users.index')->with('status', "El usuario fue correctamente reactivado");
+        return Redirect::route('admin::users.index')->with('status', trans('manage_users.recovery.success'));
     }
 }
