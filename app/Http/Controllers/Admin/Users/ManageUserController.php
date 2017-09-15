@@ -121,16 +121,23 @@ class ManageUserController extends Controller
             return Redirect::back()->withErrors([trans('manage_users.edit.error')]); //Enviar el mensaje con el idioma que corresponde
         }
 
-        // if( $user_editable->id == $this->user->id   ){
-        //     if( !( empty( array_diff( $this->user->roleLists(), $input['roles']) ) && empty( array_diff($input['roles'], $this->user->roleLists())  ) ) ){
-        //         return Redirect::back()->withErrors(["No pudes modificar tus propios roles"]); //Enviar el mensaje con el idioma que corresponde
-        //     }
-        // }else{
-        //     $user_editable->roles()->sync($input['roles']);
-        // }
+
 
         return Redirect::route( 'admin::users.edit', [$user_editable->id] )->with('status', trans('manage_users.edit.success'));
     }
+
+	public function roles(AssociateRolesUserRequest $request, User $user_editable){
+		$input = $request->all();
+		$roles = isset($input["roles"]) ? $input["roles"] : [];
+
+		$user_editable->roles()->sync($roles);
+
+		return Response::json([ // todo bien
+			'data'    => $user_editable->load("roles")->roles_ids,
+			'message' => [trans('manage_users.associate.roles.success')],
+			'success' => true
+		]);
+	}
 
     /**
      * Remove the specified resource from storage.
