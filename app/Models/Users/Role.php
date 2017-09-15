@@ -35,6 +35,10 @@ class Role extends Model
         'admin'
     ];
 
+	protected $hidden = [
+        "created_at",
+        "updated_at",
+    ];
 
     public function scopeCollectRolesBySlug($query,$role_slug)
     {
@@ -86,6 +90,22 @@ class Role extends Model
         return $query->where(
             'slug',"!=" ,$this->getSuperAdminSlug()
         )->get();
+    }
+
+    public function scopeNotSuperAdminRoles($query)
+    {
+        return $query->where(
+            'slug',"!=" ,$this->getSuperAdminSlug()
+        );
+    }
+
+    public function scopeGetForThisUser($query, User $user)
+    {
+        if ($user->isSuperAdmin()) {
+            return $query;
+        }
+
+        return $query->notSuperAdminRoles();
     }
 
     public static function getSuperAdmin()
@@ -167,5 +187,4 @@ class Role extends Model
 			$q->where( ["slug"    => $permission_slug]);
 		});
 	}
-
 }
