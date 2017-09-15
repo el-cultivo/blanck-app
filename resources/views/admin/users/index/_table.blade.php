@@ -27,13 +27,9 @@
                 <td class="">{{ $user_edit->email }}</td>
 
                 <td class="center-align">
-
-                    @if (!$user_edit->hasNoRoles())
-                        <a href="{{ route( 'admin::users.edit', [$user_edit->id] ) }}" class="btn-floating">
-                            <i class="material-icons waves-effect waves-light " >mode_edit</i>
-                        </a>
-                    @endif
-
+                    <a href="{{ route( 'admin::users.edit', [$user_edit->id] ) }}" class="btn-floating">
+                        <i class="material-icons waves-effect waves-light " >mode_edit</i>
+                    </a>
                 </td>
 
 
