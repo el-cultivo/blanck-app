@@ -1,6 +1,6 @@
 <template id="pages-group-template">
     <div :id="label" class="collection" >
-        <table class="bordered highlight responsive-table dataTable_JS">
+        <table class="bordered highlight responsive-table ">
             <thead class="">
                 <tr>
                     <th></th>
