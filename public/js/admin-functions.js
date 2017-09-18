@@ -23174,7 +23174,9 @@ _constants.w.on('load', function () {
 		sectionMultipleFixed: _pagesSimpleCruds.sectionMultipleFixed,
 		componentForm: _pagesSimpleCruds.componentForm,
 		currentPageSections: _pagesSimpleCruds.currentPageSections,
-		rolesMultiSelect: _simpleCruds.rolesMultiSelect
+		rolesMultiSelect: _simpleCruds.rolesMultiSelect,
+		users: _simpleCruds.users,
+		usersTrash: _simpleCruds.usersTrash
 	}]], ['#alert__container', _alertsController.alertsController, 'init', []], ['#admin-main-menu', _adminMainMenu.adminMainMenu, undefined, [$, '.nav_JS', '.label_JS', '.tree_JS', 'label_active']]]);
 });
 
@@ -23935,9 +23937,9 @@ var currentPageSections = exports.currentPageSections = (0, _simpleCrudComponent
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
-exports.rolesMultiSelect = undefined;
+exports.usersTrash = exports.users = exports.rolesMultiSelect = undefined;
 
 var _ramda = require('ramda');
 
@@ -23975,6 +23977,31 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // usuarios
 var rolesMultiSelect = exports.rolesMultiSelect = (0, _multiSelect.multiSelect)('#roles-multi-select-template');
+
+var userFilters = {
+	data: {
+		filters: {
+			name: {
+				description: 'Nombre',
+				filters: [(0, _listFilters.isPath)(['full_name'])]
+			},
+			email: {
+				description: 'E-mail',
+				filters: [(0, _listFilters.isPath)(['email'])]
+			},
+			role: {
+				description: 'Rol',
+				filter: [(0, _listFilters.isPathInObjArray)(['roles'], ['label'])]
+			}
+		}
+	},
+	mixins: [_listFilters.listFilters]
+};
+// users index
+var users = exports.users = (0, _simpleCrudComponentMakers.simpleCrud)('#users-template', userFilters);
+
+// users trash
+var usersTrash = exports.usersTrash = (0, _simpleCrudComponentMakers.simpleCrud)('#users-trash-template', userFilters);
 
 },{"../../functions/dom":12,"../../functions/pure":13,"../components/g-map":18,"../components/multi-select":23,"../factories/simple-crud-component-makers.js":27,"../mixins/list-filters":33,"../mixins/mexico-states-and-municipalities":35,"../mixins/multilist-sortable":36,"../mixins/number-filters":37,"../mixins/sortable":40,"../mixins/sortable-list-by-click":39,"./helpers/simple-crud-helpers":20,"ramda":3,"vue":7}],26:[function(require,module,exports){
 'use strict';

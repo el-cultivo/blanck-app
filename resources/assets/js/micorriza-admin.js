@@ -22,7 +22,9 @@ import {
 	} from './vue/components/pages-simple-cruds';
 
 import {
-	rolesMultiSelect
+	rolesMultiSelect,
+	users,
+	usersTrash
 } from './vue/components/simple-cruds';
 
 import {mediaManager} from './vue/components/media-manager';
@@ -47,7 +49,9 @@ w.on('load', () => {
 			sectionMultipleFixed,
 			componentForm,
 			currentPageSections,
-			rolesMultiSelect
+			rolesMultiSelect,
+			users,
+			usersTrash
 		}]],
 		['#alert__container', alertsController, 'init', []],
 		['#admin-main-menu', adminMainMenu, undefined, [$,'.nav_JS','.label_JS','.tree_JS', 'label_active']],
