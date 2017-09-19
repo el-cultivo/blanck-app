@@ -166,4 +166,9 @@ trait PermissionRoleTrait {
             $query->whereHasPermission($permission_slug);
         });
     }
+
+    public function getRolesIdsAttribute()
+    {
+        return $this->roles->pluck("id");
+    }
 }

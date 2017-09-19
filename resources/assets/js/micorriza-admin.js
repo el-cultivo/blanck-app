@@ -1,6 +1,7 @@
 import {ifElementExistsThenLaunch} from './functions/dom';
 import {w} from './cltvo/constants.js';
 import {alertsController} from './alerts-controller';
+import {adminMainMenu} from './admin-main-menu';
 
 //Vue
 import {mainVue} from './vue/main-vue';
@@ -19,6 +20,13 @@ import {
 		componentForm,
 		currentPageSections
 	} from './vue/components/pages-simple-cruds';
+
+import {
+	rolesMultiSelect,
+	users,
+	usersTrash
+} from './vue/components/simple-cruds';
+
 import {mediaManager} from './vue/components/media-manager';
 import './vue/components/multi-images';
 import './vue/components/single-image';
@@ -40,41 +48,15 @@ w.on('load', () => {
 			sectionMultipleLimited,
 			sectionMultipleFixed,
 			componentForm,
-			currentPageSections
+			currentPageSections,
+			rolesMultiSelect,
+			users,
+			usersTrash
 		}]],
 		['#alert__container', alertsController, 'init', []],
+		['#admin-main-menu', adminMainMenu, undefined, [$,'.nav_JS','.label_JS','.tree_JS', 'label_active']],
 	]);
 });
 
 
 console.log('Hola, estás bien sabroso de tu micorriza');
-
-
-(function($) {
-
-
-	$(document).ready( function() {
-
-		// Sidebar Item Display
-		$('.label_JS').click( function () {
-			if ( !$(this).hasClass('label_active') ) {
-				$('.tree_JS').slideUp();
-				$('.label_JS').removeClass('label_active');
-				$(this).addClass('label_active');
-				$(this).parent().find('.tree_JS').slideDown();
-			}
-		});
-
-		// Sidebar Item Display
-		$('.label_active').parent().find('.tree_JS').slideDown();
-
-		// Trigger Choose File on Media Manager
-		$(document).on('click','#media-trigger_JS', function() {
-			$('#media-input_JS input').click();
-		}).find('#media-input_JS input').on('click', function (e) {
-			e.stopPropagation();
-		});
-
-	});
-
-})(jQuery);
