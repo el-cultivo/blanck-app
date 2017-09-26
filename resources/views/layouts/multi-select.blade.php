@@ -19,13 +19,13 @@
 			         <input
 			             type="checkbox"
 			             name="{{ $select_plural }}[]"
-			             :id="{{$select_plural}}+'_'+item.{{ $option_value }}"
+			             :id="'{{$select_plural}}'+item.{{ $option_value }}"
 			             :value="item.{{ $option_value }}"
 			             :checked = "is_checked(item.{{ $option_value }})"
 			             v-model="checkedItems"
 						 form = "{{ $form_id }}"
 			         >
-			         <label :for="{{$select_plural}}+'_'+item.{{ $option_value }}">&#123;&#123; item.{{ $option_label }} &#125;&#125;</label>
+			         <label :for="'{{$select_plural}}_'+item.{{ $option_value }}">&#123;&#123; item.{{ $option_label }} &#125;&#125;</label>
 			     </div>
 			 </div>
 		 </div>
