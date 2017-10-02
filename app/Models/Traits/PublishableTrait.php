@@ -2,16 +2,26 @@
 
 namespace App\Models\Traits;
 
-use App\Models\Publish;
 use Carbon\Carbon;
+use App\Models\Publish;
 
 trait PublishableTrait 
 {
+    /**
+     * Get the administrator flag for the user.
+     *
+     * @return bool
+     */
     public function publish()
     {
         return $this->belongsTo(Publish::class, 'publish_id');
     }
 
+    /**
+     * Get the administrator flag for the user.
+     *
+     * @return bool
+     */
     public function getIsPublishAttribute()
     {
         if ($this->publish) {
@@ -23,6 +33,11 @@ trait PublishableTrait
         return false;
     }
 
+    /**
+     * Get the administrator flag for the user.
+     *
+     * @return bool
+     */
     public function associatePublish(Publish $publish, $date )
     {
         $this->publish()->associate($publish);
@@ -31,6 +46,11 @@ trait PublishableTrait
         return $this->save();
     }
 
+    /**
+     * Get the administrator flag for the user.
+     *
+     * @return bool
+     */
     public function updatePublish(Publish $publish, $date)
     {
         $this->publish()->dissociate();
@@ -39,6 +59,11 @@ trait PublishableTrait
         return $this->associatePublish($publish);
     }
 
+    /**
+     * Get the administrator flag for the user.
+     *
+     * @return bool
+     */
     public function updatePublishById($publish_id, $date)
     {
         $publish = Publish::find($publish_id);
@@ -46,25 +71,45 @@ trait PublishableTrait
         return $publish ? $this->updatePublish($publish, $date) : false;
     }
 
+    /**
+     * Get the administrator flag for the user.
+     *
+     * @return bool
+     */
     public function publicate()
     {
         $publish = Publish::getPublish();
         return $this->associatePublish($publish, Carbon::now());
     }
 
+    /**
+     * Get the administrator flag for the user.
+     *
+     * @return bool
+     */
     public function draft()
     {
         $not_publish = Publish::getNotPublish();
         return $this->associatePublish($not_publish, null);
     }
 
+    /**
+     * Get the administrator flag for the user.
+     *
+     * @return bool
+     */
     public function scopePublished($query)
     {
-        return $query->with('publish')->where('publish_at', '<=', date('Y-m-d H:m:s'))->whereHas('publish', function($q){
+        return $query->with('publish')->whereDate('publish_at', '<=', Carbon::now())->whereHas('publish', function($q){
             $q->onlyPublished();
         });
     }
 
+    /**
+     * Get the administrator flag for the user.
+     *
+     * @return bool
+     */
     public function scopeDraft($query)
     {
         return $query->with('publish')->whereHas('publish', function($q){

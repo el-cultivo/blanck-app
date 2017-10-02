@@ -189,6 +189,7 @@ return [
         App\Providers\ViewComposerServiceProvider::class,
         App\Providers\CustomValidationRulesServiceProvider::class,
 
+		App\Providers\Cltvo\SetServiceProvider::class,
     ],
 
     /*

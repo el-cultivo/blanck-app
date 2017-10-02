@@ -1,4 +1,4 @@
-<table class="highlight responsive-table dataTable_JS sections__table">
+<table class="highlight responsive-table  sections__table">
 	<thead class="sections__table__head">
 		<tr>
 			<th class="sections__table--nombre">Nombre</th>

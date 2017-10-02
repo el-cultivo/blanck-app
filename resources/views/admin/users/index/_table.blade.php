@@ -1,4 +1,4 @@
-<table class="highlight responsive-table dataTable_JS">
+<table class="highlight responsive-table " >
     <thead class="">
         <tr>
             <th>Nombre</th>
@@ -9,55 +9,57 @@
         </tr>
     </thead>
 
-    <tbody class="">
-        @foreach ($users as $user_edit)
-            <tr class="">
+    <tbody class="" v-if= "filtered_list.length > 0" >
+            <tr class="" v-for="user in filtered_list">
                 <td class="">
-                    {{ $user_edit->first_name }} {{$user_edit->last_name }}
+                    @{{ user.full_name }}
                 </td>
 
                 <td class="">
-                    @forelse ($user_edit->roles as $role)
-                        {{ $role->label }} <br>
-                    @empty
-                        <span>cliente</span>
-                    @endforelse
+					<span v-if = "user.roles.length > 0">
+						<span v-for = "role in user.roles" > @{{role.label}}<br> </span>
+					</span>
+                    <span v-else >cliente</span>
                 </td>
 
-                <td class="">{{ $user_edit->email }}</td>
+                <td class="">
+					@{{user.email}}
+				</td>
 
                 <td class="center-align">
-
-                    @if (!$user_edit->hasNoRoles())
-                        <a href="{{ route( 'admin::users.edit', [$user_edit->id] ) }}" class="btn-floating">
-                            <i class="material-icons waves-effect waves-light " >mode_edit</i>
-                        </a>
-                    @endif
-
+                    <a href="{{ route( 'admin::users.edit', ['user' =>'&#123;&#123;user.id&#125;&#125;'] ) }}" class="btn-floating">
+                        <i class="material-icons waves-effect waves-light " >mode_edit</i>
+                    </a>
                 </td>
 
 
                 <td class="center-align">
 
+                    {!! Form::open([
+                        'method'             => 'delete',
+                        'route'              => ['admin::users.destroy','user' =>'&#123;&#123;user.id&#125;&#125;'],
+                        'role'               => 'form' ,
+                        'id'                 => 'delete_user-&#123;&#123;user.id&#125;&#125;_form',
+                        'class'              => '',
+						'v-if'				 => 'user.id != '.$user->id
+                    ]) !!}
 
-                    @if( $user_edit->id != $user->id )
-                        {!! Form::open([
-                            'method'             => 'delete',
-                            'route'              => ['admin::users.destroy',$user_edit->id],
-                            'role'               => 'form' ,
-                            'id'                 => 'delete_user-'.$user_edit->id.'_form',
-                            'class'              => ''
-                        ]) !!}
-
-                            <button type="submit" class=" btn-floating waves-effect waves-light deep-orange accent-2" form ="delete_user-{{$user_edit->id}}_form">
-                                <i class="material-icons">delete</i>
-                            </button>
-                        {{ Form::close() }}
-                    @endif
+                        <button type="submit" class=" btn-floating waves-effect waves-light deep-orange accent-2" form ="delete_user-&#123;&#123;user.id&#125;&#125;_form">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    {{ Form::close() }}
 
                 </td>
 
             </tr>
-        @endforeach
     </tbody>
+
+	<tbody v-if= "filtered_list.length == 0"  >
+		<tr>
+			<td colspan=5 class="center-align">
+				Sin usuarios
+			</td>
+		</tr>
+	</tbody>
+
 </table>

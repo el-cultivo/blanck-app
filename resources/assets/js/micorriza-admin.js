@@ -1,6 +1,7 @@
 import {ifElementExistsThenLaunch} from './functions/dom';
 import {w} from './cltvo/constants.js';
 import {alertsController} from './alerts-controller';
+import {adminMainMenu} from './admin-main-menu';
 
 //Vue
 import {mainVue} from './vue/main-vue';
@@ -19,6 +20,13 @@ import {
 		componentForm,
 		currentPageSections
 	} from './vue/components/pages-simple-cruds';
+
+import {
+	rolesMultiSelect,
+	users,
+	usersTrash
+} from './vue/components/simple-cruds';
+
 import {mediaManager} from './vue/components/media-manager';
 import './vue/components/multi-images';
 import './vue/components/single-image';
@@ -40,9 +48,13 @@ w.on('load', () => {
 			sectionMultipleLimited,
 			sectionMultipleFixed,
 			componentForm,
-			currentPageSections
+			currentPageSections,
+			rolesMultiSelect,
+			users,
+			usersTrash
 		}]],
 		['#alert__container', alertsController, 'init', []],
+		['#admin-main-menu', adminMainMenu, undefined, [$,'.nav_JS','.label_JS','.tree_JS', 'label_active']],
 	]);
 });
 

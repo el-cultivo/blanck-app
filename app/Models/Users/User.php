@@ -46,6 +46,10 @@ class User extends Authenticatable
         'active' => 'boolean'
     ];
 
+    protected $appends = [
+        'roles_ids',
+        'full_name',
+    ];
     /**
      * creamos al usuario registrado desde el admin
      * @param array $input valores del request

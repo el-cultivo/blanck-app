@@ -3,9 +3,20 @@
 namespace App\Console\Cltvo;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Composer;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Console\ConfirmableTrait;
 
 class CltvoSetSiteCommand extends Command
 {
+	use ConfirmableTrait;
+
+	/**
+     * The console command name.
+     *
+     * @var string
+     */
+    protected $name = 'cltvo:set';
 
     /**
      * The name and signature of the console command.
@@ -21,24 +32,39 @@ class CltvoSetSiteCommand extends Command
      */
     protected $description = 'Preconfiguration of the App';
 
+
+	/**
+     * The Composer instance.
+     *
+     * @var \Illuminate\Support\Composer
+     */
+    protected $composer;
+
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct( Composer $composer)
     {
         parent::__construct();
+
+		$this->composer = $composer;
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
-    public function handle()
-    {
-        shell_exec("composer dump-autoload");
+	/**
+	 * Execute the console command.
+	 *
+	 * @return void
+	 */
+	public function fire()
+	{
+
+		if (! $this->confirmToProceed()) {
+			return;
+		}
+
+		$this->composer->dumpAutoloads();
 
         if ($this->option("migrate") ) {
             $this->call("migrate");
@@ -48,11 +74,24 @@ class CltvoSetSiteCommand extends Command
             $this->call("migrate:refresh");
         }
 
-		(new \DatabaseSeter($this))->run();
+		Model::unguarded(function () {
+			$this->getSeeder()->run();
+		});
 
         if ($this->option("seed") || $this->option("clean")) {
             $this->call("db:seed");
         }
+
+	}
+
+	/**
+     * Get a seeder instance from the container.
+     *
+     * @return \Illuminate\Database\Seeder
+     */
+    protected function getSeeder()
+    {
+        return new \DatabaseSeter($this);
     }
 
 }

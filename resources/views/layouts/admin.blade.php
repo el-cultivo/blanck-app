@@ -9,9 +9,9 @@
 
 		<div class="row">
 
-			<div class="sidebar">
-				@include('admin.general._sidebar')
-			</div>
+
+			@include('admin.general._sidebar')
+
 
 			<div class="main">
 
