@@ -2,12 +2,13 @@ const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 
+const ManifestPlugin = require('webpack-manifest-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const extractSass = new ExtractTextPlugin({
-    filename: "[name].css",
-    disable: process.env.NODE_ENV === "dev"
+    filename: "[name].[hash].css",
+    // disable: process.env.NODE_ENV === "dev"
 });
 
 const addProductionPlugins = plugins_arr => {
@@ -30,6 +31,21 @@ const addProductionPlugins = plugins_arr => {
 			        NODE_ENV: '"production"'
 			      }
 			    }),
+			new webpack.LoaderOptionsPlugin({
+			    options: {
+			      postcss: [
+			        autoprefixer({
+				      browsers: ['last 5 versions', '> 5%']
+				    }),
+			      ]
+			     }
+			  }),
+			extractSass,
+			 new OptimizeCssAssetsPlugin(),
+			 new ManifestPlugin({fileName: 'rev-manifest.json'})
+		])
+	} else if (process.env.NODE_ENV === 'dev' && process.env.WEBPACK !== 'hot'){
+		return plugins_arr.concat([
 			extractSass,
 			new webpack.LoaderOptionsPlugin({
 			    options: {
@@ -40,7 +56,7 @@ const addProductionPlugins = plugins_arr => {
 			      ]
 			     }
 			  }),
-			 new OptimizeCssAssetsPlugin(),
+			new ManifestPlugin({fileName: 'rev-manifest.json'})
 		])
 	} else if (process.env.WEBPACK === 'hot') {
 		return plugins_arr.concat([
@@ -59,19 +75,26 @@ const addProductionPlugins = plugins_arr => {
 const entry = (hot_build) => {
 	if (hot_build === 'functions') {
 		return {
-			functions: './resources/assets/js/micorriza.js'
+			bundle: './resources/assets/js/micorriza.js'
 		}
 	}
 
-	if (hot_build === 'admin-functions') {
+	if (hot_build === 'admin-bundle') {
 		return {
-			'admin-functions': './resources/assets/js/micorriza-admin.js', 
+			'admin-bundle': './resources/assets/js/micorriza-admin.js', 
 		}
 	} 
 
+	if (process.env.WEBPACK === 'hot') {
+		return  {
+			bundle: './resources/assets/js/micorriza.js', 
+			'admin-bundle': './resources/assets/js/micorriza-admin.js'
+		}		
+	}
+
 	return  {
-		functions: './resources/assets/js/micorriza.js', 
-		'admin-functions': './resources/assets/js/micorriza-admin.js'
+		bundle: ['./resources/assets/js/mazorca.js', './resources/assets/js/micorriza.js'], 
+		'admin-bundle': ['./resources/assets/js/mazorca-admin.js','./resources/assets/js/micorriza-admin.js']
 	}
 }
 
@@ -79,8 +102,8 @@ module.exports = {
 	entry: entry(process.env.HOT_BUILD),
 
 	output: {
-		filename: '[name].js',
-		path:  process.env.WEBPACK === 'hot' ? '/' :path.resolve(__dirname, 'public/js/'),
+		filename: process.env.WEBPACK === 'hot' ? '[name].js' : '[name].[hash].js',
+		path:  process.env.WEBPACK === 'hot' ? '/' :path.resolve(__dirname, 'public/build'),
 		publicPath: 'http://localhost:8080/'
 	},
 	module: {
@@ -105,19 +128,19 @@ module.exports = {
 			{
 				test: /\.scss$/,
 				use: extractSass.extract({
-				               use: [{
-				                   loader: "raw-loader"
-				                   // loader: "css-loader?url=false"//for sourcemaps
-				               }, 
-				               {
-				                   loader: "postcss-loader"
-				               },
-				               {
-				                   loader: "sass-loader",
-				               }],
-				               // use style-loader in development
-				               fallback: "style-loader"
-				           })
+	               use: [{
+	                   // loader: "raw-loader"
+	                   loader: "css-loader?url=false"//for sourcemaps
+	               }, 
+	               {
+	                   loader: "postcss-loader"
+	               },
+	               {
+	                   loader: "sass-loader",
+	               }],
+	               // use style-loader in development
+	               fallback: "style-loader"
+	           })
 			},
 			{
 			        test: /\.vue$/,

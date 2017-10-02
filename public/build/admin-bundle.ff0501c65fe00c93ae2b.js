@@ -1,6 +1,76 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "http://localhost:8080/";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ })
+/************************************************************************/
+/******/ ({
 
-},{}],2:[function(require,module,exports){
+/***/ "./node_modules/process/browser.js":
+/***/ (function(module, exports) {
+
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -186,13 +256,47 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],3:[function(require,module,exports){
-'use strict';
+
+/***/ }),
+
+/***/ "./node_modules/webpack/buildin/global.js":
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/alerts-controller.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-var _ = require('ramda');
+var _ = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var alertsController = exports.alertsController = function () {
 	var modal_config = {
@@ -282,8 +386,13 @@ var alertsController = exports.alertsController = function () {
 	};
 }(jQuery);
 
-},{"ramda":12}],4:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/cltvo/constants.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -293,19 +402,24 @@ var menu_top = exports.menu_top = $('#menuTop');
 var menu_top_height = exports.menu_top_height = menu_top.outerHeight();
 var document_click_callbacks = exports.document_click_callbacks = [];
 
-},{}],5:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/file-dnd.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.fileDnD = undefined;
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
-var _lodash = require('lodash.debounce');
+var _lodash = __webpack_require__("./resources/assets/js/node_modules/lodash.debounce/index.js");
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -397,19 +511,24 @@ var fileDnD = exports.fileDnD = function fileDnD(opts) {
 	};
 };
 
-},{"lodash.debounce":11,"ramda":12}],6:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/functions/dom.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.preSelectOption = exports.ifElementExistsThenLaunch = exports.parentContainerWidth = exports.positionX = exports.fixedSidebarWidth = exports.cltvoEventsWarnings = exports.onDocumentClick = exports.documentClickHandlersLauncher = undefined;
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
-var _constants = require('../cltvo/constants.js');
+var _constants = __webpack_require__("./resources/assets/js/cltvo/constants.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -508,9 +627,13 @@ var preSelectOption = exports.preSelectOption = function preSelectOption(select_
 	}
 };
 
-},{"../cltvo/constants.js":4,"ramda":12}],7:[function(require,module,exports){
-(function (process){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/functions/pure.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
@@ -519,7 +642,7 @@ exports.substringInStringArray = exports.stringInPathOfObjArray = exports.pathHa
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
@@ -826,17 +949,22 @@ var substringInStringArray = exports.substringInStringArray = _ramda2.default.cu
 	_ramda2.default.pathOr([], path) //buscamos el array
 	)(obj);
 });
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/process/browser.js")))
 
-}).call(this,require('_process'))
-},{"_process":2,"ramda":12}],8:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/logoManipulations.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.logoSwitch = undefined;
 
-var _constants = require('./cltvo/constants.js');
+var _constants = __webpack_require__("./resources/assets/js/cltvo/constants.js");
 
 var logoSwitch = exports.logoSwitch = {
 	header_logo: $('#header__logo svg'),
@@ -861,8 +989,23 @@ var logoSwitch = exports.logoSwitch = {
 	}
 };
 
-},{"./cltvo/constants.js":4}],9:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/mazorca-admin.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__("./resources/assets/sass/admin.scss");
+
+/***/ }),
+
+/***/ "./resources/assets/js/menu-tree-toggler.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
@@ -884,29 +1027,33 @@ var menuTreeToggler = exports.menuTreeToggler = function menuTreeToggler(label, 
 	});
 };
 
-},{}],10:[function(require,module,exports){
-(function (process){
-'use strict';
+/***/ }),
 
-var _dom = require('./functions/dom');
+/***/ "./resources/assets/js/micorriza-admin.js":
+/***/ (function(module, exports, __webpack_require__) {
 
-var _constants = require('./cltvo/constants.js');
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
 
-var _alertsController = require('./alerts-controller');
+var _dom = __webpack_require__("./resources/assets/js/functions/dom.js");
 
-var _mainVue = require('./vue/main-vue');
+var _constants = __webpack_require__("./resources/assets/js/cltvo/constants.js");
 
-var _admin = require('./vue/main/admin');
+var _alertsController = __webpack_require__("./resources/assets/js/alerts-controller.js");
 
-var _pagesSimpleCruds = require('./vue/components/pages-simple-cruds');
+var _mainVue = __webpack_require__("./resources/assets/js/vue/main-vue.js");
 
-var _mediaManager = require('./vue/components/media-manager');
+var _admin = __webpack_require__("./resources/assets/js/vue/main/admin.js");
 
-require('./vue/components/multi-images');
+var _pagesSimpleCruds = __webpack_require__("./resources/assets/js/vue/components/pages-simple-cruds.js");
 
-require('./vue/components/single-image');
+var _mediaManager = __webpack_require__("./resources/assets/js/vue/components/media-manager.js");
 
-require('./vue/components/cltvo-v-editor');
+__webpack_require__("./resources/assets/js/vue/components/multi-images.js");
+
+__webpack_require__("./resources/assets/js/vue/components/single-image.js");
+
+__webpack_require__("./resources/assets/js/vue/components/cltvo-v-editor.js");
 
 _constants.w.on('load', function () {
 	(0, _dom.ifElementExistsThenLaunch)([[], ['#admin-vue', _mainVue.mainVue, undefined, [_admin.adminVue, {
@@ -935,14 +1082,17 @@ console.log('Hola, estás bien sabroso de tu micorriza');
 if (process.env.NODE_ENV === 'webpack') {
 	window.CLTVO_ENV = 'webpack';
 } //corre en modo webpack, necesario para hacer HMR
-if (module.hot) {
+if (false) {
 	module.hot.accept();
 } //permite hacer Hot Module Replacement
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/process/browser.js")))
 
-}).call(this,require('_process'))
-},{"./alerts-controller":3,"./cltvo/constants.js":4,"./functions/dom":6,"./vue/components/cltvo-v-editor":334,"./vue/components/media-manager":338,"./vue/components/multi-images":339,"./vue/components/pages-simple-cruds":340,"./vue/components/single-image":341,"./vue/main-vue":344,"./vue/main/admin":345,"_process":2}],11:[function(require,module,exports){
-(function (global){
-/**
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/lodash.debounce/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {/**
  * lodash (Custom Build) <https://lodash.com/>
  * Build: `lodash modularize exports="npm" -o ./`
  * Copyright jQuery Foundation and other contributors <https://jquery.org/>
@@ -1320,259 +1470,269 @@ function toNumber(value) {
 
 module.exports = debounce;
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],12:[function(require,module,exports){
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
 module.exports = {
-  F: require('./src/F'),
-  T: require('./src/T'),
-  __: require('./src/__'),
-  add: require('./src/add'),
-  addIndex: require('./src/addIndex'),
-  adjust: require('./src/adjust'),
-  all: require('./src/all'),
-  allPass: require('./src/allPass'),
-  always: require('./src/always'),
-  and: require('./src/and'),
-  any: require('./src/any'),
-  anyPass: require('./src/anyPass'),
-  ap: require('./src/ap'),
-  aperture: require('./src/aperture'),
-  append: require('./src/append'),
-  apply: require('./src/apply'),
-  applySpec: require('./src/applySpec'),
-  ascend: require('./src/ascend'),
-  assoc: require('./src/assoc'),
-  assocPath: require('./src/assocPath'),
-  binary: require('./src/binary'),
-  bind: require('./src/bind'),
-  both: require('./src/both'),
-  call: require('./src/call'),
-  chain: require('./src/chain'),
-  clamp: require('./src/clamp'),
-  clone: require('./src/clone'),
-  comparator: require('./src/comparator'),
-  complement: require('./src/complement'),
-  compose: require('./src/compose'),
-  composeK: require('./src/composeK'),
-  composeP: require('./src/composeP'),
-  concat: require('./src/concat'),
-  cond: require('./src/cond'),
-  construct: require('./src/construct'),
-  constructN: require('./src/constructN'),
-  contains: require('./src/contains'),
-  converge: require('./src/converge'),
-  countBy: require('./src/countBy'),
-  curry: require('./src/curry'),
-  curryN: require('./src/curryN'),
-  dec: require('./src/dec'),
-  defaultTo: require('./src/defaultTo'),
-  descend: require('./src/descend'),
-  difference: require('./src/difference'),
-  differenceWith: require('./src/differenceWith'),
-  dissoc: require('./src/dissoc'),
-  dissocPath: require('./src/dissocPath'),
-  divide: require('./src/divide'),
-  drop: require('./src/drop'),
-  dropLast: require('./src/dropLast'),
-  dropLastWhile: require('./src/dropLastWhile'),
-  dropRepeats: require('./src/dropRepeats'),
-  dropRepeatsWith: require('./src/dropRepeatsWith'),
-  dropWhile: require('./src/dropWhile'),
-  either: require('./src/either'),
-  empty: require('./src/empty'),
-  endsWith: require('./src/endsWith'),
-  eqBy: require('./src/eqBy'),
-  eqProps: require('./src/eqProps'),
-  equals: require('./src/equals'),
-  evolve: require('./src/evolve'),
-  filter: require('./src/filter'),
-  find: require('./src/find'),
-  findIndex: require('./src/findIndex'),
-  findLast: require('./src/findLast'),
-  findLastIndex: require('./src/findLastIndex'),
-  flatten: require('./src/flatten'),
-  flip: require('./src/flip'),
-  forEach: require('./src/forEach'),
-  forEachObjIndexed: require('./src/forEachObjIndexed'),
-  fromPairs: require('./src/fromPairs'),
-  groupBy: require('./src/groupBy'),
-  groupWith: require('./src/groupWith'),
-  gt: require('./src/gt'),
-  gte: require('./src/gte'),
-  has: require('./src/has'),
-  hasIn: require('./src/hasIn'),
-  head: require('./src/head'),
-  identical: require('./src/identical'),
-  identity: require('./src/identity'),
-  ifElse: require('./src/ifElse'),
-  inc: require('./src/inc'),
-  indexBy: require('./src/indexBy'),
-  indexOf: require('./src/indexOf'),
-  init: require('./src/init'),
-  innerJoin: require('./src/innerJoin'),
-  insert: require('./src/insert'),
-  insertAll: require('./src/insertAll'),
-  intersection: require('./src/intersection'),
-  intersectionWith: require('./src/intersectionWith'),
-  intersperse: require('./src/intersperse'),
-  into: require('./src/into'),
-  invert: require('./src/invert'),
-  invertObj: require('./src/invertObj'),
-  invoker: require('./src/invoker'),
-  is: require('./src/is'),
-  isEmpty: require('./src/isEmpty'),
-  isNil: require('./src/isNil'),
-  join: require('./src/join'),
-  juxt: require('./src/juxt'),
-  keys: require('./src/keys'),
-  keysIn: require('./src/keysIn'),
-  last: require('./src/last'),
-  lastIndexOf: require('./src/lastIndexOf'),
-  length: require('./src/length'),
-  lens: require('./src/lens'),
-  lensIndex: require('./src/lensIndex'),
-  lensPath: require('./src/lensPath'),
-  lensProp: require('./src/lensProp'),
-  lift: require('./src/lift'),
-  liftN: require('./src/liftN'),
-  lt: require('./src/lt'),
-  lte: require('./src/lte'),
-  map: require('./src/map'),
-  mapAccum: require('./src/mapAccum'),
-  mapAccumRight: require('./src/mapAccumRight'),
-  mapObjIndexed: require('./src/mapObjIndexed'),
-  match: require('./src/match'),
-  mathMod: require('./src/mathMod'),
-  max: require('./src/max'),
-  maxBy: require('./src/maxBy'),
-  mean: require('./src/mean'),
-  median: require('./src/median'),
-  memoize: require('./src/memoize'),
-  memoizeWith: require('./src/memoizeWith'),
-  merge: require('./src/merge'),
-  mergeAll: require('./src/mergeAll'),
-  mergeDeepLeft: require('./src/mergeDeepLeft'),
-  mergeDeepRight: require('./src/mergeDeepRight'),
-  mergeDeepWith: require('./src/mergeDeepWith'),
-  mergeDeepWithKey: require('./src/mergeDeepWithKey'),
-  mergeWith: require('./src/mergeWith'),
-  mergeWithKey: require('./src/mergeWithKey'),
-  min: require('./src/min'),
-  minBy: require('./src/minBy'),
-  modulo: require('./src/modulo'),
-  multiply: require('./src/multiply'),
-  nAry: require('./src/nAry'),
-  negate: require('./src/negate'),
-  none: require('./src/none'),
-  not: require('./src/not'),
-  nth: require('./src/nth'),
-  nthArg: require('./src/nthArg'),
-  o: require('./src/o'),
-  objOf: require('./src/objOf'),
-  of: require('./src/of'),
-  omit: require('./src/omit'),
-  once: require('./src/once'),
-  or: require('./src/or'),
-  over: require('./src/over'),
-  pair: require('./src/pair'),
-  partial: require('./src/partial'),
-  partialRight: require('./src/partialRight'),
-  partition: require('./src/partition'),
-  path: require('./src/path'),
-  pathEq: require('./src/pathEq'),
-  pathOr: require('./src/pathOr'),
-  pathSatisfies: require('./src/pathSatisfies'),
-  pick: require('./src/pick'),
-  pickAll: require('./src/pickAll'),
-  pickBy: require('./src/pickBy'),
-  pipe: require('./src/pipe'),
-  pipeK: require('./src/pipeK'),
-  pipeP: require('./src/pipeP'),
-  pluck: require('./src/pluck'),
-  prepend: require('./src/prepend'),
-  product: require('./src/product'),
-  project: require('./src/project'),
-  prop: require('./src/prop'),
-  propEq: require('./src/propEq'),
-  propIs: require('./src/propIs'),
-  propOr: require('./src/propOr'),
-  propSatisfies: require('./src/propSatisfies'),
-  props: require('./src/props'),
-  range: require('./src/range'),
-  reduce: require('./src/reduce'),
-  reduceBy: require('./src/reduceBy'),
-  reduceRight: require('./src/reduceRight'),
-  reduceWhile: require('./src/reduceWhile'),
-  reduced: require('./src/reduced'),
-  reject: require('./src/reject'),
-  remove: require('./src/remove'),
-  repeat: require('./src/repeat'),
-  replace: require('./src/replace'),
-  reverse: require('./src/reverse'),
-  scan: require('./src/scan'),
-  sequence: require('./src/sequence'),
-  set: require('./src/set'),
-  slice: require('./src/slice'),
-  sort: require('./src/sort'),
-  sortBy: require('./src/sortBy'),
-  sortWith: require('./src/sortWith'),
-  split: require('./src/split'),
-  splitAt: require('./src/splitAt'),
-  splitEvery: require('./src/splitEvery'),
-  splitWhen: require('./src/splitWhen'),
-  startsWith: require('./src/startsWith'),
-  subtract: require('./src/subtract'),
-  sum: require('./src/sum'),
-  symmetricDifference: require('./src/symmetricDifference'),
-  symmetricDifferenceWith: require('./src/symmetricDifferenceWith'),
-  tail: require('./src/tail'),
-  take: require('./src/take'),
-  takeLast: require('./src/takeLast'),
-  takeLastWhile: require('./src/takeLastWhile'),
-  takeWhile: require('./src/takeWhile'),
-  tap: require('./src/tap'),
-  test: require('./src/test'),
-  times: require('./src/times'),
-  toLower: require('./src/toLower'),
-  toPairs: require('./src/toPairs'),
-  toPairsIn: require('./src/toPairsIn'),
-  toString: require('./src/toString'),
-  toUpper: require('./src/toUpper'),
-  transduce: require('./src/transduce'),
-  transpose: require('./src/transpose'),
-  traverse: require('./src/traverse'),
-  trim: require('./src/trim'),
-  tryCatch: require('./src/tryCatch'),
-  type: require('./src/type'),
-  unapply: require('./src/unapply'),
-  unary: require('./src/unary'),
-  uncurryN: require('./src/uncurryN'),
-  unfold: require('./src/unfold'),
-  union: require('./src/union'),
-  unionWith: require('./src/unionWith'),
-  uniq: require('./src/uniq'),
-  uniqBy: require('./src/uniqBy'),
-  uniqWith: require('./src/uniqWith'),
-  unless: require('./src/unless'),
-  unnest: require('./src/unnest'),
-  until: require('./src/until'),
-  update: require('./src/update'),
-  useWith: require('./src/useWith'),
-  values: require('./src/values'),
-  valuesIn: require('./src/valuesIn'),
-  view: require('./src/view'),
-  when: require('./src/when'),
-  where: require('./src/where'),
-  whereEq: require('./src/whereEq'),
-  without: require('./src/without'),
-  xprod: require('./src/xprod'),
-  zip: require('./src/zip'),
-  zipObj: require('./src/zipObj'),
-  zipWith: require('./src/zipWith')
+  F: __webpack_require__("./resources/assets/js/node_modules/ramda/src/F.js"),
+  T: __webpack_require__("./resources/assets/js/node_modules/ramda/src/T.js"),
+  __: __webpack_require__("./resources/assets/js/node_modules/ramda/src/__.js"),
+  add: __webpack_require__("./resources/assets/js/node_modules/ramda/src/add.js"),
+  addIndex: __webpack_require__("./resources/assets/js/node_modules/ramda/src/addIndex.js"),
+  adjust: __webpack_require__("./resources/assets/js/node_modules/ramda/src/adjust.js"),
+  all: __webpack_require__("./resources/assets/js/node_modules/ramda/src/all.js"),
+  allPass: __webpack_require__("./resources/assets/js/node_modules/ramda/src/allPass.js"),
+  always: __webpack_require__("./resources/assets/js/node_modules/ramda/src/always.js"),
+  and: __webpack_require__("./resources/assets/js/node_modules/ramda/src/and.js"),
+  any: __webpack_require__("./resources/assets/js/node_modules/ramda/src/any.js"),
+  anyPass: __webpack_require__("./resources/assets/js/node_modules/ramda/src/anyPass.js"),
+  ap: __webpack_require__("./resources/assets/js/node_modules/ramda/src/ap.js"),
+  aperture: __webpack_require__("./resources/assets/js/node_modules/ramda/src/aperture.js"),
+  append: __webpack_require__("./resources/assets/js/node_modules/ramda/src/append.js"),
+  apply: __webpack_require__("./resources/assets/js/node_modules/ramda/src/apply.js"),
+  applySpec: __webpack_require__("./resources/assets/js/node_modules/ramda/src/applySpec.js"),
+  ascend: __webpack_require__("./resources/assets/js/node_modules/ramda/src/ascend.js"),
+  assoc: __webpack_require__("./resources/assets/js/node_modules/ramda/src/assoc.js"),
+  assocPath: __webpack_require__("./resources/assets/js/node_modules/ramda/src/assocPath.js"),
+  binary: __webpack_require__("./resources/assets/js/node_modules/ramda/src/binary.js"),
+  bind: __webpack_require__("./resources/assets/js/node_modules/ramda/src/bind.js"),
+  both: __webpack_require__("./resources/assets/js/node_modules/ramda/src/both.js"),
+  call: __webpack_require__("./resources/assets/js/node_modules/ramda/src/call.js"),
+  chain: __webpack_require__("./resources/assets/js/node_modules/ramda/src/chain.js"),
+  clamp: __webpack_require__("./resources/assets/js/node_modules/ramda/src/clamp.js"),
+  clone: __webpack_require__("./resources/assets/js/node_modules/ramda/src/clone.js"),
+  comparator: __webpack_require__("./resources/assets/js/node_modules/ramda/src/comparator.js"),
+  complement: __webpack_require__("./resources/assets/js/node_modules/ramda/src/complement.js"),
+  compose: __webpack_require__("./resources/assets/js/node_modules/ramda/src/compose.js"),
+  composeK: __webpack_require__("./resources/assets/js/node_modules/ramda/src/composeK.js"),
+  composeP: __webpack_require__("./resources/assets/js/node_modules/ramda/src/composeP.js"),
+  concat: __webpack_require__("./resources/assets/js/node_modules/ramda/src/concat.js"),
+  cond: __webpack_require__("./resources/assets/js/node_modules/ramda/src/cond.js"),
+  construct: __webpack_require__("./resources/assets/js/node_modules/ramda/src/construct.js"),
+  constructN: __webpack_require__("./resources/assets/js/node_modules/ramda/src/constructN.js"),
+  contains: __webpack_require__("./resources/assets/js/node_modules/ramda/src/contains.js"),
+  converge: __webpack_require__("./resources/assets/js/node_modules/ramda/src/converge.js"),
+  countBy: __webpack_require__("./resources/assets/js/node_modules/ramda/src/countBy.js"),
+  curry: __webpack_require__("./resources/assets/js/node_modules/ramda/src/curry.js"),
+  curryN: __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js"),
+  dec: __webpack_require__("./resources/assets/js/node_modules/ramda/src/dec.js"),
+  defaultTo: __webpack_require__("./resources/assets/js/node_modules/ramda/src/defaultTo.js"),
+  descend: __webpack_require__("./resources/assets/js/node_modules/ramda/src/descend.js"),
+  difference: __webpack_require__("./resources/assets/js/node_modules/ramda/src/difference.js"),
+  differenceWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/differenceWith.js"),
+  dissoc: __webpack_require__("./resources/assets/js/node_modules/ramda/src/dissoc.js"),
+  dissocPath: __webpack_require__("./resources/assets/js/node_modules/ramda/src/dissocPath.js"),
+  divide: __webpack_require__("./resources/assets/js/node_modules/ramda/src/divide.js"),
+  drop: __webpack_require__("./resources/assets/js/node_modules/ramda/src/drop.js"),
+  dropLast: __webpack_require__("./resources/assets/js/node_modules/ramda/src/dropLast.js"),
+  dropLastWhile: __webpack_require__("./resources/assets/js/node_modules/ramda/src/dropLastWhile.js"),
+  dropRepeats: __webpack_require__("./resources/assets/js/node_modules/ramda/src/dropRepeats.js"),
+  dropRepeatsWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/dropRepeatsWith.js"),
+  dropWhile: __webpack_require__("./resources/assets/js/node_modules/ramda/src/dropWhile.js"),
+  either: __webpack_require__("./resources/assets/js/node_modules/ramda/src/either.js"),
+  empty: __webpack_require__("./resources/assets/js/node_modules/ramda/src/empty.js"),
+  endsWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/endsWith.js"),
+  eqBy: __webpack_require__("./resources/assets/js/node_modules/ramda/src/eqBy.js"),
+  eqProps: __webpack_require__("./resources/assets/js/node_modules/ramda/src/eqProps.js"),
+  equals: __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js"),
+  evolve: __webpack_require__("./resources/assets/js/node_modules/ramda/src/evolve.js"),
+  filter: __webpack_require__("./resources/assets/js/node_modules/ramda/src/filter.js"),
+  find: __webpack_require__("./resources/assets/js/node_modules/ramda/src/find.js"),
+  findIndex: __webpack_require__("./resources/assets/js/node_modules/ramda/src/findIndex.js"),
+  findLast: __webpack_require__("./resources/assets/js/node_modules/ramda/src/findLast.js"),
+  findLastIndex: __webpack_require__("./resources/assets/js/node_modules/ramda/src/findLastIndex.js"),
+  flatten: __webpack_require__("./resources/assets/js/node_modules/ramda/src/flatten.js"),
+  flip: __webpack_require__("./resources/assets/js/node_modules/ramda/src/flip.js"),
+  forEach: __webpack_require__("./resources/assets/js/node_modules/ramda/src/forEach.js"),
+  forEachObjIndexed: __webpack_require__("./resources/assets/js/node_modules/ramda/src/forEachObjIndexed.js"),
+  fromPairs: __webpack_require__("./resources/assets/js/node_modules/ramda/src/fromPairs.js"),
+  groupBy: __webpack_require__("./resources/assets/js/node_modules/ramda/src/groupBy.js"),
+  groupWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/groupWith.js"),
+  gt: __webpack_require__("./resources/assets/js/node_modules/ramda/src/gt.js"),
+  gte: __webpack_require__("./resources/assets/js/node_modules/ramda/src/gte.js"),
+  has: __webpack_require__("./resources/assets/js/node_modules/ramda/src/has.js"),
+  hasIn: __webpack_require__("./resources/assets/js/node_modules/ramda/src/hasIn.js"),
+  head: __webpack_require__("./resources/assets/js/node_modules/ramda/src/head.js"),
+  identical: __webpack_require__("./resources/assets/js/node_modules/ramda/src/identical.js"),
+  identity: __webpack_require__("./resources/assets/js/node_modules/ramda/src/identity.js"),
+  ifElse: __webpack_require__("./resources/assets/js/node_modules/ramda/src/ifElse.js"),
+  inc: __webpack_require__("./resources/assets/js/node_modules/ramda/src/inc.js"),
+  indexBy: __webpack_require__("./resources/assets/js/node_modules/ramda/src/indexBy.js"),
+  indexOf: __webpack_require__("./resources/assets/js/node_modules/ramda/src/indexOf.js"),
+  init: __webpack_require__("./resources/assets/js/node_modules/ramda/src/init.js"),
+  innerJoin: __webpack_require__("./resources/assets/js/node_modules/ramda/src/innerJoin.js"),
+  insert: __webpack_require__("./resources/assets/js/node_modules/ramda/src/insert.js"),
+  insertAll: __webpack_require__("./resources/assets/js/node_modules/ramda/src/insertAll.js"),
+  intersection: __webpack_require__("./resources/assets/js/node_modules/ramda/src/intersection.js"),
+  intersectionWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/intersectionWith.js"),
+  intersperse: __webpack_require__("./resources/assets/js/node_modules/ramda/src/intersperse.js"),
+  into: __webpack_require__("./resources/assets/js/node_modules/ramda/src/into.js"),
+  invert: __webpack_require__("./resources/assets/js/node_modules/ramda/src/invert.js"),
+  invertObj: __webpack_require__("./resources/assets/js/node_modules/ramda/src/invertObj.js"),
+  invoker: __webpack_require__("./resources/assets/js/node_modules/ramda/src/invoker.js"),
+  is: __webpack_require__("./resources/assets/js/node_modules/ramda/src/is.js"),
+  isEmpty: __webpack_require__("./resources/assets/js/node_modules/ramda/src/isEmpty.js"),
+  isNil: __webpack_require__("./resources/assets/js/node_modules/ramda/src/isNil.js"),
+  join: __webpack_require__("./resources/assets/js/node_modules/ramda/src/join.js"),
+  juxt: __webpack_require__("./resources/assets/js/node_modules/ramda/src/juxt.js"),
+  keys: __webpack_require__("./resources/assets/js/node_modules/ramda/src/keys.js"),
+  keysIn: __webpack_require__("./resources/assets/js/node_modules/ramda/src/keysIn.js"),
+  last: __webpack_require__("./resources/assets/js/node_modules/ramda/src/last.js"),
+  lastIndexOf: __webpack_require__("./resources/assets/js/node_modules/ramda/src/lastIndexOf.js"),
+  length: __webpack_require__("./resources/assets/js/node_modules/ramda/src/length.js"),
+  lens: __webpack_require__("./resources/assets/js/node_modules/ramda/src/lens.js"),
+  lensIndex: __webpack_require__("./resources/assets/js/node_modules/ramda/src/lensIndex.js"),
+  lensPath: __webpack_require__("./resources/assets/js/node_modules/ramda/src/lensPath.js"),
+  lensProp: __webpack_require__("./resources/assets/js/node_modules/ramda/src/lensProp.js"),
+  lift: __webpack_require__("./resources/assets/js/node_modules/ramda/src/lift.js"),
+  liftN: __webpack_require__("./resources/assets/js/node_modules/ramda/src/liftN.js"),
+  lt: __webpack_require__("./resources/assets/js/node_modules/ramda/src/lt.js"),
+  lte: __webpack_require__("./resources/assets/js/node_modules/ramda/src/lte.js"),
+  map: __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js"),
+  mapAccum: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mapAccum.js"),
+  mapAccumRight: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mapAccumRight.js"),
+  mapObjIndexed: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mapObjIndexed.js"),
+  match: __webpack_require__("./resources/assets/js/node_modules/ramda/src/match.js"),
+  mathMod: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mathMod.js"),
+  max: __webpack_require__("./resources/assets/js/node_modules/ramda/src/max.js"),
+  maxBy: __webpack_require__("./resources/assets/js/node_modules/ramda/src/maxBy.js"),
+  mean: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mean.js"),
+  median: __webpack_require__("./resources/assets/js/node_modules/ramda/src/median.js"),
+  memoize: __webpack_require__("./resources/assets/js/node_modules/ramda/src/memoize.js"),
+  memoizeWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/memoizeWith.js"),
+  merge: __webpack_require__("./resources/assets/js/node_modules/ramda/src/merge.js"),
+  mergeAll: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeAll.js"),
+  mergeDeepLeft: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeDeepLeft.js"),
+  mergeDeepRight: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeDeepRight.js"),
+  mergeDeepWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeDeepWith.js"),
+  mergeDeepWithKey: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeDeepWithKey.js"),
+  mergeWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeWith.js"),
+  mergeWithKey: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeWithKey.js"),
+  min: __webpack_require__("./resources/assets/js/node_modules/ramda/src/min.js"),
+  minBy: __webpack_require__("./resources/assets/js/node_modules/ramda/src/minBy.js"),
+  modulo: __webpack_require__("./resources/assets/js/node_modules/ramda/src/modulo.js"),
+  multiply: __webpack_require__("./resources/assets/js/node_modules/ramda/src/multiply.js"),
+  nAry: __webpack_require__("./resources/assets/js/node_modules/ramda/src/nAry.js"),
+  negate: __webpack_require__("./resources/assets/js/node_modules/ramda/src/negate.js"),
+  none: __webpack_require__("./resources/assets/js/node_modules/ramda/src/none.js"),
+  not: __webpack_require__("./resources/assets/js/node_modules/ramda/src/not.js"),
+  nth: __webpack_require__("./resources/assets/js/node_modules/ramda/src/nth.js"),
+  nthArg: __webpack_require__("./resources/assets/js/node_modules/ramda/src/nthArg.js"),
+  o: __webpack_require__("./resources/assets/js/node_modules/ramda/src/o.js"),
+  objOf: __webpack_require__("./resources/assets/js/node_modules/ramda/src/objOf.js"),
+  of: __webpack_require__("./resources/assets/js/node_modules/ramda/src/of.js"),
+  omit: __webpack_require__("./resources/assets/js/node_modules/ramda/src/omit.js"),
+  once: __webpack_require__("./resources/assets/js/node_modules/ramda/src/once.js"),
+  or: __webpack_require__("./resources/assets/js/node_modules/ramda/src/or.js"),
+  over: __webpack_require__("./resources/assets/js/node_modules/ramda/src/over.js"),
+  pair: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pair.js"),
+  partial: __webpack_require__("./resources/assets/js/node_modules/ramda/src/partial.js"),
+  partialRight: __webpack_require__("./resources/assets/js/node_modules/ramda/src/partialRight.js"),
+  partition: __webpack_require__("./resources/assets/js/node_modules/ramda/src/partition.js"),
+  path: __webpack_require__("./resources/assets/js/node_modules/ramda/src/path.js"),
+  pathEq: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pathEq.js"),
+  pathOr: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pathOr.js"),
+  pathSatisfies: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pathSatisfies.js"),
+  pick: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pick.js"),
+  pickAll: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pickAll.js"),
+  pickBy: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pickBy.js"),
+  pipe: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pipe.js"),
+  pipeK: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pipeK.js"),
+  pipeP: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pipeP.js"),
+  pluck: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pluck.js"),
+  prepend: __webpack_require__("./resources/assets/js/node_modules/ramda/src/prepend.js"),
+  product: __webpack_require__("./resources/assets/js/node_modules/ramda/src/product.js"),
+  project: __webpack_require__("./resources/assets/js/node_modules/ramda/src/project.js"),
+  prop: __webpack_require__("./resources/assets/js/node_modules/ramda/src/prop.js"),
+  propEq: __webpack_require__("./resources/assets/js/node_modules/ramda/src/propEq.js"),
+  propIs: __webpack_require__("./resources/assets/js/node_modules/ramda/src/propIs.js"),
+  propOr: __webpack_require__("./resources/assets/js/node_modules/ramda/src/propOr.js"),
+  propSatisfies: __webpack_require__("./resources/assets/js/node_modules/ramda/src/propSatisfies.js"),
+  props: __webpack_require__("./resources/assets/js/node_modules/ramda/src/props.js"),
+  range: __webpack_require__("./resources/assets/js/node_modules/ramda/src/range.js"),
+  reduce: __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduce.js"),
+  reduceBy: __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduceBy.js"),
+  reduceRight: __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduceRight.js"),
+  reduceWhile: __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduceWhile.js"),
+  reduced: __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduced.js"),
+  reject: __webpack_require__("./resources/assets/js/node_modules/ramda/src/reject.js"),
+  remove: __webpack_require__("./resources/assets/js/node_modules/ramda/src/remove.js"),
+  repeat: __webpack_require__("./resources/assets/js/node_modules/ramda/src/repeat.js"),
+  replace: __webpack_require__("./resources/assets/js/node_modules/ramda/src/replace.js"),
+  reverse: __webpack_require__("./resources/assets/js/node_modules/ramda/src/reverse.js"),
+  scan: __webpack_require__("./resources/assets/js/node_modules/ramda/src/scan.js"),
+  sequence: __webpack_require__("./resources/assets/js/node_modules/ramda/src/sequence.js"),
+  set: __webpack_require__("./resources/assets/js/node_modules/ramda/src/set.js"),
+  slice: __webpack_require__("./resources/assets/js/node_modules/ramda/src/slice.js"),
+  sort: __webpack_require__("./resources/assets/js/node_modules/ramda/src/sort.js"),
+  sortBy: __webpack_require__("./resources/assets/js/node_modules/ramda/src/sortBy.js"),
+  sortWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/sortWith.js"),
+  split: __webpack_require__("./resources/assets/js/node_modules/ramda/src/split.js"),
+  splitAt: __webpack_require__("./resources/assets/js/node_modules/ramda/src/splitAt.js"),
+  splitEvery: __webpack_require__("./resources/assets/js/node_modules/ramda/src/splitEvery.js"),
+  splitWhen: __webpack_require__("./resources/assets/js/node_modules/ramda/src/splitWhen.js"),
+  startsWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/startsWith.js"),
+  subtract: __webpack_require__("./resources/assets/js/node_modules/ramda/src/subtract.js"),
+  sum: __webpack_require__("./resources/assets/js/node_modules/ramda/src/sum.js"),
+  symmetricDifference: __webpack_require__("./resources/assets/js/node_modules/ramda/src/symmetricDifference.js"),
+  symmetricDifferenceWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/symmetricDifferenceWith.js"),
+  tail: __webpack_require__("./resources/assets/js/node_modules/ramda/src/tail.js"),
+  take: __webpack_require__("./resources/assets/js/node_modules/ramda/src/take.js"),
+  takeLast: __webpack_require__("./resources/assets/js/node_modules/ramda/src/takeLast.js"),
+  takeLastWhile: __webpack_require__("./resources/assets/js/node_modules/ramda/src/takeLastWhile.js"),
+  takeWhile: __webpack_require__("./resources/assets/js/node_modules/ramda/src/takeWhile.js"),
+  tap: __webpack_require__("./resources/assets/js/node_modules/ramda/src/tap.js"),
+  test: __webpack_require__("./resources/assets/js/node_modules/ramda/src/test.js"),
+  times: __webpack_require__("./resources/assets/js/node_modules/ramda/src/times.js"),
+  toLower: __webpack_require__("./resources/assets/js/node_modules/ramda/src/toLower.js"),
+  toPairs: __webpack_require__("./resources/assets/js/node_modules/ramda/src/toPairs.js"),
+  toPairsIn: __webpack_require__("./resources/assets/js/node_modules/ramda/src/toPairsIn.js"),
+  toString: __webpack_require__("./resources/assets/js/node_modules/ramda/src/toString.js"),
+  toUpper: __webpack_require__("./resources/assets/js/node_modules/ramda/src/toUpper.js"),
+  transduce: __webpack_require__("./resources/assets/js/node_modules/ramda/src/transduce.js"),
+  transpose: __webpack_require__("./resources/assets/js/node_modules/ramda/src/transpose.js"),
+  traverse: __webpack_require__("./resources/assets/js/node_modules/ramda/src/traverse.js"),
+  trim: __webpack_require__("./resources/assets/js/node_modules/ramda/src/trim.js"),
+  tryCatch: __webpack_require__("./resources/assets/js/node_modules/ramda/src/tryCatch.js"),
+  type: __webpack_require__("./resources/assets/js/node_modules/ramda/src/type.js"),
+  unapply: __webpack_require__("./resources/assets/js/node_modules/ramda/src/unapply.js"),
+  unary: __webpack_require__("./resources/assets/js/node_modules/ramda/src/unary.js"),
+  uncurryN: __webpack_require__("./resources/assets/js/node_modules/ramda/src/uncurryN.js"),
+  unfold: __webpack_require__("./resources/assets/js/node_modules/ramda/src/unfold.js"),
+  union: __webpack_require__("./resources/assets/js/node_modules/ramda/src/union.js"),
+  unionWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/unionWith.js"),
+  uniq: __webpack_require__("./resources/assets/js/node_modules/ramda/src/uniq.js"),
+  uniqBy: __webpack_require__("./resources/assets/js/node_modules/ramda/src/uniqBy.js"),
+  uniqWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/uniqWith.js"),
+  unless: __webpack_require__("./resources/assets/js/node_modules/ramda/src/unless.js"),
+  unnest: __webpack_require__("./resources/assets/js/node_modules/ramda/src/unnest.js"),
+  until: __webpack_require__("./resources/assets/js/node_modules/ramda/src/until.js"),
+  update: __webpack_require__("./resources/assets/js/node_modules/ramda/src/update.js"),
+  useWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/useWith.js"),
+  values: __webpack_require__("./resources/assets/js/node_modules/ramda/src/values.js"),
+  valuesIn: __webpack_require__("./resources/assets/js/node_modules/ramda/src/valuesIn.js"),
+  view: __webpack_require__("./resources/assets/js/node_modules/ramda/src/view.js"),
+  when: __webpack_require__("./resources/assets/js/node_modules/ramda/src/when.js"),
+  where: __webpack_require__("./resources/assets/js/node_modules/ramda/src/where.js"),
+  whereEq: __webpack_require__("./resources/assets/js/node_modules/ramda/src/whereEq.js"),
+  without: __webpack_require__("./resources/assets/js/node_modules/ramda/src/without.js"),
+  xprod: __webpack_require__("./resources/assets/js/node_modules/ramda/src/xprod.js"),
+  zip: __webpack_require__("./resources/assets/js/node_modules/ramda/src/zip.js"),
+  zipObj: __webpack_require__("./resources/assets/js/node_modules/ramda/src/zipObj.js"),
+  zipWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/zipWith.js")
 };
 
-},{"./src/F":13,"./src/T":14,"./src/__":15,"./src/add":16,"./src/addIndex":17,"./src/adjust":18,"./src/all":19,"./src/allPass":20,"./src/always":21,"./src/and":22,"./src/any":23,"./src/anyPass":24,"./src/ap":25,"./src/aperture":26,"./src/append":27,"./src/apply":28,"./src/applySpec":29,"./src/ascend":30,"./src/assoc":31,"./src/assocPath":32,"./src/binary":33,"./src/bind":34,"./src/both":35,"./src/call":36,"./src/chain":37,"./src/clamp":38,"./src/clone":39,"./src/comparator":40,"./src/complement":41,"./src/compose":42,"./src/composeK":43,"./src/composeP":44,"./src/concat":45,"./src/cond":46,"./src/construct":47,"./src/constructN":48,"./src/contains":49,"./src/converge":50,"./src/countBy":51,"./src/curry":52,"./src/curryN":53,"./src/dec":54,"./src/defaultTo":55,"./src/descend":56,"./src/difference":57,"./src/differenceWith":58,"./src/dissoc":59,"./src/dissocPath":60,"./src/divide":61,"./src/drop":62,"./src/dropLast":63,"./src/dropLastWhile":64,"./src/dropRepeats":65,"./src/dropRepeatsWith":66,"./src/dropWhile":67,"./src/either":68,"./src/empty":69,"./src/endsWith":70,"./src/eqBy":71,"./src/eqProps":72,"./src/equals":73,"./src/evolve":74,"./src/filter":75,"./src/find":76,"./src/findIndex":77,"./src/findLast":78,"./src/findLastIndex":79,"./src/flatten":80,"./src/flip":81,"./src/forEach":82,"./src/forEachObjIndexed":83,"./src/fromPairs":84,"./src/groupBy":85,"./src/groupWith":86,"./src/gt":87,"./src/gte":88,"./src/has":89,"./src/hasIn":90,"./src/head":91,"./src/identical":92,"./src/identity":93,"./src/ifElse":94,"./src/inc":95,"./src/indexBy":96,"./src/indexOf":97,"./src/init":98,"./src/innerJoin":99,"./src/insert":100,"./src/insertAll":101,"./src/intersection":173,"./src/intersectionWith":174,"./src/intersperse":175,"./src/into":176,"./src/invert":177,"./src/invertObj":178,"./src/invoker":179,"./src/is":180,"./src/isEmpty":181,"./src/isNil":182,"./src/join":183,"./src/juxt":184,"./src/keys":185,"./src/keysIn":186,"./src/last":187,"./src/lastIndexOf":188,"./src/length":189,"./src/lens":190,"./src/lensIndex":191,"./src/lensPath":192,"./src/lensProp":193,"./src/lift":194,"./src/liftN":195,"./src/lt":196,"./src/lte":197,"./src/map":198,"./src/mapAccum":199,"./src/mapAccumRight":200,"./src/mapObjIndexed":201,"./src/match":202,"./src/mathMod":203,"./src/max":204,"./src/maxBy":205,"./src/mean":206,"./src/median":207,"./src/memoize":208,"./src/memoizeWith":209,"./src/merge":210,"./src/mergeAll":211,"./src/mergeDeepLeft":212,"./src/mergeDeepRight":213,"./src/mergeDeepWith":214,"./src/mergeDeepWithKey":215,"./src/mergeWith":216,"./src/mergeWithKey":217,"./src/min":218,"./src/minBy":219,"./src/modulo":220,"./src/multiply":221,"./src/nAry":222,"./src/negate":223,"./src/none":224,"./src/not":225,"./src/nth":226,"./src/nthArg":227,"./src/o":228,"./src/objOf":229,"./src/of":230,"./src/omit":231,"./src/once":232,"./src/or":233,"./src/over":234,"./src/pair":235,"./src/partial":236,"./src/partialRight":237,"./src/partition":238,"./src/path":239,"./src/pathEq":240,"./src/pathOr":241,"./src/pathSatisfies":242,"./src/pick":243,"./src/pickAll":244,"./src/pickBy":245,"./src/pipe":246,"./src/pipeK":247,"./src/pipeP":248,"./src/pluck":249,"./src/prepend":250,"./src/product":251,"./src/project":252,"./src/prop":253,"./src/propEq":254,"./src/propIs":255,"./src/propOr":256,"./src/propSatisfies":257,"./src/props":258,"./src/range":259,"./src/reduce":260,"./src/reduceBy":261,"./src/reduceRight":262,"./src/reduceWhile":263,"./src/reduced":264,"./src/reject":265,"./src/remove":266,"./src/repeat":267,"./src/replace":268,"./src/reverse":269,"./src/scan":270,"./src/sequence":271,"./src/set":272,"./src/slice":273,"./src/sort":274,"./src/sortBy":275,"./src/sortWith":276,"./src/split":277,"./src/splitAt":278,"./src/splitEvery":279,"./src/splitWhen":280,"./src/startsWith":281,"./src/subtract":282,"./src/sum":283,"./src/symmetricDifference":284,"./src/symmetricDifferenceWith":285,"./src/tail":286,"./src/take":287,"./src/takeLast":288,"./src/takeLastWhile":289,"./src/takeWhile":290,"./src/tap":291,"./src/test":292,"./src/times":293,"./src/toLower":294,"./src/toPairs":295,"./src/toPairsIn":296,"./src/toString":297,"./src/toUpper":298,"./src/transduce":299,"./src/transpose":300,"./src/traverse":301,"./src/trim":302,"./src/tryCatch":303,"./src/type":304,"./src/unapply":305,"./src/unary":306,"./src/uncurryN":307,"./src/unfold":308,"./src/union":309,"./src/unionWith":310,"./src/uniq":311,"./src/uniqBy":312,"./src/uniqWith":313,"./src/unless":314,"./src/unnest":315,"./src/until":316,"./src/update":317,"./src/useWith":318,"./src/values":319,"./src/valuesIn":320,"./src/view":321,"./src/when":322,"./src/where":323,"./src/whereEq":324,"./src/without":325,"./src/xprod":326,"./src/zip":327,"./src/zipObj":328,"./src/zipWith":329}],13:[function(require,module,exports){
-var always = require('./always');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/F.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var always = __webpack_require__("./resources/assets/js/node_modules/ramda/src/always.js");
 
 
 /**
@@ -1592,8 +1752,13 @@ var always = require('./always');
  */
 module.exports = always(false);
 
-},{"./always":21}],14:[function(require,module,exports){
-var always = require('./always');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/T.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var always = __webpack_require__("./resources/assets/js/node_modules/ramda/src/always.js");
 
 
 /**
@@ -1613,7 +1778,12 @@ var always = require('./always');
  */
 module.exports = always(true);
 
-},{"./always":21}],15:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/__.js":
+/***/ (function(module, exports) {
+
 /**
  * A special placeholder value used to specify "gaps" within curried functions,
  * allowing partial application of any combination of arguments, regardless of
@@ -1642,8 +1812,13 @@ module.exports = always(true);
  */
 module.exports = {'@@functional/placeholder': true};
 
-},{}],16:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/add.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -1667,10 +1842,15 @@ module.exports = _curry2(function add(a, b) {
   return Number(a) + Number(b);
 });
 
-},{"./internal/_curry2":116}],17:[function(require,module,exports){
-var _concat = require('./internal/_concat');
-var _curry1 = require('./internal/_curry1');
-var curryN = require('./curryN');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/addIndex.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
 
 
 /**
@@ -1712,9 +1892,14 @@ module.exports = _curry1(function addIndex(fn) {
   });
 });
 
-},{"./curryN":53,"./internal/_concat":111,"./internal/_curry1":115}],18:[function(require,module,exports){
-var _concat = require('./internal/_concat');
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/adjust.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -1753,10 +1938,15 @@ module.exports = _curry3(function adjust(fn, idx, list) {
   return _list;
 });
 
-},{"./internal/_concat":111,"./internal/_curry3":117}],19:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xall = require('./internal/_xall');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/all.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xall = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xall.js");
 
 
 /**
@@ -1794,12 +1984,17 @@ module.exports = _curry2(_dispatchable(['all'], _xall, function all(fn, list) {
   return true;
 }));
 
-},{"./internal/_curry2":116,"./internal/_dispatchable":119,"./internal/_xall":153}],20:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var curryN = require('./curryN');
-var max = require('./max');
-var pluck = require('./pluck');
-var reduce = require('./reduce');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/allPass.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
+var max = __webpack_require__("./resources/assets/js/node_modules/ramda/src/max.js");
+var pluck = __webpack_require__("./resources/assets/js/node_modules/ramda/src/pluck.js");
+var reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduce.js");
 
 
 /**
@@ -1841,8 +2036,13 @@ module.exports = _curry1(function allPass(preds) {
   });
 });
 
-},{"./curryN":53,"./internal/_curry1":115,"./max":204,"./pluck":249,"./reduce":260}],21:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/always.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -1870,8 +2070,13 @@ module.exports = _curry1(function always(val) {
   };
 });
 
-},{"./internal/_curry1":115}],22:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/and.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -1897,10 +2102,15 @@ module.exports = _curry2(function and(a, b) {
   return a && b;
 });
 
-},{"./internal/_curry2":116}],23:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xany = require('./internal/_xany');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/any.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xany = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xany.js");
 
 
 /**
@@ -1939,12 +2149,17 @@ module.exports = _curry2(_dispatchable(['any'], _xany, function any(fn, list) {
   return false;
 }));
 
-},{"./internal/_curry2":116,"./internal/_dispatchable":119,"./internal/_xany":154}],24:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var curryN = require('./curryN');
-var max = require('./max');
-var pluck = require('./pluck');
-var reduce = require('./reduce');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/anyPass.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
+var max = __webpack_require__("./resources/assets/js/node_modules/ramda/src/max.js");
+var pluck = __webpack_require__("./resources/assets/js/node_modules/ramda/src/pluck.js");
+var reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduce.js");
 
 
 /**
@@ -1987,11 +2202,16 @@ module.exports = _curry1(function anyPass(preds) {
   });
 });
 
-},{"./curryN":53,"./internal/_curry1":115,"./max":204,"./pluck":249,"./reduce":260}],25:[function(require,module,exports){
-var _concat = require('./internal/_concat');
-var _curry2 = require('./internal/_curry2');
-var _reduce = require('./internal/_reduce');
-var map = require('./map');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/ap.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
 
 
 /**
@@ -2028,11 +2248,16 @@ module.exports = _curry2(function ap(applyF, applyX) {
   );
 });
 
-},{"./internal/_concat":111,"./internal/_curry2":116,"./internal/_reduce":148,"./map":198}],26:[function(require,module,exports){
-var _aperture = require('./internal/_aperture');
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xaperture = require('./internal/_xaperture');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/aperture.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _aperture = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_aperture.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xaperture = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xaperture.js");
 
 
 /**
@@ -2058,9 +2283,14 @@ var _xaperture = require('./internal/_xaperture');
  */
 module.exports = _curry2(_dispatchable([], _xaperture, _aperture));
 
-},{"./internal/_aperture":103,"./internal/_curry2":116,"./internal/_dispatchable":119,"./internal/_xaperture":155}],27:[function(require,module,exports){
-var _concat = require('./internal/_concat');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/append.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -2087,8 +2317,13 @@ module.exports = _curry2(function append(el, list) {
   return _concat(list, [el]);
 });
 
-},{"./internal/_concat":111,"./internal/_curry2":116}],28:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/apply.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -2115,15 +2350,20 @@ module.exports = _curry2(function apply(fn, args) {
   return fn.apply(this, args);
 });
 
-},{"./internal/_curry2":116}],29:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var apply = require('./apply');
-var curryN = require('./curryN');
-var map = require('./map');
-var max = require('./max');
-var pluck = require('./pluck');
-var reduce = require('./reduce');
-var values = require('./values');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/applySpec.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var apply = __webpack_require__("./resources/assets/js/node_modules/ramda/src/apply.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
+var max = __webpack_require__("./resources/assets/js/node_modules/ramda/src/max.js");
+var pluck = __webpack_require__("./resources/assets/js/node_modules/ramda/src/pluck.js");
+var reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduce.js");
+var values = __webpack_require__("./resources/assets/js/node_modules/ramda/src/values.js");
 
 
 /**
@@ -2161,8 +2401,13 @@ module.exports = _curry1(function applySpec(spec) {
                 });
 });
 
-},{"./apply":28,"./curryN":53,"./internal/_curry1":115,"./map":198,"./max":204,"./pluck":249,"./reduce":260,"./values":319}],30:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/ascend.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -2193,8 +2438,13 @@ module.exports = _curry3(function ascend(fn, a, b) {
   return aa < bb ? -1 : aa > bb ? 1 : 0;
 });
 
-},{"./internal/_curry3":117}],31:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/assoc.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -2226,13 +2476,18 @@ module.exports = _curry3(function assoc(prop, val, obj) {
   return result;
 });
 
-},{"./internal/_curry3":117}],32:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var _has = require('./internal/_has');
-var _isArray = require('./internal/_isArray');
-var _isInteger = require('./internal/_isInteger');
-var assoc = require('./assoc');
-var isNil = require('./isNil');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/assocPath.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
+var _isArray = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArray.js");
+var _isInteger = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isInteger.js");
+var assoc = __webpack_require__("./resources/assets/js/node_modules/ramda/src/assoc.js");
+var isNil = __webpack_require__("./resources/assets/js/node_modules/ramda/src/isNil.js");
 
 
 /**
@@ -2277,9 +2532,14 @@ module.exports = _curry3(function assocPath(path, val, obj) {
   }
 });
 
-},{"./assoc":31,"./internal/_curry3":117,"./internal/_has":127,"./internal/_isArray":131,"./internal/_isInteger":134,"./isNil":182}],33:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var nAry = require('./nAry');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/binary.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var nAry = __webpack_require__("./resources/assets/js/node_modules/ramda/src/nAry.js");
 
 
 /**
@@ -2314,9 +2574,14 @@ module.exports = _curry1(function binary(fn) {
   return nAry(2, fn);
 });
 
-},{"./internal/_curry1":115,"./nAry":222}],34:[function(require,module,exports){
-var _arity = require('./internal/_arity');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/bind.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arity.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -2347,11 +2612,16 @@ module.exports = _curry2(function bind(fn, thisObj) {
   });
 });
 
-},{"./internal/_arity":104,"./internal/_curry2":116}],35:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _isFunction = require('./internal/_isFunction');
-var and = require('./and');
-var lift = require('./lift');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/both.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isFunction = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isFunction.js");
+var and = __webpack_require__("./resources/assets/js/node_modules/ramda/src/and.js");
+var lift = __webpack_require__("./resources/assets/js/node_modules/ramda/src/lift.js");
 
 
 /**
@@ -2390,8 +2660,13 @@ module.exports = _curry2(function both(f, g) {
     lift(and)(f, g);
 });
 
-},{"./and":22,"./internal/_curry2":116,"./internal/_isFunction":133,"./lift":194}],36:[function(require,module,exports){
-var curry = require('./curry');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/call.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var curry = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curry.js");
 
 
 /**
@@ -2430,12 +2705,17 @@ module.exports = curry(function call(fn) {
   return fn.apply(this, Array.prototype.slice.call(arguments, 1));
 });
 
-},{"./curry":52}],37:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _makeFlat = require('./internal/_makeFlat');
-var _xchain = require('./internal/_xchain');
-var map = require('./map');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/chain.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _makeFlat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_makeFlat.js");
+var _xchain = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xchain.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
 
 
 /**
@@ -2467,8 +2747,13 @@ module.exports = _curry2(_dispatchable(['fantasy-land/chain', 'chain'], _xchain,
   return _makeFlat(false)(map(fn, monad));
 }));
 
-},{"./internal/_curry2":116,"./internal/_dispatchable":119,"./internal/_makeFlat":141,"./internal/_xchain":156,"./map":198}],38:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/clamp.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 /**
  * Restricts a number to be within a range.
@@ -2499,9 +2784,14 @@ module.exports = _curry3(function clamp(min, max, value) {
          value;
 });
 
-},{"./internal/_curry3":117}],39:[function(require,module,exports){
-var _clone = require('./internal/_clone');
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/clone.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _clone = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_clone.js");
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -2531,8 +2821,13 @@ module.exports = _curry1(function clone(value) {
     _clone(value, [], [], true);
 });
 
-},{"./internal/_clone":108,"./internal/_curry1":115}],40:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/comparator.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -2561,9 +2856,14 @@ module.exports = _curry1(function comparator(pred) {
   };
 });
 
-},{"./internal/_curry1":115}],41:[function(require,module,exports){
-var lift = require('./lift');
-var not = require('./not');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/complement.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var lift = __webpack_require__("./resources/assets/js/node_modules/ramda/src/lift.js");
+var not = __webpack_require__("./resources/assets/js/node_modules/ramda/src/not.js");
 
 
 /**
@@ -2590,9 +2890,14 @@ var not = require('./not');
  */
 module.exports = lift(not);
 
-},{"./lift":194,"./not":225}],42:[function(require,module,exports){
-var pipe = require('./pipe');
-var reverse = require('./reverse');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/compose.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var pipe = __webpack_require__("./resources/assets/js/node_modules/ramda/src/pipe.js");
+var reverse = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reverse.js");
 
 
 /**
@@ -2626,10 +2931,15 @@ module.exports = function compose() {
   return pipe.apply(this, reverse(arguments));
 };
 
-},{"./pipe":246,"./reverse":269}],43:[function(require,module,exports){
-var chain = require('./chain');
-var compose = require('./compose');
-var map = require('./map');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/composeK.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var chain = __webpack_require__("./resources/assets/js/node_modules/ramda/src/chain.js");
+var compose = __webpack_require__("./resources/assets/js/node_modules/ramda/src/compose.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
 
 
 /**
@@ -2671,9 +2981,14 @@ module.exports = function composeK() {
   return compose(compose.apply(this, map(chain, init)), last);
 };
 
-},{"./chain":37,"./compose":42,"./map":198}],44:[function(require,module,exports){
-var pipeP = require('./pipeP');
-var reverse = require('./reverse');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/composeP.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var pipeP = __webpack_require__("./resources/assets/js/node_modules/ramda/src/pipeP.js");
+var reverse = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reverse.js");
 
 
 /**
@@ -2717,12 +3032,17 @@ module.exports = function composeP() {
   return pipeP.apply(this, reverse(arguments));
 };
 
-},{"./pipeP":248,"./reverse":269}],45:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _isArray = require('./internal/_isArray');
-var _isFunction = require('./internal/_isFunction');
-var _isString = require('./internal/_isString');
-var toString = require('./toString');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/concat.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isArray = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArray.js");
+var _isFunction = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isFunction.js");
+var _isString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isString.js");
+var toString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/toString.js");
 
 
 /**
@@ -2773,12 +3093,17 @@ module.exports = _curry2(function concat(a, b) {
   throw new TypeError(toString(a) + ' does not have a method named "concat" or "fantasy-land/concat"');
 });
 
-},{"./internal/_curry2":116,"./internal/_isArray":131,"./internal/_isFunction":133,"./internal/_isString":139,"./toString":297}],46:[function(require,module,exports){
-var _arity = require('./internal/_arity');
-var _curry1 = require('./internal/_curry1');
-var map = require('./map');
-var max = require('./max');
-var reduce = require('./reduce');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/cond.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arity.js");
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
+var max = __webpack_require__("./resources/assets/js/node_modules/ramda/src/max.js");
+var reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduce.js");
 
 
 /**
@@ -2822,9 +3147,14 @@ module.exports = _curry1(function cond(pairs) {
   });
 });
 
-},{"./internal/_arity":104,"./internal/_curry1":115,"./map":198,"./max":204,"./reduce":260}],47:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var constructN = require('./constructN');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/construct.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var constructN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/constructN.js");
 
 
 /**
@@ -2863,10 +3193,15 @@ module.exports = _curry1(function construct(Fn) {
   return constructN(Fn.length, Fn);
 });
 
-},{"./constructN":48,"./internal/_curry1":115}],48:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var curry = require('./curry');
-var nAry = require('./nAry');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/constructN.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var curry = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curry.js");
+var nAry = __webpack_require__("./resources/assets/js/node_modules/ramda/src/nAry.js");
 
 
 /**
@@ -2927,9 +3262,14 @@ module.exports = _curry2(function constructN(n, Fn) {
   }));
 });
 
-},{"./curry":52,"./internal/_curry2":116,"./nAry":222}],49:[function(require,module,exports){
-var _contains = require('./internal/_contains');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/contains.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _contains = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_contains.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -2954,13 +3294,18 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(_contains);
 
-},{"./internal/_contains":112,"./internal/_curry2":116}],50:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _map = require('./internal/_map');
-var curryN = require('./curryN');
-var max = require('./max');
-var pluck = require('./pluck');
-var reduce = require('./reduce');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/converge.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_map.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
+var max = __webpack_require__("./resources/assets/js/node_modules/ramda/src/max.js");
+var pluck = __webpack_require__("./resources/assets/js/node_modules/ramda/src/pluck.js");
+var reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduce.js");
 
 
 /**
@@ -3000,8 +3345,13 @@ module.exports = _curry2(function converge(after, fns) {
   });
 });
 
-},{"./curryN":53,"./internal/_curry2":116,"./internal/_map":142,"./max":204,"./pluck":249,"./reduce":260}],51:[function(require,module,exports){
-var reduceBy = require('./reduceBy');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/countBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var reduceBy = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduceBy.js");
 
 
 /**
@@ -3030,9 +3380,14 @@ var reduceBy = require('./reduceBy');
  */
 module.exports = reduceBy(function(acc, elem) { return acc + 1; }, 0);
 
-},{"./reduceBy":261}],52:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var curryN = require('./curryN');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/curry.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
 
 
 /**
@@ -3080,11 +3435,16 @@ module.exports = _curry1(function curry(fn) {
   return curryN(fn.length, fn);
 });
 
-},{"./curryN":53,"./internal/_curry1":115}],53:[function(require,module,exports){
-var _arity = require('./internal/_arity');
-var _curry1 = require('./internal/_curry1');
-var _curry2 = require('./internal/_curry2');
-var _curryN = require('./internal/_curryN');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/curryN.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arity.js");
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curryN.js");
 
 
 /**
@@ -3136,8 +3496,13 @@ module.exports = _curry2(function curryN(length, fn) {
   return _arity(length, _curryN(length, [], fn));
 });
 
-},{"./internal/_arity":104,"./internal/_curry1":115,"./internal/_curry2":116,"./internal/_curryN":118}],54:[function(require,module,exports){
-var add = require('./add');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/dec.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var add = __webpack_require__("./resources/assets/js/node_modules/ramda/src/add.js");
 
 
 /**
@@ -3157,8 +3522,13 @@ var add = require('./add');
  */
 module.exports = add(-1);
 
-},{"./add":16}],55:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/defaultTo.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -3187,8 +3557,13 @@ module.exports = _curry2(function defaultTo(d, v) {
   return v == null || v !== v ? d : v;
 });
 
-},{"./internal/_curry2":116}],56:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/descend.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -3219,9 +3594,14 @@ module.exports = _curry3(function descend(fn, a, b) {
   return aa > bb ? -1 : aa < bb ? 1 : 0;
 });
 
-},{"./internal/_curry3":117}],57:[function(require,module,exports){
-var _contains = require('./internal/_contains');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/difference.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _contains = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_contains.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -3257,9 +3637,14 @@ module.exports = _curry2(function difference(first, second) {
   return out;
 });
 
-},{"./internal/_contains":112,"./internal/_curry2":116}],58:[function(require,module,exports){
-var _containsWith = require('./internal/_containsWith');
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/differenceWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _containsWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_containsWith.js");
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -3298,8 +3683,13 @@ module.exports = _curry3(function differenceWith(pred, first, second) {
   return out;
 });
 
-},{"./internal/_containsWith":113,"./internal/_curry3":117}],59:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/dissoc.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -3327,13 +3717,18 @@ module.exports = _curry2(function dissoc(prop, obj) {
   return result;
 });
 
-},{"./internal/_curry2":116}],60:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _isInteger = require('./internal/_isInteger');
-var assoc = require('./assoc');
-var dissoc = require('./dissoc');
-var remove = require('./remove');
-var update = require('./update');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/dissocPath.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isInteger = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isInteger.js");
+var assoc = __webpack_require__("./resources/assets/js/node_modules/ramda/src/assoc.js");
+var dissoc = __webpack_require__("./resources/assets/js/node_modules/ramda/src/dissoc.js");
+var remove = __webpack_require__("./resources/assets/js/node_modules/ramda/src/remove.js");
+var update = __webpack_require__("./resources/assets/js/node_modules/ramda/src/update.js");
 
 
 /**
@@ -3374,8 +3769,13 @@ module.exports = _curry2(function dissocPath(path, obj) {
   }
 });
 
-},{"./assoc":31,"./dissoc":59,"./internal/_curry2":116,"./internal/_isInteger":134,"./remove":266,"./update":317}],61:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/divide.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -3402,11 +3802,16 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function divide(a, b) { return a / b; });
 
-},{"./internal/_curry2":116}],62:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xdrop = require('./internal/_xdrop');
-var slice = require('./slice');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/drop.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xdrop = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xdrop.js");
+var slice = __webpack_require__("./resources/assets/js/node_modules/ramda/src/slice.js");
 
 
 /**
@@ -3437,11 +3842,16 @@ module.exports = _curry2(_dispatchable(['drop'], _xdrop, function drop(n, xs) {
   return slice(Math.max(0, n), Infinity, xs);
 }));
 
-},{"./internal/_curry2":116,"./internal/_dispatchable":119,"./internal/_xdrop":157,"./slice":273}],63:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _dropLast = require('./internal/_dropLast');
-var _xdropLast = require('./internal/_xdropLast');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/dropLast.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _dropLast = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dropLast.js");
+var _xdropLast = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xdropLast.js");
 
 
 /**
@@ -3467,11 +3877,16 @@ var _xdropLast = require('./internal/_xdropLast');
  */
 module.exports = _curry2(_dispatchable([], _xdropLast, _dropLast));
 
-},{"./internal/_curry2":116,"./internal/_dispatchable":119,"./internal/_dropLast":120,"./internal/_xdropLast":158}],64:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _dropLastWhile = require('./internal/_dropLastWhile');
-var _xdropLastWhile = require('./internal/_xdropLastWhile');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/dropLastWhile.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _dropLastWhile = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dropLastWhile.js");
+var _xdropLastWhile = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xdropLastWhile.js");
 
 
 /**
@@ -3498,12 +3913,17 @@ var _xdropLastWhile = require('./internal/_xdropLastWhile');
  */
 module.exports = _curry2(_dispatchable([], _xdropLastWhile, _dropLastWhile));
 
-},{"./internal/_curry2":116,"./internal/_dispatchable":119,"./internal/_dropLastWhile":121,"./internal/_xdropLastWhile":159}],65:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _dispatchable = require('./internal/_dispatchable');
-var _xdropRepeatsWith = require('./internal/_xdropRepeatsWith');
-var dropRepeatsWith = require('./dropRepeatsWith');
-var equals = require('./equals');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/dropRepeats.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xdropRepeatsWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xdropRepeatsWith.js");
+var dropRepeatsWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/dropRepeatsWith.js");
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
 
 
 /**
@@ -3526,11 +3946,16 @@ var equals = require('./equals');
  */
 module.exports = _curry1(_dispatchable([], _xdropRepeatsWith(equals), dropRepeatsWith(equals)));
 
-},{"./dropRepeatsWith":66,"./equals":73,"./internal/_curry1":115,"./internal/_dispatchable":119,"./internal/_xdropRepeatsWith":160}],66:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xdropRepeatsWith = require('./internal/_xdropRepeatsWith');
-var last = require('./last');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/dropRepeatsWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xdropRepeatsWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xdropRepeatsWith.js");
+var last = __webpack_require__("./resources/assets/js/node_modules/ramda/src/last.js");
 
 
 /**
@@ -3571,10 +3996,15 @@ module.exports = _curry2(_dispatchable([], _xdropRepeatsWith, function dropRepea
 }));
 
 
-},{"./internal/_curry2":116,"./internal/_dispatchable":119,"./internal/_xdropRepeatsWith":160,"./last":187}],67:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xdropWhile = require('./internal/_xdropWhile');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/dropWhile.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xdropWhile = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xdropWhile.js");
 
 
 /**
@@ -3611,11 +4041,16 @@ module.exports = _curry2(_dispatchable(['dropWhile'], _xdropWhile, function drop
   return Array.prototype.slice.call(list, idx);
 }));
 
-},{"./internal/_curry2":116,"./internal/_dispatchable":119,"./internal/_xdropWhile":161}],68:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _isFunction = require('./internal/_isFunction');
-var lift = require('./lift');
-var or = require('./or');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/either.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isFunction = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isFunction.js");
+var lift = __webpack_require__("./resources/assets/js/node_modules/ramda/src/lift.js");
+var or = __webpack_require__("./resources/assets/js/node_modules/ramda/src/or.js");
 
 
 /**
@@ -3653,12 +4088,17 @@ module.exports = _curry2(function either(f, g) {
     lift(or)(f, g);
 });
 
-},{"./internal/_curry2":116,"./internal/_isFunction":133,"./lift":194,"./or":233}],69:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _isArguments = require('./internal/_isArguments');
-var _isArray = require('./internal/_isArray');
-var _isObject = require('./internal/_isObject');
-var _isString = require('./internal/_isString');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/empty.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _isArguments = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArguments.js");
+var _isArray = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArray.js");
+var _isObject = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isObject.js");
+var _isString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isString.js");
 
 
 /**
@@ -3706,10 +4146,15 @@ module.exports = _curry1(function empty(x) {
   );
 });
 
-},{"./internal/_curry1":115,"./internal/_isArguments":130,"./internal/_isArray":131,"./internal/_isObject":136,"./internal/_isString":139}],70:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var equals = require('./equals');
-var takeLast = require('./takeLast');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/endsWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
+var takeLast = __webpack_require__("./resources/assets/js/node_modules/ramda/src/takeLast.js");
 
 /**
  * Checks if a list ends with the provided values
@@ -3734,9 +4179,14 @@ module.exports = _curry2(function(suffix, list) {
   return equals(takeLast(suffix.length, list), suffix);
 });
 
-},{"./equals":73,"./internal/_curry2":116,"./takeLast":288}],71:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var equals = require('./equals');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/eqBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
 
 
 /**
@@ -3760,9 +4210,14 @@ module.exports = _curry3(function eqBy(f, x, y) {
   return equals(f(x), f(y));
 });
 
-},{"./equals":73,"./internal/_curry3":117}],72:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var equals = require('./equals');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/eqProps.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
 
 
 /**
@@ -3790,9 +4245,14 @@ module.exports = _curry3(function eqProps(prop, obj1, obj2) {
   return equals(obj1[prop], obj2[prop]);
 });
 
-},{"./equals":73,"./internal/_curry3":117}],73:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _equals = require('./internal/_equals');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/equals.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_equals.js");
 
 
 /**
@@ -3824,8 +4284,13 @@ module.exports = _curry2(function equals(a, b) {
   return _equals(a, b, [], []);
 });
 
-},{"./internal/_curry2":116,"./internal/_equals":122}],74:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/evolve.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -3868,14 +4333,19 @@ module.exports = _curry2(function evolve(transformations, object) {
   return result;
 });
 
-},{"./internal/_curry2":116}],75:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _filter = require('./internal/_filter');
-var _isObject = require('./internal/_isObject');
-var _reduce = require('./internal/_reduce');
-var _xfilter = require('./internal/_xfilter');
-var keys = require('./keys');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/filter.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _filter = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_filter.js");
+var _isObject = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isObject.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var _xfilter = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfilter.js");
+var keys = __webpack_require__("./resources/assets/js/node_modules/ramda/src/keys.js");
 
 
 /**
@@ -3919,10 +4389,15 @@ module.exports = _curry2(_dispatchable(['filter'], _xfilter, function(pred, filt
   );
 }));
 
-},{"./internal/_curry2":116,"./internal/_dispatchable":119,"./internal/_filter":123,"./internal/_isObject":136,"./internal/_reduce":148,"./internal/_xfilter":163,"./keys":185}],76:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xfind = require('./internal/_xfind');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/find.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xfind = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfind.js");
 
 
 /**
@@ -3960,10 +4435,15 @@ module.exports = _curry2(_dispatchable(['find'], _xfind, function find(fn, list)
   }
 }));
 
-},{"./internal/_curry2":116,"./internal/_dispatchable":119,"./internal/_xfind":164}],77:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xfindIndex = require('./internal/_xfindIndex');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/findIndex.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xfindIndex = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfindIndex.js");
 
 
 /**
@@ -4000,10 +4480,15 @@ module.exports = _curry2(_dispatchable([], _xfindIndex, function findIndex(fn, l
   return -1;
 }));
 
-},{"./internal/_curry2":116,"./internal/_dispatchable":119,"./internal/_xfindIndex":165}],78:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xfindLast = require('./internal/_xfindLast');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/findLast.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xfindLast = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfindLast.js");
 
 
 /**
@@ -4038,10 +4523,15 @@ module.exports = _curry2(_dispatchable([], _xfindLast, function findLast(fn, lis
   }
 }));
 
-},{"./internal/_curry2":116,"./internal/_dispatchable":119,"./internal/_xfindLast":166}],79:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xfindLastIndex = require('./internal/_xfindLastIndex');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/findLastIndex.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xfindLastIndex = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfindLastIndex.js");
 
 
 /**
@@ -4077,9 +4567,14 @@ module.exports = _curry2(_dispatchable([], _xfindLastIndex, function findLastInd
   return -1;
 }));
 
-},{"./internal/_curry2":116,"./internal/_dispatchable":119,"./internal/_xfindLastIndex":167}],80:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _makeFlat = require('./internal/_makeFlat');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/flatten.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _makeFlat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_makeFlat.js");
 
 
 /**
@@ -4101,9 +4596,14 @@ var _makeFlat = require('./internal/_makeFlat');
  */
 module.exports = _curry1(_makeFlat(true));
 
-},{"./internal/_curry1":115,"./internal/_makeFlat":141}],81:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var curry = require('./curry');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/flip.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var curry = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curry.js");
 
 
 /**
@@ -4135,9 +4635,14 @@ module.exports = _curry1(function flip(fn) {
   });
 });
 
-},{"./curry":52,"./internal/_curry1":115}],82:[function(require,module,exports){
-var _checkForMethod = require('./internal/_checkForMethod');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/forEach.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _checkForMethod = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_checkForMethod.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -4184,9 +4689,14 @@ module.exports = _curry2(_checkForMethod('forEach', function forEach(fn, list) {
   return list;
 }));
 
-},{"./internal/_checkForMethod":107,"./internal/_curry2":116}],83:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var keys = require('./keys');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/forEachObjIndexed.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var keys = __webpack_require__("./resources/assets/js/node_modules/ramda/src/keys.js");
 
 
 /**
@@ -4222,8 +4732,13 @@ module.exports = _curry2(function forEachObjIndexed(fn, obj) {
   return obj;
 });
 
-},{"./internal/_curry2":116,"./keys":185}],84:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/fromPairs.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -4252,10 +4767,15 @@ module.exports = _curry1(function fromPairs(pairs) {
   return result;
 });
 
-},{"./internal/_curry1":115}],85:[function(require,module,exports){
-var _checkForMethod = require('./internal/_checkForMethod');
-var _curry2 = require('./internal/_curry2');
-var reduceBy = require('./reduceBy');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/groupBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _checkForMethod = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_checkForMethod.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var reduceBy = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduceBy.js");
 
 /**
  * Splits a list into sub-lists stored in an object, based on the result of
@@ -4305,8 +4825,13 @@ module.exports = _curry2(_checkForMethod('groupBy', reduceBy(function(acc, item)
   return acc;
 }, null)));
 
-},{"./internal/_checkForMethod":107,"./internal/_curry2":116,"./reduceBy":261}],86:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/groupWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 /**
  * Takes a list and returns a list of lists where each sublist's elements are
@@ -4353,8 +4878,13 @@ module.exports = _curry2(function(fn, list) {
   return res;
 });
 
-},{"./internal/_curry2":116}],87:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/gt.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -4380,8 +4910,13 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function gt(a, b) { return a > b; });
 
-},{"./internal/_curry2":116}],88:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/gte.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -4407,9 +4942,14 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function gte(a, b) { return a >= b; });
 
-},{"./internal/_curry2":116}],89:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _has = require('./internal/_has');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/has.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
 
 
 /**
@@ -4438,8 +4978,13 @@ var _has = require('./internal/_has');
  */
 module.exports = _curry2(_has);
 
-},{"./internal/_curry2":116,"./internal/_has":127}],90:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/hasIn.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -4472,8 +5017,13 @@ module.exports = _curry2(function hasIn(prop, obj) {
   return prop in obj;
 });
 
-},{"./internal/_curry2":116}],91:[function(require,module,exports){
-var nth = require('./nth');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/head.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var nth = __webpack_require__("./resources/assets/js/node_modules/ramda/src/nth.js");
 
 
 /**
@@ -4499,8 +5049,13 @@ var nth = require('./nth');
  */
 module.exports = nth(0);
 
-},{"./nth":226}],92:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/identical.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -4537,9 +5092,14 @@ module.exports = _curry2(function identical(a, b) {
   }
 });
 
-},{"./internal/_curry2":116}],93:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _identity = require('./internal/_identity');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/identity.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _identity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_identity.js");
 
 
 /**
@@ -4563,9 +5123,14 @@ var _identity = require('./internal/_identity');
  */
 module.exports = _curry1(_identity);
 
-},{"./internal/_curry1":115,"./internal/_identity":128}],94:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var curryN = require('./curryN');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/ifElse.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
 
 
 /**
@@ -4601,8 +5166,13 @@ module.exports = _curry3(function ifElse(condition, onTrue, onFalse) {
   );
 });
 
-},{"./curryN":53,"./internal/_curry3":117}],95:[function(require,module,exports){
-var add = require('./add');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/inc.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var add = __webpack_require__("./resources/assets/js/node_modules/ramda/src/add.js");
 
 
 /**
@@ -4622,8 +5192,13 @@ var add = require('./add');
  */
 module.exports = add(1);
 
-},{"./add":16}],96:[function(require,module,exports){
-var reduceBy = require('./reduceBy');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/indexBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var reduceBy = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduceBy.js");
 
 
 /**
@@ -4650,10 +5225,15 @@ var reduceBy = require('./reduceBy');
  */
 module.exports = reduceBy(function(acc, elem) { return elem; }, null);
 
-},{"./reduceBy":261}],97:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _indexOf = require('./internal/_indexOf');
-var _isArray = require('./internal/_isArray');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/indexOf.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _indexOf = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_indexOf.js");
+var _isArray = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArray.js");
 
 
 /**
@@ -4681,8 +5261,13 @@ module.exports = _curry2(function indexOf(target, xs) {
     _indexOf(xs, target, 0);
 });
 
-},{"./internal/_curry2":116,"./internal/_indexOf":129,"./internal/_isArray":131}],98:[function(require,module,exports){
-var slice = require('./slice');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/init.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var slice = __webpack_require__("./resources/assets/js/node_modules/ramda/src/slice.js");
 
 
 /**
@@ -4711,10 +5296,15 @@ var slice = require('./slice');
  */
 module.exports = slice(0, -1);
 
-},{"./slice":273}],99:[function(require,module,exports){
-var _containsWith = require('./internal/_containsWith');
-var _curry3 = require('./internal/_curry3');
-var _filter = require('./internal/_filter');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/innerJoin.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _containsWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_containsWith.js");
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var _filter = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_filter.js");
 
 
 /**
@@ -4756,8 +5346,13 @@ module.exports = _curry3(function innerJoin(pred, xs, ys) {
   return _filter(function(x) { return _containsWith(pred, x, ys); }, xs);
 });
 
-},{"./internal/_containsWith":113,"./internal/_curry3":117,"./internal/_filter":123}],100:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/insert.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -4786,8 +5381,13 @@ module.exports = _curry3(function insert(idx, elt, list) {
   return result;
 });
 
-},{"./internal/_curry3":117}],101:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/insertAll.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -4815,8 +5415,13 @@ module.exports = _curry3(function insertAll(idx, elts, list) {
                    Array.prototype.slice.call(list, idx));
 });
 
-},{"./internal/_curry3":117}],102:[function(require,module,exports){
-var _contains = require('./_contains');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_Set.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _contains = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_contains.js");
 
 
 // A simple Set type that honours R.equals semantics
@@ -4988,7 +5593,12 @@ module.exports = (function() {
   return _Set;
 }());
 
-},{"./_contains":112}],103:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_aperture.js":
+/***/ (function(module, exports) {
+
 module.exports = function _aperture(n, list) {
   var idx = 0;
   var limit = list.length - (n - 1);
@@ -5000,7 +5610,12 @@ module.exports = function _aperture(n, list) {
   return acc;
 };
 
-},{}],104:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_arity.js":
+/***/ (function(module, exports) {
+
 module.exports = function _arity(n, fn) {
   /* eslint-disable no-unused-vars */
   switch (n) {
@@ -5019,7 +5634,12 @@ module.exports = function _arity(n, fn) {
   }
 };
 
-},{}],105:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_arrayFromIterator.js":
+/***/ (function(module, exports) {
+
 module.exports = function _arrayFromIterator(iter) {
   var list = [];
   var next;
@@ -5029,14 +5649,24 @@ module.exports = function _arrayFromIterator(iter) {
   return list;
 };
 
-},{}],106:[function(require,module,exports){
-var _objectAssign = require('./_objectAssign');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_assign.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _objectAssign = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_objectAssign.js");
 
 module.exports =
   typeof Object.assign === 'function' ? Object.assign : _objectAssign;
 
-},{"./_objectAssign":143}],107:[function(require,module,exports){
-var _isArray = require('./_isArray');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_checkForMethod.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _isArray = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArray.js");
 
 
 /**
@@ -5062,9 +5692,14 @@ module.exports = function _checkForMethod(methodname, fn) {
   };
 };
 
-},{"./_isArray":131}],108:[function(require,module,exports){
-var _cloneRegExp = require('./_cloneRegExp');
-var type = require('../type');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_clone.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _cloneRegExp = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_cloneRegExp.js");
+var type = __webpack_require__("./resources/assets/js/node_modules/ramda/src/type.js");
 
 
 /**
@@ -5104,7 +5739,12 @@ module.exports = function _clone(value, refFrom, refTo, deep) {
   }
 };
 
-},{"../type":304,"./_cloneRegExp":109}],109:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_cloneRegExp.js":
+/***/ (function(module, exports) {
+
 module.exports = function _cloneRegExp(pattern) {
   return new RegExp(pattern.source, (pattern.global     ? 'g' : '') +
                                     (pattern.ignoreCase ? 'i' : '') +
@@ -5113,14 +5753,24 @@ module.exports = function _cloneRegExp(pattern) {
                                     (pattern.unicode    ? 'u' : ''));
 };
 
-},{}],110:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_complement.js":
+/***/ (function(module, exports) {
+
 module.exports = function _complement(f) {
   return function() {
     return !f.apply(this, arguments);
   };
 };
 
-},{}],111:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_concat.js":
+/***/ (function(module, exports) {
+
 /**
  * Private `concat` function to merge two array-like objects.
  *
@@ -5153,15 +5803,25 @@ module.exports = function _concat(set1, set2) {
   return result;
 };
 
-},{}],112:[function(require,module,exports){
-var _indexOf = require('./_indexOf');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_contains.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _indexOf = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_indexOf.js");
 
 
 module.exports = function _contains(a, list) {
   return _indexOf(list, a, 0) >= 0;
 };
 
-},{"./_indexOf":129}],113:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_containsWith.js":
+/***/ (function(module, exports) {
+
 module.exports = function _containsWith(pred, x, list) {
   var idx = 0;
   var len = list.length;
@@ -5175,9 +5835,14 @@ module.exports = function _containsWith(pred, x, list) {
   return false;
 };
 
-},{}],114:[function(require,module,exports){
-var _arity = require('./_arity');
-var _curry2 = require('./_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_createPartialApplicator.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arity.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 module.exports = function _createPartialApplicator(concat) {
@@ -5188,8 +5853,13 @@ module.exports = function _createPartialApplicator(concat) {
   });
 };
 
-},{"./_arity":104,"./_curry2":116}],115:[function(require,module,exports){
-var _isPlaceholder = require('./_isPlaceholder');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_curry1.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _isPlaceholder = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isPlaceholder.js");
 
 
 /**
@@ -5210,9 +5880,14 @@ module.exports = function _curry1(fn) {
   };
 };
 
-},{"./_isPlaceholder":137}],116:[function(require,module,exports){
-var _curry1 = require('./_curry1');
-var _isPlaceholder = require('./_isPlaceholder');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_curry2.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _isPlaceholder = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isPlaceholder.js");
 
 
 /**
@@ -5240,10 +5915,15 @@ module.exports = function _curry2(fn) {
   };
 };
 
-},{"./_curry1":115,"./_isPlaceholder":137}],117:[function(require,module,exports){
-var _curry1 = require('./_curry1');
-var _curry2 = require('./_curry2');
-var _isPlaceholder = require('./_isPlaceholder');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_curry3.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isPlaceholder = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isPlaceholder.js");
 
 
 /**
@@ -5280,9 +5960,14 @@ module.exports = function _curry3(fn) {
   };
 };
 
-},{"./_curry1":115,"./_curry2":116,"./_isPlaceholder":137}],118:[function(require,module,exports){
-var _arity = require('./_arity');
-var _isPlaceholder = require('./_isPlaceholder');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_curryN.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arity.js");
+var _isPlaceholder = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isPlaceholder.js");
 
 
 /**
@@ -5322,9 +6007,14 @@ module.exports = function _curryN(length, received, fn) {
   };
 };
 
-},{"./_arity":104,"./_isPlaceholder":137}],119:[function(require,module,exports){
-var _isArray = require('./_isArray');
-var _isTransformer = require('./_isTransformer');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _isArray = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArray.js");
+var _isTransformer = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isTransformer.js");
 
 
 /**
@@ -5365,14 +6055,24 @@ module.exports = function _dispatchable(methodNames, xf, fn) {
   };
 };
 
-},{"./_isArray":131,"./_isTransformer":140}],120:[function(require,module,exports){
-var take = require('../take');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_dropLast.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var take = __webpack_require__("./resources/assets/js/node_modules/ramda/src/take.js");
 
 module.exports = function dropLast(n, xs) {
   return take(n < xs.length ? xs.length - n : 0, xs);
 };
 
-},{"../take":287}],121:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_dropLastWhile.js":
+/***/ (function(module, exports) {
+
 module.exports = function dropLastWhile(pred, list) {
   var idx = list.length - 1;
   while (idx >= 0 && pred(list[idx])) {
@@ -5381,13 +6081,18 @@ module.exports = function dropLastWhile(pred, list) {
   return Array.prototype.slice.call(list, 0, idx + 1);
 };
 
-},{}],122:[function(require,module,exports){
-var _arrayFromIterator = require('./_arrayFromIterator');
-var _functionName = require('./_functionName');
-var _has = require('./_has');
-var identical = require('../identical');
-var keys = require('../keys');
-var type = require('../type');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_equals.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arrayFromIterator = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arrayFromIterator.js");
+var _functionName = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_functionName.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
+var identical = __webpack_require__("./resources/assets/js/node_modules/ramda/src/identical.js");
+var keys = __webpack_require__("./resources/assets/js/node_modules/ramda/src/keys.js");
+var type = __webpack_require__("./resources/assets/js/node_modules/ramda/src/type.js");
 
 
 module.exports = function _equals(a, b, stackA, stackB) {
@@ -5497,7 +6202,12 @@ module.exports = function _equals(a, b, stackA, stackB) {
   return true;
 };
 
-},{"../identical":92,"../keys":185,"../type":304,"./_arrayFromIterator":105,"./_functionName":126,"./_has":127}],123:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_filter.js":
+/***/ (function(module, exports) {
+
 module.exports = function _filter(fn, list) {
   var idx = 0;
   var len = list.length;
@@ -5512,11 +6222,16 @@ module.exports = function _filter(fn, list) {
   return result;
 };
 
-},{}],124:[function(require,module,exports){
-var _forceReduced = require('./_forceReduced');
-var _isArrayLike = require('./_isArrayLike');
-var _reduce = require('./_reduce');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_flatCat.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _forceReduced = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_forceReduced.js");
+var _isArrayLike = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArrayLike.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 module.exports = (function() {
   var preservingReduced = function(xf) {
@@ -5546,7 +6261,12 @@ module.exports = (function() {
   };
 }());
 
-},{"./_forceReduced":125,"./_isArrayLike":132,"./_reduce":148,"./_xfBase":162}],125:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_forceReduced.js":
+/***/ (function(module, exports) {
+
 module.exports = function _forceReduced(x) {
   return {
     '@@transducer/value': x,
@@ -5554,23 +6274,43 @@ module.exports = function _forceReduced(x) {
   };
 };
 
-},{}],126:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_functionName.js":
+/***/ (function(module, exports) {
+
 module.exports = function _functionName(f) {
   // String(x => x) evaluates to "x => x", so the pattern may not match.
   var match = String(f).match(/^function (\w*)/);
   return match == null ? '' : match[1];
 };
 
-},{}],127:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_has.js":
+/***/ (function(module, exports) {
+
 module.exports = function _has(prop, obj) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 };
 
-},{}],128:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_identity.js":
+/***/ (function(module, exports) {
+
 module.exports = function _identity(x) { return x; };
 
-},{}],129:[function(require,module,exports){
-var equals = require('../equals');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_indexOf.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
 
 
 module.exports = function _indexOf(list, a, idx) {
@@ -5628,8 +6368,13 @@ module.exports = function _indexOf(list, a, idx) {
   return -1;
 };
 
-},{"../equals":73}],130:[function(require,module,exports){
-var _has = require('./_has');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isArguments.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
 
 
 module.exports = (function() {
@@ -5639,7 +6384,12 @@ module.exports = (function() {
     function _isArguments(x) { return _has('callee', x); };
 }());
 
-},{"./_has":127}],131:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isArray.js":
+/***/ (function(module, exports) {
+
 /**
  * Tests whether or not an object is an array.
  *
@@ -5658,10 +6408,15 @@ module.exports = Array.isArray || function _isArray(val) {
           Object.prototype.toString.call(val) === '[object Array]');
 };
 
-},{}],132:[function(require,module,exports){
-var _curry1 = require('./_curry1');
-var _isArray = require('./_isArray');
-var _isString = require('./_isString');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isArrayLike.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _isArray = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArray.js");
+var _isString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isString.js");
 
 
 /**
@@ -5694,12 +6449,22 @@ module.exports = _curry1(function isArrayLike(x) {
   return false;
 });
 
-},{"./_curry1":115,"./_isArray":131,"./_isString":139}],133:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isFunction.js":
+/***/ (function(module, exports) {
+
 module.exports = function _isFunction(x) {
   return Object.prototype.toString.call(x) === '[object Function]';
 };
 
-},{}],134:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isInteger.js":
+/***/ (function(module, exports) {
+
 /**
  * Determine if the passed argument is an integer.
  *
@@ -5712,40 +6477,75 @@ module.exports = Number.isInteger || function _isInteger(n) {
   return (n << 0) === n;
 };
 
-},{}],135:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isNumber.js":
+/***/ (function(module, exports) {
+
 module.exports = function _isNumber(x) {
   return Object.prototype.toString.call(x) === '[object Number]';
 };
 
-},{}],136:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isObject.js":
+/***/ (function(module, exports) {
+
 module.exports = function _isObject(x) {
   return Object.prototype.toString.call(x) === '[object Object]';
 };
 
-},{}],137:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isPlaceholder.js":
+/***/ (function(module, exports) {
+
 module.exports = function _isPlaceholder(a) {
   return a != null &&
          typeof a === 'object' &&
          a['@@functional/placeholder'] === true;
 };
 
-},{}],138:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isRegExp.js":
+/***/ (function(module, exports) {
+
 module.exports = function _isRegExp(x) {
   return Object.prototype.toString.call(x) === '[object RegExp]';
 };
 
-},{}],139:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isString.js":
+/***/ (function(module, exports) {
+
 module.exports = function _isString(x) {
   return Object.prototype.toString.call(x) === '[object String]';
 };
 
-},{}],140:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isTransformer.js":
+/***/ (function(module, exports) {
+
 module.exports = function _isTransformer(obj) {
   return typeof obj['@@transducer/step'] === 'function';
 };
 
-},{}],141:[function(require,module,exports){
-var _isArrayLike = require('./_isArrayLike');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_makeFlat.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _isArrayLike = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArrayLike.js");
 
 
 /**
@@ -5779,7 +6579,12 @@ module.exports = function _makeFlat(recursive) {
   };
 };
 
-},{"./_isArrayLike":132}],142:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_map.js":
+/***/ (function(module, exports) {
+
 module.exports = function _map(fn, functor) {
   var idx = 0;
   var len = functor.length;
@@ -5791,8 +6596,13 @@ module.exports = function _map(fn, functor) {
   return result;
 };
 
-},{}],143:[function(require,module,exports){
-var _has = require('./_has');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_objectAssign.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
 
 // Based on https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 module.exports = function _objectAssign(target) {
@@ -5817,17 +6627,32 @@ module.exports = function _objectAssign(target) {
   return output;
 };
 
-},{"./_has":127}],144:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_of.js":
+/***/ (function(module, exports) {
+
 module.exports = function _of(x) { return [x]; };
 
-},{}],145:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_pipe.js":
+/***/ (function(module, exports) {
+
 module.exports = function _pipe(f, g) {
   return function() {
     return g.call(this, f.apply(this, arguments));
   };
 };
 
-},{}],146:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_pipeP.js":
+/***/ (function(module, exports) {
+
 module.exports = function _pipeP(f, g) {
   return function() {
     var ctx = this;
@@ -5837,7 +6662,12 @@ module.exports = function _pipeP(f, g) {
   };
 };
 
-},{}],147:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_quote.js":
+/***/ (function(module, exports) {
+
 module.exports = function _quote(s) {
   var escaped = s
     .replace(/\\/g, '\\\\')
@@ -5852,10 +6682,15 @@ module.exports = function _quote(s) {
   return '"' + escaped.replace(/"/g, '\\"') + '"';
 };
 
-},{}],148:[function(require,module,exports){
-var _isArrayLike = require('./_isArrayLike');
-var _xwrap = require('./_xwrap');
-var bind = require('../bind');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_reduce.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _isArrayLike = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArrayLike.js");
+var _xwrap = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xwrap.js");
+var bind = __webpack_require__("./resources/assets/js/node_modules/ramda/src/bind.js");
 
 
 module.exports = (function() {
@@ -5915,7 +6750,12 @@ module.exports = (function() {
   };
 }());
 
-},{"../bind":34,"./_isArrayLike":132,"./_xwrap":172}],149:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_reduced.js":
+/***/ (function(module, exports) {
+
 module.exports = function _reduced(x) {
   return x && x['@@transducer/reduced'] ? x :
     {
@@ -5924,12 +6764,17 @@ module.exports = function _reduced(x) {
     };
 };
 
-},{}],150:[function(require,module,exports){
-var _assign = require('./_assign');
-var _identity = require('./_identity');
-var _isArrayLike = require('./_isArrayLike');
-var _isTransformer = require('./_isTransformer');
-var objOf = require('../objOf');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_stepCat.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _assign = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_assign.js");
+var _identity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_identity.js");
+var _isArrayLike = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArrayLike.js");
+var _isTransformer = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isTransformer.js");
+var objOf = __webpack_require__("./resources/assets/js/node_modules/ramda/src/objOf.js");
 
 
 module.exports = (function() {
@@ -5974,7 +6819,12 @@ module.exports = (function() {
   };
 }());
 
-},{"../objOf":229,"./_assign":106,"./_identity":128,"./_isArrayLike":132,"./_isTransformer":140}],151:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_toISOString.js":
+/***/ (function(module, exports) {
+
 /**
  * Polyfill from <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString>.
  */
@@ -5998,13 +6848,18 @@ module.exports = (function() {
     };
 }());
 
-},{}],152:[function(require,module,exports){
-var _contains = require('./_contains');
-var _map = require('./_map');
-var _quote = require('./_quote');
-var _toISOString = require('./_toISOString');
-var keys = require('../keys');
-var reject = require('../reject');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_toString.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _contains = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_contains.js");
+var _map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_map.js");
+var _quote = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_quote.js");
+var _toISOString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_toISOString.js");
+var keys = __webpack_require__("./resources/assets/js/node_modules/ramda/src/keys.js");
+var reject = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reject.js");
 
 
 module.exports = function _toString(x, seen) {
@@ -6046,10 +6901,15 @@ module.exports = function _toString(x, seen) {
   }
 };
 
-},{"../keys":185,"../reject":265,"./_contains":112,"./_map":142,"./_quote":147,"./_toISOString":151}],153:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _reduced = require('./_reduced');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xall.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _reduced = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduced.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -6076,10 +6936,15 @@ module.exports = (function() {
   return _curry2(function _xall(f, xf) { return new XAll(f, xf); });
 }());
 
-},{"./_curry2":116,"./_reduced":149,"./_xfBase":162}],154:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _reduced = require('./_reduced');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xany.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _reduced = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduced.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -6106,10 +6971,15 @@ module.exports = (function() {
   return _curry2(function _xany(f, xf) { return new XAny(f, xf); });
 }());
 
-},{"./_curry2":116,"./_reduced":149,"./_xfBase":162}],155:[function(require,module,exports){
-var _concat = require('./_concat');
-var _curry2 = require('./_curry2');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xaperture.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -6144,19 +7014,29 @@ module.exports = (function() {
   return _curry2(function _xaperture(n, xf) { return new XAperture(n, xf); });
 }());
 
-},{"./_concat":111,"./_curry2":116,"./_xfBase":162}],156:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _flatCat = require('./_flatCat');
-var map = require('../map');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xchain.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _flatCat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_flatCat.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
 
 
 module.exports = _curry2(function _xchain(f, xf) {
   return map(f, _flatCat(xf));
 });
 
-},{"../map":198,"./_curry2":116,"./_flatCat":124}],157:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xdrop.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -6177,9 +7057,14 @@ module.exports = (function() {
   return _curry2(function _xdrop(n, xf) { return new XDrop(n, xf); });
 }());
 
-},{"./_curry2":116,"./_xfBase":162}],158:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xdropLast.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -6213,10 +7098,15 @@ module.exports = (function() {
   return _curry2(function _xdropLast(n, xf) { return new XDropLast(n, xf); });
 }());
 
-},{"./_curry2":116,"./_xfBase":162}],159:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _reduce = require('./_reduce');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xdropLastWhile.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 module.exports = (function() {
   function XDropLastWhile(fn, xf) {
@@ -6250,9 +7140,14 @@ module.exports = (function() {
   return _curry2(function _xdropLastWhile(fn, xf) { return new XDropLastWhile(fn, xf); });
 }());
 
-},{"./_curry2":116,"./_reduce":148,"./_xfBase":162}],160:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xdropRepeatsWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -6279,9 +7174,14 @@ module.exports = (function() {
   return _curry2(function _xdropRepeatsWith(pred, xf) { return new XDropRepeatsWith(pred, xf); });
 }());
 
-},{"./_curry2":116,"./_xfBase":162}],161:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xdropWhile.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -6304,7 +7204,12 @@ module.exports = (function() {
   return _curry2(function _xdropWhile(f, xf) { return new XDropWhile(f, xf); });
 }());
 
-},{"./_curry2":116,"./_xfBase":162}],162:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js":
+/***/ (function(module, exports) {
+
 module.exports = {
   init: function() {
     return this.xf['@@transducer/init']();
@@ -6314,9 +7219,14 @@ module.exports = {
   }
 };
 
-},{}],163:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xfilter.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -6333,10 +7243,15 @@ module.exports = (function() {
   return _curry2(function _xfilter(f, xf) { return new XFilter(f, xf); });
 }());
 
-},{"./_curry2":116,"./_xfBase":162}],164:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _reduced = require('./_reduced');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xfind.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _reduced = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduced.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -6363,10 +7278,15 @@ module.exports = (function() {
   return _curry2(function _xfind(f, xf) { return new XFind(f, xf); });
 }());
 
-},{"./_curry2":116,"./_reduced":149,"./_xfBase":162}],165:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _reduced = require('./_reduced');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xfindIndex.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _reduced = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduced.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -6395,9 +7315,14 @@ module.exports = (function() {
   return _curry2(function _xfindIndex(f, xf) { return new XFindIndex(f, xf); });
 }());
 
-},{"./_curry2":116,"./_reduced":149,"./_xfBase":162}],166:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xfindLast.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -6419,9 +7344,14 @@ module.exports = (function() {
   return _curry2(function _xfindLast(f, xf) { return new XFindLast(f, xf); });
 }());
 
-},{"./_curry2":116,"./_xfBase":162}],167:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xfindLastIndex.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -6446,9 +7376,14 @@ module.exports = (function() {
   return _curry2(function _xfindLastIndex(f, xf) { return new XFindLastIndex(f, xf); });
 }());
 
-},{"./_curry2":116,"./_xfBase":162}],168:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xmap.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -6465,10 +7400,15 @@ module.exports = (function() {
   return _curry2(function _xmap(f, xf) { return new XMap(f, xf); });
 }());
 
-},{"./_curry2":116,"./_xfBase":162}],169:[function(require,module,exports){
-var _curryN = require('./_curryN');
-var _has = require('./_has');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xreduceBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curryN.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -6507,10 +7447,15 @@ module.exports = (function() {
                  });
 }());
 
-},{"./_curryN":118,"./_has":127,"./_xfBase":162}],170:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _reduced = require('./_reduced');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xtake.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _reduced = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduced.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 module.exports = (function() {
   function XTake(n, xf) {
@@ -6529,10 +7474,15 @@ module.exports = (function() {
   return _curry2(function _xtake(n, xf) { return new XTake(n, xf); });
 }());
 
-},{"./_curry2":116,"./_reduced":149,"./_xfBase":162}],171:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _reduced = require('./_reduced');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xtakeWhile.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _reduced = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduced.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -6549,7 +7499,12 @@ module.exports = (function() {
   return _curry2(function _xtakeWhile(f, xf) { return new XTakeWhile(f, xf); });
 }());
 
-},{"./_curry2":116,"./_reduced":149,"./_xfBase":162}],172:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xwrap.js":
+/***/ (function(module, exports) {
+
 module.exports = (function() {
   function XWrap(fn) {
     this.f = fn;
@@ -6565,12 +7520,17 @@ module.exports = (function() {
   return function _xwrap(fn) { return new XWrap(fn); };
 }());
 
-},{}],173:[function(require,module,exports){
-var _contains = require('./internal/_contains');
-var _curry2 = require('./internal/_curry2');
-var _filter = require('./internal/_filter');
-var flip = require('./flip');
-var uniq = require('./uniq');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/intersection.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _contains = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_contains.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _filter = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_filter.js");
+var flip = __webpack_require__("./resources/assets/js/node_modules/ramda/src/flip.js");
+var uniq = __webpack_require__("./resources/assets/js/node_modules/ramda/src/uniq.js");
 
 
 /**
@@ -6602,10 +7562,15 @@ module.exports = _curry2(function intersection(list1, list2) {
   return uniq(_filter(flip(_contains)(lookupList), filteredList));
 });
 
-},{"./flip":81,"./internal/_contains":112,"./internal/_curry2":116,"./internal/_filter":123,"./uniq":311}],174:[function(require,module,exports){
-var _containsWith = require('./internal/_containsWith');
-var _curry3 = require('./internal/_curry3');
-var uniqWith = require('./uniqWith');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/intersectionWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _containsWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_containsWith.js");
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var uniqWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/uniqWith.js");
 
 
 /**
@@ -6664,9 +7629,14 @@ module.exports = _curry3(function intersectionWith(pred, list1, list2) {
   return uniqWith(pred, results);
 });
 
-},{"./internal/_containsWith":113,"./internal/_curry3":117,"./uniqWith":313}],175:[function(require,module,exports){
-var _checkForMethod = require('./internal/_checkForMethod');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/intersperse.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _checkForMethod = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_checkForMethod.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -6701,12 +7671,17 @@ module.exports = _curry2(_checkForMethod('intersperse', function intersperse(sep
   return out;
 }));
 
-},{"./internal/_checkForMethod":107,"./internal/_curry2":116}],176:[function(require,module,exports){
-var _clone = require('./internal/_clone');
-var _curry3 = require('./internal/_curry3');
-var _isTransformer = require('./internal/_isTransformer');
-var _reduce = require('./internal/_reduce');
-var _stepCat = require('./internal/_stepCat');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/into.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _clone = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_clone.js");
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var _isTransformer = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isTransformer.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var _stepCat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_stepCat.js");
 
 
 /**
@@ -6753,10 +7728,15 @@ module.exports = _curry3(function into(acc, xf, list) {
     _reduce(xf(_stepCat(acc)), _clone(acc, [], [], false), list);
 });
 
-},{"./internal/_clone":108,"./internal/_curry3":117,"./internal/_isTransformer":140,"./internal/_reduce":148,"./internal/_stepCat":150}],177:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _has = require('./internal/_has');
-var keys = require('./keys');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/invert.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
+var keys = __webpack_require__("./resources/assets/js/node_modules/ramda/src/keys.js");
 
 
 /**
@@ -6797,9 +7777,14 @@ module.exports = _curry1(function invert(obj) {
   return out;
 });
 
-},{"./internal/_curry1":115,"./internal/_has":127,"./keys":185}],178:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var keys = require('./keys');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/invertObj.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var keys = __webpack_require__("./resources/assets/js/node_modules/ramda/src/keys.js");
 
 
 /**
@@ -6843,11 +7828,16 @@ module.exports = _curry1(function invertObj(obj) {
   return out;
 });
 
-},{"./internal/_curry1":115,"./keys":185}],179:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _isFunction = require('./internal/_isFunction');
-var curryN = require('./curryN');
-var toString = require('./toString');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/invoker.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isFunction = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isFunction.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
+var toString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/toString.js");
 
 
 /**
@@ -6887,8 +7877,13 @@ module.exports = _curry2(function invoker(arity, method) {
   });
 });
 
-},{"./curryN":53,"./internal/_curry2":116,"./internal/_isFunction":133,"./toString":297}],180:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/is.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -6918,10 +7913,15 @@ module.exports = _curry2(function is(Ctor, val) {
   return val != null && val.constructor === Ctor || val instanceof Ctor;
 });
 
-},{"./internal/_curry2":116}],181:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var empty = require('./empty');
-var equals = require('./equals');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/isEmpty.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var empty = __webpack_require__("./resources/assets/js/node_modules/ramda/src/empty.js");
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
 
 
 /**
@@ -6949,8 +7949,13 @@ module.exports = _curry1(function isEmpty(x) {
   return x != null && equals(x, empty(x));
 });
 
-},{"./empty":69,"./equals":73,"./internal/_curry1":115}],182:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/isNil.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -6972,8 +7977,13 @@ var _curry1 = require('./internal/_curry1');
  */
 module.exports = _curry1(function isNil(x) { return x == null; });
 
-},{"./internal/_curry1":115}],183:[function(require,module,exports){
-var invoker = require('./invoker');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/join.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var invoker = __webpack_require__("./resources/assets/js/node_modules/ramda/src/invoker.js");
 
 
 /**
@@ -6997,9 +8007,14 @@ var invoker = require('./invoker');
  */
 module.exports = invoker(1, 'join');
 
-},{"./invoker":179}],184:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var converge = require('./converge');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/juxt.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var converge = __webpack_require__("./resources/assets/js/node_modules/ramda/src/converge.js");
 
 
 /**
@@ -7023,10 +8038,15 @@ module.exports = _curry1(function juxt(fns) {
   return converge(function() { return Array.prototype.slice.call(arguments, 0); }, fns);
 });
 
-},{"./converge":50,"./internal/_curry1":115}],185:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _has = require('./internal/_has');
-var _isArguments = require('./internal/_isArguments');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/keys.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
+var _isArguments = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArguments.js");
 
 
 /**
@@ -7099,8 +8119,13 @@ module.exports = (function() {
     });
 }());
 
-},{"./internal/_curry1":115,"./internal/_has":127,"./internal/_isArguments":130}],186:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/keysIn.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -7133,8 +8158,13 @@ module.exports = _curry1(function keysIn(obj) {
   return ks;
 });
 
-},{"./internal/_curry1":115}],187:[function(require,module,exports){
-var nth = require('./nth');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/last.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var nth = __webpack_require__("./resources/assets/js/node_modules/ramda/src/nth.js");
 
 
 /**
@@ -7159,10 +8189,15 @@ var nth = require('./nth');
  */
 module.exports = nth(-1);
 
-},{"./nth":226}],188:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _isArray = require('./internal/_isArray');
-var equals = require('./equals');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/lastIndexOf.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isArray = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArray.js");
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
 
 
 /**
@@ -7199,9 +8234,14 @@ module.exports = _curry2(function lastIndexOf(target, xs) {
   }
 });
 
-},{"./equals":73,"./internal/_curry2":116,"./internal/_isArray":131}],189:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _isNumber = require('./internal/_isNumber');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/length.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _isNumber = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isNumber.js");
 
 
 /**
@@ -7223,9 +8263,14 @@ module.exports = _curry1(function length(list) {
   return list != null && _isNumber(list.length) ? list.length : NaN;
 });
 
-},{"./internal/_curry1":115,"./internal/_isNumber":135}],190:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var map = require('./map');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/lens.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
 
 
 /**
@@ -7264,11 +8309,16 @@ module.exports = _curry2(function lens(getter, setter) {
   };
 });
 
-},{"./internal/_curry2":116,"./map":198}],191:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var lens = require('./lens');
-var nth = require('./nth');
-var update = require('./update');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/lensIndex.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var lens = __webpack_require__("./resources/assets/js/node_modules/ramda/src/lens.js");
+var nth = __webpack_require__("./resources/assets/js/node_modules/ramda/src/nth.js");
+var update = __webpack_require__("./resources/assets/js/node_modules/ramda/src/update.js");
 
 
 /**
@@ -7295,11 +8345,16 @@ module.exports = _curry1(function lensIndex(n) {
   return lens(nth(n), update(n));
 });
 
-},{"./internal/_curry1":115,"./lens":190,"./nth":226,"./update":317}],192:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var assocPath = require('./assocPath');
-var lens = require('./lens');
-var path = require('./path');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/lensPath.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var assocPath = __webpack_require__("./resources/assets/js/node_modules/ramda/src/assocPath.js");
+var lens = __webpack_require__("./resources/assets/js/node_modules/ramda/src/lens.js");
+var path = __webpack_require__("./resources/assets/js/node_modules/ramda/src/path.js");
 
 
 /**
@@ -7330,11 +8385,16 @@ module.exports = _curry1(function lensPath(p) {
   return lens(path(p), assocPath(p));
 });
 
-},{"./assocPath":32,"./internal/_curry1":115,"./lens":190,"./path":239}],193:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var assoc = require('./assoc');
-var lens = require('./lens');
-var prop = require('./prop');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/lensProp.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var assoc = __webpack_require__("./resources/assets/js/node_modules/ramda/src/assoc.js");
+var lens = __webpack_require__("./resources/assets/js/node_modules/ramda/src/lens.js");
+var prop = __webpack_require__("./resources/assets/js/node_modules/ramda/src/prop.js");
 
 
 /**
@@ -7361,9 +8421,14 @@ module.exports = _curry1(function lensProp(k) {
   return lens(prop(k), assoc(k));
 });
 
-},{"./assoc":31,"./internal/_curry1":115,"./lens":190,"./prop":253}],194:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var liftN = require('./liftN');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/lift.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var liftN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/liftN.js");
 
 
 /**
@@ -7392,12 +8457,17 @@ module.exports = _curry1(function lift(fn) {
   return liftN(fn.length, fn);
 });
 
-},{"./internal/_curry1":115,"./liftN":195}],195:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _reduce = require('./internal/_reduce');
-var ap = require('./ap');
-var curryN = require('./curryN');
-var map = require('./map');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/liftN.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var ap = __webpack_require__("./resources/assets/js/node_modules/ramda/src/ap.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
 
 
 /**
@@ -7424,8 +8494,13 @@ module.exports = _curry2(function liftN(arity, fn) {
   });
 });
 
-},{"./ap":25,"./curryN":53,"./internal/_curry2":116,"./internal/_reduce":148,"./map":198}],196:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/lt.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -7451,8 +8526,13 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function lt(a, b) { return a < b; });
 
-},{"./internal/_curry2":116}],197:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/lte.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -7478,14 +8558,19 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function lte(a, b) { return a <= b; });
 
-},{"./internal/_curry2":116}],198:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _map = require('./internal/_map');
-var _reduce = require('./internal/_reduce');
-var _xmap = require('./internal/_xmap');
-var curryN = require('./curryN');
-var keys = require('./keys');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/map.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_map.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var _xmap = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xmap.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
+var keys = __webpack_require__("./resources/assets/js/node_modules/ramda/src/keys.js");
 
 
 /**
@@ -7539,8 +8624,13 @@ module.exports = _curry2(_dispatchable(['fantasy-land/map', 'map'], _xmap, funct
   }
 }));
 
-},{"./curryN":53,"./internal/_curry2":116,"./internal/_dispatchable":119,"./internal/_map":142,"./internal/_reduce":148,"./internal/_xmap":168,"./keys":185}],199:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mapAccum.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -7590,8 +8680,13 @@ module.exports = _curry3(function mapAccum(fn, acc, list) {
   return [tuple[0], result];
 });
 
-},{"./internal/_curry3":117}],200:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mapAccumRight.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -7643,10 +8738,15 @@ module.exports = _curry3(function mapAccumRight(fn, acc, list) {
   return [result, tuple[0]];
 });
 
-},{"./internal/_curry3":117}],201:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _reduce = require('./internal/_reduce');
-var keys = require('./keys');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mapObjIndexed.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var keys = __webpack_require__("./resources/assets/js/node_modules/ramda/src/keys.js");
 
 
 /**
@@ -7677,8 +8777,13 @@ module.exports = _curry2(function mapObjIndexed(fn, obj) {
   }, {}, keys(obj));
 });
 
-},{"./internal/_curry2":116,"./internal/_reduce":148,"./keys":185}],202:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/match.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -7706,9 +8811,14 @@ module.exports = _curry2(function match(rx, str) {
   return str.match(rx) || [];
 });
 
-},{"./internal/_curry2":116}],203:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _isInteger = require('./internal/_isInteger');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mathMod.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isInteger = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isInteger.js");
 
 
 /**
@@ -7750,8 +8860,13 @@ module.exports = _curry2(function mathMod(m, p) {
   return ((m % p) + p) % p;
 });
 
-},{"./internal/_curry2":116,"./internal/_isInteger":134}],204:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/max.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -7773,8 +8888,13 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function max(a, b) { return b > a ? b : a; });
 
-},{"./internal/_curry2":116}],205:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/maxBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -7805,9 +8925,14 @@ module.exports = _curry3(function maxBy(f, a, b) {
   return f(b) > f(a) ? b : a;
 });
 
-},{"./internal/_curry3":117}],206:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var sum = require('./sum');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mean.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var sum = __webpack_require__("./resources/assets/js/node_modules/ramda/src/sum.js");
 
 
 /**
@@ -7830,9 +8955,14 @@ module.exports = _curry1(function mean(list) {
   return sum(list) / list.length;
 });
 
-},{"./internal/_curry1":115,"./sum":283}],207:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var mean = require('./mean');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/median.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var mean = __webpack_require__("./resources/assets/js/node_modules/ramda/src/mean.js");
 
 
 /**
@@ -7864,9 +8994,14 @@ module.exports = _curry1(function median(list) {
   }).slice(idx, idx + width));
 });
 
-},{"./internal/_curry1":115,"./mean":206}],208:[function(require,module,exports){
-var memoizeWith = require('./memoizeWith');
-var toString = require('./toString');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/memoize.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var memoizeWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/memoizeWith.js");
+var toString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/toString.js");
 
 
 /**
@@ -7900,10 +9035,15 @@ module.exports = memoizeWith(function() {
   return toString(arguments);
 });
 
-},{"./memoizeWith":209,"./toString":297}],209:[function(require,module,exports){
-var _arity = require('./internal/_arity');
-var _curry2 = require('./internal/_curry2');
-var _has = require('./internal/_has');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/memoizeWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arity.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
 
 
 /**
@@ -7946,9 +9086,14 @@ module.exports = _curry2(function memoizeWith(mFn, fn) {
   });
 });
 
-},{"./internal/_arity":104,"./internal/_curry2":116,"./internal/_has":127}],210:[function(require,module,exports){
-var _assign = require('./internal/_assign');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/merge.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _assign = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_assign.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -7978,9 +9123,14 @@ module.exports = _curry2(function merge(l, r) {
   return _assign({}, l, r);
 });
 
-},{"./internal/_assign":106,"./internal/_curry2":116}],211:[function(require,module,exports){
-var _assign = require('./internal/_assign');
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mergeAll.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _assign = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_assign.js");
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -8004,9 +9154,14 @@ module.exports = _curry1(function mergeAll(list) {
   return _assign.apply(null, [{}].concat(list));
 });
 
-},{"./internal/_assign":106,"./internal/_curry1":115}],212:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var mergeDeepWithKey = require('./mergeDeepWithKey');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mergeDeepLeft.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var mergeDeepWithKey = __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeDeepWithKey.js");
 
 
 /**
@@ -8036,9 +9191,14 @@ module.exports = _curry2(function mergeDeepLeft(lObj, rObj) {
   }, lObj, rObj);
 });
 
-},{"./internal/_curry2":116,"./mergeDeepWithKey":215}],213:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var mergeDeepWithKey = require('./mergeDeepWithKey');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mergeDeepRight.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var mergeDeepWithKey = __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeDeepWithKey.js");
 
 
 /**
@@ -8068,9 +9228,14 @@ module.exports = _curry2(function mergeDeepRight(lObj, rObj) {
   }, lObj, rObj);
 });
 
-},{"./internal/_curry2":116,"./mergeDeepWithKey":215}],214:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var mergeDeepWithKey = require('./mergeDeepWithKey');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mergeDeepWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var mergeDeepWithKey = __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeDeepWithKey.js");
 
 
 /**
@@ -8106,10 +9271,15 @@ module.exports = _curry3(function mergeDeepWith(fn, lObj, rObj) {
   }, lObj, rObj);
 });
 
-},{"./internal/_curry3":117,"./mergeDeepWithKey":215}],215:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var _isObject = require('./internal/_isObject');
-var mergeWithKey = require('./mergeWithKey');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mergeDeepWithKey.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var _isObject = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isObject.js");
+var mergeWithKey = __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeWithKey.js");
 
 
 /**
@@ -8150,9 +9320,14 @@ module.exports = _curry3(function mergeDeepWithKey(fn, lObj, rObj) {
   }, lObj, rObj);
 });
 
-},{"./internal/_curry3":117,"./internal/_isObject":136,"./mergeWithKey":217}],216:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var mergeWithKey = require('./mergeWithKey');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mergeWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var mergeWithKey = __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeWithKey.js");
 
 
 /**
@@ -8184,9 +9359,14 @@ module.exports = _curry3(function mergeWith(fn, l, r) {
   }, l, r);
 });
 
-},{"./internal/_curry3":117,"./mergeWithKey":217}],217:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var _has = require('./internal/_has');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mergeWithKey.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
 
 
 /**
@@ -8233,8 +9413,13 @@ module.exports = _curry3(function mergeWithKey(fn, l, r) {
   return result;
 });
 
-},{"./internal/_curry3":117,"./internal/_has":127}],218:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/min.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -8256,8 +9441,13 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function min(a, b) { return b < a ? b : a; });
 
-},{"./internal/_curry2":116}],219:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/minBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -8288,8 +9478,13 @@ module.exports = _curry3(function minBy(f, a, b) {
   return f(b) < f(a) ? b : a;
 });
 
-},{"./internal/_curry3":117}],220:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/modulo.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -8319,8 +9514,13 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function modulo(a, b) { return a % b; });
 
-},{"./internal/_curry2":116}],221:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/multiply.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -8345,8 +9545,13 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function multiply(a, b) { return a * b; });
 
-},{"./internal/_curry2":116}],222:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/nAry.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -8396,8 +9601,13 @@ module.exports = _curry2(function nAry(n, fn) {
   }
 });
 
-},{"./internal/_curry2":116}],223:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/negate.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -8416,12 +9626,17 @@ var _curry1 = require('./internal/_curry1');
  */
 module.exports = _curry1(function negate(n) { return -n; });
 
-},{"./internal/_curry1":115}],224:[function(require,module,exports){
-var _complement = require('./internal/_complement');
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xany = require('./internal/_xany');
-var any = require('./any');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/none.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _complement = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_complement.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xany = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xany.js");
+var any = __webpack_require__("./resources/assets/js/node_modules/ramda/src/any.js");
 
 
 /**
@@ -8448,8 +9663,13 @@ var any = require('./any');
  */
 module.exports = _curry2(_complement(_dispatchable(['any'], _xany, any)));
 
-},{"./any":23,"./internal/_complement":110,"./internal/_curry2":116,"./internal/_dispatchable":119,"./internal/_xany":154}],225:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/not.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -8475,9 +9695,14 @@ module.exports = _curry1(function not(a) {
   return !a;
 });
 
-},{"./internal/_curry1":115}],226:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _isString = require('./internal/_isString');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/nth.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isString.js");
 
 
 /**
@@ -8511,10 +9736,15 @@ module.exports = _curry2(function nth(offset, list) {
   return _isString(list) ? list.charAt(idx) : list[idx];
 });
 
-},{"./internal/_curry2":116,"./internal/_isString":139}],227:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var curryN = require('./curryN');
-var nth = require('./nth');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/nthArg.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
+var nth = __webpack_require__("./resources/assets/js/node_modules/ramda/src/nth.js");
 
 
 /**
@@ -8542,8 +9772,13 @@ module.exports = _curry1(function nthArg(n) {
   });
 });
 
-},{"./curryN":53,"./internal/_curry1":115,"./nth":226}],228:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/o.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -8575,8 +9810,13 @@ module.exports = _curry3(function o(f, g, x) {
   return f(g(x));
 });
 
-},{"./internal/_curry3":117}],229:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/objOf.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -8605,9 +9845,14 @@ module.exports = _curry2(function objOf(key, val) {
   return obj;
 });
 
-},{"./internal/_curry2":116}],230:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _of = require('./internal/_of');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/of.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _of = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_of.js");
 
 
 /**
@@ -8630,9 +9875,14 @@ var _of = require('./internal/_of');
  */
 module.exports = _curry1(_of);
 
-},{"./internal/_curry1":115,"./internal/_of":144}],231:[function(require,module,exports){
-var _contains = require('./internal/_contains');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/omit.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _contains = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_contains.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -8661,9 +9911,14 @@ module.exports = _curry2(function omit(names, obj) {
   return result;
 });
 
-},{"./internal/_contains":112,"./internal/_curry2":116}],232:[function(require,module,exports){
-var _arity = require('./internal/_arity');
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/once.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arity.js");
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -8698,8 +9953,13 @@ module.exports = _curry1(function once(fn) {
   });
 });
 
-},{"./internal/_arity":104,"./internal/_curry1":115}],233:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/or.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -8726,8 +9986,13 @@ module.exports = _curry2(function or(a, b) {
   return a || b;
 });
 
-},{"./internal/_curry2":116}],234:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/over.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -8767,8 +10032,13 @@ module.exports = (function() {
   });
 }());
 
-},{"./internal/_curry3":117}],235:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pair.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -8789,9 +10059,14 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function pair(fst, snd) { return [fst, snd]; });
 
-},{"./internal/_curry2":116}],236:[function(require,module,exports){
-var _concat = require('./internal/_concat');
-var _createPartialApplicator = require('./internal/_createPartialApplicator');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/partial.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _createPartialApplicator = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_createPartialApplicator.js");
 
 
 /**
@@ -8824,10 +10099,15 @@ var _createPartialApplicator = require('./internal/_createPartialApplicator');
  */
 module.exports = _createPartialApplicator(_concat);
 
-},{"./internal/_concat":111,"./internal/_createPartialApplicator":114}],237:[function(require,module,exports){
-var _concat = require('./internal/_concat');
-var _createPartialApplicator = require('./internal/_createPartialApplicator');
-var flip = require('./flip');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/partialRight.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _createPartialApplicator = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_createPartialApplicator.js");
+var flip = __webpack_require__("./resources/assets/js/node_modules/ramda/src/flip.js");
 
 
 /**
@@ -8856,10 +10136,15 @@ var flip = require('./flip');
  */
 module.exports = _createPartialApplicator(flip(_concat));
 
-},{"./flip":81,"./internal/_concat":111,"./internal/_createPartialApplicator":114}],238:[function(require,module,exports){
-var filter = require('./filter');
-var juxt = require('./juxt');
-var reject = require('./reject');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/partition.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var filter = __webpack_require__("./resources/assets/js/node_modules/ramda/src/filter.js");
+var juxt = __webpack_require__("./resources/assets/js/node_modules/ramda/src/juxt.js");
+var reject = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reject.js");
 
 
 /**
@@ -8888,8 +10173,13 @@ var reject = require('./reject');
  */
 module.exports = juxt([filter, reject]);
 
-},{"./filter":75,"./juxt":184,"./reject":265}],239:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/path.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -8923,10 +10213,15 @@ module.exports = _curry2(function path(paths, obj) {
   return val;
 });
 
-},{"./internal/_curry2":116}],240:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var equals = require('./equals');
-var path = require('./path');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pathEq.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
+var path = __webpack_require__("./resources/assets/js/node_modules/ramda/src/path.js");
 
 
 /**
@@ -8957,10 +10252,15 @@ module.exports = _curry3(function pathEq(_path, val, obj) {
   return equals(path(_path, obj), val);
 });
 
-},{"./equals":73,"./internal/_curry3":117,"./path":239}],241:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var defaultTo = require('./defaultTo');
-var path = require('./path');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pathOr.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var defaultTo = __webpack_require__("./resources/assets/js/node_modules/ramda/src/defaultTo.js");
+var path = __webpack_require__("./resources/assets/js/node_modules/ramda/src/path.js");
 
 
 /**
@@ -8986,9 +10286,14 @@ module.exports = _curry3(function pathOr(d, p, obj) {
   return defaultTo(d, path(p, obj));
 });
 
-},{"./defaultTo":55,"./internal/_curry3":117,"./path":239}],242:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var path = require('./path');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pathSatisfies.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var path = __webpack_require__("./resources/assets/js/node_modules/ramda/src/path.js");
 
 
 /**
@@ -9014,8 +10319,13 @@ module.exports = _curry3(function pathSatisfies(pred, propPath, obj) {
   return propPath.length > 0 && pred(path(propPath, obj));
 });
 
-},{"./internal/_curry3":117,"./path":239}],243:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pick.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -9048,8 +10358,13 @@ module.exports = _curry2(function pick(names, obj) {
   return result;
 });
 
-},{"./internal/_curry2":116}],244:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pickAll.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -9082,8 +10397,13 @@ module.exports = _curry2(function pickAll(names, obj) {
   return result;
 });
 
-},{"./internal/_curry2":116}],245:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pickBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -9116,11 +10436,16 @@ module.exports = _curry2(function pickBy(test, obj) {
   return result;
 });
 
-},{"./internal/_curry2":116}],246:[function(require,module,exports){
-var _arity = require('./internal/_arity');
-var _pipe = require('./internal/_pipe');
-var reduce = require('./reduce');
-var tail = require('./tail');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pipe.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arity.js");
+var _pipe = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_pipe.js");
+var reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduce.js");
+var tail = __webpack_require__("./resources/assets/js/node_modules/ramda/src/tail.js");
 
 
 /**
@@ -9154,9 +10479,14 @@ module.exports = function pipe() {
                 reduce(_pipe, arguments[0], tail(arguments)));
 };
 
-},{"./internal/_arity":104,"./internal/_pipe":145,"./reduce":260,"./tail":286}],247:[function(require,module,exports){
-var composeK = require('./composeK');
-var reverse = require('./reverse');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pipeK.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var composeK = __webpack_require__("./resources/assets/js/node_modules/ramda/src/composeK.js");
+var reverse = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reverse.js");
 
 /**
  * Returns the left-to-right Kleisli composition of the provided functions,
@@ -9199,11 +10529,16 @@ module.exports = function pipeK() {
   return composeK.apply(this, reverse(arguments));
 };
 
-},{"./composeK":43,"./reverse":269}],248:[function(require,module,exports){
-var _arity = require('./internal/_arity');
-var _pipeP = require('./internal/_pipeP');
-var reduce = require('./reduce');
-var tail = require('./tail');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pipeP.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arity.js");
+var _pipeP = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_pipeP.js");
+var reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduce.js");
+var tail = __webpack_require__("./resources/assets/js/node_modules/ramda/src/tail.js");
 
 
 /**
@@ -9232,10 +10567,15 @@ module.exports = function pipeP() {
                 reduce(_pipeP, arguments[0], tail(arguments)));
 };
 
-},{"./internal/_arity":104,"./internal/_pipeP":146,"./reduce":260,"./tail":286}],249:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var map = require('./map');
-var prop = require('./prop');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pluck.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
+var prop = __webpack_require__("./resources/assets/js/node_modules/ramda/src/prop.js");
 
 
 /**
@@ -9267,9 +10607,14 @@ module.exports = _curry2(function pluck(p, list) {
   return map(prop(p), list);
 });
 
-},{"./internal/_curry2":116,"./map":198,"./prop":253}],250:[function(require,module,exports){
-var _concat = require('./internal/_concat');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/prepend.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -9293,9 +10638,14 @@ module.exports = _curry2(function prepend(el, list) {
   return _concat([el], list);
 });
 
-},{"./internal/_concat":111,"./internal/_curry2":116}],251:[function(require,module,exports){
-var multiply = require('./multiply');
-var reduce = require('./reduce');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/product.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var multiply = __webpack_require__("./resources/assets/js/node_modules/ramda/src/multiply.js");
+var reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduce.js");
 
 
 /**
@@ -9315,11 +10665,16 @@ var reduce = require('./reduce');
  */
 module.exports = reduce(multiply, 1);
 
-},{"./multiply":221,"./reduce":260}],252:[function(require,module,exports){
-var _map = require('./internal/_map');
-var identity = require('./identity');
-var pickAll = require('./pickAll');
-var useWith = require('./useWith');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/project.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_map.js");
+var identity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/identity.js");
+var pickAll = __webpack_require__("./resources/assets/js/node_modules/ramda/src/pickAll.js");
+var useWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/useWith.js");
 
 
 /**
@@ -9343,8 +10698,13 @@ var useWith = require('./useWith');
  */
 module.exports = useWith(_map, [pickAll, identity]); // passing `identity` gives correct arity
 
-},{"./identity":93,"./internal/_map":142,"./pickAll":244,"./useWith":318}],253:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/prop.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -9367,9 +10727,14 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function prop(p, obj) { return obj[p]; });
 
-},{"./internal/_curry2":116}],254:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var equals = require('./equals');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/propEq.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
 
 
 /**
@@ -9400,9 +10765,14 @@ module.exports = _curry3(function propEq(name, val, obj) {
   return equals(val, obj[name]);
 });
 
-},{"./equals":73,"./internal/_curry3":117}],255:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var is = require('./is');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/propIs.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var is = __webpack_require__("./resources/assets/js/node_modules/ramda/src/is.js");
 
 
 /**
@@ -9429,9 +10799,14 @@ module.exports = _curry3(function propIs(type, name, obj) {
   return is(type, obj[name]);
 });
 
-},{"./internal/_curry3":117,"./is":180}],256:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var _has = require('./internal/_has');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/propOr.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
 
 
 /**
@@ -9464,8 +10839,13 @@ module.exports = _curry3(function propOr(val, p, obj) {
   return (obj != null && _has(p, obj)) ? obj[p] : val;
 });
 
-},{"./internal/_curry3":117,"./internal/_has":127}],257:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/propSatisfies.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -9490,8 +10870,13 @@ module.exports = _curry3(function propSatisfies(pred, name, obj) {
   return pred(obj[name]);
 });
 
-},{"./internal/_curry3":117}],258:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/props.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -9527,9 +10912,14 @@ module.exports = _curry2(function props(ps, obj) {
   return out;
 });
 
-},{"./internal/_curry2":116}],259:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _isNumber = require('./internal/_isNumber');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/range.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isNumber = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isNumber.js");
 
 
 /**
@@ -9561,9 +10951,14 @@ module.exports = _curry2(function range(from, to) {
   return result;
 });
 
-},{"./internal/_curry2":116,"./internal/_isNumber":135}],260:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var _reduce = require('./internal/_reduce');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/reduce.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
 
 
 /**
@@ -9614,12 +11009,17 @@ var _reduce = require('./internal/_reduce');
  */
 module.exports = _curry3(_reduce);
 
-},{"./internal/_curry3":117,"./internal/_reduce":148}],261:[function(require,module,exports){
-var _curryN = require('./internal/_curryN');
-var _dispatchable = require('./internal/_dispatchable');
-var _has = require('./internal/_has');
-var _reduce = require('./internal/_reduce');
-var _xreduceBy = require('./internal/_xreduceBy');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/reduceBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curryN.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var _xreduceBy = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xreduceBy.js");
 
 
 /**
@@ -9675,8 +11075,13 @@ module.exports = _curryN(4, [], _dispatchable([], _xreduceBy,
     }, {}, list);
   }));
 
-},{"./internal/_curryN":118,"./internal/_dispatchable":119,"./internal/_has":127,"./internal/_reduce":148,"./internal/_xreduceBy":169}],262:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/reduceRight.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -9730,10 +11135,15 @@ module.exports = _curry3(function reduceRight(fn, acc, list) {
   return acc;
 });
 
-},{"./internal/_curry3":117}],263:[function(require,module,exports){
-var _curryN = require('./internal/_curryN');
-var _reduce = require('./internal/_reduce');
-var _reduced = require('./internal/_reduced');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/reduceWhile.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curryN.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var _reduced = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduced.js");
 
 
 /**
@@ -9771,9 +11181,14 @@ module.exports = _curryN(4, [], function _reduceWhile(pred, fn, a, list) {
   }, a, list);
 });
 
-},{"./internal/_curryN":118,"./internal/_reduce":148,"./internal/_reduced":149}],264:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _reduced = require('./internal/_reduced');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/reduced.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _reduced = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduced.js");
 
 /**
  * Returns a value wrapped to indicate that it is the final value of the reduce
@@ -9802,10 +11217,15 @@ var _reduced = require('./internal/_reduced');
 
 module.exports = _curry1(_reduced);
 
-},{"./internal/_curry1":115,"./internal/_reduced":149}],265:[function(require,module,exports){
-var _complement = require('./internal/_complement');
-var _curry2 = require('./internal/_curry2');
-var filter = require('./filter');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/reject.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _complement = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_complement.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var filter = __webpack_require__("./resources/assets/js/node_modules/ramda/src/filter.js");
 
 
 /**
@@ -9836,8 +11256,13 @@ module.exports = _curry2(function reject(pred, filterable) {
   return filter(_complement(pred), filterable);
 });
 
-},{"./filter":75,"./internal/_complement":110,"./internal/_curry2":116}],266:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/remove.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -9865,10 +11290,15 @@ module.exports = _curry3(function remove(start, count, list) {
   return result;
 });
 
-},{"./internal/_curry3":117}],267:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var always = require('./always');
-var times = require('./times');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/repeat.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var always = __webpack_require__("./resources/assets/js/node_modules/ramda/src/always.js");
+var times = __webpack_require__("./resources/assets/js/node_modules/ramda/src/times.js");
 
 
 /**
@@ -9898,8 +11328,13 @@ module.exports = _curry2(function repeat(value, n) {
   return times(always(value), n);
 });
 
-},{"./always":21,"./internal/_curry2":116,"./times":293}],268:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/replace.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -9926,9 +11361,14 @@ module.exports = _curry3(function replace(regex, replacement, str) {
   return str.replace(regex, replacement);
 });
 
-},{"./internal/_curry3":117}],269:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _isString = require('./internal/_isString');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/reverse.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _isString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isString.js");
 
 
 /**
@@ -9960,8 +11400,13 @@ module.exports = _curry1(function reverse(list) {
                            Array.prototype.slice.call(list, 0).reverse();
 });
 
-},{"./internal/_curry1":115,"./internal/_isString":139}],270:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/scan.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -9997,12 +11442,17 @@ module.exports = _curry3(function scan(fn, acc, list) {
   return result;
 });
 
-},{"./internal/_curry3":117}],271:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var ap = require('./ap');
-var map = require('./map');
-var prepend = require('./prepend');
-var reduceRight = require('./reduceRight');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/sequence.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var ap = __webpack_require__("./resources/assets/js/node_modules/ramda/src/ap.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
+var prepend = __webpack_require__("./resources/assets/js/node_modules/ramda/src/prepend.js");
+var reduceRight = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduceRight.js");
 
 
 /**
@@ -10037,10 +11487,15 @@ module.exports = _curry2(function sequence(of, traversable) {
                 traversable);
 });
 
-},{"./ap":25,"./internal/_curry2":116,"./map":198,"./prepend":250,"./reduceRight":262}],272:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var always = require('./always');
-var over = require('./over');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/set.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var always = __webpack_require__("./resources/assets/js/node_modules/ramda/src/always.js");
+var over = __webpack_require__("./resources/assets/js/node_modules/ramda/src/over.js");
 
 
 /**
@@ -10069,9 +11524,14 @@ module.exports = _curry3(function set(lens, v, x) {
   return over(lens, always(v), x);
 });
 
-},{"./always":21,"./internal/_curry3":117,"./over":234}],273:[function(require,module,exports){
-var _checkForMethod = require('./internal/_checkForMethod');
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/slice.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _checkForMethod = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_checkForMethod.js");
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -10102,8 +11562,13 @@ module.exports = _curry3(_checkForMethod('slice', function slice(fromIndex, toIn
   return Array.prototype.slice.call(list, fromIndex, toIndex);
 }));
 
-},{"./internal/_checkForMethod":107,"./internal/_curry3":117}],274:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/sort.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -10130,8 +11595,13 @@ module.exports = _curry2(function sort(comparator, list) {
   return Array.prototype.slice.call(list, 0).sort(comparator);
 });
 
-},{"./internal/_curry2":116}],275:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/sortBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -10174,8 +11644,13 @@ module.exports = _curry2(function sortBy(fn, list) {
   });
 });
 
-},{"./internal/_curry2":116}],276:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/sortWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -10222,8 +11697,13 @@ module.exports = _curry2(function sortWith(fns, list) {
   });
 });
 
-},{"./internal/_curry2":116}],277:[function(require,module,exports){
-var invoker = require('./invoker');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/split.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var invoker = __webpack_require__("./resources/assets/js/node_modules/ramda/src/invoker.js");
 
 
 /**
@@ -10248,10 +11728,15 @@ var invoker = require('./invoker');
  */
 module.exports = invoker(1, 'split');
 
-},{"./invoker":179}],278:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var length = require('./length');
-var slice = require('./slice');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/splitAt.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var length = __webpack_require__("./resources/assets/js/node_modules/ramda/src/length.js");
+var slice = __webpack_require__("./resources/assets/js/node_modules/ramda/src/slice.js");
 
 
 /**
@@ -10276,9 +11761,14 @@ module.exports = _curry2(function splitAt(index, array) {
   return [slice(0, index, array), slice(index, length(array), array)];
 });
 
-},{"./internal/_curry2":116,"./length":189,"./slice":273}],279:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var slice = require('./slice');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/splitEvery.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var slice = __webpack_require__("./resources/assets/js/node_modules/ramda/src/slice.js");
 
 
 /**
@@ -10310,8 +11800,13 @@ module.exports = _curry2(function splitEvery(n, list) {
   return result;
 });
 
-},{"./internal/_curry2":116,"./slice":273}],280:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/splitWhen.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -10346,10 +11841,15 @@ module.exports = _curry2(function splitWhen(pred, list) {
   return [prefix, Array.prototype.slice.call(list, idx)];
 });
 
-},{"./internal/_curry2":116}],281:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var equals = require('./equals');
-var take = require('./take');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/startsWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
+var take = __webpack_require__("./resources/assets/js/node_modules/ramda/src/take.js");
 
 /**
  * Checks if a list starts with the provided values
@@ -10374,8 +11874,13 @@ module.exports = _curry2(function(prefix, list) {
   return equals(take(prefix.length, list), prefix);
 });
 
-},{"./equals":73,"./internal/_curry2":116,"./take":287}],282:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/subtract.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -10405,9 +11910,14 @@ module.exports = _curry2(function subtract(a, b) {
   return Number(a) - Number(b);
 });
 
-},{"./internal/_curry2":116}],283:[function(require,module,exports){
-var add = require('./add');
-var reduce = require('./reduce');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/sum.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var add = __webpack_require__("./resources/assets/js/node_modules/ramda/src/add.js");
+var reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduce.js");
 
 
 /**
@@ -10427,10 +11937,15 @@ var reduce = require('./reduce');
  */
 module.exports = reduce(add, 0);
 
-},{"./add":16,"./reduce":260}],284:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var concat = require('./concat');
-var difference = require('./difference');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/symmetricDifference.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/concat.js");
+var difference = __webpack_require__("./resources/assets/js/node_modules/ramda/src/difference.js");
 
 
 /**
@@ -10455,10 +11970,15 @@ module.exports = _curry2(function symmetricDifference(list1, list2) {
   return concat(difference(list1, list2), difference(list2, list1));
 });
 
-},{"./concat":45,"./difference":57,"./internal/_curry2":116}],285:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var concat = require('./concat');
-var differenceWith = require('./differenceWith');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/symmetricDifferenceWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/concat.js");
+var differenceWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/differenceWith.js");
 
 
 /**
@@ -10487,10 +12007,15 @@ module.exports = _curry3(function symmetricDifferenceWith(pred, list1, list2) {
   return concat(differenceWith(pred, list1, list2), differenceWith(pred, list2, list1));
 });
 
-},{"./concat":45,"./differenceWith":58,"./internal/_curry3":117}],286:[function(require,module,exports){
-var _checkForMethod = require('./internal/_checkForMethod');
-var _curry1 = require('./internal/_curry1');
-var slice = require('./slice');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/tail.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _checkForMethod = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_checkForMethod.js");
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var slice = __webpack_require__("./resources/assets/js/node_modules/ramda/src/slice.js");
 
 
 /**
@@ -10522,11 +12047,16 @@ var slice = require('./slice');
  */
 module.exports = _curry1(_checkForMethod('tail', slice(1, Infinity)));
 
-},{"./internal/_checkForMethod":107,"./internal/_curry1":115,"./slice":273}],287:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xtake = require('./internal/_xtake');
-var slice = require('./slice');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/take.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xtake = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xtake.js");
+var slice = __webpack_require__("./resources/assets/js/node_modules/ramda/src/slice.js");
 
 
 /**
@@ -10576,9 +12106,14 @@ module.exports = _curry2(_dispatchable(['take'], _xtake, function take(n, xs) {
   return slice(0, n < 0 ? Infinity : n, xs);
 }));
 
-},{"./internal/_curry2":116,"./internal/_dispatchable":119,"./internal/_xtake":170,"./slice":273}],288:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var drop = require('./drop');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/takeLast.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var drop = __webpack_require__("./resources/assets/js/node_modules/ramda/src/drop.js");
 
 
 /**
@@ -10607,8 +12142,13 @@ module.exports = _curry2(function takeLast(n, xs) {
   return drop(n >= 0 ? xs.length - n : 0, xs);
 });
 
-},{"./drop":62,"./internal/_curry2":116}],289:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/takeLastWhile.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -10641,10 +12181,15 @@ module.exports = _curry2(function takeLastWhile(fn, list) {
   return Array.prototype.slice.call(list, idx + 1);
 });
 
-},{"./internal/_curry2":116}],290:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xtakeWhile = require('./internal/_xtakeWhile');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/takeWhile.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xtakeWhile = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xtakeWhile.js");
 
 
 /**
@@ -10682,8 +12227,13 @@ module.exports = _curry2(_dispatchable(['takeWhile'], _xtakeWhile, function take
   return Array.prototype.slice.call(list, 0, idx);
 }));
 
-},{"./internal/_curry2":116,"./internal/_dispatchable":119,"./internal/_xtakeWhile":171}],291:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/tap.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -10709,11 +12259,16 @@ module.exports = _curry2(function tap(fn, x) {
   return x;
 });
 
-},{"./internal/_curry2":116}],292:[function(require,module,exports){
-var _cloneRegExp = require('./internal/_cloneRegExp');
-var _curry2 = require('./internal/_curry2');
-var _isRegExp = require('./internal/_isRegExp');
-var toString = require('./toString');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/test.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _cloneRegExp = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_cloneRegExp.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isRegExp = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isRegExp.js");
+var toString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/toString.js");
 
 
 /**
@@ -10740,8 +12295,13 @@ module.exports = _curry2(function test(pattern, str) {
   return _cloneRegExp(pattern).test(str);
 });
 
-},{"./internal/_cloneRegExp":109,"./internal/_curry2":116,"./internal/_isRegExp":138,"./toString":297}],293:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/times.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -10783,8 +12343,13 @@ module.exports = _curry2(function times(fn, n) {
   return list;
 });
 
-},{"./internal/_curry2":116}],294:[function(require,module,exports){
-var invoker = require('./invoker');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/toLower.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var invoker = __webpack_require__("./resources/assets/js/node_modules/ramda/src/invoker.js");
 
 
 /**
@@ -10804,9 +12369,14 @@ var invoker = require('./invoker');
  */
 module.exports = invoker(0, 'toLowerCase');
 
-},{"./invoker":179}],295:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _has = require('./internal/_has');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/toPairs.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
 
 
 /**
@@ -10837,8 +12407,13 @@ module.exports = _curry1(function toPairs(obj) {
   return pairs;
 });
 
-},{"./internal/_curry1":115,"./internal/_has":127}],296:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/toPairsIn.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -10870,9 +12445,14 @@ module.exports = _curry1(function toPairsIn(obj) {
   return pairs;
 });
 
-},{"./internal/_curry1":115}],297:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _toString = require('./internal/_toString');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/toString.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _toString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_toString.js");
 
 
 /**
@@ -10913,8 +12493,13 @@ var _toString = require('./internal/_toString');
  */
 module.exports = _curry1(function toString(val) { return _toString(val, []); });
 
-},{"./internal/_curry1":115,"./internal/_toString":152}],298:[function(require,module,exports){
-var invoker = require('./invoker');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/toUpper.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var invoker = __webpack_require__("./resources/assets/js/node_modules/ramda/src/invoker.js");
 
 
 /**
@@ -10934,10 +12519,15 @@ var invoker = require('./invoker');
  */
 module.exports = invoker(0, 'toUpperCase');
 
-},{"./invoker":179}],299:[function(require,module,exports){
-var _reduce = require('./internal/_reduce');
-var _xwrap = require('./internal/_xwrap');
-var curryN = require('./curryN');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/transduce.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var _xwrap = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xwrap.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
 
 
 /**
@@ -10991,8 +12581,13 @@ module.exports = curryN(4, function transduce(xf, fn, acc, list) {
   return _reduce(xf(typeof fn === 'function' ? _xwrap(fn) : fn), acc, list);
 });
 
-},{"./curryN":53,"./internal/_reduce":148,"./internal/_xwrap":172}],300:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/transpose.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -11037,10 +12632,15 @@ module.exports = _curry1(function transpose(outerlist) {
   return result;
 });
 
-},{"./internal/_curry1":115}],301:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var map = require('./map');
-var sequence = require('./sequence');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/traverse.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
+var sequence = __webpack_require__("./resources/assets/js/node_modules/ramda/src/sequence.js");
 
 
 /**
@@ -11075,8 +12675,13 @@ module.exports = _curry3(function traverse(of, f, traversable) {
     sequence(of, map(f, traversable));
 });
 
-},{"./internal/_curry3":117,"./map":198,"./sequence":271}],302:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/trim.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -11113,10 +12718,15 @@ module.exports = (function() {
   }
 }());
 
-},{"./internal/_curry1":115}],303:[function(require,module,exports){
-var _arity = require('./internal/_arity');
-var _concat = require('./internal/_concat');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/tryCatch.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arity.js");
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -11150,8 +12760,13 @@ module.exports = _curry2(function _tryCatch(tryer, catcher) {
   });
 });
 
-},{"./internal/_arity":104,"./internal/_concat":111,"./internal/_curry2":116}],304:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/type.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -11184,8 +12799,13 @@ module.exports = _curry1(function type(val) {
          Object.prototype.toString.call(val).slice(8, -1);
 });
 
-},{"./internal/_curry1":115}],305:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/unapply.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -11218,9 +12838,14 @@ module.exports = _curry1(function unapply(fn) {
   };
 });
 
-},{"./internal/_curry1":115}],306:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var nAry = require('./nAry');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/unary.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var nAry = __webpack_require__("./resources/assets/js/node_modules/ramda/src/nAry.js");
 
 
 /**
@@ -11255,9 +12880,14 @@ module.exports = _curry1(function unary(fn) {
   return nAry(1, fn);
 });
 
-},{"./internal/_curry1":115,"./nAry":222}],307:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var curryN = require('./curryN');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/uncurryN.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
 
 
 /**
@@ -11295,8 +12925,13 @@ module.exports = _curry2(function uncurryN(depth, fn) {
   });
 });
 
-},{"./curryN":53,"./internal/_curry2":116}],308:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/unfold.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -11334,11 +12969,16 @@ module.exports = _curry2(function unfold(fn, seed) {
   return result;
 });
 
-},{"./internal/_curry2":116}],309:[function(require,module,exports){
-var _concat = require('./internal/_concat');
-var _curry2 = require('./internal/_curry2');
-var compose = require('./compose');
-var uniq = require('./uniq');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/union.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var compose = __webpack_require__("./resources/assets/js/node_modules/ramda/src/compose.js");
+var uniq = __webpack_require__("./resources/assets/js/node_modules/ramda/src/uniq.js");
 
 
 /**
@@ -11360,10 +13000,15 @@ var uniq = require('./uniq');
  */
 module.exports = _curry2(compose(uniq, _concat));
 
-},{"./compose":42,"./internal/_concat":111,"./internal/_curry2":116,"./uniq":311}],310:[function(require,module,exports){
-var _concat = require('./internal/_concat');
-var _curry3 = require('./internal/_curry3');
-var uniqWith = require('./uniqWith');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/unionWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var uniqWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/uniqWith.js");
 
 
 /**
@@ -11392,9 +13037,14 @@ module.exports = _curry3(function unionWith(pred, list1, list2) {
   return uniqWith(pred, _concat(list1, list2));
 });
 
-},{"./internal/_concat":111,"./internal/_curry3":117,"./uniqWith":313}],311:[function(require,module,exports){
-var identity = require('./identity');
-var uniqBy = require('./uniqBy');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/uniq.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var identity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/identity.js");
+var uniqBy = __webpack_require__("./resources/assets/js/node_modules/ramda/src/uniqBy.js");
 
 
 /**
@@ -11416,9 +13066,14 @@ var uniqBy = require('./uniqBy');
  */
 module.exports = uniqBy(identity);
 
-},{"./identity":93,"./uniqBy":312}],312:[function(require,module,exports){
-var _Set = require('./internal/_Set');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/uniqBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _Set = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_Set.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -11456,9 +13111,14 @@ module.exports = _curry2(function uniqBy(fn, list) {
   return result;
 });
 
-},{"./internal/_Set":102,"./internal/_curry2":116}],313:[function(require,module,exports){
-var _containsWith = require('./internal/_containsWith');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/uniqWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _containsWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_containsWith.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -11498,8 +13158,13 @@ module.exports = _curry2(function uniqWith(pred, list) {
   return result;
 });
 
-},{"./internal/_containsWith":113,"./internal/_curry2":116}],314:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/unless.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -11530,9 +13195,14 @@ module.exports = _curry3(function unless(pred, whenFalseFn, x) {
   return pred(x) ? x : whenFalseFn(x);
 });
 
-},{"./internal/_curry3":117}],315:[function(require,module,exports){
-var _identity = require('./internal/_identity');
-var chain = require('./chain');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/unnest.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _identity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_identity.js");
+var chain = __webpack_require__("./resources/assets/js/node_modules/ramda/src/chain.js");
 
 
 /**
@@ -11554,8 +13224,13 @@ var chain = require('./chain');
  */
 module.exports = chain(_identity);
 
-},{"./chain":37,"./internal/_identity":128}],316:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/until.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -11585,10 +13260,15 @@ module.exports = _curry3(function until(pred, fn, init) {
   return val;
 });
 
-},{"./internal/_curry3":117}],317:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var adjust = require('./adjust');
-var always = require('./always');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/update.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var adjust = __webpack_require__("./resources/assets/js/node_modules/ramda/src/adjust.js");
+var always = __webpack_require__("./resources/assets/js/node_modules/ramda/src/always.js");
 
 
 /**
@@ -11617,9 +13297,14 @@ module.exports = _curry3(function update(idx, x, list) {
   return adjust(always(x), idx, list);
 });
 
-},{"./adjust":18,"./always":21,"./internal/_curry3":117}],318:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var curryN = require('./curryN');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/useWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
 
 
 /**
@@ -11663,9 +13348,14 @@ module.exports = _curry2(function useWith(fn, transformers) {
   });
 });
 
-},{"./curryN":53,"./internal/_curry2":116}],319:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var keys = require('./keys');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/values.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var keys = __webpack_require__("./resources/assets/js/node_modules/ramda/src/keys.js");
 
 
 /**
@@ -11697,8 +13387,13 @@ module.exports = _curry1(function values(obj) {
   return vals;
 });
 
-},{"./internal/_curry1":115,"./keys":185}],320:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/valuesIn.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -11731,8 +13426,13 @@ module.exports = _curry1(function valuesIn(obj) {
   return vs;
 });
 
-},{"./internal/_curry1":115}],321:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/view.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -11769,8 +13469,13 @@ module.exports = (function() {
   });
 }());
 
-},{"./internal/_curry2":116}],322:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/when.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -11805,9 +13510,14 @@ module.exports = _curry3(function when(pred, whenTrueFn, x) {
   return pred(x) ? whenTrueFn(x) : x;
 });
 
-},{"./internal/_curry3":117}],323:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _has = require('./internal/_has');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/where.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
 
 
 /**
@@ -11853,11 +13563,16 @@ module.exports = _curry2(function where(spec, testObj) {
   return true;
 });
 
-},{"./internal/_curry2":116,"./internal/_has":127}],324:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var equals = require('./equals');
-var map = require('./map');
-var where = require('./where');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/whereEq.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
+var where = __webpack_require__("./resources/assets/js/node_modules/ramda/src/where.js");
 
 
 /**
@@ -11892,11 +13607,16 @@ module.exports = _curry2(function whereEq(spec, testObj) {
   return where(map(equals, spec), testObj);
 });
 
-},{"./equals":73,"./internal/_curry2":116,"./map":198,"./where":323}],325:[function(require,module,exports){
-var _contains = require('./internal/_contains');
-var _curry2 = require('./internal/_curry2');
-var flip = require('./flip');
-var reject = require('./reject');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/without.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _contains = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_contains.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var flip = __webpack_require__("./resources/assets/js/node_modules/ramda/src/flip.js");
+var reject = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reject.js");
 
 
 /**
@@ -11922,8 +13642,13 @@ module.exports = _curry2(function(xs, list) {
   return reject(flip(_contains)(xs), list);
 });
 
-},{"./flip":81,"./internal/_contains":112,"./internal/_curry2":116,"./reject":265}],326:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/xprod.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -11961,8 +13686,13 @@ module.exports = _curry2(function xprod(a, b) { // = xprodWith(prepend); (takes 
   return result;
 });
 
-},{"./internal/_curry2":116}],327:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/zip.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -11995,8 +13725,13 @@ module.exports = _curry2(function zip(a, b) {
   return rv;
 });
 
-},{"./internal/_curry2":116}],328:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/zipObj.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -12027,8 +13762,13 @@ module.exports = _curry2(function zipObj(keys, values) {
   return out;
 });
 
-},{"./internal/_curry2":116}],329:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/zipWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -12066,8 +13806,13 @@ module.exports = _curry3(function zipWith(fn, a, b) {
   return rv;
 });
 
-},{"./internal/_curry3":117}],330:[function(require,module,exports){
-/**!
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/sortablejs/Sortable.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**!
  * Sortable
  * @author	RubaXa   <trash@rubaxa.org>
  * @license MIT
@@ -12076,8 +13821,12 @@ module.exports = _curry3(function zipWith(fn, a, b) {
 (function sortableModule(factory) {
 	"use strict";
 
-	if (typeof define === "function" && define.amd) {
-		define(factory);
+	if (true) {
+		!(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	}
 	else if (typeof module != "undefined" && typeof module.exports != "undefined") {
 		module.exports = factory();
@@ -13559,14 +15308,22 @@ module.exports = _curry3(function zipWith(fn, a, b) {
 	return Sortable;
 });
 
-},{}],331:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/vue-resource/dist/vue-resource.es2015.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Url", function() { return Url; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Http", function() { return Http; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Resource", function() { return Resource; });
 /*!
  * vue-resource v1.3.4
  * https://github.com/pagekit/vue-resource
  * Released under the MIT License.
  */
-
-'use strict';
 
 /**
  * Promises/A+ polyfill v1.1.4 (https://github.com/bramstein/promis)
@@ -14656,7 +16413,7 @@ var xhrClient = function (request) {
 
 var nodeClient = function (request) {
 
-    var client = require('got');
+    var client = __webpack_require__(0);
 
     return new PromiseObj(function (resolve) {
 
@@ -15127,14 +16884,20 @@ if (typeof window !== 'undefined' && window.Vue) {
     window.Vue.use(plugin);
 }
 
-module.exports = plugin;
+/* harmony default export */ __webpack_exports__["default"] = (plugin);
 
-},{"got":1}],332:[function(require,module,exports){
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/vue-sortable/vue-sortable.js":
+/***/ (function(module, exports, __webpack_require__) {
+
 ;(function () {
 
   var vSortable = {}
-  var Sortable = typeof require === 'function'
-      ? require('sortablejs')
+  var Sortable =  true
+      ? __webpack_require__("./resources/assets/js/node_modules/sortablejs/Sortable.js")
       : window.Sortable
 
   if (!Sortable) {
@@ -15163,7 +16926,7 @@ module.exports = plugin;
     })
   }
 
-  if (typeof exports == "object") {
+  if (true) {
     module.exports = vSortable
   } else if (typeof define == "function" && define.amd) {
     define([], function () {
@@ -15176,14 +16939,19 @@ module.exports = plugin;
 
 })()
 
-},{"sortablejs":330}],333:[function(require,module,exports){
-(function (process){
-/*!
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/vue/dist/vue.common.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/*!
  * Vue.js v1.0.28
  * (c) 2016 Evan You
  * Released under the MIT License.
  */
-'use strict';
+
 
 function set(obj, key, val) {
   if (hasOwn(obj, key)) {
@@ -25416,44 +27184,56 @@ setTimeout(function () {
 }, 0);
 
 module.exports = Vue;
-}).call(this,require('_process'))
-},{"_process":2}],334:[function(require,module,exports){
-'use strict';
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/process/browser.js")))
+
+/***/ }),
+
+/***/ "./resources/assets/js/vue/components/cltvo-v-editor.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.cltvoVEditor = undefined;
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
+var _vue = __webpack_require__("./resources/assets/js/node_modules/vue/dist/vue.common.js");
+
+var _vue2 = _interopRequireDefault(_vue);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Vue = require('vue');
-var VueResource = Vue.use(require('vue-resource'));
-
-var cltvoVEditor = exports.cltvoVEditor = Vue.component('cltvo-v-editor', {
+var cltvoVEditor = exports.cltvoVEditor = _vue2.default.component('cltvo-v-editor', {
 	template: '#cltvo-v-editor-template',
 
 	props: ['value', 'form', 'name', 'label']
 
 });
 
-},{"ramda":12,"vue":333,"vue-resource":331}],335:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/vue/components/g-map.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.gMap = undefined;
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
-var _vue = require('vue');
+var _vue = __webpack_require__("./resources/assets/js/node_modules/vue/dist/vue.common.js");
 
 var _vue2 = _interopRequireDefault(_vue);
 
@@ -25597,15 +27377,20 @@ var gMap = exports.gMap = _vue2.default.extend({
 	}
 });
 
-},{"ramda":12,"vue":333}],336:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/vue/components/helpers/pages-simple-crud-helpers.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.pageSectionsCheckboxUpdateSuccess = exports.removedCheckboxId = exports.addedCheckboxElem = undefined;
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
@@ -25635,15 +27420,20 @@ var pageSectionsCheckboxUpdateSuccess = exports.pageSectionsCheckboxUpdateSucces
 	}
 };
 
-},{"ramda":12}],337:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/vue/components/helpers/simple-crud-helpers.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.checkboxesMethods = exports.postWithMaterialNote = exports.openModalFromSimpleImageCrud = exports.openModal = exports.makePost = undefined;
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
@@ -25716,29 +27506,36 @@ var checkboxesMethods = exports.checkboxesMethods = function checkboxesMethods(o
 	};
 };
 
-},{"ramda":12}],338:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/vue/components/media-manager.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.mediaManager = undefined;
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
-var _crudAjax = require('../mixins/crud-ajax');
+var _vue = __webpack_require__("./resources/assets/js/node_modules/vue/dist/vue.common.js");
 
-var _fileDnd = require('../../file-dnd.js');
+var _vue2 = _interopRequireDefault(_vue);
 
-var _pure = require('../../functions/pure');
+var _crudAjax = __webpack_require__("./resources/assets/js/vue/mixins/crud-ajax.js");
+
+var _fileDnd = __webpack_require__("./resources/assets/js/file-dnd.js");
+
+var _pure = __webpack_require__("./resources/assets/js/functions/pure.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Vue = require('vue');
-var VueResource = Vue.use(require('vue-resource'));
-var mediaManager = exports.mediaManager = Vue.extend({
+var mediaManager = exports.mediaManager = _vue2.default.extend({
 	template: '#media-manager-template',
 	mixins: [_crudAjax.crudAjax],
 
@@ -25891,27 +27688,28 @@ var mediaManager = exports.mediaManager = Vue.extend({
 	}
 });
 
-},{"../../file-dnd.js":5,"../../functions/pure":7,"../mixins/crud-ajax":347,"ramda":12,"vue":333,"vue-resource":331}],339:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/vue/components/multi-images.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.multiImages = undefined;
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
-var _crudAjax = require('../mixins/crud-ajax');
+var _crudAjax = __webpack_require__("./resources/assets/js/vue/mixins/crud-ajax.js");
 
-var _pure = require('../../functions/pure');
+var _pure = __webpack_require__("./resources/assets/js/functions/pure.js");
 
-var _singleImage = require('./single-image');
-
-var _vueSortable = require('vue-sortable');
-
-var _vueSortable2 = _interopRequireDefault(_vueSortable);
+var _singleImage = __webpack_require__("./resources/assets/js/vue/components/single-image.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25919,11 +27717,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * MultiImages Vue Component 
  * version 2.0.0-BestBuddies
  */
-var Vue = require('vue');
-var VueResource = Vue.use(require('vue-resource'));
-
-Vue.use(_vueSortable2.default);
-
+var Vue = __webpack_require__("./resources/assets/js/node_modules/vue/dist/vue.common.js");
 var multiImages = exports.multiImages = Vue.component('multi-images', {
 	template: '#multi-images-template',
 
@@ -26016,43 +27810,48 @@ var multiImages = exports.multiImages = Vue.component('multi-images', {
 	}
 });
 
-},{"../../functions/pure":7,"../mixins/crud-ajax":347,"./single-image":341,"ramda":12,"vue":333,"vue-resource":331,"vue-sortable":332}],340:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/vue/components/pages-simple-cruds.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.currentPageSections = exports.sectionMultipleFixed = exports.sectionMultipleLimited = exports.sectionMultipleUnlimited = exports.sectionProtected = exports.componentForm = exports.pagesectionsSort = exports.pagesectionsCheckbox = exports.pagesections = exports.pagesectionsModalEdit = exports.pagesectionsModalCreate = exports.pages = exports.pagesGroup = undefined;
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
-var _vue = require('vue');
+var _vue = __webpack_require__("./resources/assets/js/node_modules/vue/dist/vue.common.js");
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _simpleCrudComponentMakers = require('../factories/simple-crud-component-makers.js');
+var _simpleCrudComponentMakers = __webpack_require__("./resources/assets/js/vue/factories/simple-crud-component-makers.js");
 
-var _gMap = require('../components/g-map');
+var _gMap = __webpack_require__("./resources/assets/js/vue/components/g-map.js");
 
-var _numberFilters = require('../mixins/number-filters');
+var _numberFilters = __webpack_require__("./resources/assets/js/vue/mixins/number-filters.js");
 
-var _sortable = require('../mixins/sortable');
+var _sortable = __webpack_require__("./resources/assets/js/vue/mixins/sortable.js");
 
-var _multilistSortable = require('../mixins/multilist-sortable');
+var _multilistSortable = __webpack_require__("./resources/assets/js/vue/mixins/multilist-sortable.js");
 
-var _sortableListByClick = require('../mixins/sortable-list-by-click');
+var _sortableListByClick = __webpack_require__("./resources/assets/js/vue/mixins/sortable-list-by-click.js");
 
-var _mexicoStatesAndMunicipalities = require('../mixins/mexico-states-and-municipalities');
+var _mexicoStatesAndMunicipalities = __webpack_require__("./resources/assets/js/vue/mixins/mexico-states-and-municipalities.js");
 
-var _pure = require('../../functions/pure');
+var _pure = __webpack_require__("./resources/assets/js/functions/pure.js");
 
-var _dom = require('../../functions/dom');
+var _dom = __webpack_require__("./resources/assets/js/functions/dom.js");
 
-var _simpleCrudHelpers = require('./helpers/simple-crud-helpers');
+var _simpleCrudHelpers = __webpack_require__("./resources/assets/js/vue/components/helpers/simple-crud-helpers.js");
 
-var _pagesSimpleCrudHelpers = require('./helpers/pages-simple-crud-helpers');
+var _pagesSimpleCrudHelpers = __webpack_require__("./resources/assets/js/vue/components/helpers/pages-simple-crud-helpers.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26082,51 +27881,61 @@ var sectionMultipleLimited = exports.sectionMultipleLimited = (0, _simpleCrudCom
 var sectionMultipleFixed = exports.sectionMultipleFixed = (0, _simpleCrudComponentMakers.simpleCrud)('#section-multiple-fixed-template', sectionConfig);
 var currentPageSections = exports.currentPageSections = (0, _simpleCrudComponentMakers.simpleCrud)('#current-page-sections-template', { props: ['currentPage'], components: { sectionProtected: sectionProtected, sectionMultipleUnlimited: sectionMultipleUnlimited, sectionMultipleLimited: sectionMultipleLimited, sectionMultipleFixed: sectionMultipleFixed } });
 
-},{"../../functions/dom":6,"../../functions/pure":7,"../components/g-map":335,"../factories/simple-crud-component-makers.js":342,"../mixins/mexico-states-and-municipalities":349,"../mixins/multilist-sortable":350,"../mixins/number-filters":351,"../mixins/sortable":354,"../mixins/sortable-list-by-click":353,"./helpers/pages-simple-crud-helpers":336,"./helpers/simple-crud-helpers":337,"ramda":12,"vue":333}],341:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/vue/components/single-image.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.singleImage = undefined;
 
-var _singleImageMixin = require('../mixins/single-image-mixin');
+var _singleImageMixin = __webpack_require__("./resources/assets/js/vue/mixins/single-image-mixin.js");
 
-var Vue = require('vue');
+var Vue = __webpack_require__("./resources/assets/js/node_modules/vue/dist/vue.common.js");
 var singleImage = exports.singleImage = Vue.component('single-image', {
 	template: '#single-image-template',
 	mixins: [_singleImageMixin.singleImageMixin]
 });
 
-},{"../mixins/single-image-mixin":352,"vue":333}],342:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/vue/factories/simple-crud-component-makers.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.simpleModalCrud = exports.simpleCrudWithImage = exports.simpleCrud = undefined;
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
-var _vue = require('vue');
+var _vue = __webpack_require__("./resources/assets/js/node_modules/vue/dist/vue.common.js");
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vueResource = require('vue-resource');
+var _vueResource = __webpack_require__("./resources/assets/js/node_modules/vue-resource/dist/vue-resource.es2015.js");
 
 var _vueResource2 = _interopRequireDefault(_vueResource);
 
-var _crudAjax = require('../mixins/crud-ajax');
+var _crudAjax = __webpack_require__("./resources/assets/js/vue/mixins/crud-ajax.js");
 
-var _singleImageMixin = require('../mixins/single-image-mixin');
+var _singleImageMixin = __webpack_require__("./resources/assets/js/vue/mixins/single-image-mixin.js");
 
-var _vForFilters = require('../mixins/v-for-filters.js');
+var _vForFilters = __webpack_require__("./resources/assets/js/vue/mixins/v-for-filters.js");
 
-var _helpers = require('../helpers');
+var _helpers = __webpack_require__("./resources/assets/js/vue/helpers.js");
 
-var _pure = require('../../functions/pure');
+var _pure = __webpack_require__("./resources/assets/js/functions/pure.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26282,19 +28091,24 @@ var simpleModalCrud = exports.simpleModalCrud = _ramda2.default.curry(function (
 	return simpleCrud(template, modalOptions);
 });
 
-},{"../../functions/pure":7,"../helpers":343,"../mixins/crud-ajax":347,"../mixins/single-image-mixin":352,"../mixins/v-for-filters.js":355,"ramda":12,"vue":333,"vue-resource":331}],343:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/vue/helpers.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.turnInputTypeIntoNumber = exports.initPropsFromJSON = undefined;
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
-var _pure = require('../functions/pure');
+var _pure = __webpack_require__("./resources/assets/js/functions/pure.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26321,37 +28135,46 @@ var turnInputTypeIntoNumber = exports.turnInputTypeIntoNumber = function turnInp
 	}, inputs);
 };
 
-},{"../functions/pure":7,"ramda":12}],344:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/vue/main-vue.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.mainVue = undefined;
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
-var _vue = require('vue');
+var _vue = __webpack_require__("./resources/assets/js/node_modules/vue/dist/vue.common.js");
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vueResource = require('vue-resource');
+var _vueResource = __webpack_require__("./resources/assets/js/node_modules/vue-resource/dist/vue-resource.es2015.js");
 
 var _vueResource2 = _interopRequireDefault(_vueResource);
 
-var _crudAjax = require('./mixins/crud-ajax');
+var _vueSortable = __webpack_require__("./resources/assets/js/node_modules/vue-sortable/vue-sortable.js");
 
-var _menus = require('./mixins/menus');
+var _vueSortable2 = _interopRequireDefault(_vueSortable);
 
-var _pure = require('../functions/pure');
+var _crudAjax = __webpack_require__("./resources/assets/js/vue/mixins/crud-ajax.js");
 
-var _dom = require('../functions/dom');
+var _menus = __webpack_require__("./resources/assets/js/vue/mixins/menus.js");
 
-var _logoManipulations = require('../logoManipulations');
+var _pure = __webpack_require__("./resources/assets/js/functions/pure.js");
 
-var _menuTreeToggler = require('../menu-tree-toggler');
+var _dom = __webpack_require__("./resources/assets/js/functions/dom.js");
+
+var _logoManipulations = __webpack_require__("./resources/assets/js/logoManipulations.js");
+
+var _menuTreeToggler = __webpack_require__("./resources/assets/js/menu-tree-toggler.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26364,6 +28187,7 @@ if (window.VueHtml5Editor) {
 	});
 }
 
+_vue2.default.use(_vueSortable2.default);
 _vue2.default.use(_vueResource2.default);
 
 var mainVue = exports.mainVue = function mainVue() {
@@ -26433,19 +28257,24 @@ var mainVue = exports.mainVue = function mainVue() {
 	});
 };
 
-},{"../functions/dom":6,"../functions/pure":7,"../logoManipulations":8,"../menu-tree-toggler":9,"./mixins/crud-ajax":347,"./mixins/menus":348,"ramda":12,"vue":333,"vue-resource":331}],345:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/vue/main/admin.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.adminVue = undefined;
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
-var _mexicoStatesAndMunicipalities = require('../mixins/mexico-states-and-municipalities');
+var _mexicoStatesAndMunicipalities = __webpack_require__("./resources/assets/js/vue/mixins/mexico-states-and-municipalities.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26465,8 +28294,13 @@ var adminVue = exports.adminVue = {
 	}
 };
 
-},{"../mixins/mexico-states-and-municipalities":349,"ramda":12}],346:[function(require,module,exports){
+/***/ }),
+
+/***/ "./resources/assets/js/vue/mixins/component-interactions-with-media-manager.js":
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
@@ -26480,21 +28314,26 @@ var componentInteractionsWithMediaManager = exports.componentInteractionsWithMed
 	}
 };
 
-},{}],347:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/vue/mixins/crud-ajax.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.crudAjax = undefined;
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
-var _alertsController = require('../../alerts-controller.js');
+var _alertsController = __webpack_require__("./resources/assets/js/alerts-controller.js");
 
-var _pure = require('../../functions/pure');
+var _pure = __webpack_require__("./resources/assets/js/functions/pure.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26653,15 +28492,20 @@ var crudAjax = exports.crudAjax = {
 	}
 };
 
-},{"../../alerts-controller.js":3,"../../functions/pure":7,"ramda":12}],348:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/vue/mixins/menus.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.menusMixin = exports.menusStore = undefined;
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
@@ -26719,15 +28563,20 @@ var menusMixin = exports.menusMixin = {
 	}
 };
 
-},{"ramda":12}],349:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/vue/mixins/mexico-states-and-municipalities.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.mexicoStatesAndMunicipalities = undefined;
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
@@ -26775,27 +28624,32 @@ var mexicoStatesAndMunicipalities = exports.mexicoStatesAndMunicipalities = {
 	}
 };
 
-},{"ramda":12}],350:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/vue/mixins/multilist-sortable.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.multilistSortable = undefined;
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
-var _vue = require('vue');
+var _vue = __webpack_require__("./resources/assets/js/node_modules/vue/dist/vue.common.js");
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vueSortable = require('vue-sortable');
+var _vueSortable = __webpack_require__("./resources/assets/js/node_modules/vue-sortable/vue-sortable.js");
 
 var _vueSortable2 = _interopRequireDefault(_vueSortable);
 
-var _pure = require('../../functions/pure');
+var _pure = __webpack_require__("./resources/assets/js/functions/pure.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26845,8 +28699,13 @@ var multilistSortable = exports.multilistSortable = {
 
 _vue2.default.use(_vueSortable2.default);
 
-},{"../../functions/pure":7,"ramda":12,"vue":333,"vue-sortable":332}],351:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/vue/mixins/number-filters.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
@@ -26870,27 +28729,32 @@ var numberFilters = exports.numberFilters = {
 	}
 };
 
-},{}],352:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/vue/mixins/single-image-mixin.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.singleImageMixin = undefined;
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
-var _crudAjax = require('./crud-ajax');
+var _crudAjax = __webpack_require__("./resources/assets/js/vue/mixins/crud-ajax.js");
 
-var _helpers = require('../helpers');
+var _helpers = __webpack_require__("./resources/assets/js/vue/helpers.js");
 
-var _componentInteractionsWithMediaManager = require('./component-interactions-with-media-manager.js');
+var _componentInteractionsWithMediaManager = __webpack_require__("./resources/assets/js/vue/mixins/component-interactions-with-media-manager.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Vue = require('vue');
+var Vue = __webpack_require__("./resources/assets/js/node_modules/vue/dist/vue.common.js");
 // var VueResource = Vue.use(require('vue-resource'));
 var singleImageMixin = exports.singleImageMixin = {
 	data: function data() {
@@ -26962,15 +28826,20 @@ var singleImageMixin = exports.singleImageMixin = {
 	}
 };
 
-},{"../helpers":343,"./component-interactions-with-media-manager.js":346,"./crud-ajax":347,"ramda":12,"vue":333}],353:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/vue/mixins/sortable-list-by-click.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.sortableOnClickCbs = exports.sortableListByClick = undefined;
 
-var _pure = require('../../functions/pure');
+var _pure = __webpack_require__("./resources/assets/js/functions/pure.js");
 
 var sortableListByClick = exports.sortableListByClick = {
 	data: function data() {
@@ -27010,27 +28879,32 @@ var sortableOnClickCbs = exports.sortableOnClickCbs = {
 	}
 };
 
-},{"../../functions/pure":7}],354:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/vue/mixins/sortable.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.sortable = undefined;
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
-var _vue = require('vue');
+var _vue = __webpack_require__("./resources/assets/js/node_modules/vue/dist/vue.common.js");
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vueSortable = require('vue-sortable');
+var _vueSortable = __webpack_require__("./resources/assets/js/node_modules/vue-sortable/vue-sortable.js");
 
 var _vueSortable2 = _interopRequireDefault(_vueSortable);
 
-var _pure = require('../../functions/pure');
+var _pure = __webpack_require__("./resources/assets/js/functions/pure.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27058,19 +28932,24 @@ var sortable = exports.sortable = {
 
 _vue2.default.use(_vueSortable2.default);
 
-},{"../../functions/pure":7,"ramda":12,"vue":333,"vue-sortable":332}],355:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/vue/mixins/v-for-filters.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.vForFilters = undefined;
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
-var _pure = require('../../functions/pure');
+var _pure = __webpack_require__("./resources/assets/js/functions/pure.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27102,6 +28981,30 @@ var vForFilters = exports.vForFilters = {
 	}
 };
 
-},{"../../functions/pure":7,"ramda":12}]},{},[10]);
+/***/ }),
 
-//# sourceMappingURL=admin-functions.js.map
+/***/ "./resources/assets/sass/admin.scss":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 0:
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 1:
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("./resources/assets/js/mazorca-admin.js");
+module.exports = __webpack_require__("./resources/assets/js/micorriza-admin.js");
+
+
+/***/ })
+
+/******/ });
+//# sourceMappingURL=admin-bundle.ff0501c65fe00c93ae2b.js.map

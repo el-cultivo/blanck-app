@@ -13,8 +13,12 @@
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 	<meta name="author" content="">
-
-	<link href="{{ asset('css/mazorca.css') }}" rel="stylesheet" type="text/css" />
+	
+	@if(env('DEV_CSS') == true) 
+    	<link href="{{ asset('css/mazorca.css') }}" rel="stylesheet" type="text/css" />
+	@else
+	    <link rel="stylesheet" href="{{ elixir('bundle.css') }}" rel="stylesheet" type="text/css">
+    @endif
 
 	{{-- Favicon --}}
 	@include('general.favicon')

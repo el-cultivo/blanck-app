@@ -22,9 +22,11 @@ El segundo y el tercer comando son m'as rápidos
 __Es importante notar que con estos comandos Webpack no crea ningún archivo en la carpeta `public` y todo sucede en el cache.__
 
 ### Para hacer un Build
-`npm run build:dev` Compila y guarda el archivo en `public`
+`npm run build:dev` Compila y guarda los archivos de `CSS` y `JS` en `public/build`.
 
-`npm run build:prod` Compila, minifica, realiza varias optmizaciones y guarda el archivo en `public`
+`npm run build:prod` Compila, minifica, realiza varias optmizaciones y guarda los archivos de `CSS` y `JS` en `public/build`. Este es el comando que debe de utilizarse para compilar para producción.
+
+IMPORTANTE: Estos últimos dos comandos requieren que mazroca.scss y admin.scss existan en la carpeta `assets/resources/sass/`
 
 
 ## .env
@@ -38,6 +40,10 @@ APP_NAME=
 
 #URL donde se muestra el sitio
 URL_SITE=
+
+# CSS
+# True muestra el CSS compilado por elixir/gulp. False, permite mostrar el CSS tal como queda compilado por webpack después de correr los comando `npm run build:prod` o `npm run build:dev`.
+DEV_CSS=true
 
 #DB_CONNECTION
 DB_HOST=

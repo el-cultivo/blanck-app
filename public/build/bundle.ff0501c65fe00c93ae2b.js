@@ -1,4 +1,76 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "http://localhost:8080/";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./node_modules/process/browser.js":
+/***/ (function(module, exports) {
+
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -184,8 +256,14 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],2:[function(require,module,exports){
-'use strict';
+
+/***/ }),
+
+/***/ "./resources/assets/js/cltvo/constants.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -195,19 +273,24 @@ var menu_top = exports.menu_top = $('#menuTop');
 var menu_top_height = exports.menu_top_height = menu_top.outerHeight();
 var document_click_callbacks = exports.document_click_callbacks = [];
 
-},{}],3:[function(require,module,exports){
-'use strict';
+/***/ }),
+
+/***/ "./resources/assets/js/functions/dom.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.preSelectOption = exports.ifElementExistsThenLaunch = exports.parentContainerWidth = exports.positionX = exports.fixedSidebarWidth = exports.cltvoEventsWarnings = exports.onDocumentClick = exports.documentClickHandlersLauncher = undefined;
 
-var _ramda = require('ramda');
+var _ramda = __webpack_require__("./resources/assets/js/node_modules/ramda/index.js");
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
-var _constants = require('../cltvo/constants.js');
+var _constants = __webpack_require__("./resources/assets/js/cltvo/constants.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -306,13 +389,27 @@ var preSelectOption = exports.preSelectOption = function preSelectOption(select_
 	}
 };
 
-},{"../cltvo/constants.js":2,"ramda":5}],4:[function(require,module,exports){
-(function (process){
-'use strict';
+/***/ }),
 
-var _dom = require('./functions/dom');
+/***/ "./resources/assets/js/mazorca.js":
+/***/ (function(module, exports, __webpack_require__) {
 
-var _constants = require('./cltvo/constants.js');
+"use strict";
+
+
+__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../sass/mazorca.scss\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+/***/ }),
+
+/***/ "./resources/assets/js/micorriza.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var _dom = __webpack_require__("./resources/assets/js/functions/dom.js");
+
+var _constants = __webpack_require__("./resources/assets/js/cltvo/constants.js");
 
 _constants.w.on('load', function () {
 	(0, _dom.ifElementExistsThenLaunch)([[]]);
@@ -322,263 +419,272 @@ _constants.w.on('load', function () {
 if (process.env.NODE_ENV === 'webpack') {
 	window.CLTVO_ENV = 'webpack';
 } //corre en modo webpack, necesario para hacer HMR
-if (module.hot) {
+if (false) {
 	module.hot.accept();
 } //permite hacer Hot Module Replacement
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/process/browser.js")))
 
-}).call(this,require('_process'))
-},{"./cltvo/constants.js":2,"./functions/dom":3,"_process":1}],5:[function(require,module,exports){
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
 module.exports = {
-  F: require('./src/F'),
-  T: require('./src/T'),
-  __: require('./src/__'),
-  add: require('./src/add'),
-  addIndex: require('./src/addIndex'),
-  adjust: require('./src/adjust'),
-  all: require('./src/all'),
-  allPass: require('./src/allPass'),
-  always: require('./src/always'),
-  and: require('./src/and'),
-  any: require('./src/any'),
-  anyPass: require('./src/anyPass'),
-  ap: require('./src/ap'),
-  aperture: require('./src/aperture'),
-  append: require('./src/append'),
-  apply: require('./src/apply'),
-  applySpec: require('./src/applySpec'),
-  ascend: require('./src/ascend'),
-  assoc: require('./src/assoc'),
-  assocPath: require('./src/assocPath'),
-  binary: require('./src/binary'),
-  bind: require('./src/bind'),
-  both: require('./src/both'),
-  call: require('./src/call'),
-  chain: require('./src/chain'),
-  clamp: require('./src/clamp'),
-  clone: require('./src/clone'),
-  comparator: require('./src/comparator'),
-  complement: require('./src/complement'),
-  compose: require('./src/compose'),
-  composeK: require('./src/composeK'),
-  composeP: require('./src/composeP'),
-  concat: require('./src/concat'),
-  cond: require('./src/cond'),
-  construct: require('./src/construct'),
-  constructN: require('./src/constructN'),
-  contains: require('./src/contains'),
-  converge: require('./src/converge'),
-  countBy: require('./src/countBy'),
-  curry: require('./src/curry'),
-  curryN: require('./src/curryN'),
-  dec: require('./src/dec'),
-  defaultTo: require('./src/defaultTo'),
-  descend: require('./src/descend'),
-  difference: require('./src/difference'),
-  differenceWith: require('./src/differenceWith'),
-  dissoc: require('./src/dissoc'),
-  dissocPath: require('./src/dissocPath'),
-  divide: require('./src/divide'),
-  drop: require('./src/drop'),
-  dropLast: require('./src/dropLast'),
-  dropLastWhile: require('./src/dropLastWhile'),
-  dropRepeats: require('./src/dropRepeats'),
-  dropRepeatsWith: require('./src/dropRepeatsWith'),
-  dropWhile: require('./src/dropWhile'),
-  either: require('./src/either'),
-  empty: require('./src/empty'),
-  endsWith: require('./src/endsWith'),
-  eqBy: require('./src/eqBy'),
-  eqProps: require('./src/eqProps'),
-  equals: require('./src/equals'),
-  evolve: require('./src/evolve'),
-  filter: require('./src/filter'),
-  find: require('./src/find'),
-  findIndex: require('./src/findIndex'),
-  findLast: require('./src/findLast'),
-  findLastIndex: require('./src/findLastIndex'),
-  flatten: require('./src/flatten'),
-  flip: require('./src/flip'),
-  forEach: require('./src/forEach'),
-  forEachObjIndexed: require('./src/forEachObjIndexed'),
-  fromPairs: require('./src/fromPairs'),
-  groupBy: require('./src/groupBy'),
-  groupWith: require('./src/groupWith'),
-  gt: require('./src/gt'),
-  gte: require('./src/gte'),
-  has: require('./src/has'),
-  hasIn: require('./src/hasIn'),
-  head: require('./src/head'),
-  identical: require('./src/identical'),
-  identity: require('./src/identity'),
-  ifElse: require('./src/ifElse'),
-  inc: require('./src/inc'),
-  indexBy: require('./src/indexBy'),
-  indexOf: require('./src/indexOf'),
-  init: require('./src/init'),
-  innerJoin: require('./src/innerJoin'),
-  insert: require('./src/insert'),
-  insertAll: require('./src/insertAll'),
-  intersection: require('./src/intersection'),
-  intersectionWith: require('./src/intersectionWith'),
-  intersperse: require('./src/intersperse'),
-  into: require('./src/into'),
-  invert: require('./src/invert'),
-  invertObj: require('./src/invertObj'),
-  invoker: require('./src/invoker'),
-  is: require('./src/is'),
-  isEmpty: require('./src/isEmpty'),
-  isNil: require('./src/isNil'),
-  join: require('./src/join'),
-  juxt: require('./src/juxt'),
-  keys: require('./src/keys'),
-  keysIn: require('./src/keysIn'),
-  last: require('./src/last'),
-  lastIndexOf: require('./src/lastIndexOf'),
-  length: require('./src/length'),
-  lens: require('./src/lens'),
-  lensIndex: require('./src/lensIndex'),
-  lensPath: require('./src/lensPath'),
-  lensProp: require('./src/lensProp'),
-  lift: require('./src/lift'),
-  liftN: require('./src/liftN'),
-  lt: require('./src/lt'),
-  lte: require('./src/lte'),
-  map: require('./src/map'),
-  mapAccum: require('./src/mapAccum'),
-  mapAccumRight: require('./src/mapAccumRight'),
-  mapObjIndexed: require('./src/mapObjIndexed'),
-  match: require('./src/match'),
-  mathMod: require('./src/mathMod'),
-  max: require('./src/max'),
-  maxBy: require('./src/maxBy'),
-  mean: require('./src/mean'),
-  median: require('./src/median'),
-  memoize: require('./src/memoize'),
-  memoizeWith: require('./src/memoizeWith'),
-  merge: require('./src/merge'),
-  mergeAll: require('./src/mergeAll'),
-  mergeDeepLeft: require('./src/mergeDeepLeft'),
-  mergeDeepRight: require('./src/mergeDeepRight'),
-  mergeDeepWith: require('./src/mergeDeepWith'),
-  mergeDeepWithKey: require('./src/mergeDeepWithKey'),
-  mergeWith: require('./src/mergeWith'),
-  mergeWithKey: require('./src/mergeWithKey'),
-  min: require('./src/min'),
-  minBy: require('./src/minBy'),
-  modulo: require('./src/modulo'),
-  multiply: require('./src/multiply'),
-  nAry: require('./src/nAry'),
-  negate: require('./src/negate'),
-  none: require('./src/none'),
-  not: require('./src/not'),
-  nth: require('./src/nth'),
-  nthArg: require('./src/nthArg'),
-  o: require('./src/o'),
-  objOf: require('./src/objOf'),
-  of: require('./src/of'),
-  omit: require('./src/omit'),
-  once: require('./src/once'),
-  or: require('./src/or'),
-  over: require('./src/over'),
-  pair: require('./src/pair'),
-  partial: require('./src/partial'),
-  partialRight: require('./src/partialRight'),
-  partition: require('./src/partition'),
-  path: require('./src/path'),
-  pathEq: require('./src/pathEq'),
-  pathOr: require('./src/pathOr'),
-  pathSatisfies: require('./src/pathSatisfies'),
-  pick: require('./src/pick'),
-  pickAll: require('./src/pickAll'),
-  pickBy: require('./src/pickBy'),
-  pipe: require('./src/pipe'),
-  pipeK: require('./src/pipeK'),
-  pipeP: require('./src/pipeP'),
-  pluck: require('./src/pluck'),
-  prepend: require('./src/prepend'),
-  product: require('./src/product'),
-  project: require('./src/project'),
-  prop: require('./src/prop'),
-  propEq: require('./src/propEq'),
-  propIs: require('./src/propIs'),
-  propOr: require('./src/propOr'),
-  propSatisfies: require('./src/propSatisfies'),
-  props: require('./src/props'),
-  range: require('./src/range'),
-  reduce: require('./src/reduce'),
-  reduceBy: require('./src/reduceBy'),
-  reduceRight: require('./src/reduceRight'),
-  reduceWhile: require('./src/reduceWhile'),
-  reduced: require('./src/reduced'),
-  reject: require('./src/reject'),
-  remove: require('./src/remove'),
-  repeat: require('./src/repeat'),
-  replace: require('./src/replace'),
-  reverse: require('./src/reverse'),
-  scan: require('./src/scan'),
-  sequence: require('./src/sequence'),
-  set: require('./src/set'),
-  slice: require('./src/slice'),
-  sort: require('./src/sort'),
-  sortBy: require('./src/sortBy'),
-  sortWith: require('./src/sortWith'),
-  split: require('./src/split'),
-  splitAt: require('./src/splitAt'),
-  splitEvery: require('./src/splitEvery'),
-  splitWhen: require('./src/splitWhen'),
-  startsWith: require('./src/startsWith'),
-  subtract: require('./src/subtract'),
-  sum: require('./src/sum'),
-  symmetricDifference: require('./src/symmetricDifference'),
-  symmetricDifferenceWith: require('./src/symmetricDifferenceWith'),
-  tail: require('./src/tail'),
-  take: require('./src/take'),
-  takeLast: require('./src/takeLast'),
-  takeLastWhile: require('./src/takeLastWhile'),
-  takeWhile: require('./src/takeWhile'),
-  tap: require('./src/tap'),
-  test: require('./src/test'),
-  times: require('./src/times'),
-  toLower: require('./src/toLower'),
-  toPairs: require('./src/toPairs'),
-  toPairsIn: require('./src/toPairsIn'),
-  toString: require('./src/toString'),
-  toUpper: require('./src/toUpper'),
-  transduce: require('./src/transduce'),
-  transpose: require('./src/transpose'),
-  traverse: require('./src/traverse'),
-  trim: require('./src/trim'),
-  tryCatch: require('./src/tryCatch'),
-  type: require('./src/type'),
-  unapply: require('./src/unapply'),
-  unary: require('./src/unary'),
-  uncurryN: require('./src/uncurryN'),
-  unfold: require('./src/unfold'),
-  union: require('./src/union'),
-  unionWith: require('./src/unionWith'),
-  uniq: require('./src/uniq'),
-  uniqBy: require('./src/uniqBy'),
-  uniqWith: require('./src/uniqWith'),
-  unless: require('./src/unless'),
-  unnest: require('./src/unnest'),
-  until: require('./src/until'),
-  update: require('./src/update'),
-  useWith: require('./src/useWith'),
-  values: require('./src/values'),
-  valuesIn: require('./src/valuesIn'),
-  view: require('./src/view'),
-  when: require('./src/when'),
-  where: require('./src/where'),
-  whereEq: require('./src/whereEq'),
-  without: require('./src/without'),
-  xprod: require('./src/xprod'),
-  zip: require('./src/zip'),
-  zipObj: require('./src/zipObj'),
-  zipWith: require('./src/zipWith')
+  F: __webpack_require__("./resources/assets/js/node_modules/ramda/src/F.js"),
+  T: __webpack_require__("./resources/assets/js/node_modules/ramda/src/T.js"),
+  __: __webpack_require__("./resources/assets/js/node_modules/ramda/src/__.js"),
+  add: __webpack_require__("./resources/assets/js/node_modules/ramda/src/add.js"),
+  addIndex: __webpack_require__("./resources/assets/js/node_modules/ramda/src/addIndex.js"),
+  adjust: __webpack_require__("./resources/assets/js/node_modules/ramda/src/adjust.js"),
+  all: __webpack_require__("./resources/assets/js/node_modules/ramda/src/all.js"),
+  allPass: __webpack_require__("./resources/assets/js/node_modules/ramda/src/allPass.js"),
+  always: __webpack_require__("./resources/assets/js/node_modules/ramda/src/always.js"),
+  and: __webpack_require__("./resources/assets/js/node_modules/ramda/src/and.js"),
+  any: __webpack_require__("./resources/assets/js/node_modules/ramda/src/any.js"),
+  anyPass: __webpack_require__("./resources/assets/js/node_modules/ramda/src/anyPass.js"),
+  ap: __webpack_require__("./resources/assets/js/node_modules/ramda/src/ap.js"),
+  aperture: __webpack_require__("./resources/assets/js/node_modules/ramda/src/aperture.js"),
+  append: __webpack_require__("./resources/assets/js/node_modules/ramda/src/append.js"),
+  apply: __webpack_require__("./resources/assets/js/node_modules/ramda/src/apply.js"),
+  applySpec: __webpack_require__("./resources/assets/js/node_modules/ramda/src/applySpec.js"),
+  ascend: __webpack_require__("./resources/assets/js/node_modules/ramda/src/ascend.js"),
+  assoc: __webpack_require__("./resources/assets/js/node_modules/ramda/src/assoc.js"),
+  assocPath: __webpack_require__("./resources/assets/js/node_modules/ramda/src/assocPath.js"),
+  binary: __webpack_require__("./resources/assets/js/node_modules/ramda/src/binary.js"),
+  bind: __webpack_require__("./resources/assets/js/node_modules/ramda/src/bind.js"),
+  both: __webpack_require__("./resources/assets/js/node_modules/ramda/src/both.js"),
+  call: __webpack_require__("./resources/assets/js/node_modules/ramda/src/call.js"),
+  chain: __webpack_require__("./resources/assets/js/node_modules/ramda/src/chain.js"),
+  clamp: __webpack_require__("./resources/assets/js/node_modules/ramda/src/clamp.js"),
+  clone: __webpack_require__("./resources/assets/js/node_modules/ramda/src/clone.js"),
+  comparator: __webpack_require__("./resources/assets/js/node_modules/ramda/src/comparator.js"),
+  complement: __webpack_require__("./resources/assets/js/node_modules/ramda/src/complement.js"),
+  compose: __webpack_require__("./resources/assets/js/node_modules/ramda/src/compose.js"),
+  composeK: __webpack_require__("./resources/assets/js/node_modules/ramda/src/composeK.js"),
+  composeP: __webpack_require__("./resources/assets/js/node_modules/ramda/src/composeP.js"),
+  concat: __webpack_require__("./resources/assets/js/node_modules/ramda/src/concat.js"),
+  cond: __webpack_require__("./resources/assets/js/node_modules/ramda/src/cond.js"),
+  construct: __webpack_require__("./resources/assets/js/node_modules/ramda/src/construct.js"),
+  constructN: __webpack_require__("./resources/assets/js/node_modules/ramda/src/constructN.js"),
+  contains: __webpack_require__("./resources/assets/js/node_modules/ramda/src/contains.js"),
+  converge: __webpack_require__("./resources/assets/js/node_modules/ramda/src/converge.js"),
+  countBy: __webpack_require__("./resources/assets/js/node_modules/ramda/src/countBy.js"),
+  curry: __webpack_require__("./resources/assets/js/node_modules/ramda/src/curry.js"),
+  curryN: __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js"),
+  dec: __webpack_require__("./resources/assets/js/node_modules/ramda/src/dec.js"),
+  defaultTo: __webpack_require__("./resources/assets/js/node_modules/ramda/src/defaultTo.js"),
+  descend: __webpack_require__("./resources/assets/js/node_modules/ramda/src/descend.js"),
+  difference: __webpack_require__("./resources/assets/js/node_modules/ramda/src/difference.js"),
+  differenceWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/differenceWith.js"),
+  dissoc: __webpack_require__("./resources/assets/js/node_modules/ramda/src/dissoc.js"),
+  dissocPath: __webpack_require__("./resources/assets/js/node_modules/ramda/src/dissocPath.js"),
+  divide: __webpack_require__("./resources/assets/js/node_modules/ramda/src/divide.js"),
+  drop: __webpack_require__("./resources/assets/js/node_modules/ramda/src/drop.js"),
+  dropLast: __webpack_require__("./resources/assets/js/node_modules/ramda/src/dropLast.js"),
+  dropLastWhile: __webpack_require__("./resources/assets/js/node_modules/ramda/src/dropLastWhile.js"),
+  dropRepeats: __webpack_require__("./resources/assets/js/node_modules/ramda/src/dropRepeats.js"),
+  dropRepeatsWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/dropRepeatsWith.js"),
+  dropWhile: __webpack_require__("./resources/assets/js/node_modules/ramda/src/dropWhile.js"),
+  either: __webpack_require__("./resources/assets/js/node_modules/ramda/src/either.js"),
+  empty: __webpack_require__("./resources/assets/js/node_modules/ramda/src/empty.js"),
+  endsWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/endsWith.js"),
+  eqBy: __webpack_require__("./resources/assets/js/node_modules/ramda/src/eqBy.js"),
+  eqProps: __webpack_require__("./resources/assets/js/node_modules/ramda/src/eqProps.js"),
+  equals: __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js"),
+  evolve: __webpack_require__("./resources/assets/js/node_modules/ramda/src/evolve.js"),
+  filter: __webpack_require__("./resources/assets/js/node_modules/ramda/src/filter.js"),
+  find: __webpack_require__("./resources/assets/js/node_modules/ramda/src/find.js"),
+  findIndex: __webpack_require__("./resources/assets/js/node_modules/ramda/src/findIndex.js"),
+  findLast: __webpack_require__("./resources/assets/js/node_modules/ramda/src/findLast.js"),
+  findLastIndex: __webpack_require__("./resources/assets/js/node_modules/ramda/src/findLastIndex.js"),
+  flatten: __webpack_require__("./resources/assets/js/node_modules/ramda/src/flatten.js"),
+  flip: __webpack_require__("./resources/assets/js/node_modules/ramda/src/flip.js"),
+  forEach: __webpack_require__("./resources/assets/js/node_modules/ramda/src/forEach.js"),
+  forEachObjIndexed: __webpack_require__("./resources/assets/js/node_modules/ramda/src/forEachObjIndexed.js"),
+  fromPairs: __webpack_require__("./resources/assets/js/node_modules/ramda/src/fromPairs.js"),
+  groupBy: __webpack_require__("./resources/assets/js/node_modules/ramda/src/groupBy.js"),
+  groupWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/groupWith.js"),
+  gt: __webpack_require__("./resources/assets/js/node_modules/ramda/src/gt.js"),
+  gte: __webpack_require__("./resources/assets/js/node_modules/ramda/src/gte.js"),
+  has: __webpack_require__("./resources/assets/js/node_modules/ramda/src/has.js"),
+  hasIn: __webpack_require__("./resources/assets/js/node_modules/ramda/src/hasIn.js"),
+  head: __webpack_require__("./resources/assets/js/node_modules/ramda/src/head.js"),
+  identical: __webpack_require__("./resources/assets/js/node_modules/ramda/src/identical.js"),
+  identity: __webpack_require__("./resources/assets/js/node_modules/ramda/src/identity.js"),
+  ifElse: __webpack_require__("./resources/assets/js/node_modules/ramda/src/ifElse.js"),
+  inc: __webpack_require__("./resources/assets/js/node_modules/ramda/src/inc.js"),
+  indexBy: __webpack_require__("./resources/assets/js/node_modules/ramda/src/indexBy.js"),
+  indexOf: __webpack_require__("./resources/assets/js/node_modules/ramda/src/indexOf.js"),
+  init: __webpack_require__("./resources/assets/js/node_modules/ramda/src/init.js"),
+  innerJoin: __webpack_require__("./resources/assets/js/node_modules/ramda/src/innerJoin.js"),
+  insert: __webpack_require__("./resources/assets/js/node_modules/ramda/src/insert.js"),
+  insertAll: __webpack_require__("./resources/assets/js/node_modules/ramda/src/insertAll.js"),
+  intersection: __webpack_require__("./resources/assets/js/node_modules/ramda/src/intersection.js"),
+  intersectionWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/intersectionWith.js"),
+  intersperse: __webpack_require__("./resources/assets/js/node_modules/ramda/src/intersperse.js"),
+  into: __webpack_require__("./resources/assets/js/node_modules/ramda/src/into.js"),
+  invert: __webpack_require__("./resources/assets/js/node_modules/ramda/src/invert.js"),
+  invertObj: __webpack_require__("./resources/assets/js/node_modules/ramda/src/invertObj.js"),
+  invoker: __webpack_require__("./resources/assets/js/node_modules/ramda/src/invoker.js"),
+  is: __webpack_require__("./resources/assets/js/node_modules/ramda/src/is.js"),
+  isEmpty: __webpack_require__("./resources/assets/js/node_modules/ramda/src/isEmpty.js"),
+  isNil: __webpack_require__("./resources/assets/js/node_modules/ramda/src/isNil.js"),
+  join: __webpack_require__("./resources/assets/js/node_modules/ramda/src/join.js"),
+  juxt: __webpack_require__("./resources/assets/js/node_modules/ramda/src/juxt.js"),
+  keys: __webpack_require__("./resources/assets/js/node_modules/ramda/src/keys.js"),
+  keysIn: __webpack_require__("./resources/assets/js/node_modules/ramda/src/keysIn.js"),
+  last: __webpack_require__("./resources/assets/js/node_modules/ramda/src/last.js"),
+  lastIndexOf: __webpack_require__("./resources/assets/js/node_modules/ramda/src/lastIndexOf.js"),
+  length: __webpack_require__("./resources/assets/js/node_modules/ramda/src/length.js"),
+  lens: __webpack_require__("./resources/assets/js/node_modules/ramda/src/lens.js"),
+  lensIndex: __webpack_require__("./resources/assets/js/node_modules/ramda/src/lensIndex.js"),
+  lensPath: __webpack_require__("./resources/assets/js/node_modules/ramda/src/lensPath.js"),
+  lensProp: __webpack_require__("./resources/assets/js/node_modules/ramda/src/lensProp.js"),
+  lift: __webpack_require__("./resources/assets/js/node_modules/ramda/src/lift.js"),
+  liftN: __webpack_require__("./resources/assets/js/node_modules/ramda/src/liftN.js"),
+  lt: __webpack_require__("./resources/assets/js/node_modules/ramda/src/lt.js"),
+  lte: __webpack_require__("./resources/assets/js/node_modules/ramda/src/lte.js"),
+  map: __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js"),
+  mapAccum: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mapAccum.js"),
+  mapAccumRight: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mapAccumRight.js"),
+  mapObjIndexed: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mapObjIndexed.js"),
+  match: __webpack_require__("./resources/assets/js/node_modules/ramda/src/match.js"),
+  mathMod: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mathMod.js"),
+  max: __webpack_require__("./resources/assets/js/node_modules/ramda/src/max.js"),
+  maxBy: __webpack_require__("./resources/assets/js/node_modules/ramda/src/maxBy.js"),
+  mean: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mean.js"),
+  median: __webpack_require__("./resources/assets/js/node_modules/ramda/src/median.js"),
+  memoize: __webpack_require__("./resources/assets/js/node_modules/ramda/src/memoize.js"),
+  memoizeWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/memoizeWith.js"),
+  merge: __webpack_require__("./resources/assets/js/node_modules/ramda/src/merge.js"),
+  mergeAll: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeAll.js"),
+  mergeDeepLeft: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeDeepLeft.js"),
+  mergeDeepRight: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeDeepRight.js"),
+  mergeDeepWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeDeepWith.js"),
+  mergeDeepWithKey: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeDeepWithKey.js"),
+  mergeWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeWith.js"),
+  mergeWithKey: __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeWithKey.js"),
+  min: __webpack_require__("./resources/assets/js/node_modules/ramda/src/min.js"),
+  minBy: __webpack_require__("./resources/assets/js/node_modules/ramda/src/minBy.js"),
+  modulo: __webpack_require__("./resources/assets/js/node_modules/ramda/src/modulo.js"),
+  multiply: __webpack_require__("./resources/assets/js/node_modules/ramda/src/multiply.js"),
+  nAry: __webpack_require__("./resources/assets/js/node_modules/ramda/src/nAry.js"),
+  negate: __webpack_require__("./resources/assets/js/node_modules/ramda/src/negate.js"),
+  none: __webpack_require__("./resources/assets/js/node_modules/ramda/src/none.js"),
+  not: __webpack_require__("./resources/assets/js/node_modules/ramda/src/not.js"),
+  nth: __webpack_require__("./resources/assets/js/node_modules/ramda/src/nth.js"),
+  nthArg: __webpack_require__("./resources/assets/js/node_modules/ramda/src/nthArg.js"),
+  o: __webpack_require__("./resources/assets/js/node_modules/ramda/src/o.js"),
+  objOf: __webpack_require__("./resources/assets/js/node_modules/ramda/src/objOf.js"),
+  of: __webpack_require__("./resources/assets/js/node_modules/ramda/src/of.js"),
+  omit: __webpack_require__("./resources/assets/js/node_modules/ramda/src/omit.js"),
+  once: __webpack_require__("./resources/assets/js/node_modules/ramda/src/once.js"),
+  or: __webpack_require__("./resources/assets/js/node_modules/ramda/src/or.js"),
+  over: __webpack_require__("./resources/assets/js/node_modules/ramda/src/over.js"),
+  pair: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pair.js"),
+  partial: __webpack_require__("./resources/assets/js/node_modules/ramda/src/partial.js"),
+  partialRight: __webpack_require__("./resources/assets/js/node_modules/ramda/src/partialRight.js"),
+  partition: __webpack_require__("./resources/assets/js/node_modules/ramda/src/partition.js"),
+  path: __webpack_require__("./resources/assets/js/node_modules/ramda/src/path.js"),
+  pathEq: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pathEq.js"),
+  pathOr: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pathOr.js"),
+  pathSatisfies: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pathSatisfies.js"),
+  pick: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pick.js"),
+  pickAll: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pickAll.js"),
+  pickBy: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pickBy.js"),
+  pipe: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pipe.js"),
+  pipeK: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pipeK.js"),
+  pipeP: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pipeP.js"),
+  pluck: __webpack_require__("./resources/assets/js/node_modules/ramda/src/pluck.js"),
+  prepend: __webpack_require__("./resources/assets/js/node_modules/ramda/src/prepend.js"),
+  product: __webpack_require__("./resources/assets/js/node_modules/ramda/src/product.js"),
+  project: __webpack_require__("./resources/assets/js/node_modules/ramda/src/project.js"),
+  prop: __webpack_require__("./resources/assets/js/node_modules/ramda/src/prop.js"),
+  propEq: __webpack_require__("./resources/assets/js/node_modules/ramda/src/propEq.js"),
+  propIs: __webpack_require__("./resources/assets/js/node_modules/ramda/src/propIs.js"),
+  propOr: __webpack_require__("./resources/assets/js/node_modules/ramda/src/propOr.js"),
+  propSatisfies: __webpack_require__("./resources/assets/js/node_modules/ramda/src/propSatisfies.js"),
+  props: __webpack_require__("./resources/assets/js/node_modules/ramda/src/props.js"),
+  range: __webpack_require__("./resources/assets/js/node_modules/ramda/src/range.js"),
+  reduce: __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduce.js"),
+  reduceBy: __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduceBy.js"),
+  reduceRight: __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduceRight.js"),
+  reduceWhile: __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduceWhile.js"),
+  reduced: __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduced.js"),
+  reject: __webpack_require__("./resources/assets/js/node_modules/ramda/src/reject.js"),
+  remove: __webpack_require__("./resources/assets/js/node_modules/ramda/src/remove.js"),
+  repeat: __webpack_require__("./resources/assets/js/node_modules/ramda/src/repeat.js"),
+  replace: __webpack_require__("./resources/assets/js/node_modules/ramda/src/replace.js"),
+  reverse: __webpack_require__("./resources/assets/js/node_modules/ramda/src/reverse.js"),
+  scan: __webpack_require__("./resources/assets/js/node_modules/ramda/src/scan.js"),
+  sequence: __webpack_require__("./resources/assets/js/node_modules/ramda/src/sequence.js"),
+  set: __webpack_require__("./resources/assets/js/node_modules/ramda/src/set.js"),
+  slice: __webpack_require__("./resources/assets/js/node_modules/ramda/src/slice.js"),
+  sort: __webpack_require__("./resources/assets/js/node_modules/ramda/src/sort.js"),
+  sortBy: __webpack_require__("./resources/assets/js/node_modules/ramda/src/sortBy.js"),
+  sortWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/sortWith.js"),
+  split: __webpack_require__("./resources/assets/js/node_modules/ramda/src/split.js"),
+  splitAt: __webpack_require__("./resources/assets/js/node_modules/ramda/src/splitAt.js"),
+  splitEvery: __webpack_require__("./resources/assets/js/node_modules/ramda/src/splitEvery.js"),
+  splitWhen: __webpack_require__("./resources/assets/js/node_modules/ramda/src/splitWhen.js"),
+  startsWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/startsWith.js"),
+  subtract: __webpack_require__("./resources/assets/js/node_modules/ramda/src/subtract.js"),
+  sum: __webpack_require__("./resources/assets/js/node_modules/ramda/src/sum.js"),
+  symmetricDifference: __webpack_require__("./resources/assets/js/node_modules/ramda/src/symmetricDifference.js"),
+  symmetricDifferenceWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/symmetricDifferenceWith.js"),
+  tail: __webpack_require__("./resources/assets/js/node_modules/ramda/src/tail.js"),
+  take: __webpack_require__("./resources/assets/js/node_modules/ramda/src/take.js"),
+  takeLast: __webpack_require__("./resources/assets/js/node_modules/ramda/src/takeLast.js"),
+  takeLastWhile: __webpack_require__("./resources/assets/js/node_modules/ramda/src/takeLastWhile.js"),
+  takeWhile: __webpack_require__("./resources/assets/js/node_modules/ramda/src/takeWhile.js"),
+  tap: __webpack_require__("./resources/assets/js/node_modules/ramda/src/tap.js"),
+  test: __webpack_require__("./resources/assets/js/node_modules/ramda/src/test.js"),
+  times: __webpack_require__("./resources/assets/js/node_modules/ramda/src/times.js"),
+  toLower: __webpack_require__("./resources/assets/js/node_modules/ramda/src/toLower.js"),
+  toPairs: __webpack_require__("./resources/assets/js/node_modules/ramda/src/toPairs.js"),
+  toPairsIn: __webpack_require__("./resources/assets/js/node_modules/ramda/src/toPairsIn.js"),
+  toString: __webpack_require__("./resources/assets/js/node_modules/ramda/src/toString.js"),
+  toUpper: __webpack_require__("./resources/assets/js/node_modules/ramda/src/toUpper.js"),
+  transduce: __webpack_require__("./resources/assets/js/node_modules/ramda/src/transduce.js"),
+  transpose: __webpack_require__("./resources/assets/js/node_modules/ramda/src/transpose.js"),
+  traverse: __webpack_require__("./resources/assets/js/node_modules/ramda/src/traverse.js"),
+  trim: __webpack_require__("./resources/assets/js/node_modules/ramda/src/trim.js"),
+  tryCatch: __webpack_require__("./resources/assets/js/node_modules/ramda/src/tryCatch.js"),
+  type: __webpack_require__("./resources/assets/js/node_modules/ramda/src/type.js"),
+  unapply: __webpack_require__("./resources/assets/js/node_modules/ramda/src/unapply.js"),
+  unary: __webpack_require__("./resources/assets/js/node_modules/ramda/src/unary.js"),
+  uncurryN: __webpack_require__("./resources/assets/js/node_modules/ramda/src/uncurryN.js"),
+  unfold: __webpack_require__("./resources/assets/js/node_modules/ramda/src/unfold.js"),
+  union: __webpack_require__("./resources/assets/js/node_modules/ramda/src/union.js"),
+  unionWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/unionWith.js"),
+  uniq: __webpack_require__("./resources/assets/js/node_modules/ramda/src/uniq.js"),
+  uniqBy: __webpack_require__("./resources/assets/js/node_modules/ramda/src/uniqBy.js"),
+  uniqWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/uniqWith.js"),
+  unless: __webpack_require__("./resources/assets/js/node_modules/ramda/src/unless.js"),
+  unnest: __webpack_require__("./resources/assets/js/node_modules/ramda/src/unnest.js"),
+  until: __webpack_require__("./resources/assets/js/node_modules/ramda/src/until.js"),
+  update: __webpack_require__("./resources/assets/js/node_modules/ramda/src/update.js"),
+  useWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/useWith.js"),
+  values: __webpack_require__("./resources/assets/js/node_modules/ramda/src/values.js"),
+  valuesIn: __webpack_require__("./resources/assets/js/node_modules/ramda/src/valuesIn.js"),
+  view: __webpack_require__("./resources/assets/js/node_modules/ramda/src/view.js"),
+  when: __webpack_require__("./resources/assets/js/node_modules/ramda/src/when.js"),
+  where: __webpack_require__("./resources/assets/js/node_modules/ramda/src/where.js"),
+  whereEq: __webpack_require__("./resources/assets/js/node_modules/ramda/src/whereEq.js"),
+  without: __webpack_require__("./resources/assets/js/node_modules/ramda/src/without.js"),
+  xprod: __webpack_require__("./resources/assets/js/node_modules/ramda/src/xprod.js"),
+  zip: __webpack_require__("./resources/assets/js/node_modules/ramda/src/zip.js"),
+  zipObj: __webpack_require__("./resources/assets/js/node_modules/ramda/src/zipObj.js"),
+  zipWith: __webpack_require__("./resources/assets/js/node_modules/ramda/src/zipWith.js")
 };
 
-},{"./src/F":6,"./src/T":7,"./src/__":8,"./src/add":9,"./src/addIndex":10,"./src/adjust":11,"./src/all":12,"./src/allPass":13,"./src/always":14,"./src/and":15,"./src/any":16,"./src/anyPass":17,"./src/ap":18,"./src/aperture":19,"./src/append":20,"./src/apply":21,"./src/applySpec":22,"./src/ascend":23,"./src/assoc":24,"./src/assocPath":25,"./src/binary":26,"./src/bind":27,"./src/both":28,"./src/call":29,"./src/chain":30,"./src/clamp":31,"./src/clone":32,"./src/comparator":33,"./src/complement":34,"./src/compose":35,"./src/composeK":36,"./src/composeP":37,"./src/concat":38,"./src/cond":39,"./src/construct":40,"./src/constructN":41,"./src/contains":42,"./src/converge":43,"./src/countBy":44,"./src/curry":45,"./src/curryN":46,"./src/dec":47,"./src/defaultTo":48,"./src/descend":49,"./src/difference":50,"./src/differenceWith":51,"./src/dissoc":52,"./src/dissocPath":53,"./src/divide":54,"./src/drop":55,"./src/dropLast":56,"./src/dropLastWhile":57,"./src/dropRepeats":58,"./src/dropRepeatsWith":59,"./src/dropWhile":60,"./src/either":61,"./src/empty":62,"./src/endsWith":63,"./src/eqBy":64,"./src/eqProps":65,"./src/equals":66,"./src/evolve":67,"./src/filter":68,"./src/find":69,"./src/findIndex":70,"./src/findLast":71,"./src/findLastIndex":72,"./src/flatten":73,"./src/flip":74,"./src/forEach":75,"./src/forEachObjIndexed":76,"./src/fromPairs":77,"./src/groupBy":78,"./src/groupWith":79,"./src/gt":80,"./src/gte":81,"./src/has":82,"./src/hasIn":83,"./src/head":84,"./src/identical":85,"./src/identity":86,"./src/ifElse":87,"./src/inc":88,"./src/indexBy":89,"./src/indexOf":90,"./src/init":91,"./src/innerJoin":92,"./src/insert":93,"./src/insertAll":94,"./src/intersection":166,"./src/intersectionWith":167,"./src/intersperse":168,"./src/into":169,"./src/invert":170,"./src/invertObj":171,"./src/invoker":172,"./src/is":173,"./src/isEmpty":174,"./src/isNil":175,"./src/join":176,"./src/juxt":177,"./src/keys":178,"./src/keysIn":179,"./src/last":180,"./src/lastIndexOf":181,"./src/length":182,"./src/lens":183,"./src/lensIndex":184,"./src/lensPath":185,"./src/lensProp":186,"./src/lift":187,"./src/liftN":188,"./src/lt":189,"./src/lte":190,"./src/map":191,"./src/mapAccum":192,"./src/mapAccumRight":193,"./src/mapObjIndexed":194,"./src/match":195,"./src/mathMod":196,"./src/max":197,"./src/maxBy":198,"./src/mean":199,"./src/median":200,"./src/memoize":201,"./src/memoizeWith":202,"./src/merge":203,"./src/mergeAll":204,"./src/mergeDeepLeft":205,"./src/mergeDeepRight":206,"./src/mergeDeepWith":207,"./src/mergeDeepWithKey":208,"./src/mergeWith":209,"./src/mergeWithKey":210,"./src/min":211,"./src/minBy":212,"./src/modulo":213,"./src/multiply":214,"./src/nAry":215,"./src/negate":216,"./src/none":217,"./src/not":218,"./src/nth":219,"./src/nthArg":220,"./src/o":221,"./src/objOf":222,"./src/of":223,"./src/omit":224,"./src/once":225,"./src/or":226,"./src/over":227,"./src/pair":228,"./src/partial":229,"./src/partialRight":230,"./src/partition":231,"./src/path":232,"./src/pathEq":233,"./src/pathOr":234,"./src/pathSatisfies":235,"./src/pick":236,"./src/pickAll":237,"./src/pickBy":238,"./src/pipe":239,"./src/pipeK":240,"./src/pipeP":241,"./src/pluck":242,"./src/prepend":243,"./src/product":244,"./src/project":245,"./src/prop":246,"./src/propEq":247,"./src/propIs":248,"./src/propOr":249,"./src/propSatisfies":250,"./src/props":251,"./src/range":252,"./src/reduce":253,"./src/reduceBy":254,"./src/reduceRight":255,"./src/reduceWhile":256,"./src/reduced":257,"./src/reject":258,"./src/remove":259,"./src/repeat":260,"./src/replace":261,"./src/reverse":262,"./src/scan":263,"./src/sequence":264,"./src/set":265,"./src/slice":266,"./src/sort":267,"./src/sortBy":268,"./src/sortWith":269,"./src/split":270,"./src/splitAt":271,"./src/splitEvery":272,"./src/splitWhen":273,"./src/startsWith":274,"./src/subtract":275,"./src/sum":276,"./src/symmetricDifference":277,"./src/symmetricDifferenceWith":278,"./src/tail":279,"./src/take":280,"./src/takeLast":281,"./src/takeLastWhile":282,"./src/takeWhile":283,"./src/tap":284,"./src/test":285,"./src/times":286,"./src/toLower":287,"./src/toPairs":288,"./src/toPairsIn":289,"./src/toString":290,"./src/toUpper":291,"./src/transduce":292,"./src/transpose":293,"./src/traverse":294,"./src/trim":295,"./src/tryCatch":296,"./src/type":297,"./src/unapply":298,"./src/unary":299,"./src/uncurryN":300,"./src/unfold":301,"./src/union":302,"./src/unionWith":303,"./src/uniq":304,"./src/uniqBy":305,"./src/uniqWith":306,"./src/unless":307,"./src/unnest":308,"./src/until":309,"./src/update":310,"./src/useWith":311,"./src/values":312,"./src/valuesIn":313,"./src/view":314,"./src/when":315,"./src/where":316,"./src/whereEq":317,"./src/without":318,"./src/xprod":319,"./src/zip":320,"./src/zipObj":321,"./src/zipWith":322}],6:[function(require,module,exports){
-var always = require('./always');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/F.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var always = __webpack_require__("./resources/assets/js/node_modules/ramda/src/always.js");
 
 
 /**
@@ -598,8 +704,13 @@ var always = require('./always');
  */
 module.exports = always(false);
 
-},{"./always":14}],7:[function(require,module,exports){
-var always = require('./always');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/T.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var always = __webpack_require__("./resources/assets/js/node_modules/ramda/src/always.js");
 
 
 /**
@@ -619,7 +730,12 @@ var always = require('./always');
  */
 module.exports = always(true);
 
-},{"./always":14}],8:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/__.js":
+/***/ (function(module, exports) {
+
 /**
  * A special placeholder value used to specify "gaps" within curried functions,
  * allowing partial application of any combination of arguments, regardless of
@@ -648,8 +764,13 @@ module.exports = always(true);
  */
 module.exports = {'@@functional/placeholder': true};
 
-},{}],9:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/add.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -673,10 +794,15 @@ module.exports = _curry2(function add(a, b) {
   return Number(a) + Number(b);
 });
 
-},{"./internal/_curry2":109}],10:[function(require,module,exports){
-var _concat = require('./internal/_concat');
-var _curry1 = require('./internal/_curry1');
-var curryN = require('./curryN');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/addIndex.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
 
 
 /**
@@ -718,9 +844,14 @@ module.exports = _curry1(function addIndex(fn) {
   });
 });
 
-},{"./curryN":46,"./internal/_concat":104,"./internal/_curry1":108}],11:[function(require,module,exports){
-var _concat = require('./internal/_concat');
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/adjust.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -759,10 +890,15 @@ module.exports = _curry3(function adjust(fn, idx, list) {
   return _list;
 });
 
-},{"./internal/_concat":104,"./internal/_curry3":110}],12:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xall = require('./internal/_xall');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/all.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xall = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xall.js");
 
 
 /**
@@ -800,12 +936,17 @@ module.exports = _curry2(_dispatchable(['all'], _xall, function all(fn, list) {
   return true;
 }));
 
-},{"./internal/_curry2":109,"./internal/_dispatchable":112,"./internal/_xall":146}],13:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var curryN = require('./curryN');
-var max = require('./max');
-var pluck = require('./pluck');
-var reduce = require('./reduce');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/allPass.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
+var max = __webpack_require__("./resources/assets/js/node_modules/ramda/src/max.js");
+var pluck = __webpack_require__("./resources/assets/js/node_modules/ramda/src/pluck.js");
+var reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduce.js");
 
 
 /**
@@ -847,8 +988,13 @@ module.exports = _curry1(function allPass(preds) {
   });
 });
 
-},{"./curryN":46,"./internal/_curry1":108,"./max":197,"./pluck":242,"./reduce":253}],14:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/always.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -876,8 +1022,13 @@ module.exports = _curry1(function always(val) {
   };
 });
 
-},{"./internal/_curry1":108}],15:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/and.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -903,10 +1054,15 @@ module.exports = _curry2(function and(a, b) {
   return a && b;
 });
 
-},{"./internal/_curry2":109}],16:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xany = require('./internal/_xany');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/any.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xany = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xany.js");
 
 
 /**
@@ -945,12 +1101,17 @@ module.exports = _curry2(_dispatchable(['any'], _xany, function any(fn, list) {
   return false;
 }));
 
-},{"./internal/_curry2":109,"./internal/_dispatchable":112,"./internal/_xany":147}],17:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var curryN = require('./curryN');
-var max = require('./max');
-var pluck = require('./pluck');
-var reduce = require('./reduce');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/anyPass.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
+var max = __webpack_require__("./resources/assets/js/node_modules/ramda/src/max.js");
+var pluck = __webpack_require__("./resources/assets/js/node_modules/ramda/src/pluck.js");
+var reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduce.js");
 
 
 /**
@@ -993,11 +1154,16 @@ module.exports = _curry1(function anyPass(preds) {
   });
 });
 
-},{"./curryN":46,"./internal/_curry1":108,"./max":197,"./pluck":242,"./reduce":253}],18:[function(require,module,exports){
-var _concat = require('./internal/_concat');
-var _curry2 = require('./internal/_curry2');
-var _reduce = require('./internal/_reduce');
-var map = require('./map');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/ap.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
 
 
 /**
@@ -1034,11 +1200,16 @@ module.exports = _curry2(function ap(applyF, applyX) {
   );
 });
 
-},{"./internal/_concat":104,"./internal/_curry2":109,"./internal/_reduce":141,"./map":191}],19:[function(require,module,exports){
-var _aperture = require('./internal/_aperture');
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xaperture = require('./internal/_xaperture');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/aperture.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _aperture = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_aperture.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xaperture = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xaperture.js");
 
 
 /**
@@ -1064,9 +1235,14 @@ var _xaperture = require('./internal/_xaperture');
  */
 module.exports = _curry2(_dispatchable([], _xaperture, _aperture));
 
-},{"./internal/_aperture":96,"./internal/_curry2":109,"./internal/_dispatchable":112,"./internal/_xaperture":148}],20:[function(require,module,exports){
-var _concat = require('./internal/_concat');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/append.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -1093,8 +1269,13 @@ module.exports = _curry2(function append(el, list) {
   return _concat(list, [el]);
 });
 
-},{"./internal/_concat":104,"./internal/_curry2":109}],21:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/apply.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -1121,15 +1302,20 @@ module.exports = _curry2(function apply(fn, args) {
   return fn.apply(this, args);
 });
 
-},{"./internal/_curry2":109}],22:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var apply = require('./apply');
-var curryN = require('./curryN');
-var map = require('./map');
-var max = require('./max');
-var pluck = require('./pluck');
-var reduce = require('./reduce');
-var values = require('./values');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/applySpec.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var apply = __webpack_require__("./resources/assets/js/node_modules/ramda/src/apply.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
+var max = __webpack_require__("./resources/assets/js/node_modules/ramda/src/max.js");
+var pluck = __webpack_require__("./resources/assets/js/node_modules/ramda/src/pluck.js");
+var reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduce.js");
+var values = __webpack_require__("./resources/assets/js/node_modules/ramda/src/values.js");
 
 
 /**
@@ -1167,8 +1353,13 @@ module.exports = _curry1(function applySpec(spec) {
                 });
 });
 
-},{"./apply":21,"./curryN":46,"./internal/_curry1":108,"./map":191,"./max":197,"./pluck":242,"./reduce":253,"./values":312}],23:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/ascend.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -1199,8 +1390,13 @@ module.exports = _curry3(function ascend(fn, a, b) {
   return aa < bb ? -1 : aa > bb ? 1 : 0;
 });
 
-},{"./internal/_curry3":110}],24:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/assoc.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -1232,13 +1428,18 @@ module.exports = _curry3(function assoc(prop, val, obj) {
   return result;
 });
 
-},{"./internal/_curry3":110}],25:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var _has = require('./internal/_has');
-var _isArray = require('./internal/_isArray');
-var _isInteger = require('./internal/_isInteger');
-var assoc = require('./assoc');
-var isNil = require('./isNil');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/assocPath.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
+var _isArray = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArray.js");
+var _isInteger = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isInteger.js");
+var assoc = __webpack_require__("./resources/assets/js/node_modules/ramda/src/assoc.js");
+var isNil = __webpack_require__("./resources/assets/js/node_modules/ramda/src/isNil.js");
 
 
 /**
@@ -1283,9 +1484,14 @@ module.exports = _curry3(function assocPath(path, val, obj) {
   }
 });
 
-},{"./assoc":24,"./internal/_curry3":110,"./internal/_has":120,"./internal/_isArray":124,"./internal/_isInteger":127,"./isNil":175}],26:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var nAry = require('./nAry');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/binary.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var nAry = __webpack_require__("./resources/assets/js/node_modules/ramda/src/nAry.js");
 
 
 /**
@@ -1320,9 +1526,14 @@ module.exports = _curry1(function binary(fn) {
   return nAry(2, fn);
 });
 
-},{"./internal/_curry1":108,"./nAry":215}],27:[function(require,module,exports){
-var _arity = require('./internal/_arity');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/bind.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arity.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -1353,11 +1564,16 @@ module.exports = _curry2(function bind(fn, thisObj) {
   });
 });
 
-},{"./internal/_arity":97,"./internal/_curry2":109}],28:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _isFunction = require('./internal/_isFunction');
-var and = require('./and');
-var lift = require('./lift');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/both.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isFunction = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isFunction.js");
+var and = __webpack_require__("./resources/assets/js/node_modules/ramda/src/and.js");
+var lift = __webpack_require__("./resources/assets/js/node_modules/ramda/src/lift.js");
 
 
 /**
@@ -1396,8 +1612,13 @@ module.exports = _curry2(function both(f, g) {
     lift(and)(f, g);
 });
 
-},{"./and":15,"./internal/_curry2":109,"./internal/_isFunction":126,"./lift":187}],29:[function(require,module,exports){
-var curry = require('./curry');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/call.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var curry = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curry.js");
 
 
 /**
@@ -1436,12 +1657,17 @@ module.exports = curry(function call(fn) {
   return fn.apply(this, Array.prototype.slice.call(arguments, 1));
 });
 
-},{"./curry":45}],30:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _makeFlat = require('./internal/_makeFlat');
-var _xchain = require('./internal/_xchain');
-var map = require('./map');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/chain.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _makeFlat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_makeFlat.js");
+var _xchain = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xchain.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
 
 
 /**
@@ -1473,8 +1699,13 @@ module.exports = _curry2(_dispatchable(['fantasy-land/chain', 'chain'], _xchain,
   return _makeFlat(false)(map(fn, monad));
 }));
 
-},{"./internal/_curry2":109,"./internal/_dispatchable":112,"./internal/_makeFlat":134,"./internal/_xchain":149,"./map":191}],31:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/clamp.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 /**
  * Restricts a number to be within a range.
@@ -1505,9 +1736,14 @@ module.exports = _curry3(function clamp(min, max, value) {
          value;
 });
 
-},{"./internal/_curry3":110}],32:[function(require,module,exports){
-var _clone = require('./internal/_clone');
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/clone.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _clone = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_clone.js");
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -1537,8 +1773,13 @@ module.exports = _curry1(function clone(value) {
     _clone(value, [], [], true);
 });
 
-},{"./internal/_clone":101,"./internal/_curry1":108}],33:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/comparator.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -1567,9 +1808,14 @@ module.exports = _curry1(function comparator(pred) {
   };
 });
 
-},{"./internal/_curry1":108}],34:[function(require,module,exports){
-var lift = require('./lift');
-var not = require('./not');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/complement.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var lift = __webpack_require__("./resources/assets/js/node_modules/ramda/src/lift.js");
+var not = __webpack_require__("./resources/assets/js/node_modules/ramda/src/not.js");
 
 
 /**
@@ -1596,9 +1842,14 @@ var not = require('./not');
  */
 module.exports = lift(not);
 
-},{"./lift":187,"./not":218}],35:[function(require,module,exports){
-var pipe = require('./pipe');
-var reverse = require('./reverse');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/compose.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var pipe = __webpack_require__("./resources/assets/js/node_modules/ramda/src/pipe.js");
+var reverse = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reverse.js");
 
 
 /**
@@ -1632,10 +1883,15 @@ module.exports = function compose() {
   return pipe.apply(this, reverse(arguments));
 };
 
-},{"./pipe":239,"./reverse":262}],36:[function(require,module,exports){
-var chain = require('./chain');
-var compose = require('./compose');
-var map = require('./map');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/composeK.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var chain = __webpack_require__("./resources/assets/js/node_modules/ramda/src/chain.js");
+var compose = __webpack_require__("./resources/assets/js/node_modules/ramda/src/compose.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
 
 
 /**
@@ -1677,9 +1933,14 @@ module.exports = function composeK() {
   return compose(compose.apply(this, map(chain, init)), last);
 };
 
-},{"./chain":30,"./compose":35,"./map":191}],37:[function(require,module,exports){
-var pipeP = require('./pipeP');
-var reverse = require('./reverse');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/composeP.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var pipeP = __webpack_require__("./resources/assets/js/node_modules/ramda/src/pipeP.js");
+var reverse = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reverse.js");
 
 
 /**
@@ -1723,12 +1984,17 @@ module.exports = function composeP() {
   return pipeP.apply(this, reverse(arguments));
 };
 
-},{"./pipeP":241,"./reverse":262}],38:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _isArray = require('./internal/_isArray');
-var _isFunction = require('./internal/_isFunction');
-var _isString = require('./internal/_isString');
-var toString = require('./toString');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/concat.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isArray = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArray.js");
+var _isFunction = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isFunction.js");
+var _isString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isString.js");
+var toString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/toString.js");
 
 
 /**
@@ -1779,12 +2045,17 @@ module.exports = _curry2(function concat(a, b) {
   throw new TypeError(toString(a) + ' does not have a method named "concat" or "fantasy-land/concat"');
 });
 
-},{"./internal/_curry2":109,"./internal/_isArray":124,"./internal/_isFunction":126,"./internal/_isString":132,"./toString":290}],39:[function(require,module,exports){
-var _arity = require('./internal/_arity');
-var _curry1 = require('./internal/_curry1');
-var map = require('./map');
-var max = require('./max');
-var reduce = require('./reduce');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/cond.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arity.js");
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
+var max = __webpack_require__("./resources/assets/js/node_modules/ramda/src/max.js");
+var reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduce.js");
 
 
 /**
@@ -1828,9 +2099,14 @@ module.exports = _curry1(function cond(pairs) {
   });
 });
 
-},{"./internal/_arity":97,"./internal/_curry1":108,"./map":191,"./max":197,"./reduce":253}],40:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var constructN = require('./constructN');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/construct.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var constructN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/constructN.js");
 
 
 /**
@@ -1869,10 +2145,15 @@ module.exports = _curry1(function construct(Fn) {
   return constructN(Fn.length, Fn);
 });
 
-},{"./constructN":41,"./internal/_curry1":108}],41:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var curry = require('./curry');
-var nAry = require('./nAry');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/constructN.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var curry = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curry.js");
+var nAry = __webpack_require__("./resources/assets/js/node_modules/ramda/src/nAry.js");
 
 
 /**
@@ -1933,9 +2214,14 @@ module.exports = _curry2(function constructN(n, Fn) {
   }));
 });
 
-},{"./curry":45,"./internal/_curry2":109,"./nAry":215}],42:[function(require,module,exports){
-var _contains = require('./internal/_contains');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/contains.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _contains = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_contains.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -1960,13 +2246,18 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(_contains);
 
-},{"./internal/_contains":105,"./internal/_curry2":109}],43:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _map = require('./internal/_map');
-var curryN = require('./curryN');
-var max = require('./max');
-var pluck = require('./pluck');
-var reduce = require('./reduce');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/converge.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_map.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
+var max = __webpack_require__("./resources/assets/js/node_modules/ramda/src/max.js");
+var pluck = __webpack_require__("./resources/assets/js/node_modules/ramda/src/pluck.js");
+var reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduce.js");
 
 
 /**
@@ -2006,8 +2297,13 @@ module.exports = _curry2(function converge(after, fns) {
   });
 });
 
-},{"./curryN":46,"./internal/_curry2":109,"./internal/_map":135,"./max":197,"./pluck":242,"./reduce":253}],44:[function(require,module,exports){
-var reduceBy = require('./reduceBy');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/countBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var reduceBy = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduceBy.js");
 
 
 /**
@@ -2036,9 +2332,14 @@ var reduceBy = require('./reduceBy');
  */
 module.exports = reduceBy(function(acc, elem) { return acc + 1; }, 0);
 
-},{"./reduceBy":254}],45:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var curryN = require('./curryN');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/curry.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
 
 
 /**
@@ -2086,11 +2387,16 @@ module.exports = _curry1(function curry(fn) {
   return curryN(fn.length, fn);
 });
 
-},{"./curryN":46,"./internal/_curry1":108}],46:[function(require,module,exports){
-var _arity = require('./internal/_arity');
-var _curry1 = require('./internal/_curry1');
-var _curry2 = require('./internal/_curry2');
-var _curryN = require('./internal/_curryN');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/curryN.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arity.js");
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curryN.js");
 
 
 /**
@@ -2142,8 +2448,13 @@ module.exports = _curry2(function curryN(length, fn) {
   return _arity(length, _curryN(length, [], fn));
 });
 
-},{"./internal/_arity":97,"./internal/_curry1":108,"./internal/_curry2":109,"./internal/_curryN":111}],47:[function(require,module,exports){
-var add = require('./add');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/dec.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var add = __webpack_require__("./resources/assets/js/node_modules/ramda/src/add.js");
 
 
 /**
@@ -2163,8 +2474,13 @@ var add = require('./add');
  */
 module.exports = add(-1);
 
-},{"./add":9}],48:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/defaultTo.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -2193,8 +2509,13 @@ module.exports = _curry2(function defaultTo(d, v) {
   return v == null || v !== v ? d : v;
 });
 
-},{"./internal/_curry2":109}],49:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/descend.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -2225,9 +2546,14 @@ module.exports = _curry3(function descend(fn, a, b) {
   return aa > bb ? -1 : aa < bb ? 1 : 0;
 });
 
-},{"./internal/_curry3":110}],50:[function(require,module,exports){
-var _contains = require('./internal/_contains');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/difference.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _contains = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_contains.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -2263,9 +2589,14 @@ module.exports = _curry2(function difference(first, second) {
   return out;
 });
 
-},{"./internal/_contains":105,"./internal/_curry2":109}],51:[function(require,module,exports){
-var _containsWith = require('./internal/_containsWith');
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/differenceWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _containsWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_containsWith.js");
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -2304,8 +2635,13 @@ module.exports = _curry3(function differenceWith(pred, first, second) {
   return out;
 });
 
-},{"./internal/_containsWith":106,"./internal/_curry3":110}],52:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/dissoc.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -2333,13 +2669,18 @@ module.exports = _curry2(function dissoc(prop, obj) {
   return result;
 });
 
-},{"./internal/_curry2":109}],53:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _isInteger = require('./internal/_isInteger');
-var assoc = require('./assoc');
-var dissoc = require('./dissoc');
-var remove = require('./remove');
-var update = require('./update');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/dissocPath.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isInteger = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isInteger.js");
+var assoc = __webpack_require__("./resources/assets/js/node_modules/ramda/src/assoc.js");
+var dissoc = __webpack_require__("./resources/assets/js/node_modules/ramda/src/dissoc.js");
+var remove = __webpack_require__("./resources/assets/js/node_modules/ramda/src/remove.js");
+var update = __webpack_require__("./resources/assets/js/node_modules/ramda/src/update.js");
 
 
 /**
@@ -2380,8 +2721,13 @@ module.exports = _curry2(function dissocPath(path, obj) {
   }
 });
 
-},{"./assoc":24,"./dissoc":52,"./internal/_curry2":109,"./internal/_isInteger":127,"./remove":259,"./update":310}],54:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/divide.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -2408,11 +2754,16 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function divide(a, b) { return a / b; });
 
-},{"./internal/_curry2":109}],55:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xdrop = require('./internal/_xdrop');
-var slice = require('./slice');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/drop.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xdrop = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xdrop.js");
+var slice = __webpack_require__("./resources/assets/js/node_modules/ramda/src/slice.js");
 
 
 /**
@@ -2443,11 +2794,16 @@ module.exports = _curry2(_dispatchable(['drop'], _xdrop, function drop(n, xs) {
   return slice(Math.max(0, n), Infinity, xs);
 }));
 
-},{"./internal/_curry2":109,"./internal/_dispatchable":112,"./internal/_xdrop":150,"./slice":266}],56:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _dropLast = require('./internal/_dropLast');
-var _xdropLast = require('./internal/_xdropLast');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/dropLast.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _dropLast = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dropLast.js");
+var _xdropLast = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xdropLast.js");
 
 
 /**
@@ -2473,11 +2829,16 @@ var _xdropLast = require('./internal/_xdropLast');
  */
 module.exports = _curry2(_dispatchable([], _xdropLast, _dropLast));
 
-},{"./internal/_curry2":109,"./internal/_dispatchable":112,"./internal/_dropLast":113,"./internal/_xdropLast":151}],57:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _dropLastWhile = require('./internal/_dropLastWhile');
-var _xdropLastWhile = require('./internal/_xdropLastWhile');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/dropLastWhile.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _dropLastWhile = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dropLastWhile.js");
+var _xdropLastWhile = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xdropLastWhile.js");
 
 
 /**
@@ -2504,12 +2865,17 @@ var _xdropLastWhile = require('./internal/_xdropLastWhile');
  */
 module.exports = _curry2(_dispatchable([], _xdropLastWhile, _dropLastWhile));
 
-},{"./internal/_curry2":109,"./internal/_dispatchable":112,"./internal/_dropLastWhile":114,"./internal/_xdropLastWhile":152}],58:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _dispatchable = require('./internal/_dispatchable');
-var _xdropRepeatsWith = require('./internal/_xdropRepeatsWith');
-var dropRepeatsWith = require('./dropRepeatsWith');
-var equals = require('./equals');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/dropRepeats.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xdropRepeatsWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xdropRepeatsWith.js");
+var dropRepeatsWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/dropRepeatsWith.js");
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
 
 
 /**
@@ -2532,11 +2898,16 @@ var equals = require('./equals');
  */
 module.exports = _curry1(_dispatchable([], _xdropRepeatsWith(equals), dropRepeatsWith(equals)));
 
-},{"./dropRepeatsWith":59,"./equals":66,"./internal/_curry1":108,"./internal/_dispatchable":112,"./internal/_xdropRepeatsWith":153}],59:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xdropRepeatsWith = require('./internal/_xdropRepeatsWith');
-var last = require('./last');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/dropRepeatsWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xdropRepeatsWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xdropRepeatsWith.js");
+var last = __webpack_require__("./resources/assets/js/node_modules/ramda/src/last.js");
 
 
 /**
@@ -2577,10 +2948,15 @@ module.exports = _curry2(_dispatchable([], _xdropRepeatsWith, function dropRepea
 }));
 
 
-},{"./internal/_curry2":109,"./internal/_dispatchable":112,"./internal/_xdropRepeatsWith":153,"./last":180}],60:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xdropWhile = require('./internal/_xdropWhile');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/dropWhile.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xdropWhile = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xdropWhile.js");
 
 
 /**
@@ -2617,11 +2993,16 @@ module.exports = _curry2(_dispatchable(['dropWhile'], _xdropWhile, function drop
   return Array.prototype.slice.call(list, idx);
 }));
 
-},{"./internal/_curry2":109,"./internal/_dispatchable":112,"./internal/_xdropWhile":154}],61:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _isFunction = require('./internal/_isFunction');
-var lift = require('./lift');
-var or = require('./or');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/either.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isFunction = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isFunction.js");
+var lift = __webpack_require__("./resources/assets/js/node_modules/ramda/src/lift.js");
+var or = __webpack_require__("./resources/assets/js/node_modules/ramda/src/or.js");
 
 
 /**
@@ -2659,12 +3040,17 @@ module.exports = _curry2(function either(f, g) {
     lift(or)(f, g);
 });
 
-},{"./internal/_curry2":109,"./internal/_isFunction":126,"./lift":187,"./or":226}],62:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _isArguments = require('./internal/_isArguments');
-var _isArray = require('./internal/_isArray');
-var _isObject = require('./internal/_isObject');
-var _isString = require('./internal/_isString');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/empty.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _isArguments = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArguments.js");
+var _isArray = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArray.js");
+var _isObject = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isObject.js");
+var _isString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isString.js");
 
 
 /**
@@ -2712,10 +3098,15 @@ module.exports = _curry1(function empty(x) {
   );
 });
 
-},{"./internal/_curry1":108,"./internal/_isArguments":123,"./internal/_isArray":124,"./internal/_isObject":129,"./internal/_isString":132}],63:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var equals = require('./equals');
-var takeLast = require('./takeLast');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/endsWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
+var takeLast = __webpack_require__("./resources/assets/js/node_modules/ramda/src/takeLast.js");
 
 /**
  * Checks if a list ends with the provided values
@@ -2740,9 +3131,14 @@ module.exports = _curry2(function(suffix, list) {
   return equals(takeLast(suffix.length, list), suffix);
 });
 
-},{"./equals":66,"./internal/_curry2":109,"./takeLast":281}],64:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var equals = require('./equals');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/eqBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
 
 
 /**
@@ -2766,9 +3162,14 @@ module.exports = _curry3(function eqBy(f, x, y) {
   return equals(f(x), f(y));
 });
 
-},{"./equals":66,"./internal/_curry3":110}],65:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var equals = require('./equals');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/eqProps.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
 
 
 /**
@@ -2796,9 +3197,14 @@ module.exports = _curry3(function eqProps(prop, obj1, obj2) {
   return equals(obj1[prop], obj2[prop]);
 });
 
-},{"./equals":66,"./internal/_curry3":110}],66:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _equals = require('./internal/_equals');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/equals.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_equals.js");
 
 
 /**
@@ -2830,8 +3236,13 @@ module.exports = _curry2(function equals(a, b) {
   return _equals(a, b, [], []);
 });
 
-},{"./internal/_curry2":109,"./internal/_equals":115}],67:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/evolve.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -2874,14 +3285,19 @@ module.exports = _curry2(function evolve(transformations, object) {
   return result;
 });
 
-},{"./internal/_curry2":109}],68:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _filter = require('./internal/_filter');
-var _isObject = require('./internal/_isObject');
-var _reduce = require('./internal/_reduce');
-var _xfilter = require('./internal/_xfilter');
-var keys = require('./keys');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/filter.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _filter = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_filter.js");
+var _isObject = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isObject.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var _xfilter = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfilter.js");
+var keys = __webpack_require__("./resources/assets/js/node_modules/ramda/src/keys.js");
 
 
 /**
@@ -2925,10 +3341,15 @@ module.exports = _curry2(_dispatchable(['filter'], _xfilter, function(pred, filt
   );
 }));
 
-},{"./internal/_curry2":109,"./internal/_dispatchable":112,"./internal/_filter":116,"./internal/_isObject":129,"./internal/_reduce":141,"./internal/_xfilter":156,"./keys":178}],69:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xfind = require('./internal/_xfind');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/find.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xfind = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfind.js");
 
 
 /**
@@ -2966,10 +3387,15 @@ module.exports = _curry2(_dispatchable(['find'], _xfind, function find(fn, list)
   }
 }));
 
-},{"./internal/_curry2":109,"./internal/_dispatchable":112,"./internal/_xfind":157}],70:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xfindIndex = require('./internal/_xfindIndex');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/findIndex.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xfindIndex = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfindIndex.js");
 
 
 /**
@@ -3006,10 +3432,15 @@ module.exports = _curry2(_dispatchable([], _xfindIndex, function findIndex(fn, l
   return -1;
 }));
 
-},{"./internal/_curry2":109,"./internal/_dispatchable":112,"./internal/_xfindIndex":158}],71:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xfindLast = require('./internal/_xfindLast');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/findLast.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xfindLast = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfindLast.js");
 
 
 /**
@@ -3044,10 +3475,15 @@ module.exports = _curry2(_dispatchable([], _xfindLast, function findLast(fn, lis
   }
 }));
 
-},{"./internal/_curry2":109,"./internal/_dispatchable":112,"./internal/_xfindLast":159}],72:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xfindLastIndex = require('./internal/_xfindLastIndex');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/findLastIndex.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xfindLastIndex = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfindLastIndex.js");
 
 
 /**
@@ -3083,9 +3519,14 @@ module.exports = _curry2(_dispatchable([], _xfindLastIndex, function findLastInd
   return -1;
 }));
 
-},{"./internal/_curry2":109,"./internal/_dispatchable":112,"./internal/_xfindLastIndex":160}],73:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _makeFlat = require('./internal/_makeFlat');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/flatten.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _makeFlat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_makeFlat.js");
 
 
 /**
@@ -3107,9 +3548,14 @@ var _makeFlat = require('./internal/_makeFlat');
  */
 module.exports = _curry1(_makeFlat(true));
 
-},{"./internal/_curry1":108,"./internal/_makeFlat":134}],74:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var curry = require('./curry');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/flip.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var curry = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curry.js");
 
 
 /**
@@ -3141,9 +3587,14 @@ module.exports = _curry1(function flip(fn) {
   });
 });
 
-},{"./curry":45,"./internal/_curry1":108}],75:[function(require,module,exports){
-var _checkForMethod = require('./internal/_checkForMethod');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/forEach.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _checkForMethod = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_checkForMethod.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -3190,9 +3641,14 @@ module.exports = _curry2(_checkForMethod('forEach', function forEach(fn, list) {
   return list;
 }));
 
-},{"./internal/_checkForMethod":100,"./internal/_curry2":109}],76:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var keys = require('./keys');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/forEachObjIndexed.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var keys = __webpack_require__("./resources/assets/js/node_modules/ramda/src/keys.js");
 
 
 /**
@@ -3228,8 +3684,13 @@ module.exports = _curry2(function forEachObjIndexed(fn, obj) {
   return obj;
 });
 
-},{"./internal/_curry2":109,"./keys":178}],77:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/fromPairs.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -3258,10 +3719,15 @@ module.exports = _curry1(function fromPairs(pairs) {
   return result;
 });
 
-},{"./internal/_curry1":108}],78:[function(require,module,exports){
-var _checkForMethod = require('./internal/_checkForMethod');
-var _curry2 = require('./internal/_curry2');
-var reduceBy = require('./reduceBy');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/groupBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _checkForMethod = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_checkForMethod.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var reduceBy = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduceBy.js");
 
 /**
  * Splits a list into sub-lists stored in an object, based on the result of
@@ -3311,8 +3777,13 @@ module.exports = _curry2(_checkForMethod('groupBy', reduceBy(function(acc, item)
   return acc;
 }, null)));
 
-},{"./internal/_checkForMethod":100,"./internal/_curry2":109,"./reduceBy":254}],79:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/groupWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 /**
  * Takes a list and returns a list of lists where each sublist's elements are
@@ -3359,8 +3830,13 @@ module.exports = _curry2(function(fn, list) {
   return res;
 });
 
-},{"./internal/_curry2":109}],80:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/gt.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -3386,8 +3862,13 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function gt(a, b) { return a > b; });
 
-},{"./internal/_curry2":109}],81:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/gte.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -3413,9 +3894,14 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function gte(a, b) { return a >= b; });
 
-},{"./internal/_curry2":109}],82:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _has = require('./internal/_has');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/has.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
 
 
 /**
@@ -3444,8 +3930,13 @@ var _has = require('./internal/_has');
  */
 module.exports = _curry2(_has);
 
-},{"./internal/_curry2":109,"./internal/_has":120}],83:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/hasIn.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -3478,8 +3969,13 @@ module.exports = _curry2(function hasIn(prop, obj) {
   return prop in obj;
 });
 
-},{"./internal/_curry2":109}],84:[function(require,module,exports){
-var nth = require('./nth');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/head.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var nth = __webpack_require__("./resources/assets/js/node_modules/ramda/src/nth.js");
 
 
 /**
@@ -3505,8 +4001,13 @@ var nth = require('./nth');
  */
 module.exports = nth(0);
 
-},{"./nth":219}],85:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/identical.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -3543,9 +4044,14 @@ module.exports = _curry2(function identical(a, b) {
   }
 });
 
-},{"./internal/_curry2":109}],86:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _identity = require('./internal/_identity');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/identity.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _identity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_identity.js");
 
 
 /**
@@ -3569,9 +4075,14 @@ var _identity = require('./internal/_identity');
  */
 module.exports = _curry1(_identity);
 
-},{"./internal/_curry1":108,"./internal/_identity":121}],87:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var curryN = require('./curryN');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/ifElse.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
 
 
 /**
@@ -3607,8 +4118,13 @@ module.exports = _curry3(function ifElse(condition, onTrue, onFalse) {
   );
 });
 
-},{"./curryN":46,"./internal/_curry3":110}],88:[function(require,module,exports){
-var add = require('./add');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/inc.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var add = __webpack_require__("./resources/assets/js/node_modules/ramda/src/add.js");
 
 
 /**
@@ -3628,8 +4144,13 @@ var add = require('./add');
  */
 module.exports = add(1);
 
-},{"./add":9}],89:[function(require,module,exports){
-var reduceBy = require('./reduceBy');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/indexBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var reduceBy = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduceBy.js");
 
 
 /**
@@ -3656,10 +4177,15 @@ var reduceBy = require('./reduceBy');
  */
 module.exports = reduceBy(function(acc, elem) { return elem; }, null);
 
-},{"./reduceBy":254}],90:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _indexOf = require('./internal/_indexOf');
-var _isArray = require('./internal/_isArray');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/indexOf.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _indexOf = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_indexOf.js");
+var _isArray = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArray.js");
 
 
 /**
@@ -3687,8 +4213,13 @@ module.exports = _curry2(function indexOf(target, xs) {
     _indexOf(xs, target, 0);
 });
 
-},{"./internal/_curry2":109,"./internal/_indexOf":122,"./internal/_isArray":124}],91:[function(require,module,exports){
-var slice = require('./slice');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/init.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var slice = __webpack_require__("./resources/assets/js/node_modules/ramda/src/slice.js");
 
 
 /**
@@ -3717,10 +4248,15 @@ var slice = require('./slice');
  */
 module.exports = slice(0, -1);
 
-},{"./slice":266}],92:[function(require,module,exports){
-var _containsWith = require('./internal/_containsWith');
-var _curry3 = require('./internal/_curry3');
-var _filter = require('./internal/_filter');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/innerJoin.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _containsWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_containsWith.js");
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var _filter = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_filter.js");
 
 
 /**
@@ -3762,8 +4298,13 @@ module.exports = _curry3(function innerJoin(pred, xs, ys) {
   return _filter(function(x) { return _containsWith(pred, x, ys); }, xs);
 });
 
-},{"./internal/_containsWith":106,"./internal/_curry3":110,"./internal/_filter":116}],93:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/insert.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -3792,8 +4333,13 @@ module.exports = _curry3(function insert(idx, elt, list) {
   return result;
 });
 
-},{"./internal/_curry3":110}],94:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/insertAll.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -3821,8 +4367,13 @@ module.exports = _curry3(function insertAll(idx, elts, list) {
                    Array.prototype.slice.call(list, idx));
 });
 
-},{"./internal/_curry3":110}],95:[function(require,module,exports){
-var _contains = require('./_contains');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_Set.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _contains = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_contains.js");
 
 
 // A simple Set type that honours R.equals semantics
@@ -3994,7 +4545,12 @@ module.exports = (function() {
   return _Set;
 }());
 
-},{"./_contains":105}],96:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_aperture.js":
+/***/ (function(module, exports) {
+
 module.exports = function _aperture(n, list) {
   var idx = 0;
   var limit = list.length - (n - 1);
@@ -4006,7 +4562,12 @@ module.exports = function _aperture(n, list) {
   return acc;
 };
 
-},{}],97:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_arity.js":
+/***/ (function(module, exports) {
+
 module.exports = function _arity(n, fn) {
   /* eslint-disable no-unused-vars */
   switch (n) {
@@ -4025,7 +4586,12 @@ module.exports = function _arity(n, fn) {
   }
 };
 
-},{}],98:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_arrayFromIterator.js":
+/***/ (function(module, exports) {
+
 module.exports = function _arrayFromIterator(iter) {
   var list = [];
   var next;
@@ -4035,14 +4601,24 @@ module.exports = function _arrayFromIterator(iter) {
   return list;
 };
 
-},{}],99:[function(require,module,exports){
-var _objectAssign = require('./_objectAssign');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_assign.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _objectAssign = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_objectAssign.js");
 
 module.exports =
   typeof Object.assign === 'function' ? Object.assign : _objectAssign;
 
-},{"./_objectAssign":136}],100:[function(require,module,exports){
-var _isArray = require('./_isArray');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_checkForMethod.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _isArray = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArray.js");
 
 
 /**
@@ -4068,9 +4644,14 @@ module.exports = function _checkForMethod(methodname, fn) {
   };
 };
 
-},{"./_isArray":124}],101:[function(require,module,exports){
-var _cloneRegExp = require('./_cloneRegExp');
-var type = require('../type');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_clone.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _cloneRegExp = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_cloneRegExp.js");
+var type = __webpack_require__("./resources/assets/js/node_modules/ramda/src/type.js");
 
 
 /**
@@ -4110,7 +4691,12 @@ module.exports = function _clone(value, refFrom, refTo, deep) {
   }
 };
 
-},{"../type":297,"./_cloneRegExp":102}],102:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_cloneRegExp.js":
+/***/ (function(module, exports) {
+
 module.exports = function _cloneRegExp(pattern) {
   return new RegExp(pattern.source, (pattern.global     ? 'g' : '') +
                                     (pattern.ignoreCase ? 'i' : '') +
@@ -4119,14 +4705,24 @@ module.exports = function _cloneRegExp(pattern) {
                                     (pattern.unicode    ? 'u' : ''));
 };
 
-},{}],103:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_complement.js":
+/***/ (function(module, exports) {
+
 module.exports = function _complement(f) {
   return function() {
     return !f.apply(this, arguments);
   };
 };
 
-},{}],104:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_concat.js":
+/***/ (function(module, exports) {
+
 /**
  * Private `concat` function to merge two array-like objects.
  *
@@ -4159,15 +4755,25 @@ module.exports = function _concat(set1, set2) {
   return result;
 };
 
-},{}],105:[function(require,module,exports){
-var _indexOf = require('./_indexOf');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_contains.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _indexOf = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_indexOf.js");
 
 
 module.exports = function _contains(a, list) {
   return _indexOf(list, a, 0) >= 0;
 };
 
-},{"./_indexOf":122}],106:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_containsWith.js":
+/***/ (function(module, exports) {
+
 module.exports = function _containsWith(pred, x, list) {
   var idx = 0;
   var len = list.length;
@@ -4181,9 +4787,14 @@ module.exports = function _containsWith(pred, x, list) {
   return false;
 };
 
-},{}],107:[function(require,module,exports){
-var _arity = require('./_arity');
-var _curry2 = require('./_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_createPartialApplicator.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arity.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 module.exports = function _createPartialApplicator(concat) {
@@ -4194,8 +4805,13 @@ module.exports = function _createPartialApplicator(concat) {
   });
 };
 
-},{"./_arity":97,"./_curry2":109}],108:[function(require,module,exports){
-var _isPlaceholder = require('./_isPlaceholder');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_curry1.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _isPlaceholder = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isPlaceholder.js");
 
 
 /**
@@ -4216,9 +4832,14 @@ module.exports = function _curry1(fn) {
   };
 };
 
-},{"./_isPlaceholder":130}],109:[function(require,module,exports){
-var _curry1 = require('./_curry1');
-var _isPlaceholder = require('./_isPlaceholder');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_curry2.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _isPlaceholder = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isPlaceholder.js");
 
 
 /**
@@ -4246,10 +4867,15 @@ module.exports = function _curry2(fn) {
   };
 };
 
-},{"./_curry1":108,"./_isPlaceholder":130}],110:[function(require,module,exports){
-var _curry1 = require('./_curry1');
-var _curry2 = require('./_curry2');
-var _isPlaceholder = require('./_isPlaceholder');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_curry3.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isPlaceholder = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isPlaceholder.js");
 
 
 /**
@@ -4286,9 +4912,14 @@ module.exports = function _curry3(fn) {
   };
 };
 
-},{"./_curry1":108,"./_curry2":109,"./_isPlaceholder":130}],111:[function(require,module,exports){
-var _arity = require('./_arity');
-var _isPlaceholder = require('./_isPlaceholder');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_curryN.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arity.js");
+var _isPlaceholder = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isPlaceholder.js");
 
 
 /**
@@ -4328,9 +4959,14 @@ module.exports = function _curryN(length, received, fn) {
   };
 };
 
-},{"./_arity":97,"./_isPlaceholder":130}],112:[function(require,module,exports){
-var _isArray = require('./_isArray');
-var _isTransformer = require('./_isTransformer');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _isArray = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArray.js");
+var _isTransformer = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isTransformer.js");
 
 
 /**
@@ -4371,14 +5007,24 @@ module.exports = function _dispatchable(methodNames, xf, fn) {
   };
 };
 
-},{"./_isArray":124,"./_isTransformer":133}],113:[function(require,module,exports){
-var take = require('../take');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_dropLast.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var take = __webpack_require__("./resources/assets/js/node_modules/ramda/src/take.js");
 
 module.exports = function dropLast(n, xs) {
   return take(n < xs.length ? xs.length - n : 0, xs);
 };
 
-},{"../take":280}],114:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_dropLastWhile.js":
+/***/ (function(module, exports) {
+
 module.exports = function dropLastWhile(pred, list) {
   var idx = list.length - 1;
   while (idx >= 0 && pred(list[idx])) {
@@ -4387,13 +5033,18 @@ module.exports = function dropLastWhile(pred, list) {
   return Array.prototype.slice.call(list, 0, idx + 1);
 };
 
-},{}],115:[function(require,module,exports){
-var _arrayFromIterator = require('./_arrayFromIterator');
-var _functionName = require('./_functionName');
-var _has = require('./_has');
-var identical = require('../identical');
-var keys = require('../keys');
-var type = require('../type');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_equals.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arrayFromIterator = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arrayFromIterator.js");
+var _functionName = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_functionName.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
+var identical = __webpack_require__("./resources/assets/js/node_modules/ramda/src/identical.js");
+var keys = __webpack_require__("./resources/assets/js/node_modules/ramda/src/keys.js");
+var type = __webpack_require__("./resources/assets/js/node_modules/ramda/src/type.js");
 
 
 module.exports = function _equals(a, b, stackA, stackB) {
@@ -4503,7 +5154,12 @@ module.exports = function _equals(a, b, stackA, stackB) {
   return true;
 };
 
-},{"../identical":85,"../keys":178,"../type":297,"./_arrayFromIterator":98,"./_functionName":119,"./_has":120}],116:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_filter.js":
+/***/ (function(module, exports) {
+
 module.exports = function _filter(fn, list) {
   var idx = 0;
   var len = list.length;
@@ -4518,11 +5174,16 @@ module.exports = function _filter(fn, list) {
   return result;
 };
 
-},{}],117:[function(require,module,exports){
-var _forceReduced = require('./_forceReduced');
-var _isArrayLike = require('./_isArrayLike');
-var _reduce = require('./_reduce');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_flatCat.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _forceReduced = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_forceReduced.js");
+var _isArrayLike = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArrayLike.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 module.exports = (function() {
   var preservingReduced = function(xf) {
@@ -4552,7 +5213,12 @@ module.exports = (function() {
   };
 }());
 
-},{"./_forceReduced":118,"./_isArrayLike":125,"./_reduce":141,"./_xfBase":155}],118:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_forceReduced.js":
+/***/ (function(module, exports) {
+
 module.exports = function _forceReduced(x) {
   return {
     '@@transducer/value': x,
@@ -4560,23 +5226,43 @@ module.exports = function _forceReduced(x) {
   };
 };
 
-},{}],119:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_functionName.js":
+/***/ (function(module, exports) {
+
 module.exports = function _functionName(f) {
   // String(x => x) evaluates to "x => x", so the pattern may not match.
   var match = String(f).match(/^function (\w*)/);
   return match == null ? '' : match[1];
 };
 
-},{}],120:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_has.js":
+/***/ (function(module, exports) {
+
 module.exports = function _has(prop, obj) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 };
 
-},{}],121:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_identity.js":
+/***/ (function(module, exports) {
+
 module.exports = function _identity(x) { return x; };
 
-},{}],122:[function(require,module,exports){
-var equals = require('../equals');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_indexOf.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
 
 
 module.exports = function _indexOf(list, a, idx) {
@@ -4634,8 +5320,13 @@ module.exports = function _indexOf(list, a, idx) {
   return -1;
 };
 
-},{"../equals":66}],123:[function(require,module,exports){
-var _has = require('./_has');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isArguments.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
 
 
 module.exports = (function() {
@@ -4645,7 +5336,12 @@ module.exports = (function() {
     function _isArguments(x) { return _has('callee', x); };
 }());
 
-},{"./_has":120}],124:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isArray.js":
+/***/ (function(module, exports) {
+
 /**
  * Tests whether or not an object is an array.
  *
@@ -4664,10 +5360,15 @@ module.exports = Array.isArray || function _isArray(val) {
           Object.prototype.toString.call(val) === '[object Array]');
 };
 
-},{}],125:[function(require,module,exports){
-var _curry1 = require('./_curry1');
-var _isArray = require('./_isArray');
-var _isString = require('./_isString');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isArrayLike.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _isArray = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArray.js");
+var _isString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isString.js");
 
 
 /**
@@ -4700,12 +5401,22 @@ module.exports = _curry1(function isArrayLike(x) {
   return false;
 });
 
-},{"./_curry1":108,"./_isArray":124,"./_isString":132}],126:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isFunction.js":
+/***/ (function(module, exports) {
+
 module.exports = function _isFunction(x) {
   return Object.prototype.toString.call(x) === '[object Function]';
 };
 
-},{}],127:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isInteger.js":
+/***/ (function(module, exports) {
+
 /**
  * Determine if the passed argument is an integer.
  *
@@ -4718,40 +5429,75 @@ module.exports = Number.isInteger || function _isInteger(n) {
   return (n << 0) === n;
 };
 
-},{}],128:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isNumber.js":
+/***/ (function(module, exports) {
+
 module.exports = function _isNumber(x) {
   return Object.prototype.toString.call(x) === '[object Number]';
 };
 
-},{}],129:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isObject.js":
+/***/ (function(module, exports) {
+
 module.exports = function _isObject(x) {
   return Object.prototype.toString.call(x) === '[object Object]';
 };
 
-},{}],130:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isPlaceholder.js":
+/***/ (function(module, exports) {
+
 module.exports = function _isPlaceholder(a) {
   return a != null &&
          typeof a === 'object' &&
          a['@@functional/placeholder'] === true;
 };
 
-},{}],131:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isRegExp.js":
+/***/ (function(module, exports) {
+
 module.exports = function _isRegExp(x) {
   return Object.prototype.toString.call(x) === '[object RegExp]';
 };
 
-},{}],132:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isString.js":
+/***/ (function(module, exports) {
+
 module.exports = function _isString(x) {
   return Object.prototype.toString.call(x) === '[object String]';
 };
 
-},{}],133:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_isTransformer.js":
+/***/ (function(module, exports) {
+
 module.exports = function _isTransformer(obj) {
   return typeof obj['@@transducer/step'] === 'function';
 };
 
-},{}],134:[function(require,module,exports){
-var _isArrayLike = require('./_isArrayLike');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_makeFlat.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _isArrayLike = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArrayLike.js");
 
 
 /**
@@ -4785,7 +5531,12 @@ module.exports = function _makeFlat(recursive) {
   };
 };
 
-},{"./_isArrayLike":125}],135:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_map.js":
+/***/ (function(module, exports) {
+
 module.exports = function _map(fn, functor) {
   var idx = 0;
   var len = functor.length;
@@ -4797,8 +5548,13 @@ module.exports = function _map(fn, functor) {
   return result;
 };
 
-},{}],136:[function(require,module,exports){
-var _has = require('./_has');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_objectAssign.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
 
 // Based on https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 module.exports = function _objectAssign(target) {
@@ -4823,17 +5579,32 @@ module.exports = function _objectAssign(target) {
   return output;
 };
 
-},{"./_has":120}],137:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_of.js":
+/***/ (function(module, exports) {
+
 module.exports = function _of(x) { return [x]; };
 
-},{}],138:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_pipe.js":
+/***/ (function(module, exports) {
+
 module.exports = function _pipe(f, g) {
   return function() {
     return g.call(this, f.apply(this, arguments));
   };
 };
 
-},{}],139:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_pipeP.js":
+/***/ (function(module, exports) {
+
 module.exports = function _pipeP(f, g) {
   return function() {
     var ctx = this;
@@ -4843,7 +5614,12 @@ module.exports = function _pipeP(f, g) {
   };
 };
 
-},{}],140:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_quote.js":
+/***/ (function(module, exports) {
+
 module.exports = function _quote(s) {
   var escaped = s
     .replace(/\\/g, '\\\\')
@@ -4858,10 +5634,15 @@ module.exports = function _quote(s) {
   return '"' + escaped.replace(/"/g, '\\"') + '"';
 };
 
-},{}],141:[function(require,module,exports){
-var _isArrayLike = require('./_isArrayLike');
-var _xwrap = require('./_xwrap');
-var bind = require('../bind');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_reduce.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _isArrayLike = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArrayLike.js");
+var _xwrap = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xwrap.js");
+var bind = __webpack_require__("./resources/assets/js/node_modules/ramda/src/bind.js");
 
 
 module.exports = (function() {
@@ -4921,7 +5702,12 @@ module.exports = (function() {
   };
 }());
 
-},{"../bind":27,"./_isArrayLike":125,"./_xwrap":165}],142:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_reduced.js":
+/***/ (function(module, exports) {
+
 module.exports = function _reduced(x) {
   return x && x['@@transducer/reduced'] ? x :
     {
@@ -4930,12 +5716,17 @@ module.exports = function _reduced(x) {
     };
 };
 
-},{}],143:[function(require,module,exports){
-var _assign = require('./_assign');
-var _identity = require('./_identity');
-var _isArrayLike = require('./_isArrayLike');
-var _isTransformer = require('./_isTransformer');
-var objOf = require('../objOf');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_stepCat.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _assign = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_assign.js");
+var _identity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_identity.js");
+var _isArrayLike = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArrayLike.js");
+var _isTransformer = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isTransformer.js");
+var objOf = __webpack_require__("./resources/assets/js/node_modules/ramda/src/objOf.js");
 
 
 module.exports = (function() {
@@ -4980,7 +5771,12 @@ module.exports = (function() {
   };
 }());
 
-},{"../objOf":222,"./_assign":99,"./_identity":121,"./_isArrayLike":125,"./_isTransformer":133}],144:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_toISOString.js":
+/***/ (function(module, exports) {
+
 /**
  * Polyfill from <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString>.
  */
@@ -5004,13 +5800,18 @@ module.exports = (function() {
     };
 }());
 
-},{}],145:[function(require,module,exports){
-var _contains = require('./_contains');
-var _map = require('./_map');
-var _quote = require('./_quote');
-var _toISOString = require('./_toISOString');
-var keys = require('../keys');
-var reject = require('../reject');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_toString.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _contains = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_contains.js");
+var _map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_map.js");
+var _quote = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_quote.js");
+var _toISOString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_toISOString.js");
+var keys = __webpack_require__("./resources/assets/js/node_modules/ramda/src/keys.js");
+var reject = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reject.js");
 
 
 module.exports = function _toString(x, seen) {
@@ -5052,10 +5853,15 @@ module.exports = function _toString(x, seen) {
   }
 };
 
-},{"../keys":178,"../reject":258,"./_contains":105,"./_map":135,"./_quote":140,"./_toISOString":144}],146:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _reduced = require('./_reduced');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xall.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _reduced = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduced.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -5082,10 +5888,15 @@ module.exports = (function() {
   return _curry2(function _xall(f, xf) { return new XAll(f, xf); });
 }());
 
-},{"./_curry2":109,"./_reduced":142,"./_xfBase":155}],147:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _reduced = require('./_reduced');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xany.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _reduced = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduced.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -5112,10 +5923,15 @@ module.exports = (function() {
   return _curry2(function _xany(f, xf) { return new XAny(f, xf); });
 }());
 
-},{"./_curry2":109,"./_reduced":142,"./_xfBase":155}],148:[function(require,module,exports){
-var _concat = require('./_concat');
-var _curry2 = require('./_curry2');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xaperture.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -5150,19 +5966,29 @@ module.exports = (function() {
   return _curry2(function _xaperture(n, xf) { return new XAperture(n, xf); });
 }());
 
-},{"./_concat":104,"./_curry2":109,"./_xfBase":155}],149:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _flatCat = require('./_flatCat');
-var map = require('../map');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xchain.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _flatCat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_flatCat.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
 
 
 module.exports = _curry2(function _xchain(f, xf) {
   return map(f, _flatCat(xf));
 });
 
-},{"../map":191,"./_curry2":109,"./_flatCat":117}],150:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xdrop.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -5183,9 +6009,14 @@ module.exports = (function() {
   return _curry2(function _xdrop(n, xf) { return new XDrop(n, xf); });
 }());
 
-},{"./_curry2":109,"./_xfBase":155}],151:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xdropLast.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -5219,10 +6050,15 @@ module.exports = (function() {
   return _curry2(function _xdropLast(n, xf) { return new XDropLast(n, xf); });
 }());
 
-},{"./_curry2":109,"./_xfBase":155}],152:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _reduce = require('./_reduce');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xdropLastWhile.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 module.exports = (function() {
   function XDropLastWhile(fn, xf) {
@@ -5256,9 +6092,14 @@ module.exports = (function() {
   return _curry2(function _xdropLastWhile(fn, xf) { return new XDropLastWhile(fn, xf); });
 }());
 
-},{"./_curry2":109,"./_reduce":141,"./_xfBase":155}],153:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xdropRepeatsWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -5285,9 +6126,14 @@ module.exports = (function() {
   return _curry2(function _xdropRepeatsWith(pred, xf) { return new XDropRepeatsWith(pred, xf); });
 }());
 
-},{"./_curry2":109,"./_xfBase":155}],154:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xdropWhile.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -5310,7 +6156,12 @@ module.exports = (function() {
   return _curry2(function _xdropWhile(f, xf) { return new XDropWhile(f, xf); });
 }());
 
-},{"./_curry2":109,"./_xfBase":155}],155:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js":
+/***/ (function(module, exports) {
+
 module.exports = {
   init: function() {
     return this.xf['@@transducer/init']();
@@ -5320,9 +6171,14 @@ module.exports = {
   }
 };
 
-},{}],156:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xfilter.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -5339,10 +6195,15 @@ module.exports = (function() {
   return _curry2(function _xfilter(f, xf) { return new XFilter(f, xf); });
 }());
 
-},{"./_curry2":109,"./_xfBase":155}],157:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _reduced = require('./_reduced');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xfind.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _reduced = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduced.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -5369,10 +6230,15 @@ module.exports = (function() {
   return _curry2(function _xfind(f, xf) { return new XFind(f, xf); });
 }());
 
-},{"./_curry2":109,"./_reduced":142,"./_xfBase":155}],158:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _reduced = require('./_reduced');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xfindIndex.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _reduced = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduced.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -5401,9 +6267,14 @@ module.exports = (function() {
   return _curry2(function _xfindIndex(f, xf) { return new XFindIndex(f, xf); });
 }());
 
-},{"./_curry2":109,"./_reduced":142,"./_xfBase":155}],159:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xfindLast.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -5425,9 +6296,14 @@ module.exports = (function() {
   return _curry2(function _xfindLast(f, xf) { return new XFindLast(f, xf); });
 }());
 
-},{"./_curry2":109,"./_xfBase":155}],160:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xfindLastIndex.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -5452,9 +6328,14 @@ module.exports = (function() {
   return _curry2(function _xfindLastIndex(f, xf) { return new XFindLastIndex(f, xf); });
 }());
 
-},{"./_curry2":109,"./_xfBase":155}],161:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xmap.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -5471,10 +6352,15 @@ module.exports = (function() {
   return _curry2(function _xmap(f, xf) { return new XMap(f, xf); });
 }());
 
-},{"./_curry2":109,"./_xfBase":155}],162:[function(require,module,exports){
-var _curryN = require('./_curryN');
-var _has = require('./_has');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xreduceBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curryN.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -5513,10 +6399,15 @@ module.exports = (function() {
                  });
 }());
 
-},{"./_curryN":111,"./_has":120,"./_xfBase":155}],163:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _reduced = require('./_reduced');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xtake.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _reduced = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduced.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 module.exports = (function() {
   function XTake(n, xf) {
@@ -5535,10 +6426,15 @@ module.exports = (function() {
   return _curry2(function _xtake(n, xf) { return new XTake(n, xf); });
 }());
 
-},{"./_curry2":109,"./_reduced":142,"./_xfBase":155}],164:[function(require,module,exports){
-var _curry2 = require('./_curry2');
-var _reduced = require('./_reduced');
-var _xfBase = require('./_xfBase');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xtakeWhile.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _reduced = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduced.js");
+var _xfBase = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xfBase.js");
 
 
 module.exports = (function() {
@@ -5555,7 +6451,12 @@ module.exports = (function() {
   return _curry2(function _xtakeWhile(f, xf) { return new XTakeWhile(f, xf); });
 }());
 
-},{"./_curry2":109,"./_reduced":142,"./_xfBase":155}],165:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/internal/_xwrap.js":
+/***/ (function(module, exports) {
+
 module.exports = (function() {
   function XWrap(fn) {
     this.f = fn;
@@ -5571,12 +6472,17 @@ module.exports = (function() {
   return function _xwrap(fn) { return new XWrap(fn); };
 }());
 
-},{}],166:[function(require,module,exports){
-var _contains = require('./internal/_contains');
-var _curry2 = require('./internal/_curry2');
-var _filter = require('./internal/_filter');
-var flip = require('./flip');
-var uniq = require('./uniq');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/intersection.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _contains = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_contains.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _filter = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_filter.js");
+var flip = __webpack_require__("./resources/assets/js/node_modules/ramda/src/flip.js");
+var uniq = __webpack_require__("./resources/assets/js/node_modules/ramda/src/uniq.js");
 
 
 /**
@@ -5608,10 +6514,15 @@ module.exports = _curry2(function intersection(list1, list2) {
   return uniq(_filter(flip(_contains)(lookupList), filteredList));
 });
 
-},{"./flip":74,"./internal/_contains":105,"./internal/_curry2":109,"./internal/_filter":116,"./uniq":304}],167:[function(require,module,exports){
-var _containsWith = require('./internal/_containsWith');
-var _curry3 = require('./internal/_curry3');
-var uniqWith = require('./uniqWith');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/intersectionWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _containsWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_containsWith.js");
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var uniqWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/uniqWith.js");
 
 
 /**
@@ -5670,9 +6581,14 @@ module.exports = _curry3(function intersectionWith(pred, list1, list2) {
   return uniqWith(pred, results);
 });
 
-},{"./internal/_containsWith":106,"./internal/_curry3":110,"./uniqWith":306}],168:[function(require,module,exports){
-var _checkForMethod = require('./internal/_checkForMethod');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/intersperse.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _checkForMethod = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_checkForMethod.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -5707,12 +6623,17 @@ module.exports = _curry2(_checkForMethod('intersperse', function intersperse(sep
   return out;
 }));
 
-},{"./internal/_checkForMethod":100,"./internal/_curry2":109}],169:[function(require,module,exports){
-var _clone = require('./internal/_clone');
-var _curry3 = require('./internal/_curry3');
-var _isTransformer = require('./internal/_isTransformer');
-var _reduce = require('./internal/_reduce');
-var _stepCat = require('./internal/_stepCat');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/into.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _clone = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_clone.js");
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var _isTransformer = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isTransformer.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var _stepCat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_stepCat.js");
 
 
 /**
@@ -5759,10 +6680,15 @@ module.exports = _curry3(function into(acc, xf, list) {
     _reduce(xf(_stepCat(acc)), _clone(acc, [], [], false), list);
 });
 
-},{"./internal/_clone":101,"./internal/_curry3":110,"./internal/_isTransformer":133,"./internal/_reduce":141,"./internal/_stepCat":143}],170:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _has = require('./internal/_has');
-var keys = require('./keys');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/invert.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
+var keys = __webpack_require__("./resources/assets/js/node_modules/ramda/src/keys.js");
 
 
 /**
@@ -5803,9 +6729,14 @@ module.exports = _curry1(function invert(obj) {
   return out;
 });
 
-},{"./internal/_curry1":108,"./internal/_has":120,"./keys":178}],171:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var keys = require('./keys');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/invertObj.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var keys = __webpack_require__("./resources/assets/js/node_modules/ramda/src/keys.js");
 
 
 /**
@@ -5849,11 +6780,16 @@ module.exports = _curry1(function invertObj(obj) {
   return out;
 });
 
-},{"./internal/_curry1":108,"./keys":178}],172:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _isFunction = require('./internal/_isFunction');
-var curryN = require('./curryN');
-var toString = require('./toString');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/invoker.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isFunction = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isFunction.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
+var toString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/toString.js");
 
 
 /**
@@ -5893,8 +6829,13 @@ module.exports = _curry2(function invoker(arity, method) {
   });
 });
 
-},{"./curryN":46,"./internal/_curry2":109,"./internal/_isFunction":126,"./toString":290}],173:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/is.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -5924,10 +6865,15 @@ module.exports = _curry2(function is(Ctor, val) {
   return val != null && val.constructor === Ctor || val instanceof Ctor;
 });
 
-},{"./internal/_curry2":109}],174:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var empty = require('./empty');
-var equals = require('./equals');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/isEmpty.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var empty = __webpack_require__("./resources/assets/js/node_modules/ramda/src/empty.js");
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
 
 
 /**
@@ -5955,8 +6901,13 @@ module.exports = _curry1(function isEmpty(x) {
   return x != null && equals(x, empty(x));
 });
 
-},{"./empty":62,"./equals":66,"./internal/_curry1":108}],175:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/isNil.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -5978,8 +6929,13 @@ var _curry1 = require('./internal/_curry1');
  */
 module.exports = _curry1(function isNil(x) { return x == null; });
 
-},{"./internal/_curry1":108}],176:[function(require,module,exports){
-var invoker = require('./invoker');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/join.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var invoker = __webpack_require__("./resources/assets/js/node_modules/ramda/src/invoker.js");
 
 
 /**
@@ -6003,9 +6959,14 @@ var invoker = require('./invoker');
  */
 module.exports = invoker(1, 'join');
 
-},{"./invoker":172}],177:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var converge = require('./converge');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/juxt.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var converge = __webpack_require__("./resources/assets/js/node_modules/ramda/src/converge.js");
 
 
 /**
@@ -6029,10 +6990,15 @@ module.exports = _curry1(function juxt(fns) {
   return converge(function() { return Array.prototype.slice.call(arguments, 0); }, fns);
 });
 
-},{"./converge":43,"./internal/_curry1":108}],178:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _has = require('./internal/_has');
-var _isArguments = require('./internal/_isArguments');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/keys.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
+var _isArguments = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArguments.js");
 
 
 /**
@@ -6105,8 +7071,13 @@ module.exports = (function() {
     });
 }());
 
-},{"./internal/_curry1":108,"./internal/_has":120,"./internal/_isArguments":123}],179:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/keysIn.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -6139,8 +7110,13 @@ module.exports = _curry1(function keysIn(obj) {
   return ks;
 });
 
-},{"./internal/_curry1":108}],180:[function(require,module,exports){
-var nth = require('./nth');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/last.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var nth = __webpack_require__("./resources/assets/js/node_modules/ramda/src/nth.js");
 
 
 /**
@@ -6165,10 +7141,15 @@ var nth = require('./nth');
  */
 module.exports = nth(-1);
 
-},{"./nth":219}],181:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _isArray = require('./internal/_isArray');
-var equals = require('./equals');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/lastIndexOf.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isArray = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isArray.js");
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
 
 
 /**
@@ -6205,9 +7186,14 @@ module.exports = _curry2(function lastIndexOf(target, xs) {
   }
 });
 
-},{"./equals":66,"./internal/_curry2":109,"./internal/_isArray":124}],182:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _isNumber = require('./internal/_isNumber');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/length.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _isNumber = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isNumber.js");
 
 
 /**
@@ -6229,9 +7215,14 @@ module.exports = _curry1(function length(list) {
   return list != null && _isNumber(list.length) ? list.length : NaN;
 });
 
-},{"./internal/_curry1":108,"./internal/_isNumber":128}],183:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var map = require('./map');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/lens.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
 
 
 /**
@@ -6270,11 +7261,16 @@ module.exports = _curry2(function lens(getter, setter) {
   };
 });
 
-},{"./internal/_curry2":109,"./map":191}],184:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var lens = require('./lens');
-var nth = require('./nth');
-var update = require('./update');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/lensIndex.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var lens = __webpack_require__("./resources/assets/js/node_modules/ramda/src/lens.js");
+var nth = __webpack_require__("./resources/assets/js/node_modules/ramda/src/nth.js");
+var update = __webpack_require__("./resources/assets/js/node_modules/ramda/src/update.js");
 
 
 /**
@@ -6301,11 +7297,16 @@ module.exports = _curry1(function lensIndex(n) {
   return lens(nth(n), update(n));
 });
 
-},{"./internal/_curry1":108,"./lens":183,"./nth":219,"./update":310}],185:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var assocPath = require('./assocPath');
-var lens = require('./lens');
-var path = require('./path');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/lensPath.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var assocPath = __webpack_require__("./resources/assets/js/node_modules/ramda/src/assocPath.js");
+var lens = __webpack_require__("./resources/assets/js/node_modules/ramda/src/lens.js");
+var path = __webpack_require__("./resources/assets/js/node_modules/ramda/src/path.js");
 
 
 /**
@@ -6336,11 +7337,16 @@ module.exports = _curry1(function lensPath(p) {
   return lens(path(p), assocPath(p));
 });
 
-},{"./assocPath":25,"./internal/_curry1":108,"./lens":183,"./path":232}],186:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var assoc = require('./assoc');
-var lens = require('./lens');
-var prop = require('./prop');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/lensProp.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var assoc = __webpack_require__("./resources/assets/js/node_modules/ramda/src/assoc.js");
+var lens = __webpack_require__("./resources/assets/js/node_modules/ramda/src/lens.js");
+var prop = __webpack_require__("./resources/assets/js/node_modules/ramda/src/prop.js");
 
 
 /**
@@ -6367,9 +7373,14 @@ module.exports = _curry1(function lensProp(k) {
   return lens(prop(k), assoc(k));
 });
 
-},{"./assoc":24,"./internal/_curry1":108,"./lens":183,"./prop":246}],187:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var liftN = require('./liftN');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/lift.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var liftN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/liftN.js");
 
 
 /**
@@ -6398,12 +7409,17 @@ module.exports = _curry1(function lift(fn) {
   return liftN(fn.length, fn);
 });
 
-},{"./internal/_curry1":108,"./liftN":188}],188:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _reduce = require('./internal/_reduce');
-var ap = require('./ap');
-var curryN = require('./curryN');
-var map = require('./map');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/liftN.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var ap = __webpack_require__("./resources/assets/js/node_modules/ramda/src/ap.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
 
 
 /**
@@ -6430,8 +7446,13 @@ module.exports = _curry2(function liftN(arity, fn) {
   });
 });
 
-},{"./ap":18,"./curryN":46,"./internal/_curry2":109,"./internal/_reduce":141,"./map":191}],189:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/lt.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -6457,8 +7478,13 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function lt(a, b) { return a < b; });
 
-},{"./internal/_curry2":109}],190:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/lte.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -6484,14 +7510,19 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function lte(a, b) { return a <= b; });
 
-},{"./internal/_curry2":109}],191:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _map = require('./internal/_map');
-var _reduce = require('./internal/_reduce');
-var _xmap = require('./internal/_xmap');
-var curryN = require('./curryN');
-var keys = require('./keys');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/map.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_map.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var _xmap = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xmap.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
+var keys = __webpack_require__("./resources/assets/js/node_modules/ramda/src/keys.js");
 
 
 /**
@@ -6545,8 +7576,13 @@ module.exports = _curry2(_dispatchable(['fantasy-land/map', 'map'], _xmap, funct
   }
 }));
 
-},{"./curryN":46,"./internal/_curry2":109,"./internal/_dispatchable":112,"./internal/_map":135,"./internal/_reduce":141,"./internal/_xmap":161,"./keys":178}],192:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mapAccum.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -6596,8 +7632,13 @@ module.exports = _curry3(function mapAccum(fn, acc, list) {
   return [tuple[0], result];
 });
 
-},{"./internal/_curry3":110}],193:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mapAccumRight.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -6649,10 +7690,15 @@ module.exports = _curry3(function mapAccumRight(fn, acc, list) {
   return [result, tuple[0]];
 });
 
-},{"./internal/_curry3":110}],194:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _reduce = require('./internal/_reduce');
-var keys = require('./keys');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mapObjIndexed.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var keys = __webpack_require__("./resources/assets/js/node_modules/ramda/src/keys.js");
 
 
 /**
@@ -6683,8 +7729,13 @@ module.exports = _curry2(function mapObjIndexed(fn, obj) {
   }, {}, keys(obj));
 });
 
-},{"./internal/_curry2":109,"./internal/_reduce":141,"./keys":178}],195:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/match.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -6712,9 +7763,14 @@ module.exports = _curry2(function match(rx, str) {
   return str.match(rx) || [];
 });
 
-},{"./internal/_curry2":109}],196:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _isInteger = require('./internal/_isInteger');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mathMod.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isInteger = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isInteger.js");
 
 
 /**
@@ -6756,8 +7812,13 @@ module.exports = _curry2(function mathMod(m, p) {
   return ((m % p) + p) % p;
 });
 
-},{"./internal/_curry2":109,"./internal/_isInteger":127}],197:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/max.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -6779,8 +7840,13 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function max(a, b) { return b > a ? b : a; });
 
-},{"./internal/_curry2":109}],198:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/maxBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -6811,9 +7877,14 @@ module.exports = _curry3(function maxBy(f, a, b) {
   return f(b) > f(a) ? b : a;
 });
 
-},{"./internal/_curry3":110}],199:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var sum = require('./sum');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mean.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var sum = __webpack_require__("./resources/assets/js/node_modules/ramda/src/sum.js");
 
 
 /**
@@ -6836,9 +7907,14 @@ module.exports = _curry1(function mean(list) {
   return sum(list) / list.length;
 });
 
-},{"./internal/_curry1":108,"./sum":276}],200:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var mean = require('./mean');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/median.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var mean = __webpack_require__("./resources/assets/js/node_modules/ramda/src/mean.js");
 
 
 /**
@@ -6870,9 +7946,14 @@ module.exports = _curry1(function median(list) {
   }).slice(idx, idx + width));
 });
 
-},{"./internal/_curry1":108,"./mean":199}],201:[function(require,module,exports){
-var memoizeWith = require('./memoizeWith');
-var toString = require('./toString');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/memoize.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var memoizeWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/memoizeWith.js");
+var toString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/toString.js");
 
 
 /**
@@ -6906,10 +7987,15 @@ module.exports = memoizeWith(function() {
   return toString(arguments);
 });
 
-},{"./memoizeWith":202,"./toString":290}],202:[function(require,module,exports){
-var _arity = require('./internal/_arity');
-var _curry2 = require('./internal/_curry2');
-var _has = require('./internal/_has');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/memoizeWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arity.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
 
 
 /**
@@ -6952,9 +8038,14 @@ module.exports = _curry2(function memoizeWith(mFn, fn) {
   });
 });
 
-},{"./internal/_arity":97,"./internal/_curry2":109,"./internal/_has":120}],203:[function(require,module,exports){
-var _assign = require('./internal/_assign');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/merge.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _assign = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_assign.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -6984,9 +8075,14 @@ module.exports = _curry2(function merge(l, r) {
   return _assign({}, l, r);
 });
 
-},{"./internal/_assign":99,"./internal/_curry2":109}],204:[function(require,module,exports){
-var _assign = require('./internal/_assign');
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mergeAll.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _assign = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_assign.js");
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -7010,9 +8106,14 @@ module.exports = _curry1(function mergeAll(list) {
   return _assign.apply(null, [{}].concat(list));
 });
 
-},{"./internal/_assign":99,"./internal/_curry1":108}],205:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var mergeDeepWithKey = require('./mergeDeepWithKey');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mergeDeepLeft.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var mergeDeepWithKey = __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeDeepWithKey.js");
 
 
 /**
@@ -7042,9 +8143,14 @@ module.exports = _curry2(function mergeDeepLeft(lObj, rObj) {
   }, lObj, rObj);
 });
 
-},{"./internal/_curry2":109,"./mergeDeepWithKey":208}],206:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var mergeDeepWithKey = require('./mergeDeepWithKey');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mergeDeepRight.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var mergeDeepWithKey = __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeDeepWithKey.js");
 
 
 /**
@@ -7074,9 +8180,14 @@ module.exports = _curry2(function mergeDeepRight(lObj, rObj) {
   }, lObj, rObj);
 });
 
-},{"./internal/_curry2":109,"./mergeDeepWithKey":208}],207:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var mergeDeepWithKey = require('./mergeDeepWithKey');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mergeDeepWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var mergeDeepWithKey = __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeDeepWithKey.js");
 
 
 /**
@@ -7112,10 +8223,15 @@ module.exports = _curry3(function mergeDeepWith(fn, lObj, rObj) {
   }, lObj, rObj);
 });
 
-},{"./internal/_curry3":110,"./mergeDeepWithKey":208}],208:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var _isObject = require('./internal/_isObject');
-var mergeWithKey = require('./mergeWithKey');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mergeDeepWithKey.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var _isObject = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isObject.js");
+var mergeWithKey = __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeWithKey.js");
 
 
 /**
@@ -7156,9 +8272,14 @@ module.exports = _curry3(function mergeDeepWithKey(fn, lObj, rObj) {
   }, lObj, rObj);
 });
 
-},{"./internal/_curry3":110,"./internal/_isObject":129,"./mergeWithKey":210}],209:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var mergeWithKey = require('./mergeWithKey');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mergeWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var mergeWithKey = __webpack_require__("./resources/assets/js/node_modules/ramda/src/mergeWithKey.js");
 
 
 /**
@@ -7190,9 +8311,14 @@ module.exports = _curry3(function mergeWith(fn, l, r) {
   }, l, r);
 });
 
-},{"./internal/_curry3":110,"./mergeWithKey":210}],210:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var _has = require('./internal/_has');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/mergeWithKey.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
 
 
 /**
@@ -7239,8 +8365,13 @@ module.exports = _curry3(function mergeWithKey(fn, l, r) {
   return result;
 });
 
-},{"./internal/_curry3":110,"./internal/_has":120}],211:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/min.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -7262,8 +8393,13 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function min(a, b) { return b < a ? b : a; });
 
-},{"./internal/_curry2":109}],212:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/minBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -7294,8 +8430,13 @@ module.exports = _curry3(function minBy(f, a, b) {
   return f(b) < f(a) ? b : a;
 });
 
-},{"./internal/_curry3":110}],213:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/modulo.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -7325,8 +8466,13 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function modulo(a, b) { return a % b; });
 
-},{"./internal/_curry2":109}],214:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/multiply.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -7351,8 +8497,13 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function multiply(a, b) { return a * b; });
 
-},{"./internal/_curry2":109}],215:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/nAry.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -7402,8 +8553,13 @@ module.exports = _curry2(function nAry(n, fn) {
   }
 });
 
-},{"./internal/_curry2":109}],216:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/negate.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -7422,12 +8578,17 @@ var _curry1 = require('./internal/_curry1');
  */
 module.exports = _curry1(function negate(n) { return -n; });
 
-},{"./internal/_curry1":108}],217:[function(require,module,exports){
-var _complement = require('./internal/_complement');
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xany = require('./internal/_xany');
-var any = require('./any');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/none.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _complement = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_complement.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xany = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xany.js");
+var any = __webpack_require__("./resources/assets/js/node_modules/ramda/src/any.js");
 
 
 /**
@@ -7454,8 +8615,13 @@ var any = require('./any');
  */
 module.exports = _curry2(_complement(_dispatchable(['any'], _xany, any)));
 
-},{"./any":16,"./internal/_complement":103,"./internal/_curry2":109,"./internal/_dispatchable":112,"./internal/_xany":147}],218:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/not.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -7481,9 +8647,14 @@ module.exports = _curry1(function not(a) {
   return !a;
 });
 
-},{"./internal/_curry1":108}],219:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _isString = require('./internal/_isString');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/nth.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isString.js");
 
 
 /**
@@ -7517,10 +8688,15 @@ module.exports = _curry2(function nth(offset, list) {
   return _isString(list) ? list.charAt(idx) : list[idx];
 });
 
-},{"./internal/_curry2":109,"./internal/_isString":132}],220:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var curryN = require('./curryN');
-var nth = require('./nth');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/nthArg.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
+var nth = __webpack_require__("./resources/assets/js/node_modules/ramda/src/nth.js");
 
 
 /**
@@ -7548,8 +8724,13 @@ module.exports = _curry1(function nthArg(n) {
   });
 });
 
-},{"./curryN":46,"./internal/_curry1":108,"./nth":219}],221:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/o.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -7581,8 +8762,13 @@ module.exports = _curry3(function o(f, g, x) {
   return f(g(x));
 });
 
-},{"./internal/_curry3":110}],222:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/objOf.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -7611,9 +8797,14 @@ module.exports = _curry2(function objOf(key, val) {
   return obj;
 });
 
-},{"./internal/_curry2":109}],223:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _of = require('./internal/_of');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/of.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _of = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_of.js");
 
 
 /**
@@ -7636,9 +8827,14 @@ var _of = require('./internal/_of');
  */
 module.exports = _curry1(_of);
 
-},{"./internal/_curry1":108,"./internal/_of":137}],224:[function(require,module,exports){
-var _contains = require('./internal/_contains');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/omit.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _contains = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_contains.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -7667,9 +8863,14 @@ module.exports = _curry2(function omit(names, obj) {
   return result;
 });
 
-},{"./internal/_contains":105,"./internal/_curry2":109}],225:[function(require,module,exports){
-var _arity = require('./internal/_arity');
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/once.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arity.js");
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -7704,8 +8905,13 @@ module.exports = _curry1(function once(fn) {
   });
 });
 
-},{"./internal/_arity":97,"./internal/_curry1":108}],226:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/or.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -7732,8 +8938,13 @@ module.exports = _curry2(function or(a, b) {
   return a || b;
 });
 
-},{"./internal/_curry2":109}],227:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/over.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -7773,8 +8984,13 @@ module.exports = (function() {
   });
 }());
 
-},{"./internal/_curry3":110}],228:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pair.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -7795,9 +9011,14 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function pair(fst, snd) { return [fst, snd]; });
 
-},{"./internal/_curry2":109}],229:[function(require,module,exports){
-var _concat = require('./internal/_concat');
-var _createPartialApplicator = require('./internal/_createPartialApplicator');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/partial.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _createPartialApplicator = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_createPartialApplicator.js");
 
 
 /**
@@ -7830,10 +9051,15 @@ var _createPartialApplicator = require('./internal/_createPartialApplicator');
  */
 module.exports = _createPartialApplicator(_concat);
 
-},{"./internal/_concat":104,"./internal/_createPartialApplicator":107}],230:[function(require,module,exports){
-var _concat = require('./internal/_concat');
-var _createPartialApplicator = require('./internal/_createPartialApplicator');
-var flip = require('./flip');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/partialRight.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _createPartialApplicator = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_createPartialApplicator.js");
+var flip = __webpack_require__("./resources/assets/js/node_modules/ramda/src/flip.js");
 
 
 /**
@@ -7862,10 +9088,15 @@ var flip = require('./flip');
  */
 module.exports = _createPartialApplicator(flip(_concat));
 
-},{"./flip":74,"./internal/_concat":104,"./internal/_createPartialApplicator":107}],231:[function(require,module,exports){
-var filter = require('./filter');
-var juxt = require('./juxt');
-var reject = require('./reject');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/partition.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var filter = __webpack_require__("./resources/assets/js/node_modules/ramda/src/filter.js");
+var juxt = __webpack_require__("./resources/assets/js/node_modules/ramda/src/juxt.js");
+var reject = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reject.js");
 
 
 /**
@@ -7894,8 +9125,13 @@ var reject = require('./reject');
  */
 module.exports = juxt([filter, reject]);
 
-},{"./filter":68,"./juxt":177,"./reject":258}],232:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/path.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -7929,10 +9165,15 @@ module.exports = _curry2(function path(paths, obj) {
   return val;
 });
 
-},{"./internal/_curry2":109}],233:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var equals = require('./equals');
-var path = require('./path');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pathEq.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
+var path = __webpack_require__("./resources/assets/js/node_modules/ramda/src/path.js");
 
 
 /**
@@ -7963,10 +9204,15 @@ module.exports = _curry3(function pathEq(_path, val, obj) {
   return equals(path(_path, obj), val);
 });
 
-},{"./equals":66,"./internal/_curry3":110,"./path":232}],234:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var defaultTo = require('./defaultTo');
-var path = require('./path');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pathOr.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var defaultTo = __webpack_require__("./resources/assets/js/node_modules/ramda/src/defaultTo.js");
+var path = __webpack_require__("./resources/assets/js/node_modules/ramda/src/path.js");
 
 
 /**
@@ -7992,9 +9238,14 @@ module.exports = _curry3(function pathOr(d, p, obj) {
   return defaultTo(d, path(p, obj));
 });
 
-},{"./defaultTo":48,"./internal/_curry3":110,"./path":232}],235:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var path = require('./path');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pathSatisfies.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var path = __webpack_require__("./resources/assets/js/node_modules/ramda/src/path.js");
 
 
 /**
@@ -8020,8 +9271,13 @@ module.exports = _curry3(function pathSatisfies(pred, propPath, obj) {
   return propPath.length > 0 && pred(path(propPath, obj));
 });
 
-},{"./internal/_curry3":110,"./path":232}],236:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pick.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -8054,8 +9310,13 @@ module.exports = _curry2(function pick(names, obj) {
   return result;
 });
 
-},{"./internal/_curry2":109}],237:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pickAll.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -8088,8 +9349,13 @@ module.exports = _curry2(function pickAll(names, obj) {
   return result;
 });
 
-},{"./internal/_curry2":109}],238:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pickBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -8122,11 +9388,16 @@ module.exports = _curry2(function pickBy(test, obj) {
   return result;
 });
 
-},{"./internal/_curry2":109}],239:[function(require,module,exports){
-var _arity = require('./internal/_arity');
-var _pipe = require('./internal/_pipe');
-var reduce = require('./reduce');
-var tail = require('./tail');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pipe.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arity.js");
+var _pipe = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_pipe.js");
+var reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduce.js");
+var tail = __webpack_require__("./resources/assets/js/node_modules/ramda/src/tail.js");
 
 
 /**
@@ -8160,9 +9431,14 @@ module.exports = function pipe() {
                 reduce(_pipe, arguments[0], tail(arguments)));
 };
 
-},{"./internal/_arity":97,"./internal/_pipe":138,"./reduce":253,"./tail":279}],240:[function(require,module,exports){
-var composeK = require('./composeK');
-var reverse = require('./reverse');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pipeK.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var composeK = __webpack_require__("./resources/assets/js/node_modules/ramda/src/composeK.js");
+var reverse = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reverse.js");
 
 /**
  * Returns the left-to-right Kleisli composition of the provided functions,
@@ -8205,11 +9481,16 @@ module.exports = function pipeK() {
   return composeK.apply(this, reverse(arguments));
 };
 
-},{"./composeK":36,"./reverse":262}],241:[function(require,module,exports){
-var _arity = require('./internal/_arity');
-var _pipeP = require('./internal/_pipeP');
-var reduce = require('./reduce');
-var tail = require('./tail');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pipeP.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arity.js");
+var _pipeP = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_pipeP.js");
+var reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduce.js");
+var tail = __webpack_require__("./resources/assets/js/node_modules/ramda/src/tail.js");
 
 
 /**
@@ -8238,10 +9519,15 @@ module.exports = function pipeP() {
                 reduce(_pipeP, arguments[0], tail(arguments)));
 };
 
-},{"./internal/_arity":97,"./internal/_pipeP":139,"./reduce":253,"./tail":279}],242:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var map = require('./map');
-var prop = require('./prop');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/pluck.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
+var prop = __webpack_require__("./resources/assets/js/node_modules/ramda/src/prop.js");
 
 
 /**
@@ -8273,9 +9559,14 @@ module.exports = _curry2(function pluck(p, list) {
   return map(prop(p), list);
 });
 
-},{"./internal/_curry2":109,"./map":191,"./prop":246}],243:[function(require,module,exports){
-var _concat = require('./internal/_concat');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/prepend.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -8299,9 +9590,14 @@ module.exports = _curry2(function prepend(el, list) {
   return _concat([el], list);
 });
 
-},{"./internal/_concat":104,"./internal/_curry2":109}],244:[function(require,module,exports){
-var multiply = require('./multiply');
-var reduce = require('./reduce');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/product.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var multiply = __webpack_require__("./resources/assets/js/node_modules/ramda/src/multiply.js");
+var reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduce.js");
 
 
 /**
@@ -8321,11 +9617,16 @@ var reduce = require('./reduce');
  */
 module.exports = reduce(multiply, 1);
 
-},{"./multiply":214,"./reduce":253}],245:[function(require,module,exports){
-var _map = require('./internal/_map');
-var identity = require('./identity');
-var pickAll = require('./pickAll');
-var useWith = require('./useWith');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/project.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_map.js");
+var identity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/identity.js");
+var pickAll = __webpack_require__("./resources/assets/js/node_modules/ramda/src/pickAll.js");
+var useWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/useWith.js");
 
 
 /**
@@ -8349,8 +9650,13 @@ var useWith = require('./useWith');
  */
 module.exports = useWith(_map, [pickAll, identity]); // passing `identity` gives correct arity
 
-},{"./identity":86,"./internal/_map":135,"./pickAll":237,"./useWith":311}],246:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/prop.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -8373,9 +9679,14 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function prop(p, obj) { return obj[p]; });
 
-},{"./internal/_curry2":109}],247:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var equals = require('./equals');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/propEq.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
 
 
 /**
@@ -8406,9 +9717,14 @@ module.exports = _curry3(function propEq(name, val, obj) {
   return equals(val, obj[name]);
 });
 
-},{"./equals":66,"./internal/_curry3":110}],248:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var is = require('./is');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/propIs.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var is = __webpack_require__("./resources/assets/js/node_modules/ramda/src/is.js");
 
 
 /**
@@ -8435,9 +9751,14 @@ module.exports = _curry3(function propIs(type, name, obj) {
   return is(type, obj[name]);
 });
 
-},{"./internal/_curry3":110,"./is":173}],249:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var _has = require('./internal/_has');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/propOr.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
 
 
 /**
@@ -8470,8 +9791,13 @@ module.exports = _curry3(function propOr(val, p, obj) {
   return (obj != null && _has(p, obj)) ? obj[p] : val;
 });
 
-},{"./internal/_curry3":110,"./internal/_has":120}],250:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/propSatisfies.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -8496,8 +9822,13 @@ module.exports = _curry3(function propSatisfies(pred, name, obj) {
   return pred(obj[name]);
 });
 
-},{"./internal/_curry3":110}],251:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/props.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -8533,9 +9864,14 @@ module.exports = _curry2(function props(ps, obj) {
   return out;
 });
 
-},{"./internal/_curry2":109}],252:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _isNumber = require('./internal/_isNumber');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/range.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isNumber = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isNumber.js");
 
 
 /**
@@ -8567,9 +9903,14 @@ module.exports = _curry2(function range(from, to) {
   return result;
 });
 
-},{"./internal/_curry2":109,"./internal/_isNumber":128}],253:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var _reduce = require('./internal/_reduce');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/reduce.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
 
 
 /**
@@ -8620,12 +9961,17 @@ var _reduce = require('./internal/_reduce');
  */
 module.exports = _curry3(_reduce);
 
-},{"./internal/_curry3":110,"./internal/_reduce":141}],254:[function(require,module,exports){
-var _curryN = require('./internal/_curryN');
-var _dispatchable = require('./internal/_dispatchable');
-var _has = require('./internal/_has');
-var _reduce = require('./internal/_reduce');
-var _xreduceBy = require('./internal/_xreduceBy');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/reduceBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curryN.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var _xreduceBy = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xreduceBy.js");
 
 
 /**
@@ -8681,8 +10027,13 @@ module.exports = _curryN(4, [], _dispatchable([], _xreduceBy,
     }, {}, list);
   }));
 
-},{"./internal/_curryN":111,"./internal/_dispatchable":112,"./internal/_has":120,"./internal/_reduce":141,"./internal/_xreduceBy":162}],255:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/reduceRight.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -8736,10 +10087,15 @@ module.exports = _curry3(function reduceRight(fn, acc, list) {
   return acc;
 });
 
-},{"./internal/_curry3":110}],256:[function(require,module,exports){
-var _curryN = require('./internal/_curryN');
-var _reduce = require('./internal/_reduce');
-var _reduced = require('./internal/_reduced');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/reduceWhile.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curryN.js");
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var _reduced = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduced.js");
 
 
 /**
@@ -8777,9 +10133,14 @@ module.exports = _curryN(4, [], function _reduceWhile(pred, fn, a, list) {
   }, a, list);
 });
 
-},{"./internal/_curryN":111,"./internal/_reduce":141,"./internal/_reduced":142}],257:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _reduced = require('./internal/_reduced');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/reduced.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _reduced = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduced.js");
 
 /**
  * Returns a value wrapped to indicate that it is the final value of the reduce
@@ -8808,10 +10169,15 @@ var _reduced = require('./internal/_reduced');
 
 module.exports = _curry1(_reduced);
 
-},{"./internal/_curry1":108,"./internal/_reduced":142}],258:[function(require,module,exports){
-var _complement = require('./internal/_complement');
-var _curry2 = require('./internal/_curry2');
-var filter = require('./filter');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/reject.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _complement = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_complement.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var filter = __webpack_require__("./resources/assets/js/node_modules/ramda/src/filter.js");
 
 
 /**
@@ -8842,8 +10208,13 @@ module.exports = _curry2(function reject(pred, filterable) {
   return filter(_complement(pred), filterable);
 });
 
-},{"./filter":68,"./internal/_complement":103,"./internal/_curry2":109}],259:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/remove.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -8871,10 +10242,15 @@ module.exports = _curry3(function remove(start, count, list) {
   return result;
 });
 
-},{"./internal/_curry3":110}],260:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var always = require('./always');
-var times = require('./times');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/repeat.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var always = __webpack_require__("./resources/assets/js/node_modules/ramda/src/always.js");
+var times = __webpack_require__("./resources/assets/js/node_modules/ramda/src/times.js");
 
 
 /**
@@ -8904,8 +10280,13 @@ module.exports = _curry2(function repeat(value, n) {
   return times(always(value), n);
 });
 
-},{"./always":14,"./internal/_curry2":109,"./times":286}],261:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/replace.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -8932,9 +10313,14 @@ module.exports = _curry3(function replace(regex, replacement, str) {
   return str.replace(regex, replacement);
 });
 
-},{"./internal/_curry3":110}],262:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _isString = require('./internal/_isString');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/reverse.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _isString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isString.js");
 
 
 /**
@@ -8966,8 +10352,13 @@ module.exports = _curry1(function reverse(list) {
                            Array.prototype.slice.call(list, 0).reverse();
 });
 
-},{"./internal/_curry1":108,"./internal/_isString":132}],263:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/scan.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -9003,12 +10394,17 @@ module.exports = _curry3(function scan(fn, acc, list) {
   return result;
 });
 
-},{"./internal/_curry3":110}],264:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var ap = require('./ap');
-var map = require('./map');
-var prepend = require('./prepend');
-var reduceRight = require('./reduceRight');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/sequence.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var ap = __webpack_require__("./resources/assets/js/node_modules/ramda/src/ap.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
+var prepend = __webpack_require__("./resources/assets/js/node_modules/ramda/src/prepend.js");
+var reduceRight = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduceRight.js");
 
 
 /**
@@ -9043,10 +10439,15 @@ module.exports = _curry2(function sequence(of, traversable) {
                 traversable);
 });
 
-},{"./ap":18,"./internal/_curry2":109,"./map":191,"./prepend":243,"./reduceRight":255}],265:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var always = require('./always');
-var over = require('./over');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/set.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var always = __webpack_require__("./resources/assets/js/node_modules/ramda/src/always.js");
+var over = __webpack_require__("./resources/assets/js/node_modules/ramda/src/over.js");
 
 
 /**
@@ -9075,9 +10476,14 @@ module.exports = _curry3(function set(lens, v, x) {
   return over(lens, always(v), x);
 });
 
-},{"./always":14,"./internal/_curry3":110,"./over":227}],266:[function(require,module,exports){
-var _checkForMethod = require('./internal/_checkForMethod');
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/slice.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _checkForMethod = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_checkForMethod.js");
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -9108,8 +10514,13 @@ module.exports = _curry3(_checkForMethod('slice', function slice(fromIndex, toIn
   return Array.prototype.slice.call(list, fromIndex, toIndex);
 }));
 
-},{"./internal/_checkForMethod":100,"./internal/_curry3":110}],267:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/sort.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -9136,8 +10547,13 @@ module.exports = _curry2(function sort(comparator, list) {
   return Array.prototype.slice.call(list, 0).sort(comparator);
 });
 
-},{"./internal/_curry2":109}],268:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/sortBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -9180,8 +10596,13 @@ module.exports = _curry2(function sortBy(fn, list) {
   });
 });
 
-},{"./internal/_curry2":109}],269:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/sortWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -9228,8 +10649,13 @@ module.exports = _curry2(function sortWith(fns, list) {
   });
 });
 
-},{"./internal/_curry2":109}],270:[function(require,module,exports){
-var invoker = require('./invoker');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/split.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var invoker = __webpack_require__("./resources/assets/js/node_modules/ramda/src/invoker.js");
 
 
 /**
@@ -9254,10 +10680,15 @@ var invoker = require('./invoker');
  */
 module.exports = invoker(1, 'split');
 
-},{"./invoker":172}],271:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var length = require('./length');
-var slice = require('./slice');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/splitAt.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var length = __webpack_require__("./resources/assets/js/node_modules/ramda/src/length.js");
+var slice = __webpack_require__("./resources/assets/js/node_modules/ramda/src/slice.js");
 
 
 /**
@@ -9282,9 +10713,14 @@ module.exports = _curry2(function splitAt(index, array) {
   return [slice(0, index, array), slice(index, length(array), array)];
 });
 
-},{"./internal/_curry2":109,"./length":182,"./slice":266}],272:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var slice = require('./slice');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/splitEvery.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var slice = __webpack_require__("./resources/assets/js/node_modules/ramda/src/slice.js");
 
 
 /**
@@ -9316,8 +10752,13 @@ module.exports = _curry2(function splitEvery(n, list) {
   return result;
 });
 
-},{"./internal/_curry2":109,"./slice":266}],273:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/splitWhen.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -9352,10 +10793,15 @@ module.exports = _curry2(function splitWhen(pred, list) {
   return [prefix, Array.prototype.slice.call(list, idx)];
 });
 
-},{"./internal/_curry2":109}],274:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var equals = require('./equals');
-var take = require('./take');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/startsWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
+var take = __webpack_require__("./resources/assets/js/node_modules/ramda/src/take.js");
 
 /**
  * Checks if a list starts with the provided values
@@ -9380,8 +10826,13 @@ module.exports = _curry2(function(prefix, list) {
   return equals(take(prefix.length, list), prefix);
 });
 
-},{"./equals":66,"./internal/_curry2":109,"./take":280}],275:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/subtract.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -9411,9 +10862,14 @@ module.exports = _curry2(function subtract(a, b) {
   return Number(a) - Number(b);
 });
 
-},{"./internal/_curry2":109}],276:[function(require,module,exports){
-var add = require('./add');
-var reduce = require('./reduce');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/sum.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var add = __webpack_require__("./resources/assets/js/node_modules/ramda/src/add.js");
+var reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reduce.js");
 
 
 /**
@@ -9433,10 +10889,15 @@ var reduce = require('./reduce');
  */
 module.exports = reduce(add, 0);
 
-},{"./add":9,"./reduce":253}],277:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var concat = require('./concat');
-var difference = require('./difference');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/symmetricDifference.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/concat.js");
+var difference = __webpack_require__("./resources/assets/js/node_modules/ramda/src/difference.js");
 
 
 /**
@@ -9461,10 +10922,15 @@ module.exports = _curry2(function symmetricDifference(list1, list2) {
   return concat(difference(list1, list2), difference(list2, list1));
 });
 
-},{"./concat":38,"./difference":50,"./internal/_curry2":109}],278:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var concat = require('./concat');
-var differenceWith = require('./differenceWith');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/symmetricDifferenceWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/concat.js");
+var differenceWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/differenceWith.js");
 
 
 /**
@@ -9493,10 +10959,15 @@ module.exports = _curry3(function symmetricDifferenceWith(pred, list1, list2) {
   return concat(differenceWith(pred, list1, list2), differenceWith(pred, list2, list1));
 });
 
-},{"./concat":38,"./differenceWith":51,"./internal/_curry3":110}],279:[function(require,module,exports){
-var _checkForMethod = require('./internal/_checkForMethod');
-var _curry1 = require('./internal/_curry1');
-var slice = require('./slice');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/tail.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _checkForMethod = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_checkForMethod.js");
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var slice = __webpack_require__("./resources/assets/js/node_modules/ramda/src/slice.js");
 
 
 /**
@@ -9528,11 +10999,16 @@ var slice = require('./slice');
  */
 module.exports = _curry1(_checkForMethod('tail', slice(1, Infinity)));
 
-},{"./internal/_checkForMethod":100,"./internal/_curry1":108,"./slice":266}],280:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xtake = require('./internal/_xtake');
-var slice = require('./slice');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/take.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xtake = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xtake.js");
+var slice = __webpack_require__("./resources/assets/js/node_modules/ramda/src/slice.js");
 
 
 /**
@@ -9582,9 +11058,14 @@ module.exports = _curry2(_dispatchable(['take'], _xtake, function take(n, xs) {
   return slice(0, n < 0 ? Infinity : n, xs);
 }));
 
-},{"./internal/_curry2":109,"./internal/_dispatchable":112,"./internal/_xtake":163,"./slice":266}],281:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var drop = require('./drop');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/takeLast.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var drop = __webpack_require__("./resources/assets/js/node_modules/ramda/src/drop.js");
 
 
 /**
@@ -9613,8 +11094,13 @@ module.exports = _curry2(function takeLast(n, xs) {
   return drop(n >= 0 ? xs.length - n : 0, xs);
 });
 
-},{"./drop":55,"./internal/_curry2":109}],282:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/takeLastWhile.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -9647,10 +11133,15 @@ module.exports = _curry2(function takeLastWhile(fn, list) {
   return Array.prototype.slice.call(list, idx + 1);
 });
 
-},{"./internal/_curry2":109}],283:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xtakeWhile = require('./internal/_xtakeWhile');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/takeWhile.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _dispatchable = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_dispatchable.js");
+var _xtakeWhile = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xtakeWhile.js");
 
 
 /**
@@ -9688,8 +11179,13 @@ module.exports = _curry2(_dispatchable(['takeWhile'], _xtakeWhile, function take
   return Array.prototype.slice.call(list, 0, idx);
 }));
 
-},{"./internal/_curry2":109,"./internal/_dispatchable":112,"./internal/_xtakeWhile":164}],284:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/tap.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -9715,11 +11211,16 @@ module.exports = _curry2(function tap(fn, x) {
   return x;
 });
 
-},{"./internal/_curry2":109}],285:[function(require,module,exports){
-var _cloneRegExp = require('./internal/_cloneRegExp');
-var _curry2 = require('./internal/_curry2');
-var _isRegExp = require('./internal/_isRegExp');
-var toString = require('./toString');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/test.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _cloneRegExp = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_cloneRegExp.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _isRegExp = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_isRegExp.js");
+var toString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/toString.js");
 
 
 /**
@@ -9746,8 +11247,13 @@ module.exports = _curry2(function test(pattern, str) {
   return _cloneRegExp(pattern).test(str);
 });
 
-},{"./internal/_cloneRegExp":102,"./internal/_curry2":109,"./internal/_isRegExp":131,"./toString":290}],286:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/times.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -9789,8 +11295,13 @@ module.exports = _curry2(function times(fn, n) {
   return list;
 });
 
-},{"./internal/_curry2":109}],287:[function(require,module,exports){
-var invoker = require('./invoker');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/toLower.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var invoker = __webpack_require__("./resources/assets/js/node_modules/ramda/src/invoker.js");
 
 
 /**
@@ -9810,9 +11321,14 @@ var invoker = require('./invoker');
  */
 module.exports = invoker(0, 'toLowerCase');
 
-},{"./invoker":172}],288:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _has = require('./internal/_has');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/toPairs.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
 
 
 /**
@@ -9843,8 +11359,13 @@ module.exports = _curry1(function toPairs(obj) {
   return pairs;
 });
 
-},{"./internal/_curry1":108,"./internal/_has":120}],289:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/toPairsIn.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -9876,9 +11397,14 @@ module.exports = _curry1(function toPairsIn(obj) {
   return pairs;
 });
 
-},{"./internal/_curry1":108}],290:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var _toString = require('./internal/_toString');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/toString.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var _toString = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_toString.js");
 
 
 /**
@@ -9919,8 +11445,13 @@ var _toString = require('./internal/_toString');
  */
 module.exports = _curry1(function toString(val) { return _toString(val, []); });
 
-},{"./internal/_curry1":108,"./internal/_toString":145}],291:[function(require,module,exports){
-var invoker = require('./invoker');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/toUpper.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var invoker = __webpack_require__("./resources/assets/js/node_modules/ramda/src/invoker.js");
 
 
 /**
@@ -9940,10 +11471,15 @@ var invoker = require('./invoker');
  */
 module.exports = invoker(0, 'toUpperCase');
 
-},{"./invoker":172}],292:[function(require,module,exports){
-var _reduce = require('./internal/_reduce');
-var _xwrap = require('./internal/_xwrap');
-var curryN = require('./curryN');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/transduce.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _reduce = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_reduce.js");
+var _xwrap = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_xwrap.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
 
 
 /**
@@ -9997,8 +11533,13 @@ module.exports = curryN(4, function transduce(xf, fn, acc, list) {
   return _reduce(xf(typeof fn === 'function' ? _xwrap(fn) : fn), acc, list);
 });
 
-},{"./curryN":46,"./internal/_reduce":141,"./internal/_xwrap":165}],293:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/transpose.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -10043,10 +11584,15 @@ module.exports = _curry1(function transpose(outerlist) {
   return result;
 });
 
-},{"./internal/_curry1":108}],294:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var map = require('./map');
-var sequence = require('./sequence');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/traverse.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
+var sequence = __webpack_require__("./resources/assets/js/node_modules/ramda/src/sequence.js");
 
 
 /**
@@ -10081,8 +11627,13 @@ module.exports = _curry3(function traverse(of, f, traversable) {
     sequence(of, map(f, traversable));
 });
 
-},{"./internal/_curry3":110,"./map":191,"./sequence":264}],295:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/trim.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -10119,10 +11670,15 @@ module.exports = (function() {
   }
 }());
 
-},{"./internal/_curry1":108}],296:[function(require,module,exports){
-var _arity = require('./internal/_arity');
-var _concat = require('./internal/_concat');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/tryCatch.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _arity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_arity.js");
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -10156,8 +11712,13 @@ module.exports = _curry2(function _tryCatch(tryer, catcher) {
   });
 });
 
-},{"./internal/_arity":97,"./internal/_concat":104,"./internal/_curry2":109}],297:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/type.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -10190,8 +11751,13 @@ module.exports = _curry1(function type(val) {
          Object.prototype.toString.call(val).slice(8, -1);
 });
 
-},{"./internal/_curry1":108}],298:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/unapply.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -10224,9 +11790,14 @@ module.exports = _curry1(function unapply(fn) {
   };
 });
 
-},{"./internal/_curry1":108}],299:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var nAry = require('./nAry');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/unary.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var nAry = __webpack_require__("./resources/assets/js/node_modules/ramda/src/nAry.js");
 
 
 /**
@@ -10261,9 +11832,14 @@ module.exports = _curry1(function unary(fn) {
   return nAry(1, fn);
 });
 
-},{"./internal/_curry1":108,"./nAry":215}],300:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var curryN = require('./curryN');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/uncurryN.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
 
 
 /**
@@ -10301,8 +11877,13 @@ module.exports = _curry2(function uncurryN(depth, fn) {
   });
 });
 
-},{"./curryN":46,"./internal/_curry2":109}],301:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/unfold.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -10340,11 +11921,16 @@ module.exports = _curry2(function unfold(fn, seed) {
   return result;
 });
 
-},{"./internal/_curry2":109}],302:[function(require,module,exports){
-var _concat = require('./internal/_concat');
-var _curry2 = require('./internal/_curry2');
-var compose = require('./compose');
-var uniq = require('./uniq');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/union.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var compose = __webpack_require__("./resources/assets/js/node_modules/ramda/src/compose.js");
+var uniq = __webpack_require__("./resources/assets/js/node_modules/ramda/src/uniq.js");
 
 
 /**
@@ -10366,10 +11952,15 @@ var uniq = require('./uniq');
  */
 module.exports = _curry2(compose(uniq, _concat));
 
-},{"./compose":35,"./internal/_concat":104,"./internal/_curry2":109,"./uniq":304}],303:[function(require,module,exports){
-var _concat = require('./internal/_concat');
-var _curry3 = require('./internal/_curry3');
-var uniqWith = require('./uniqWith');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/unionWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _concat = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_concat.js");
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var uniqWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/uniqWith.js");
 
 
 /**
@@ -10398,9 +11989,14 @@ module.exports = _curry3(function unionWith(pred, list1, list2) {
   return uniqWith(pred, _concat(list1, list2));
 });
 
-},{"./internal/_concat":104,"./internal/_curry3":110,"./uniqWith":306}],304:[function(require,module,exports){
-var identity = require('./identity');
-var uniqBy = require('./uniqBy');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/uniq.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var identity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/identity.js");
+var uniqBy = __webpack_require__("./resources/assets/js/node_modules/ramda/src/uniqBy.js");
 
 
 /**
@@ -10422,9 +12018,14 @@ var uniqBy = require('./uniqBy');
  */
 module.exports = uniqBy(identity);
 
-},{"./identity":86,"./uniqBy":305}],305:[function(require,module,exports){
-var _Set = require('./internal/_Set');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/uniqBy.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _Set = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_Set.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -10462,9 +12063,14 @@ module.exports = _curry2(function uniqBy(fn, list) {
   return result;
 });
 
-},{"./internal/_Set":95,"./internal/_curry2":109}],306:[function(require,module,exports){
-var _containsWith = require('./internal/_containsWith');
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/uniqWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _containsWith = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_containsWith.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -10504,8 +12110,13 @@ module.exports = _curry2(function uniqWith(pred, list) {
   return result;
 });
 
-},{"./internal/_containsWith":106,"./internal/_curry2":109}],307:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/unless.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -10536,9 +12147,14 @@ module.exports = _curry3(function unless(pred, whenFalseFn, x) {
   return pred(x) ? x : whenFalseFn(x);
 });
 
-},{"./internal/_curry3":110}],308:[function(require,module,exports){
-var _identity = require('./internal/_identity');
-var chain = require('./chain');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/unnest.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _identity = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_identity.js");
+var chain = __webpack_require__("./resources/assets/js/node_modules/ramda/src/chain.js");
 
 
 /**
@@ -10560,8 +12176,13 @@ var chain = require('./chain');
  */
 module.exports = chain(_identity);
 
-},{"./chain":30,"./internal/_identity":121}],309:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/until.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -10591,10 +12212,15 @@ module.exports = _curry3(function until(pred, fn, init) {
   return val;
 });
 
-},{"./internal/_curry3":110}],310:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
-var adjust = require('./adjust');
-var always = require('./always');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/update.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
+var adjust = __webpack_require__("./resources/assets/js/node_modules/ramda/src/adjust.js");
+var always = __webpack_require__("./resources/assets/js/node_modules/ramda/src/always.js");
 
 
 /**
@@ -10623,9 +12249,14 @@ module.exports = _curry3(function update(idx, x, list) {
   return adjust(always(x), idx, list);
 });
 
-},{"./adjust":11,"./always":14,"./internal/_curry3":110}],311:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var curryN = require('./curryN');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/useWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var curryN = __webpack_require__("./resources/assets/js/node_modules/ramda/src/curryN.js");
 
 
 /**
@@ -10669,9 +12300,14 @@ module.exports = _curry2(function useWith(fn, transformers) {
   });
 });
 
-},{"./curryN":46,"./internal/_curry2":109}],312:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
-var keys = require('./keys');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/values.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
+var keys = __webpack_require__("./resources/assets/js/node_modules/ramda/src/keys.js");
 
 
 /**
@@ -10703,8 +12339,13 @@ module.exports = _curry1(function values(obj) {
   return vals;
 });
 
-},{"./internal/_curry1":108,"./keys":178}],313:[function(require,module,exports){
-var _curry1 = require('./internal/_curry1');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/valuesIn.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry1 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry1.js");
 
 
 /**
@@ -10737,8 +12378,13 @@ module.exports = _curry1(function valuesIn(obj) {
   return vs;
 });
 
-},{"./internal/_curry1":108}],314:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/view.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -10775,8 +12421,13 @@ module.exports = (function() {
   });
 }());
 
-},{"./internal/_curry2":109}],315:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/when.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -10811,9 +12462,14 @@ module.exports = _curry3(function when(pred, whenTrueFn, x) {
   return pred(x) ? whenTrueFn(x) : x;
 });
 
-},{"./internal/_curry3":110}],316:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var _has = require('./internal/_has');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/where.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var _has = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_has.js");
 
 
 /**
@@ -10859,11 +12515,16 @@ module.exports = _curry2(function where(spec, testObj) {
   return true;
 });
 
-},{"./internal/_curry2":109,"./internal/_has":120}],317:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
-var equals = require('./equals');
-var map = require('./map');
-var where = require('./where');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/whereEq.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var equals = __webpack_require__("./resources/assets/js/node_modules/ramda/src/equals.js");
+var map = __webpack_require__("./resources/assets/js/node_modules/ramda/src/map.js");
+var where = __webpack_require__("./resources/assets/js/node_modules/ramda/src/where.js");
 
 
 /**
@@ -10898,11 +12559,16 @@ module.exports = _curry2(function whereEq(spec, testObj) {
   return where(map(equals, spec), testObj);
 });
 
-},{"./equals":66,"./internal/_curry2":109,"./map":191,"./where":316}],318:[function(require,module,exports){
-var _contains = require('./internal/_contains');
-var _curry2 = require('./internal/_curry2');
-var flip = require('./flip');
-var reject = require('./reject');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/without.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _contains = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_contains.js");
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
+var flip = __webpack_require__("./resources/assets/js/node_modules/ramda/src/flip.js");
+var reject = __webpack_require__("./resources/assets/js/node_modules/ramda/src/reject.js");
 
 
 /**
@@ -10928,8 +12594,13 @@ module.exports = _curry2(function(xs, list) {
   return reject(flip(_contains)(xs), list);
 });
 
-},{"./flip":74,"./internal/_contains":105,"./internal/_curry2":109,"./reject":258}],319:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/xprod.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -10967,8 +12638,13 @@ module.exports = _curry2(function xprod(a, b) { // = xprodWith(prepend); (takes 
   return result;
 });
 
-},{"./internal/_curry2":109}],320:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/zip.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -11001,8 +12677,13 @@ module.exports = _curry2(function zip(a, b) {
   return rv;
 });
 
-},{"./internal/_curry2":109}],321:[function(require,module,exports){
-var _curry2 = require('./internal/_curry2');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/zipObj.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry2 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry2.js");
 
 
 /**
@@ -11033,8 +12714,13 @@ module.exports = _curry2(function zipObj(keys, values) {
   return out;
 });
 
-},{"./internal/_curry2":109}],322:[function(require,module,exports){
-var _curry3 = require('./internal/_curry3');
+
+/***/ }),
+
+/***/ "./resources/assets/js/node_modules/ramda/src/zipWith.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var _curry3 = __webpack_require__("./resources/assets/js/node_modules/ramda/src/internal/_curry3.js");
 
 
 /**
@@ -11072,6 +12758,17 @@ module.exports = _curry3(function zipWith(fn, a, b) {
   return rv;
 });
 
-},{"./internal/_curry3":110}]},{},[4]);
 
-//# sourceMappingURL=functions.js.map
+/***/ }),
+
+/***/ 2:
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("./resources/assets/js/mazorca.js");
+module.exports = __webpack_require__("./resources/assets/js/micorriza.js");
+
+
+/***/ })
+
+/******/ });
+//# sourceMappingURL=bundle.ff0501c65fe00c93ae2b.js.map
