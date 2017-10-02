@@ -1,6 +1,5 @@
 import R from 'ramda';
-var Vue = require('vue');
-var VueResource = Vue.use(require('vue-resource'));
+import Vue from 'vue';
 import {crudAjax} from '../mixins/crud-ajax';
 import {fileDnD} from '../../file-dnd.js';
 import {ifElementExistsThenLaunch, objTextFilter, numericalObjSort, sortingOrder} from '../../functions/pure';

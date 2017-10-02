@@ -1,9 +1,3 @@
- <script>
- 	@if(config('cltvo.dev_mode'))
- 		var process = { env: {NODE_ENV: 'dev'}}
- 	@endif
- </script>
-
 {{-- pasar al js --}}
 <!-- Note: jQuery is on the head -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
@@ -71,8 +65,16 @@ mainVueStore.iva = 16;
 
 @yield('vue_store'){{-- debe estar antes del admin functions --}}
 
- {{-- @if($asset_versioning) --}}
-	 {{-- {!! Html::script(elixir('js/admin-functions.js')) !!} --}}
- {{-- @else --}}
-	 {!! Html::script('js/admin-functions.js') !!}
- {{-- @endif --}}
+@if(env('APP_DEBUG') == true) 
+    <script src="http://localhost:8080/admin-bundle.js"></script> 
+    <script> 
+        if (window.CLTVO_ENV !== 'webpack') { 
+          	console.log('Estamos en desarollo y sin usar webpack'); 
+            var s = document.createElement( 'script' ); 
+            s.setAttribute( 'src', '{{ elixir("admin-bundle.js") }}' ); 
+            document.body.appendChild( s ); 
+        } 
+    </script> 
+@else 
+    <script src="{{ elixir('admin-bundle.js') }}"></script> 
+@endif 

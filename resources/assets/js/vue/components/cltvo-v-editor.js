@@ -1,9 +1,7 @@
 import R from 'ramda';
+import Vue from 'vue';
 
-var Vue = require('vue');
-var VueResource = Vue.use(require('vue-resource'));
-
-export var cltvoVEditor = Vue.component('cltvo-v-editor',{
+export const cltvoVEditor = Vue.component('cltvo-v-editor',{
 	template: '#cltvo-v-editor-template',
 
 	props: [
