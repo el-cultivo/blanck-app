@@ -14,7 +14,7 @@
 	<meta name="keywords" content="" />
 	<meta name="author" content="">
 
-	<link href="{{ config("cltvo.version_assets") ? asset('css/mazorca.css') : elixir('bundle.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ config("cltvo.version_assets") ? elixir('bundle.css') :  asset('css/mazorca.css') }}" rel="stylesheet" type="text/css">
 
 	{{-- Favicon --}}
 	@include('general.favicon')

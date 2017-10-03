@@ -1,7 +1,8 @@
+require('dotenv').config();
+
 const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
-
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -81,19 +82,19 @@ const entry = (hot_build) => {
 
 	if (hot_build === 'admin-bundle') {
 		return {
-			'admin-bundle': './resources/assets/js/micorriza-admin.js', 
+			'admin-bundle': './resources/assets/js/micorriza-admin.js',
 		}
-	} 
+	}
 
 	if (process.env.WEBPACK === 'hot') {
 		return  {
-			bundle: './resources/assets/js/micorriza.js', 
+			bundle: './resources/assets/js/micorriza.js',
 			'admin-bundle': './resources/assets/js/micorriza-admin.js'
-		}		
+		}
 	}
 
 	return  {
-		bundle: ['./resources/assets/js/mazorca.js', './resources/assets/js/micorriza.js'], 
+		bundle: ['./resources/assets/js/mazorca.js', './resources/assets/js/micorriza.js'],
 		'admin-bundle': ['./resources/assets/js/mazorca-admin.js','./resources/assets/js/micorriza-admin.js']
 	}
 }
@@ -131,7 +132,7 @@ module.exports = {
 	               use: [{
 	                   // loader: "raw-loader"
 	                   loader: "css-loader?url=false"//for sourcemaps
-	               }, 
+	               },
 	               {
 	                   loader: "postcss-loader"
 	               },
@@ -184,7 +185,7 @@ module.exports = {
 	devtool: "source-map",
 	devServer: {
 		hot: true, // this enables hot reload
-	  	inline: true, // use inline method for hmr 
+	  	inline: true, // use inline method for hmr
 	  	headers: {'Access-Control-Allow-Origin': '*'}
 	},
 };
