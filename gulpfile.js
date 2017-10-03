@@ -30,8 +30,8 @@ elixir.config.css.autoprefix = {
 
 elixir(mix => {
 	mix
-		.browserify(['micorriza-admin.js'], 'public/js/admin-functions.js')
-		.browserify(['micorriza.js'], 'public/js/functions.js')
+		// .browserify(['micorriza-admin.js'], 'public/js/admin-functions.js')
+		// .browserify(['micorriza.js'], 'public/js/functions.js')
 		.sass(['admin.scss'], 'public/css/admin.css')
 		.sass(['mazorca.scss'], 'public/css/mazorca.css')
 		.browserSync({proxy: process.env.URL_SITE});
