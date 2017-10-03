@@ -28,22 +28,24 @@ __Es importante notar que con estos comandos Webpack no crea ningún archivo en 
 
 IMPORTANTE: Estos últimos dos comandos requieren que mazroca.scss y admin.scss existan en la carpeta `assets/resources/sass/`
 
+# App readme
 
 ## .env
 
-#App
+###App
 ```
 APP_ENV=
 APP_DEBUG=true
 APP_KEY=
 APP_NAME=
 ```
-#URL del app
-```
+###App info
+ ```
 URL_SITE=
+SEND_MAIL_AS=
 ```
 
-#DB_CONNECTION
+###DB_CONNECTION
 ```
 DB_HOST=
 DB_DATABASE=
@@ -51,23 +53,14 @@ DB_USERNAME=
 DB_PASSWORD=
 ```
 
-#Datos del super user
-```
-CLTVO_USER_NAME=
-CLTVO_USER_FIRST_NAME=
-CLTVO_USER_LAST_NAME=
-CLTVO_USER_EMAIL=
-CLTVO_USER_PASS=
-```
-
-# Cache
+###Cache
 ```
 CACHE_DRIVER=file
 SESSION_DRIVER=file
 QUEUE_DRIVER=sync
 ```
 
-#Mail driver
+###Mail driver
 ```
 MAIL_DRIVER=
 MAIL_HOST=
@@ -75,10 +68,9 @@ MAIL_PORT=
 MAIL_USERNAME=
 MAIL_PASSWORD=
 MAIL_ENCRYPTION=
-SEND_MAIL_AS=
 ```
 
-#Cltvo dev tools
+###Cltvo dev tools
 ```
 CLTVO_TEST_VIEW=
 CLTVO_DEV_MODE=true
@@ -87,9 +79,19 @@ CLTVO_OPEN_REGISTER=false
 CLTVO_DEV_SEED=true
 CLTVO_BASE_SEED=1
 CLTVO_ENCRYPTION_KEY=
+CLTVO_VERSION_ASSETS=false
 ```
 
-#Embed url from youtube  
+###Datos del super user
 ```
-CLTVO_MANUAL_URL="https://www.youtube.com/"
+CLTVO_USER_NAME=
+CLTVO_USER_FIRST_NAME=
+CLTVO_USER_LAST_NAME=
+CLTVO_USER_EMAIL=
+CLTVO_USER_PASS=
+```
+
+###Embed url from youtube  
+```
+CLTVO_MANUAL_URL=
 ```
