@@ -6,8 +6,8 @@ return array(
     |--------------------------------------------------------------------------
     | Open site
     |--------------------------------------------------------------------------
-    |
-    |
+    |	When the open_site is flase the app show a splash page in the main route,
+    |	and register routes are closed
     */
 
     'open_site' => env("CLTVO_OPEN_SITE", false),
@@ -18,7 +18,7 @@ return array(
     |--------------------------------------------------------------------------
     | Open register
     |--------------------------------------------------------------------------
-    |
+    |	if false register routes are closed
     |
     */
 
@@ -29,7 +29,8 @@ return array(
     |--------------------------------------------------------------------------
     | Cltvo test view
     |--------------------------------------------------------------------------
-    |
+    |	when the dev mode is true exists the uri cltvo/ , the controller of this
+	| find the view  'cltvo.'.config("cltvo.test_view")
     |
     */
 
@@ -39,7 +40,7 @@ return array(
 	|--------------------------------------------------------------------------
 	| Cltvo dev mode
 	|--------------------------------------------------------------------------
-	|
+	|	turns the app in cltvo dev mode
 	|
 	*/
 
@@ -51,7 +52,7 @@ return array(
 	|--------------------------------------------------------------------------
 	| Cltvo version assets
 	|--------------------------------------------------------------------------
-	|
+	|	if version assets is true the the app load css versioned
 	|
 	*/
 
@@ -62,7 +63,7 @@ return array(
     |--------------------------------------------------------------------------
     | Cltvo encryption key
     |--------------------------------------------------------------------------
-    |
+    |	random string to enconde and decode emails for set firsttime password
     |
     */
 
@@ -70,9 +71,9 @@ return array(
 
 	/*
 	|--------------------------------------------------------------------------
-	| Cltvo encryption key
+	| Cltvo base seed
 	|--------------------------------------------------------------------------
-	|
+	|	factor of the base seed, multiplies the number of dates in seed
 	|
 	*/
 
@@ -81,9 +82,9 @@ return array(
 
 	/*
 	|--------------------------------------------------------------------------
-	| Cltvo encryption key
+	| Cltvo manual url
 	|--------------------------------------------------------------------------
-	|
+	|	url embed of cltvo playlist of the manual of this app
 	|
 	*/
 
