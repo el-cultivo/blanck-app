@@ -19,12 +19,7 @@
 	@include('general.favicon')
 
 	<!-- Styles -->
-	@if(env('DEV_CSS') == true) 
-    	<link href="{{ asset('css/admin.css') }}" rel="stylesheet" type="text/css" />
-	@else
-	    <link rel="stylesheet" href="{{ elixir('admin-bundle.css') }}">
-    @endif
-
+	<link rel="stylesheet" href="{{ config("cltvo.version_assets") ?  asset('css/admin.css') : elixir('admin-bundle.css') }}"  type="text/css"  >
 
 	<!-- include summernote css/js-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet" />

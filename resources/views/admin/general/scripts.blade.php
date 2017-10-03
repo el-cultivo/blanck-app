@@ -65,16 +65,16 @@ mainVueStore.iva = 16;
 
 @yield('vue_store'){{-- debe estar antes del admin functions --}}
 
-@if(env('APP_DEBUG') == true) 
-    <script src="http://localhost:8080/admin-bundle.js"></script> 
-    <script> 
-        if (window.CLTVO_ENV !== 'webpack') { 
-          	console.log('Estamos en desarollo y sin usar webpack'); 
-            var s = document.createElement( 'script' ); 
-            s.setAttribute( 'src', '{{ elixir("admin-bundle.js") }}' ); 
-            document.body.appendChild( s ); 
-        } 
-    </script> 
-@else 
-    <script src="{{ elixir('admin-bundle.js') }}"></script> 
-@endif 
+@if(config("cltvo.dev_mode")) 
+    <script src="http://localhost:8080/admin-bundle.js"></script>
+    <script>
+        if (window.CLTVO_ENV !== 'webpack') {
+          	console.log('Estamos en desarollo y sin usar webpack');
+            var s = document.createElement( 'script' );
+            s.setAttribute( 'src', '{{ elixir("admin-bundle.js") }}' );
+            document.body.appendChild( s );
+        }
+    </script>
+@else
+    <script src="{{ elixir('admin-bundle.js') }}"></script>
+@endif
