@@ -8,7 +8,7 @@
         	@yield('title') &lsaquo;
     	@endif
 
-    	Administrador &ndash; {{ env('APP_NAME') }}
+    	Administrador &ndash; {{ config( "app.name") }}
 	</title>
 
 	<!-- Fonts -->
