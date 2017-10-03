@@ -4,8 +4,8 @@
     "prod": "gulp --production",
     "dev": "gulp watch",
     "start": "NODE_ENV=dev WEBPACK=hot webpack-dev-server",
-    "start:functions": "NODE_ENV=dev WEBPACK=hot HOT_BUILD=functions webpack-dev-server",
-    "start:admin-functions": "NODE_ENV=dev WEBPACK=hot HOT_BUILD=admin-functions webpack-dev-server",
+    "start:client": "NODE_ENV=dev WEBPACK=hot HOT_BUILD=functions webpack-dev-server",
+    "start:admin": "NODE_ENV=dev WEBPACK=hot HOT_BUILD=admin-functions webpack-dev-server",
     "build:dev": "npm run remove_build_folder && NODE_ENV=dev webpack --config webpack.config.js",
     "build:prod": "npm run remove_build_folder && NODE_ENV=prod webpack --config webpack.config.js",
     "remove_build_folder": "echo 'borrando folder public/build' && rm -rf public/build && echo 'compilando nuevo build de css y js'"
