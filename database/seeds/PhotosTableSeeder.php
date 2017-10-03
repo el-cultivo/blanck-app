@@ -30,7 +30,9 @@ class PhotosTableSeeder extends Seeder
 		$proportion  = config( "cltvo.base_seed");
 		$proportion = $proportion <= static::PROPORTION_BASE ? $proportion : static::PROPORTION_BASE;
 
-        factory( App\Models\Photo::class, intval($proportion*$total_images/static::PROPORTION_BASE) )->create()->each(function($photo,$key) use ($languages,$faker,$thunmbail_width,$images){
+		$total_seeds = intval($proportion*$total_images/static::PROPORTION_BASE);
+		
+        factory( App\Models\Photo::class, $total_seeds )->create()->each(function($photo,$key) use ($languages,$faker,$thunmbail_width,$images){
 
             if (!array_has($images,$key)) { // si la foto no existe borramos el modelo
                 dump("no source found");
