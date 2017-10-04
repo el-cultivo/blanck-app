@@ -28,10 +28,10 @@ export const pagesectionsSort = simpleCrud('#pagesections-sort-template',{props:
 export const componentForm = simpleCrud('#component-form-template',{props: ['section','component', 'index', 'componentName']} );
 
 const sectionConfig = {//tiene que ir después de componentForm
-	props: ['section', 'index'],  
-	data:{editing_title: false, title: []},  
-	components:{componentForm}, 
-	mixins:[sortableListByClick], 
+	props: ['section', 'index'],
+	data:{editing_title: false, title: []},
+	components:{componentForm},
+	mixins:[sortableListByClick],
 	methods: sortableOnClickCbs
 }
 
@@ -40,4 +40,4 @@ export const sectionProtected = simpleCrud('#section-protected-template',{props:
 export const sectionMultipleUnlimited = simpleCrud('#section-multiple-unlimited-template', sectionConfig );
 export const sectionMultipleLimited = simpleCrud('#section-multiple-limited-template', sectionConfig );
 export const sectionMultipleFixed = simpleCrud('#section-multiple-fixed-template', sectionConfig );
-export const currentPageSections = simpleCrud('#current-page-sections-template',{props: ['currentPage'],components:{sectionProtected,sectionMultipleUnlimited, sectionMultipleLimited,sectionMultipleFixed} } );
+export const currentPageSections = simpleCrud('#current-page-sections-template',{props: ['currentPage'],ready(){$('.collapsible').collapsible();},components:{sectionProtected,sectionMultipleUnlimited, sectionMultipleLimited,sectionMultipleFixed} } );
