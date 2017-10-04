@@ -37,12 +37,6 @@ var mainVueStore = {
     get: function(route) {
         return this.ajaxData({get: route})
     },
-
-	bag_key: '0000000000',
-	bag: [],
-	currency: 'MXN',
-	exchange_rate: 1,
-	iva: 16,
 	current_language: '{{$current_lang_iso}}',
 	languages: '{!!json_encode($languages)!!}',
 	media_manager: {
@@ -52,15 +46,6 @@ var mainVueStore = {
 		}
 	}
 };
-
-
- {{--
-mainVueStore.bag_key = '{!! $bag_key !!}';
-mainVueStore.bag = {!! $bag !!};
-mainVueStore.currency = '{!! $currency !!}';
-mainVueStore.exchange_rate = {!! $exchange_rate !!};
-mainVueStore.iva = 16;
-  --}}
 </script>
 
 @yield('vue_store'){{-- debe estar antes del admin functions --}}
