@@ -5,6 +5,7 @@
 	@include('client.general.head')
 
 	<body>
+		@include('general._alerts')
 		{{-- Analytics --}}
 	    @include('client.general.analytics')
 

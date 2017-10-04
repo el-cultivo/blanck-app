@@ -16,12 +16,13 @@ export var alertsController = function() {
 	return {
 		is_open: false,
 		container: $('#alerts__container'),
-		success_container: $('#alert__success').modal(modal_config),
-		danger_container:$('#alert__danger').modal(modal_config),
+		success_container: $('#alert__success'),
+		danger_container:$('#alert__danger'),
 		msg: [],
 		success: '',
 		close_btn: $('.alert__hide_JS'),
 		init() {
+			var self = this;
 			//placeholder method for the helpers.ifExistsThenLaunch, do not delete
 			////TO DO: arreglar esta necesidad en el "ifExistsThenLaunch"
 			this.hideAlert();
@@ -53,16 +54,16 @@ export var alertsController = function() {
 
 		hideAlreadyOpenContainer() {
 			if (this.success_container.css('display') === 'block') {
-				this.success_container.modal('close');
+				this.success_container.css('display','none');
 			}
 			if (this.danger_container.css('display') === 'block') {
-				this.danger_container.modal('close');
+				this.danger_container.css('display','none');
 			}
 		},
 
 		hideAlert() {
 			this.close_btn.on('click', function() {
-				$(this).parent().addClass('hidden');
+				$(this).parent().css('display','none');
 			});
 		},
 
@@ -80,7 +81,7 @@ export var alertsController = function() {
 
 		alert(type) {
 			var $li, $ul;
-			this[`${type}_container`].modal('open');
+			this[`${type}_container`].css('display','block');
 			$ul = $(this[`${type}_container`].find('ul')[0]);
 			$ul.html('');
 			this.msg.forEach(function(msg) {
