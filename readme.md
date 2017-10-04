@@ -13,9 +13,9 @@ Los comandos son los siguientes:
 
 `npm run start` Compila archivos de JS asociados a `micorriza.js` y `micorriza-admin.js`
 
-`npm run start:functions` Compila archivos de JS asociados únicamente a `micorriza.js`
+`npm run start:client` Compila archivos de JS asociados únicamente a `micorriza.js`
 
-`npm run start:admin-functions` Compila archivos de JS asociados únicamente a `micorriza-admin.js`
+`npm run start:admin` Compila archivos de JS asociados únicamente a `micorriza-admin.js`
 
 El segundo y el tercer comando son m'as rápidos
 
