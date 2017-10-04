@@ -64,6 +64,11 @@ Route::group(['middleware' => ['permission:manage_users'] ,'prefix' => 'users', 
         'parameters'    => ['' => 'erasable_user']
     ]);
 
+    Route::group(['middleware' => ['onlyajax'], 'as' => 'ajax.'  ,'prefix' => 'ajax' ], function(){
+        Route::patch( '{user_editable}/roles' , 'Admin\Users\ManageUserController@roles')->name('roles');
+    });
+
+
     Route::get('trash', 'Admin\Users\ManageUserController@trash')->name('trash');
     Route::patch('trash/{user_trashed}', 'Admin\Users\ManageUserController@recovery')->name('recovery');
 });

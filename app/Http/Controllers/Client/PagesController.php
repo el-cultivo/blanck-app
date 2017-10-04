@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Client;
 
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
-
-use App\Mail\ContactMail;
-use App\Mail\ThanksForContactMail;
 
 use App\Http\Requests\Client\CreateContactRequest;
 
 use App\Http\Controllers\ClientController;
+
+use App\Notifications\Client\ContactNotification;
+use App\Notifications\Client\ThanksForContactNotification;
 
 use View;
 use Redirect;
@@ -26,8 +25,8 @@ class PagesController extends ClientController
     public function index()
     {
         $main_page = Page::getMainPage();
-        if (!$main_page || !$main_page->is_publish || !env("CLTVO_OPEN_SITE")) {
-                
+        if (!$main_page || !$main_page->is_publish || !config("cltvo.open_site")) {
+
             return view("client.pages.splash");
         }
 
@@ -62,33 +61,18 @@ class PagesController extends ClientController
     public function contact(CreateContactRequest $request)
     {
         $input = $request->all();
+		$args = [
+			'name'		=> $input['first_name'].' '.$input['last_name'],
+			'email'		=> $input['email'],
+			'message'	=> $input['message']
+		];
 
-        $first_name = $input['first_name'];
-        $last_name  = $input['last_name'];
-        $full_name  = $first_name.' '.$last_name;
 
-        $street1    = $input['address']['street1'];
-        $street2    = $input['address']['street2'];
-        $city       = $input['address']['city'];
-        $state      = $input['address']['state'];
-        $country    = $input['address']['country'];
-        $zip        = $input['address']['zip'];
+		ContactNotification::SystemNotify($args);
 
-        $phone      = $input['phone'];
-        $email      = $input['email'];
-
-        $content = [
-            'Nombre: '   .$full_name,
-            'Correo: '   .$email,
-            'Teléfono: ' .$phone,
-            'Dirección: '.$street1.' '.$street2.', '.$city.', '.$state.', '.$country.', '.$zip,
-        ];
-
-        Mail::to('dev@elcultivo.mx')->send(new ContactMail($content, $email, $first_name));
-
-        Mail::to($email)->send( new ThanksForContactMail($full_name) );
-
-        return Redirect::back()->with('status', "¡Muchas gracias! Hemos recibido tu mensaje correctamente, pronto recibirás un correo de confirmación.");
+		ThanksForContactNotification::NotUserNotify($args);
+		
+        return Redirect::back()->with('status', trans("contact_form.sended.success") );
 
     }
 

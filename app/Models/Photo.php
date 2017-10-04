@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Image;
 use File;
 use Storage;
+use Exception;
 
 class Photo extends Model
 {

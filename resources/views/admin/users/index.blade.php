@@ -16,14 +16,29 @@
 @endsection
 
 @section('content')
-   {{-- @include('admin.general._page-instructions', [
-        'title'         =>  '',
-        'instructions'  =>  'Da click para editar o desactivar un usuario'
-    ]) --}}
 
+	<users :list="store.users.data"></users>
 
-    <div class="col s10 offset-s1">
-        @include('admin.users.index._table')
-    </div>
+@endsection
+
+@section('vue_templates')
+    <script type="x/templates" id="users-template">
+		<div class="">
+			{{-- filtros por: industria, nombre, apellido, empresa --}}
+			@include('admin.general._table-search')
+		    <div class="col s10 offset-s1">
+		        @include('admin.users.index._table')
+		    </div>
+		</div>
+    </script>
+@endsection
+
+@section('vue_store')
+
+    <script>
+        mainVueStore.users = {
+            data: {!! json_encode($users) !!}
+        }
+    </script>
 
 @endsection

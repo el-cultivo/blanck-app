@@ -29,31 +29,14 @@ class UpdateUserRequest extends Request
      */
     public function rules()
     {
-        $input = $this->all();
-
         $user_editable = $this->route()->parameters()["user_editable"];
 
-        $rules = [
+        return [
             'first_name'    => 'required|max:255',
             'last_name'     => 'required|max:255',
-            'email'         => 'required|email|max:255',
-            'roles'         => 'required',
-            'roles.*'       => 'required|exists:roles,id'
+            'email'         => 'required|email|max:255|unique:users,email,'.$user_editable->id.',id',
         ];
 
-
-
-        if (!$this->user->isSuperAdmin()) {
-            $roleSAdmin = Role::GetSuperAdmin();
-            $rules['roles.*'] .= '|not_in:'.$roleSAdmin->id;
-        }
-
-
-        if( $user_editable && isset( $input['email']) && $user_editable->email != $input['email']  ){
-            $rules['email'] .= "|unique:users";
-        }
-
-        return $rules;
     }
 
     public function messages()
@@ -69,10 +52,6 @@ class UpdateUserRequest extends Request
             'email.email' => trans('users.email.email'),
             'email.max' => trans('users.email.max'),
             'email.unique' => trans('users.email.unique'),
-
-            'roles.required' => trans('users.roles.required'),
-            'roles.*.required' => trans('users.roles.required'),
-            'roles.*.exist' => trans('users.roles.exist'),
         ];
     }
 }

@@ -27,5 +27,37 @@
         "form_method"   => 'PATCH'
     ])
 
+	@unless ($user_edit->id == $user->id)
+		<div class="col s12 ">
+			<div class="divider"></div>
+		</div>
 
+		<div class=" col s10 offset-s1">
+			<roles-multi-select :list.sync="store.roles.data" :items-ids="store.current_user.roles_ids"></roles-multi-select>
+		</div>
+	@endunless
+
+@endsection
+
+@section('vue_templates')
+	@unless ($user_edit->id == $user->id)
+	    @include('admin.users.roles._multi-select-template', [
+		  'form_id' 		=> "update_roles-user_form",
+		  'form_method'		=> "patch",
+		  'form_route'		=> ["admin::users.ajax.roles",$user_edit->id],
+		])
+	@endunless
+@endsection
+
+@section('vue_store')
+	@unless ($user_edit->id == $user->id)
+		<script>
+			mainVueStore.current_user = {!! $user_edit !!};
+
+			mainVueStore.roles = {
+				data: {!! json_encode($roles) !!}
+			};
+
+		</script>
+	@endunless
 @endsection

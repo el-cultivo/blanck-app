@@ -27,7 +27,7 @@ class ManageUserBind extends CltvoBind
     // para editr al usuario
         Route::bind('user_editable', function ($user_id) {
             return User::with("roles","roles.permissions")
-                ->whereHas("roles")
+                // ->whereHas("roles")
                 ->SuperAdminFilter()
                 ->find($user_id);
         });

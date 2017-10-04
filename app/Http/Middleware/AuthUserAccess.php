@@ -46,7 +46,7 @@ class AuthUserAccess
         if (
             ( isset($parameters["user_id"]) && $user_id != $parameters["user_id"] )  ||
             ( isset($parameters["user_name"]) && $user_name != $parameters["user_name"]  ) ||
-            ( isset($parameters["user"]) && $current_user != $parameters["user"]  )
+            ( isset($parameters["user"]) && $user_id != $parameters["user"]->id  )
 
             ) {
             if ($request->ajax() || $request->wantsJson()){

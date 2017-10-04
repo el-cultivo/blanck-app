@@ -27,7 +27,7 @@ class PhotosTableSeeder extends Seeder
 
         $total_images = $images->count();
 
-		$proportion  = env('CLTVO_BASE_SEED' , 1);
+		$proportion  = config( "cltvo.base_seed");
 		$proportion = $proportion <= static::PROPORTION_BASE ? $proportion : static::PROPORTION_BASE;
 
         factory( App\Models\Photo::class, intval($proportion*$total_images/static::PROPORTION_BASE) )->create()->each(function($photo,$key) use ($languages,$faker,$thunmbail_width,$images){

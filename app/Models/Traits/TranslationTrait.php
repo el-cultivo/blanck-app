@@ -24,7 +24,7 @@ trait TranslationTrait {
         //     }
         // }
         // dd($select,"muere");
-        return $this->belongsToMany(Language::class)
+        return $this->belongsToMany(Language::class, $this->translation_table)
             ->select('languages.id','languages.iso6391','languages.label as language_label',$this->translation_table.".*")
             // ->groupBy("languages.id")
             ->withPivot($this->translatable)
@@ -168,7 +168,7 @@ trait TranslationTrait {
 
     public function scopeOrderedBy($query, $column)
     {
-        $lang_iso = session("lang") ? session("lang") : "es";
+        $lang_iso = cltvoCurrentLanguageIso();
 
         $same = new static;
         $table = with($same)->getTable();

@@ -4,9 +4,13 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Helpers\Traits\Auth\RedirectPathTrait;
+
 
 class RedirectIfAuthenticated
 {
+    use RedirectPathTrait;
+
     /**
      * Handle an incoming request.
      *
@@ -18,9 +22,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            $user = Auth::user();
-            $redirect = $user->hasPermission("admin_access") ? route("admin::index") : $user->getHomeUrl();
-            return redirect($redirect);
+            return redirect($this->redirectPath());
         }
 
         return $next($request);

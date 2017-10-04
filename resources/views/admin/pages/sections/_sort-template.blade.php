@@ -1,7 +1,7 @@
 <template id="pagesections-sort-template">
 	<div class="col s10  offset-s1">
 
-        <table class="bordered highlight responsive-table dataTable_JS">
+        <table class="bordered highlight responsive-table ">
             <thead class="">
                 <tr>
                     <th></th>

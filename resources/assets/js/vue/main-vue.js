@@ -3,32 +3,35 @@ import Vue from 'vue';
 import VueResource from 'vue-resource';
 
 import {crudAjax} from './mixins/crud-ajax';
-import {menusStore} from './mixins/menus';
+import {menusStore, menusMixin} from './mixins/menus';
 import {JsonParseOrFalse} from '../functions/pure';
 import {ifElementExistsThenLaunch} from '../functions/dom';
 import {logoSwitch} from '../logoManipulations';
 import {menuTreeToggler} from '../menu-tree-toggler';
 
-Vue.use(VueHtml5Editor, {
-	name: 'v-editor',
-	visibleModules: [
-        "text",
-        "font",
-        "list",
-        "link",
-        "unlink",
-        "hr",
-        "eraser",
-        "undo",
-    ]
-});
+
+if (window.VueHtml5Editor) {
+	Vue.use(VueHtml5Editor, {
+		name: 'v-editor',
+		visibleModules: [
+	        "text",
+	        // "font",
+	        "list",
+	        "link",
+	        "unlink",
+	        "hr",
+	        "eraser",
+	        "undo",
+	    ]
+	});
+}
 
 Vue.use(VueResource);
 
 export const mainVue = function(config ={}, components = {}) {
 	let store = mainVueStore,
 		data = config.data || {},
-		mixins = R.concat([crudAjax], (config.mixins || []));
+		mixins = R.concat([crudAjax, menusMixin], (config.mixins || []));
 
 	data.store = R.mergeAll([store, (data.store || {}), menusStore]);
 
@@ -62,9 +65,6 @@ export const mainVue = function(config ={}, components = {}) {
 		},
 
 		ready() {
-			console.log('main-vue', this);
-			$('.collapsible').collapsible(); // borrar y colocarlo donde sea  nencesario
-			console.log("borrar esta linea");
 			ifElementExistsThenLaunch([
 				['#header__logo', logoSwitch, 'init', []],
 			]);
@@ -74,24 +74,11 @@ export const mainVue = function(config ={}, components = {}) {
 		data: data,
 
 		computed: R.merge({
-			bodyScrollIsDisabled() {
-				return R.pathOr(false, ['store', 'menus','main', 'isOpen'], this) ||
-						R.pathOr(false, ['store', 'menus','shop', 'isOpen'], this) ||
-						R.pathOr(false, ['store', 'menus','filters', 'isOpen'], this);
-			}
 		},config.computed || {}),
 
 		methods: R.merge({
 			onGetSuccess(body, data) {
 				this.store[data.callee].data = body;
-			},
-			closeOpenStuff(args) {
-				this.$emit('toggle-menu', undefined)
-				if(config.closeOpenStuff === 'function') {config.closeOpenStuff(args)}
-			},
-			toggleMenu(menu_name) {
-				console.log('menu_name', menu_name);
-				this.$emit('toggle-menu', menu_name)
 			}
 		},config.methods || {}),
 
@@ -99,18 +86,6 @@ export const mainVue = function(config ={}, components = {}) {
 		mixins: mixins,
 
 		events: R.merge({
-			'toggle-menu': function(menu_name) {
-				let other_menus_names = R.filter(menu => menu !== menu_name, R.keys(this.store.menus));
-
-				R.forEach(menu_name => {
-					if (R.path(['store', 'menus', menu_name], this)) {
-						this.store.menus[menu_name].isOpen = false;
-					}
-				}, other_menus_names);
-				if (R.path(['store', 'menus', menu_name], this)) {
-					this.store.menus[menu_name].isOpen = !this.store.menus[menu_name].isOpen;
-				}
-			}
 		}, config.events || {}),
 
 		watch: config.watch || {},

@@ -9,6 +9,14 @@ export const openModal = function(name, $index) {
 	$(name).modal('open');
 }
 
+export const closeModal = function(name) {
+    if (this.modal.length > 0) {
+        this.modal.modal('close')
+    } else {
+        $(name).modal('close');
+    }
+}
+
 export const openModalFromSimpleImageCrud = function(name, $index) {
 	if ($index === undefined) {return}
 	this.$parent.$data.edit_index = $index;
@@ -25,6 +33,20 @@ export const postWithMaterialNote = function($event) {
 	});
 	this.post($event)
 };
+
+export const openMultiSelect = function(selector) {
+
+	$('html').click(function() {
+		$('.container-items_JS').slideUp();
+	});
+	$('.submenu_JS').click(function(event){
+		event.stopPropagation();
+	});
+	$(".select-wrapper").click(function(){
+  		$(".select-wrapper").not(this).next(".container-items_JS").slideUp("slow");
+  		$(this).next(".container-items_JS").slideDown("slow");
+	});
+}
 
 export const checkboxesMethods = function(options) {
 	let toNumberMap = R.map(n => Number(n));

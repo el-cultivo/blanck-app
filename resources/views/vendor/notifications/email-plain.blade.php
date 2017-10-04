@@ -3,7 +3,7 @@
 if (! empty($greeting)) {
     echo $greeting, "\n\n";
 } else {
-    echo $level == 'error' ? 'Whoops!' : 'Hola!', "\n\n";
+    echo $level == 'error' ? trans('notifications.general.error') :trans('notifications.general.success'), "\n\n";
 }
 
 if (! empty($introLines)) {
@@ -18,5 +18,5 @@ if (! empty($outroLines)) {
     echo implode("\n", $outroLines), "\n\n";
 }
 
-echo 'Saludos,', "\n";
-echo "El Cultivo", "\n";
+echo trans('notifications.general.salutation'), "\n";
+echo config( 'app.name'), "\n";

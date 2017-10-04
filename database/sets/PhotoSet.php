@@ -1,8 +1,8 @@
 <?php
-
+use App\Console\Cltvo\SetSite\CltvoSetInterface;
 use Illuminate\Console\Command;
 
-class PhotoSet
+class PhotoSet implements CltvoSetInterface
 {
 
     /**

@@ -1,6 +1,12 @@
 <head>
 	<meta charset="UTF-8">
-	<title>@yield('title') {{ env('APP_NAME') }}</title>
+	<title>
+		@if(View::hasSection('title'))
+        	@yield('title'):
+    	@endif
+
+    	{{ config( "app.name") }}
+	</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
 

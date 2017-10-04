@@ -2,6 +2,8 @@
 
 use Illuminate\Console\Command;
 
+use App\Console\Cltvo\SetSite\CltvoSet;
+
 class DummyClass extends CltvoSet
 {
     /**

@@ -1,5 +1,5 @@
 <?php
-
+use App\Console\Cltvo\SetSite\CltvoSet;
 use Illuminate\Console\Command;
 
 class LanguageSet extends CltvoSet
@@ -30,7 +30,7 @@ class LanguageSet extends CltvoSet
                 "label"     => $name
             ];
         }
-        
+
         return $languages;
     }
 
