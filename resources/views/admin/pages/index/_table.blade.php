@@ -1,4 +1,4 @@
-<table class="bordered highlight responsive-table dataTable_JS">
+<table class="bordered highlight responsive-table ">
     <thead class="">
         <tr>
             <th>Nombre <small><br>(index)</small></th>

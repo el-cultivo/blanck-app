@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\ClientController;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Helpers\Traits\Auth\RedirectPathTrait;
 
 use Auth;
 use Redirect;
@@ -23,7 +24,9 @@ class LoginController extends ClientController
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers, RedirectPathTrait {
+        RedirectPathTrait::redirectPath insteadof AuthenticatesUsers;
+    }
 
     /**
      * Where to redirect users after login / registration.
@@ -54,7 +57,6 @@ class LoginController extends ClientController
 
         $redirect = $this->redirectPath() ;
 
-
         if( !$user->isActive() ){
             Auth::logout();
             return Redirect::back()->withErrors([
@@ -62,13 +64,7 @@ class LoginController extends ClientController
             ]);
         }
 
-        // $lang_iso = session("lang") ? session("lang") : "es";
-
-        // $redirect = session('CltvoPreviousURL') ? session('CltvoPreviousURL') : $lang_iso."/".Lang::get("routes.username",[],$lang_iso)."/".rawurlencode(Auth::User()->id) ;
-
-        $redirect = $user->hasPermission("admin_access") ? route("admin::index") : $user->getHomeUrl();
-
-        return redirect()->intended(  $redirect );
+        return redirect()->intended( $this->redirectPath() );
 
     }
 }

@@ -1,9 +1,9 @@
 <?php
-
+use App\Console\Cltvo\SetSite\CltvoSet;
 use Illuminate\Console\Command;
 
-use App\User;
-use App\Role;
+use App\Models\Users\User;
+use App\Models\Users\Role;
 
 class AdminsUserSet extends CltvoSet
 {

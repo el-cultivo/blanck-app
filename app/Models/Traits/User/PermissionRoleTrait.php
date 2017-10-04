@@ -1,9 +1,9 @@
 <?php
 namespace App\Models\Traits\User;
 
-use App\Role;
+use App\Models\Users\Role;
 use Auth;
-use App\User;
+use App\Models\Users\User;
 
 trait PermissionRoleTrait {
 
@@ -151,5 +151,24 @@ trait PermissionRoleTrait {
         }
         return $query;
 
+    }
+
+    public function scopeWhereDoesntHavePermission($query,$permission_slug)
+    {
+        return $query->whereDoesntHave('roles', function($query) use ($permission_slug){
+            $query->whereHasPermission($permission_slug);
+        });
+    }
+
+    public function scopeWhereHasPermission($query,$permission_slug)
+    {
+        return $query->whereHas('roles', function($query) use ($permission_slug){
+            $query->whereHasPermission($permission_slug);
+        });
+    }
+
+    public function getRolesIdsAttribute()
+    {
+        return $this->roles->pluck("id");
     }
 }

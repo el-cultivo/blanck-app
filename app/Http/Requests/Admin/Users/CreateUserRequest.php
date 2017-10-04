@@ -3,8 +3,8 @@
 namespace App\Http\Requests\Admin\Users;
 
 use App\Http\Requests\Request;
-use App\User;
-use App\Role;
+use App\Models\Users\User;
+use App\Models\Users\Role;
 
 class CreateUserRequest extends Request
 {
@@ -29,39 +29,27 @@ class CreateUserRequest extends Request
      */
     public function rules()
     {
-        $rules = [
+        return [
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'roles' => 'required',
-            'roles.*' => 'required|exists:roles,id'
         ];
-
-        if (!$this->user->isSuperAdmin()) {
-            $roleSAdmin = Role::GetSuperAdmin();
-            $rules['roles.*'] .= '|not_in:'.$roleSAdmin->id;
-        }
-
-        return $rules;
     }
 
     public function messages()
     {
         return [
-            'first_name.required' => 'El nombre es obligatorio.',
-            'first_name.max' => 'El nombre debe tener 255 caracteres como máximo.',
+            'first_name.required' => trans('users.first_name.required'),
+            'first_name.max' => trans('users.first_name.max'),
 
-            'last_name.required' => 'El apellido es obligatorio.',
-            'last_name.max' => 'El apellido debe tener 255 caracteres como máximo.',
+            'last_name.required' => trans('users.last_name.required'),
+            'last_name.max' => trans('users.last_name.max'),
 
-            'email.required' => 'El email es obligatorio.',
-            'email.email' => 'El email no es válido.',
-            'email.max' => 'El email debe tener 255 caracteres como máximo',
-            'email.unique' => 'El email proporcionado ya existe.',
+            'email.required' => trans('users.email.required'),
+            'email.email' => trans('users.email.email'),
+            'email.max' => trans('users.email.max'),
+            'email.unique' => trans('users.email.unique'),
 
-            'roles.required' => 'Asignar un rol es obligatorio.',
-            'roles.*.required' => 'Asignar un rol es obligatorio.',
-            'roles.*.exist' => 'El rol asignado no existe.',
         ];
     }
 

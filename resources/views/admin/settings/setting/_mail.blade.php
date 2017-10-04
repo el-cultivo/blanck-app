@@ -1,7 +1,7 @@
 @include('admin.general._page-subtitle', ['title' => trans('manage_settings.mail.title') ])
 {!! Form::open([
       'method'              => 'PATCH',
-      'action'              => ['Admin\Settings\ManageSettingController@update', 'mail'],
+      'route'               => ['admin::settings.update', 'mail'],
       'role'                => 'form' ,
       'id'                  => 'update_setting-mail_form',
       'class'               => "col s10 offset-s1"

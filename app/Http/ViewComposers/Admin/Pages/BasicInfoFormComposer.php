@@ -4,7 +4,7 @@ namespace App\Http\ViewComposers\Admin\Pages;
 use Illuminate\Contracts\View\View;
 
 use App\Models\Pages\Page;
-use App\Publish;
+use App\Models\Publish;
 
 class BasicInfoFormComposer
 {

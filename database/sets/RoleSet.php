@@ -1,5 +1,5 @@
 <?php
-
+use App\Console\Cltvo\SetSite\CltvoSet;
 use Illuminate\Console\Command;
 
 class RoleSet extends CltvoSet
@@ -13,7 +13,7 @@ class RoleSet extends CltvoSet
      * nombre de la clase a ser sembrada
      */
     protected function CltvoGetModelClass(){
-        return "App\Role";
+        return "App\Models\Users\Role";
     }
 
     /**

@@ -47,7 +47,9 @@
 @import "admin/_modal";
 @import "admin/_media-manager";
 @import "admin/_users";
-
+@import "admin/_helpers";
+@import "admin/_welcome";
+@import "admin/_multi-select";
 //=== Summernote for Material styles ===//
 @import "admin/_materialNote";
 @import "admin/_vue-html5-editor";

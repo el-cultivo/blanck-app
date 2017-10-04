@@ -15,7 +15,7 @@ class CltvoTestUrls
      */
     public function handle($request, Closure $next)
     {
-        if (!env("CLTVO_DEV_MODE")) {
+        if (!config("cltvo.dev_mode")) {
             if ($request->ajax() || $request->wantsJson()){
                 return response('Unauthorized.', 403);
             } else {

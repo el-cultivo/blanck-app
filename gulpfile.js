@@ -1,4 +1,6 @@
 const elixir = require('laravel-elixir');
+require('dotenv').config();
+require('laravel-elixir-browserify-official');
 
 /*
  |--------------------------------------------------------------------------
@@ -32,5 +34,5 @@ elixir(mix => {
 		.browserify(['micorriza.js'], 'public/js/functions.js')
 		.sass(['admin.scss'], 'public/css/admin.css')
 		.sass(['mazorca.scss'], 'public/css/mazorca.css')
-		.browserSync({proxy: 'blank-app.dev'});
+		.browserSync({proxy: process.env.URL_SITE});
 });

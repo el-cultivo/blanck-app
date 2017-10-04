@@ -30,4 +30,14 @@ class CreatePhotoRequest extends Request
             "file_input"    => "required|image|max:2048"
         ];
     }
+    public function messages()
+    {
+        return [
+
+            'file_input.max' =>  trans('manage_photo.file_input.max'),
+            'file_input.image' =>  trans('manage_photo.file_input.image'),
+            'file_input.required' =>  trans('manage_photo.file_input.required'),
+
+        ];
+    }
 }

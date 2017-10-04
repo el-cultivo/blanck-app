@@ -1,5 +1,5 @@
  <script>
- 	@if(env('CLTVO_DEV_MODE'))
+ 	@if(config('cltvo.dev_mode'))
  		var process = { env: {NODE_ENV: 'dev'}}
  	@endif
  </script>

@@ -301,12 +301,10 @@ time, mark {
 
 /*************************** Animations ***************************/
 .transition-fast {
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
 }
 
 .transition-slow {
-  -webkit-transition: all 1s;
   transition: all 1s;
 }
 
@@ -780,7 +778,6 @@ input:focus, select:focus, textarea:focus, button:focus {
   font-family: "FoundersGrotesk-Bold", sans-serif;
   margin-bottom: 75px;
   text-transform: uppercase;
-  -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 
@@ -818,7 +815,6 @@ p {
 a {
   color: #000000;
   text-decoration: none;
-  -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 
@@ -1021,7 +1017,6 @@ b, strong {
   font-family: "FoundersGrotesk-Light", sans-serif;
   margin-bottom: 20px;
   vertical-align: middle;
-  -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 
@@ -1042,7 +1037,6 @@ b, strong {
   font-family: "FoundersGrotesk-Bold", sans-serif;
   text-transform: uppercase;
   white-space: nowrap;
-  -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 

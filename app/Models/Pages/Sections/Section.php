@@ -66,6 +66,16 @@ class Section extends Model
     ];
 
     /**
+     * Get label.
+     *
+     * @return bool
+     */
+    public function getLabelAttribute()
+    {
+        return trans('pages.sections.'.$this->index. '.title');
+    }
+
+    /**
      * Get type label.
      *
      * @return bool
@@ -103,7 +113,8 @@ class Section extends Model
             'editable_contents'     => $this->all_editable_contents,
             'components'            => $this->all_components,
             'type'                  => $this->type,
-            'description'           => $this->description
+            'description'           => $this->description,
+            'label'                 => $this->label
         ];
     }
 
@@ -165,8 +176,10 @@ class Section extends Model
     public function getImplodeEditableContentsAttribute()
     {
         $editable_contents = collect($this->editable_contents ? $this->editable_contents : []);
-
-        return $editable_contents->map(function($true,$key){
+        return $editable_contents->filter(function($true){
+            return $true;
+        })
+        ->map(function($true,$key){
             return $true && isset(Component::EDITABLE_CONTENTS[$key]) ? Component::EDITABLE_CONTENTS[$key] : null;
         })->implode(",<br/>");
     }

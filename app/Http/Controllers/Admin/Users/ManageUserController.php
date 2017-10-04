@@ -9,13 +9,15 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Admin\Users\CreateUserRequest;
 use App\Http\Requests\Admin\Users\UpdateUserRequest;
+use App\Http\Requests\Admin\Users\AssociateRolesUserRequest;
 
-use App\Notifications\Users\ActivationAccountNotification;
+use App\Notifications\Admin\Users\ActivationAccountNotification;
 
-use App\User;
-use App\Role;
+use App\Models\Users\User;
+use App\Models\Users\Role;
 
 use Redirect;
+use Response;
 
 class ManageUserController extends Controller
 {
@@ -41,7 +43,6 @@ class ManageUserController extends Controller
     public function create()
     {
         $data = [
-            "rolesList"     => $this->user->rolesListToSelect(),
             "user_edit"     => new User
         ];
 
@@ -64,13 +65,13 @@ class ManageUserController extends Controller
 
         $newUser = User::CltvoCreate($input);
 
-        $newUser->roles()->sync($input['roles']);
-
+        if (!$newUser) {
+            return Redirect::back()->withErrors([trans('manage_users.create.error')]);
+        }
     //enviamos correo de activacion
-        // $this->sendRegisterMail($newUser);
         $newUser->notify( new ActivationAccountNotification);
 
-        return Redirect::route( 'admin::users.edit', [$newUser->id] )->with('status', trans('manage_users.success.create')); //Enviar el mensaje con el idioma que corresponde
+        return Redirect::route( 'admin::users.edit', [$newUser->id] )->with('status', trans('manage_users.create.success'));
     }
 
     /**
@@ -93,8 +94,8 @@ class ManageUserController extends Controller
     public function edit(User $user_editable)
     {
         $data = [
-            "rolesList"      => $this->user->rolesListToSelect(),
-            "user_edit"      => $user_editable
+            "user_edit"      => $user_editable,
+			'roles'         => Role::getForThisUser($this->user)->get(),
         ];
 
         //Regreso a la vista de index la informacion de los usuarios
@@ -118,19 +119,26 @@ class ManageUserController extends Controller
         $user_editable->email      =$input['email'];
 
         if (!$user_editable->save()) {
-            return Redirect::back()->withErrors(["El usuario no pudo ser gurdado correctamente"]); //Enviar el mensaje con el idioma que corresponde
+            return Redirect::back()->withErrors([trans('manage_users.edit.error')]); //Enviar el mensaje con el idioma que corresponde
         }
 
-        if( $user_editable->id == $this->user->id   ){
-            if( !( empty( array_diff( $this->user->roleLists(), $input['roles']) ) && empty( array_diff($input['roles'], $this->user->roleLists())  ) ) ){
-                return Redirect::back()->withErrors(["No pudes modificar tus propios roles"]); //Enviar el mensaje con el idioma que corresponde
-            }
-        }else{
-            $user_editable->roles()->sync($input['roles']);
-        }
 
-        return Redirect::route( 'admin::users.edit', [$user_editable->id] )->with('status', "Usuario correctamente actualizado");
+
+        return Redirect::route( 'admin::users.edit', [$user_editable->id] )->with('status', trans('manage_users.edit.success'));
     }
+
+	public function roles(AssociateRolesUserRequest $request, User $user_editable){
+		$input = $request->all();
+		$roles = isset($input["roles"]) ? $input["roles"] : [];
+
+		$user_editable->roles()->sync($roles);
+
+		return Response::json([ // todo bien
+			'data'    => $user_editable->load("roles")->roles_ids,
+			'message' => [trans('manage_users.associate.roles.success')],
+			'success' => true
+		]);
+	}
 
     /**
      * Remove the specified resource from storage.
@@ -142,10 +150,10 @@ class ManageUserController extends Controller
     {
 
         if (!$erasable_user->delete()) {
-            return Redirect::back()->withErrors(["El usuario no pudo ser desactivdo"]); //Enviar el mensaje con el idioma que corresponde
+            return Redirect::back()->withErrors([trans('manage_users.delete.error')]);
         }
 
-        return Redirect::route('admin::users.trash')->with('status', "El usuario fue correctamente desactivado");
+        return Redirect::route('admin::users.trash')->with('status',trans('manage_users.delete.success'));
     }
 
     public function trash()
@@ -160,9 +168,9 @@ class ManageUserController extends Controller
     {
 
         if (!$user_trashed->restore()) {
-            return Redirect::back()->withErrors(["El usuario no pudo ser reactivado"]); //Enviar el mensaje con el idioma que corresponde
+            return Redirect::back()->withErrors([trans('manage_users.recovery.error')]);
         }
 
-        return Redirect::route('admin::users.index')->with('status', "El usuario fue correctamente reactivado");
+        return Redirect::route('admin::users.index')->with('status', trans('manage_users.recovery.success'));
     }
 }

@@ -1,27 +1,54 @@
-# Laravel PHP Framework
+# Cltvo Blank app
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+## Instalación de la parte del front
+`npm i`
+Luego es necesario ir a las carpetas `resources/assets/sass/` y `resources/assets/js/` y seguir los pasos de sus respectivos readmes. Finalmente para probar que todo funcione correctamente y el proyecto compile `gulp watch`
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+### env
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+´´´
+APP_ENV=
+APP_DEBUG=
+APP_KEY=
 
-## Official Documentation
+APP_NAME=
+URL_SITE=
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+DB_CONNECTION
+DB_HOST=
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
 
-## Contributing
+CACHE_DRIVER=file
+SESSION_DRIVER=file
+QUEUE_DRIVER=sync
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+MAIL_DRIVER=
+MAIL_HOST=
+MAIL_PORT=
+MAIL_USERNAME=
+MAIL_PASSWORD=
+MAIL_ENCRYPTION=
 
-## Security Vulnerabilities
+SEND_MAIL_AS=
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+CLTVO_MANUAL_URL="https://www.youtube.com/"
 
-## License
+CLTVO_DEV_MODE=true
+CLTVO_OPEN_SITE=false
+CLTVO_OPEN_REGISTER=false
+CLTVO_DEV_SEED=true
+CLTVO_BASE_SEED=1
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+CLTVO_TEST_VIEW=
+
+CLTVO_USER_NAME=
+CLTVO_USER_FIRST_NAME=
+CLTVO_USER_LAST_NAME=
+CLTVO_USER_EMAIL=
+CLTVO_USER_PASS=
+
+CLTVO_ENCRYPTION_KEY=
+
+´´´

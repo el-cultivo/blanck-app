@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html class="splash">
     <head>
-        <title>Blank App | El cultivo</title>
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+        <title>{{ config('app.name') }} by El cultivo</title>
+        <link href="https://fonts.googleapis.com/css?family=Lato:100, 500" rel="stylesheet" type="text/css">
 
         <style>
 			.splash {
@@ -10,17 +10,15 @@
 				width: 100%;
 				margin: 0px auto;
 				background-image: url("images/logo.svg");
-				background-size: cover;
 				background-position: center;
 				background-repeat: no-repeat;
-				background-size: cover;
+				background-size: 40%;
 			}
 			.splash__svg {
 				z-index: 1;
 			}
 			.splash__footer {
 				position: fixed;
-				background-color: white;
 				left: 0;
 				bottom: 0;
 				z-index: 2;
@@ -38,10 +36,11 @@
 				padding-right: 20px;
 				padding-left: 20px;
 				text-align: center;
+				box-sizing: border-box;
+				background-color: whitesmoke;
 			}
 			.splash__footer ul {
 				width: 100%;
-				margin-bottom: 0;
 			}
 			.splash__footer ul li {
 				margin-right: 30px;
@@ -56,13 +55,14 @@
 			.splash__footer ul li a {
 				text-decoration: none;
 				text-transform: uppercase;
-				font-family: 'DTLNobelT';
-				font-style: italic;
+				font-family: 'Lato';
+				font-weight: 500;
 				font-size: 12px;
 				color: #312822;
 			}
 			.splash__footer ul li a:hover {
 				color: #EA7640;
+				text-decoration: underline;
 			}
 
 			.splash__footer ul li:last-child {
@@ -74,7 +74,6 @@
         </style>
     </head>
     <body>
-
 		<footer class="splash__footer">
 			<ul>
 

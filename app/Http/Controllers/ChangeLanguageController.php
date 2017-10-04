@@ -12,7 +12,7 @@ use Config;
 use Session;
 use Lang;
 
-use App\Language;
+use App\Models\Language;
 // use Request;
 
 
@@ -25,7 +25,7 @@ class ChangeLanguageController extends ClientController
      */
     public function changeLang(Language $language ,Request $request)
     {
-        dd($language);
+        dd($language); // requiere actualizacion y bind
         $laguagesArray = Language::GetLanguagesIso()->toArray();
 
         $previousUrl = Session::get('_previous')['url'];
@@ -40,11 +40,11 @@ class ChangeLanguageController extends ClientController
             return view("errors.404");
         }
 
-        if (!$previousUrl || (isset($previousUrlParts[0]) && $previousUrlParts[0] == "lang") ) {
+        if (!$previousUrl || (isset($previousUrlParts[0]) && $previousUrlParts[0] == 'Lang') ) {
             return Redirect::to($lang) ;
         }
 
-        session(['lang' => $lang]);
+        session(['Lang' => $lang]);
 
         App::setLocale( $lang );
 

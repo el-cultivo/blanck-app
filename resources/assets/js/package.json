@@ -1,24 +1,30 @@
 {
+  "private": true,
   "name": "micorriza",
-  "version": "1.2.0-Elcultivo",
+  "version": "1.3.0-Blank-App",
   "description": "Micorriza",
   "main": "micorriza.js",
   "scripts": {
-    "tests": "karma start",
-    "setup_micorriza_karma": "cp -vpnr node_modules/micorriza-karma-jasmine/* . || true"
+    "test": "karma start",
+    "setup_cltvo_karma": "node node_modules/cltvo-karma/bin/full-install.js"
   },
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "jquery": "^3",
+    "lodash.debounce": "^4.0.7",
+    "ramda": "^0.24.1",
+    "swiper": "^3.3.1",
+    "vue": "^1.0.28",
+    "vue-animate": "0.0.4",
+    "vue-resource": "^1.0.3",
+    "vue-sortable": "^0.1.3",
+    "vue-truncate": "^1.0.0",
+    "vue-html5-editor": "^0.5.1",
+    "coral-std-library": "^1.1.3"
+  },
+
   "devDependencies": {
-    "micorriza-karma-jasmine": "^1.0.1",
-    "babel-loader": "^5.0.0",
-    "jasmine": "^2.2.1",
-    "jasmine-core": "^2.2.0",
-    "karma": "^0.13.2",
-    "karma-jasmine": "^0.3.5",
-    "karma-phantomjs-launcher": "^0.1.4",
-    "karma-webpack": "^1.6.0",
-    "phantomjs-polyfill": "0.0.2",
-    "webpack": "^1.8.4"
+    "cltvo-karma": "^1"
   }
 }

@@ -18,13 +18,26 @@
 
 @section('content')
 
-    @include('admin.general._page-instructions', [
-        'title'         =>  '',
-        'instructions'  =>  'Da click para reactivar un usuario'
-    ])
+	<users-trash :list="store.users_disabled.data"></users-trash>
 
-    <div class="col s10 offset-s1 ">
-        @include('admin.users.trash._table')
-    </div>
+@endsection
 
+@section('vue_templates')
+    <script type="x/templates" id="users-trash-template">
+		<div class="">
+			{{-- filtros por: industria, nombre, apellido, empresa --}}
+			@include('admin.general._table-search')
+		    <div class="col s10 offset-s1">
+		        @include('admin.users.trash._table')
+		    </div>
+		</div>
+    </script>
+@endsection
+
+@section('vue_store')
+    <script>
+        mainVueStore.users_disabled = {
+            data: {!! json_encode($users_disabled) !!}
+        }
+    </script>
 @endsection

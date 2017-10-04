@@ -3,7 +3,7 @@
     'route'                 => 'admin::pages.sort',
     'role'                  => 'form' ,
     'id'                    => '&#123;&#123;index+"_sort_page_form"&#125;&#125;',
-    // 'class'                 => 'pageslists--sort-form',
+    'v-if'                  => 'list.length > 1',
     ]) !!}
     <input
         type="hidden"
@@ -11,7 +11,7 @@
         :form="index+'_sort_page_form'"
         name="pages[]"
         :value="id">
-    <div class="pull-right pageslists--save-button">
+    <div class="pull-right pageslists--save-button mt-5">
         {!! Form::submit("Guardar orden", [
             'class' => 'btn waves-effect waves-light',
             'form'  => '&#123;&#123;index+"_sort_page_form"&#125;&#125;'

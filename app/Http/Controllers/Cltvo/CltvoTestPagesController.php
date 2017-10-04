@@ -19,10 +19,8 @@ class CltvoTestPagesController extends ClientController
      */
     public function index()
     {
-        $test = env("CLTVO_TEST_VIEW");
-        $test_view = $test ? $test : "test";
-        if (View::exists('cltvo.'.$test_view)) {
-            return view('cltvo.'.$test_view);
+        if (View::exists('cltvo.'.config("cltvo.test_view"))) {
+            return view('cltvo.'.config("cltvo.test_view"));
         }
         abort('404');
     }

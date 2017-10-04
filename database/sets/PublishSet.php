@@ -1,5 +1,5 @@
 <?php
-
+use App\Console\Cltvo\SetSite\CltvoSet;
 use Illuminate\Console\Command;
 
 class PublishSet extends CltvoSet
@@ -13,7 +13,7 @@ class PublishSet extends CltvoSet
      * nombre de la clase a ser sembrada
      */
     protected function CltvoGetModelClass(){
-        return "App\Publish";
+        return "App\Models\Publish";
     }
 
     /**

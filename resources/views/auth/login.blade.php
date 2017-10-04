@@ -18,11 +18,11 @@
 			<a class="auth__links--password auth__links--link" href="{{ route('client::pass_reset:get') }}">
 				Olvidé la contraseña
 			</a>
-		{{-- @if (env('CLTVO_DEV_MODE'))
+		@if (config("cltvo.open_register") && config("cltvo.open_site"))
 			<a class="auth__links--registro auth__links--link" href="{{ route('client::register:get') }}">
 				Registrar nuevo usuario
 			</a>
-		@endif --}}
+		@endif
 		</div>
 
 	</div>

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\Users\User;
 use Validator;
 use App\Http\Controllers\ClientController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 use App\Models\Shop\BagUser;
+use App\Http\Helpers\Traits\Auth\RedirectPathTrait;
 
 class RegisterController extends ClientController
 {
@@ -22,7 +23,10 @@ class RegisterController extends ClientController
     |
     */
 
-    use RegistersUsers;
+
+    use RegistersUsers,RedirectPathTrait {
+        RedirectPathTrait::redirectPath insteadof RegistersUsers;
+    }
 
     /**
      * Where to redirect users after login / registration.

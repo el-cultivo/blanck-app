@@ -9,6 +9,25 @@ function is_page($route_name)
     return Route::currentRouteName() == $route_name;
 }
 
+/**
+ * verifica que si la  futa contiene el string buscado
+ * @param  string  $page_slug slug de la pagina a pasar
+ * @return boolean            si se encuentra en la fruta o no
+ */
+function in_pages(array $route_names)
+{
+    return in_array(Route::currentRouteName(), $route_names);
+}
+
+/**
+ * verifica que si la  futa contiene el string buscado
+ * @param  string  $page_slug slug de la pagina a pasar
+ * @return boolean            si se encuentra en la fruta o no
+ */
+function is_exact_page($route_name,array $parameters)
+{
+    return Request::url() == route($route_name,$parameters);
+}
 
 /**
  * encrypta el mail
@@ -19,7 +38,7 @@ function is_page($route_name)
  {
      $iv = getIVKey();
 
-     $key = env("CLTVO_ENCRYPTION_KEY=") ? env("CLTVO_ENCRYPTION_KEY=") : '#&$sdfx2s7sffgg4';
+     $key = config( "cltvo.encryption_key");
 
      return  base64url_encode( openssl_encrypt( $mail, Config::get('app.cipher'), md5($key), OPENSSL_RAW_DATA, $iv));
  }
@@ -34,14 +53,14 @@ function is_page($route_name)
  {
      $iv = getIVKey();
 
-     $key = env("CLTVO_ENCRYPTION_KEY=") ? env("CLTVO_ENCRYPTION_KEY=") : '#&$sdfx2s7sffgg4';
+     $key = config( "cltvo.encryption_key");
 
      return openssl_decrypt( base64url_decode($mail_encoded), Config::get('app.cipher'), md5($key), OPENSSL_RAW_DATA, $iv);
  }
 
  function getIVKey()
 {
-    $app_key    = env('APP_KEY');
+    $app_key    = config('app.key');
     $cipher     = Config::get('app.cipher');
     $iv_lenght  = openssl_cipher_iv_length($cipher);
     $iv_base64  = explode(':', $app_key)[1];
@@ -107,4 +126,10 @@ function csvToArray($filename='', $delimiter=','){
         fclose($handle);
     }
     return $data;
+}
+
+
+function cltvoCurrentLanguageIso()
+{
+	return session('Lang') ? session('Lang') : config("app.locale"); 
 }

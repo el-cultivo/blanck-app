@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('SEND_MAIL_AS'),
-        'name' => env('APP_NAME'),
+        'address' => env('SEND_MAIL_AS',"hola@elcultivo.mx"),
+        'name' => env('APP_NAME',"Cltvo Blank App"),
     ],
 
     /*

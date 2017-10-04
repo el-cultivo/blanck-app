@@ -24,33 +24,27 @@ class CreateContactRequest extends Request
     public function rules()
     {
         return [
-
             "first_name"        => "required|string",
             "last_name"         => "required|string",
-            "phone"             => "present",
+            "message"           => "present|string",
             "email"             => "required|email",
-
-            "address"           => "required|array",
-            "address.street1"   => "present|string",
-            "address.street2"   => "present|string",
-            "address.city"      => "present|string",
-            "address.state"     => "present|string",
-            "address.country"   => "present|string",
-            "address.zip"       => "present",
         ];
     }
 
-    // public function messages()
-    // {
-    //     return [
-    //         'first_name.required'         =>  'Olvidaste ingresar tu contraseña.',
-    //         'password.password_check'   =>  'La contraseña que ingresaste es incorrecta.',
-    //
-    //         'email.required'            =>  'Olvidaste ingresar tu correo electrónico.',
-    //         'email.email'               =>  'Ingresa una dirección de correo electrónico válida.',
-    //         'email.max'                 =>  'El campo correo electrónico no puede ser mayor a 255 caracteres.',
-    //         'email.unique'              =>  'La dirección de correo electrónico ya ha sido registrada.',
-    //         'email.not_in'              =>  'La dirección de correo electrónico es inválida.',
-    //     ];
-    // }
+    public function messages()
+    {
+        return [
+            'first_name.required' => trans('contact_form.first_name.required'),
+            'first_name.string' => trans('contact_form.first_name.string'),
+
+            'last_name.required' => trans('contact_form.last_name.required'),
+            'last_name.string' => trans('contact_form.last_name.string'),
+
+			'message.present' => trans('contact_form.message.present'),
+            'message.string' => trans('contact_form.message.string'),
+
+            'email.required' => trans('contact_form.email.required'),
+            'email.email' => trans('contact_form.email.email'),
+        ];
+    }
 }

@@ -1,6 +1,6 @@
 <?php namespace App\Models\Traits;
 
-use App\Photo;
+use App\Models\Photo;
 
 use Image;
 use Response;
@@ -49,14 +49,10 @@ trait PhotoableTrait {
      * @param  Image  $image imagen a ser agregada
      * @param  array $UseOrderAndClass   uso, orden y clase que se le va dar a esta imagen
      */
-    public function disassociateImage(Photo $image,array $UseOrderAndClass )
-    {
-        $photos = $this->photos();
-        foreach ($UseOrderAndClass as $key => $value) {
-            $photos->wherePivot($key,$value);
-        }
-        return $photos->detach($image);
-    }
+	 public function disassociateImage(Photo $image,array $UseOrderAndClass )
+     {
+ 		return $this->photos()->wherePivot("use",$UseOrderAndClass["use"])->detach($image);
+     }
 
     /**
      *  si el usuario tiene la imagen de algun tipo
@@ -115,7 +111,7 @@ trait PhotoableTrait {
     }
 
 
-    /**
+	/**
      * Get the administrator flag for the user.
      *
      * @return bool
@@ -123,8 +119,19 @@ trait PhotoableTrait {
     public function getThumbnailImageAttribute()
     {
         $photo = $this->getFirstPhotoTo(["use"=>"thumbnail"]);
-        return $photo ? $photo : new stdClass;
+        return $photo ? $photo : $this->getEmptyPhoto();
     }
+
+	protected function getEmptyPhoto()
+	{
+		return (object) [
+            'url'           => "",
+
+            'title'         => "",
+            'alt'           => "",
+            'description'   => "",
+        ];
+	}
 
 
 }

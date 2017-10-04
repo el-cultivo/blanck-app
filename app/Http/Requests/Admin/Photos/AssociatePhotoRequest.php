@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin\Photos;
 
 use App\Http\Requests\Request;
 
-use App\Photo;
+use App\Models\Photo;
 
 class AssociatePhotoRequest extends Request
 {

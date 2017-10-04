@@ -15,7 +15,7 @@ use App\Models\Pages\Sections\Type;
 use App\Models\Pages\Sections\Section;
 use App\Models\Pages\Sections\Components\Component;
 
-use App\Publish;
+use App\Models\Publish;
 
 use Redirect;
 use Response;

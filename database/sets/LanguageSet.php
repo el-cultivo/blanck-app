@@ -1,5 +1,5 @@
 <?php
-
+use App\Console\Cltvo\SetSite\CltvoSet;
 use Illuminate\Console\Command;
 
 class LanguageSet extends CltvoSet
@@ -13,7 +13,7 @@ class LanguageSet extends CltvoSet
      * nombre de la clase a ser sembrada
      */
     protected function CltvoGetModelClass(){
-        return "App\Language";
+        return "App\Models\Language";
     }
 
     /**
@@ -30,7 +30,7 @@ class LanguageSet extends CltvoSet
                 "label"     => $name
             ];
         }
-        
+
         return $languages;
     }
 

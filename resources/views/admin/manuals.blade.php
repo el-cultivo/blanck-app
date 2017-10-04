@@ -11,17 +11,19 @@
 @section('content')
     @include('admin.general._page-instructions', [
         'title'         =>  'Manuales',
-        'instructions'  =>  'Proximamente'
+        'instructions'  =>  config('cltvo.manual_url') ? '' : 'Proximamente',
     ])
 
-    <div class="col s10 offset-s1">
-        <div class="row manuals">
+	@if (config('cltvo.manual_url'))
+		<div class="col s10 offset-s1">
+	        <div class="row manuals">
 
-            <div class="manuals__container">
-                <iframe class="manuals__container--video" src="{{ env("CLTVO_MANUAL_URL") }}" frameborder="0" allowfullscreen></iframe>
-            </div>
+	            <div class="manuals__container">
+	                <iframe class="manuals__container--video" src="{{ config('cltvo.manual_url') }}" frameborder="0" allowfullscreen></iframe>
+	            </div>
 
-        </div>
-    </div>
+	        </div>
+	    </div>
+	@endif
 
 @endsection
