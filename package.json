@@ -11,8 +11,14 @@
     "remove_build_folder": "echo 'borrando folder public/build' && rm -rf public/build && echo 'compilando nuevo build de css y js'"
   },
   "dependencies": {
-    "materialize-css": "0.97.8"
+    "materialize-css": "0.97.8",
+   	"lodash.debounce": "4.0.8",
+    "materialize-css": "0.97.8",
+    "ramda": "0.24.1",
+    "vue": "1.0.28",
+    "vue-sortable": "0.1.3"
   },
+  
   "devDependencies": {
     "autoprefixer": "6.7.7",
     "babel-core": "6.24.1",
