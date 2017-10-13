@@ -11,7 +11,7 @@
 @section('content')
     @include('admin.general._page-instructions', [
         'title'         =>  'Manuales',
-        'instructions'  =>  config('cltvo.manual_url') ? '' : 'Proximamente',
+        'instructions'  =>  config('cltvo.manual_url') ? '' : 'Próximamente',
     ])
 
 	@if (config('cltvo.manual_url'))
