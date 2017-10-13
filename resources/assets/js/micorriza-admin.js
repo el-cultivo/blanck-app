@@ -2,6 +2,7 @@ import {ifElementExistsThenLaunch} from './functions/dom';
 import {w} from './cltvo/constants.js';
 import {alertsController} from './alerts-controller';
 import {adminMainMenu} from './admin-main-menu';
+import {mediaTriger}	from './media-triger';
 
 //Vue
 import {mainVue} from './vue/main-vue';
@@ -55,6 +56,7 @@ w.on('load', () => {
 		}]],
 		['#alert__container', alertsController, 'init', []],
 		['#admin-main-menu', adminMainMenu, undefined, [$,'.nav_JS','.label_JS','.tree_JS', 'label_active']],
+		mediaTriger,
 	]);
 });
 
