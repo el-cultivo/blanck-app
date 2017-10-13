@@ -64,13 +64,13 @@ class ManagePhotosController extends Controller
 
         if (!$newImage) {
             return Response::json([
-                'error' => ["La imagen no pudo ser cargada"]
+                'error' => [trans( "manage_photo.create.error")]
             ], 422);
         }
 
         if (Photo::existsPhoto($newImage)) {
             return Response::json([
-                'error' => ["La imagen fue cargada anteriomente"]
+                'error' => [trans( "manage_photo.create.exist")]
             ], 422);
         }
 
@@ -84,13 +84,13 @@ class ManagePhotosController extends Controller
             Storage::delete($file_path);
             Storage::delete(str_replace(Photo::STORAGE_PATH, Photo::THUMBNAILS_STORAGE_PATH, $file_path)  );
             return Response::json([
-                'error' => ["La imagen no pudo ser salvada"]
+                'error' => [trans( "manage_photo.create.store")]
             ], 422);
         }
 
         return Response::json([ // todo bien
             'data'=> $photo->load("languages"),
-            'message' => ["La imagen fue creado correctamente."],
+            'message' => [trans( "manage_photo.create.success")],
             'success' => true
         ]);
 
@@ -107,7 +107,7 @@ class ManagePhotosController extends Controller
         // dd($photo);
         if (!$photo) {
             return Response::json([
-                'error' => ["La imagen que desea modificar no existe"]
+                'error' => [trans( "manage_photo.edit.error")]
             ], 422);
         }
 
@@ -136,7 +136,7 @@ class ManagePhotosController extends Controller
         }
 
         return Response::json([ // todo bien
-            'message' => ["La imagen exitosamente actualizada."],
+            'message' => [trans( "manage_photo.update.success")],
             'success' => true
         ]);
     }
@@ -151,13 +151,13 @@ class ManagePhotosController extends Controller
     {
         if (!$photo->isDeletable()) {
             return Response::json([
-                'error' => ["La imagen que desea borrar se encuetra en uso"]
+                'error' => [trans( "manage_photo.deletable.error")]
             ], 422);
         }
 
         if (!$photo->languages()->detach()) {
             return Response::json([
-                'error' => ["La imagen pudo ser borrada"]
+                'error' => [trans( "manage_photo.delete.error")]
             ], 422);
         }
 
@@ -165,12 +165,12 @@ class ManagePhotosController extends Controller
 
         if (!$photo->delete()) {
             return Response::json([
-                'error' => ["La imagen pudo ser borrada"]
+                'error' => [trans( "manage_photo.delete.error")]
             ], 422);
         }
 
         return Response::json([ // todo bien
-            'message' => ["La imagen se borrado exitosamente."],
+            'message' => [trans( "manage_photo.delete.success")],
             'success' => true
         ]);
     }
@@ -193,25 +193,25 @@ class ManagePhotosController extends Controller
         {
             if ($photoable->hasPhotoTo($use_order_class) ) {
                 return Response::json([
-                    'error' => ["1 Ya cuenta con una imagen asignada previamente"]
+                    'error' => [trans( "manage_photo.associate.exist")]
                 ], 422);
             }
         }
 
         if ($photoable->cantUsePhotoFor($photo,$use_order_class["use"]) ) {
             return Response::json([
-                'error' => ["Ya cuenta con esa imagen asignada previamente"]
+                'error' => [trans( "manage_photo.associate.use")]
             ], 422);
         }
 
         if (!$photoable->associateImage($photo,$use_order_class)) {
             return Response::json([
-                'error' => ["La imagen no pudo ser asignada"]
+                'error' => [trans( "manage_photo.associate.error")]
             ], 422);
         }
 
         return Response::json([ // todo bien
-            'message' => ["La imagen asigno exitosamente."],
+            'message' => [trans( "manage_photo.associate.success")],
             'success' => true
         ]);
     }
@@ -231,18 +231,18 @@ class ManagePhotosController extends Controller
 
         if (!$photoable->hasPhotoTo($use_order_class) ) {
             return Response::json([
-                'error' => ["No cuenta con una imagen asignada"]
+                'error' => [trans( "manage_photo.dissasociate.use")]
             ], 422);
         }
 
         if (!$photoable->disassociateImage($photo,$use_order_class)) {
             return Response::json([
-                'error' => ["La imagen no pudo ser desasignada"]
+                'error' => [trans( "manage_photo.dissasociate.error")]
             ], 422);
         }
 
         return Response::json([ // todo bien
-            'message' => ["Imagen desasignada exitosamente."],
+            'message' => [trans( "manage_photo.dissasociate.success")],
             'success' => true
         ]);
     }
@@ -270,7 +270,7 @@ class ManagePhotosController extends Controller
 
         return Response::json([ // todo bien
             "data"    => $input["photos"] ,
-            'message' => ["Orden correctamente guardado"],
+            'message' => [trans( "manage_photo.sort.success")],
             'success' => true
         ]);
     }
