@@ -38,7 +38,7 @@ return [
 
 	'dissasociate'	=>	[
 		'use'		=>	"No cuenta con una imagen asignada",
-		'success'	=>	"La imagen se ha desasignado exitosamente"
+		'success'	=>	"La imagen se ha desasignado exitosamente",
 		'error'		=>	"La imagen no pudo ser desasignada"
 	],
 
