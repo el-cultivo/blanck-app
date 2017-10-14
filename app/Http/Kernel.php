@@ -31,7 +31,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 			\App\Http\Middleware\Cltvo\PreviousUrl::class,
-            //\App\Http\Middleware\CltvoLang::class,
+            \App\Http\Middleware\Cltvo\CltvoCurrentLanguage::class,
         ],
 
         'user' => [
