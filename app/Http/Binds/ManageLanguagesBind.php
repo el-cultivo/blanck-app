@@ -15,7 +15,7 @@ class ManageLanguagesBind extends CltvoBind
     public static function Bind(){
     // para los lenguages
         Route::bind('language', function ($language_iso) {
-            return Language::where(['iso6391' => $language_iso])->first();
+            return Language::available()->where(['iso6391' => $language_iso])->first();
         });
     }
 

@@ -114,11 +114,11 @@ trait TranslationTrait {
         $nombre_compuesto = "";
 
         foreach ($this->languages as $language) {
-            if (!$language->isCurrentLanguage()) {
+            if (!$language->is_current) {
                 $nombre_compuesto .= $glue_open;
             }
             $nombre_compuesto .= $language->pivot->$key;
-            if (!$language->isCurrentLanguage()) {
+            if (!$language->is_current) {
                 $nombre_compuesto .= $glue_clouse;
             }
         }

@@ -5,6 +5,7 @@ namespace App\Http\Middleware\Cltvo;
 use Closure;
 use Config ;
 use App;
+use Carbon\Carbon;
 
 class CltvoCurrentLanguage
 {
@@ -56,13 +57,14 @@ class CltvoCurrentLanguage
 
 	protected function setCurrentLanguage()
 	{
-		$current_lang = cltvoCurrentLanguageIso() ;
+		$current_lang_iso = cltvoCurrentLanguageIso() ;
 
-		App::setLocale( $current_lang );
-		Config::set('app.locale_prefix', $current_lang );
+        Carbon::setLocale($current_lang_iso);
+		App::setLocale( $current_lang_iso );
 
-		session(['cltvo_lang' => $current_lang]);
+		Config::set('app.locale_prefix', $current_lang_iso );
 
+		session(['cltvo_lang' => $current_lang_iso]);
 	}
 
 

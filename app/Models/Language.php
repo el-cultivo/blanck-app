@@ -2,10 +2,6 @@
 
 namespace App\Models;
 
-use App;
-
-use Auth;
-
 use Illuminate\Database\Eloquent\Model;
 
 class Language extends Model
@@ -33,7 +29,19 @@ class Language extends Model
      */
     protected $hidden = [
         "created_at",
-        "updated_at"
+        "updated_at",
+		"id"
+    ];
+
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+		'is_current',
+		'translate_url',
     ];
 
     /**
@@ -42,12 +50,17 @@ class Language extends Model
      */
     public static function getLanguagesIso()
     {
-        if (!session("languages_iso") || session("languages_iso")->count() == 0 ) {
-            session(["languages_iso" => static::orderBy("id","ASC")->pluck('iso6391','id') ]);
+        if (!session("languages_iso") || (session("languages_iso")->count() != count(config('app.available_langs'))) ) {
+            session(["languages_iso" => static::available()->orderBy("id","ASC")->pluck('iso6391','id') ]);
         }
 
         return session("languages_iso")  ;
     }
+
+	public function scopeAvailable($query)
+	{
+		return $query->whereIn('iso6391', array_keys(config('app.available_langs')) );
+	}
 
     /**
      * Genera la lista de los nombres de los paises del sistema
@@ -97,9 +110,14 @@ class Language extends Model
         return static::languagesByIso($iso)->get()->first();
     }
 
-    public function isCurrentLanguage()
+    public function getIsCurrentAttribute()
     {
-        return App::getLocale() == $this->iso6391;
+        return cltvoCurrentLanguageIso() == $this->iso6391;
     }
+
+	public function getTranslateUrlAttribute()
+	{
+		return	route('client::language',$this->iso6391);
+	}
 
 }
