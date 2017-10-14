@@ -20,12 +20,12 @@ class CltvoLang
         $available_langs = Config::get('app.available_langs');
 
         if( isset($available_langs[$testLang]) ) {
-            session(['Lang' => $testLang]);
+            session(['cltvo_lang' => $testLang]);
         }
 
-        if (session('Lang')) {
-            \App::setLocale( session('Lang') );
-            \Config::set('app.locale_prefix', session('Lang') );
+        if (session('cltvo_lang')) {
+            \App::setLocale( session('cltvo_lang') );
+            \Config::set('app.locale_prefix', session('cltvo_lang') );
         }
 
         return $next($request);

@@ -128,8 +128,7 @@ function csvToArray($filename='', $delimiter=','){
     return $data;
 }
 
-
 function cltvoCurrentLanguageIso()
 {
-	return session('Lang') ? session('Lang') : config("app.locale"); 
+	return isset(config('app.available_langs')[ session('cltvo_lang')]) ? session('cltvo_lang') : config( 'app.locale');
 }

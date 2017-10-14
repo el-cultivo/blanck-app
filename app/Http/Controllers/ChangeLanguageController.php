@@ -40,11 +40,11 @@ class ChangeLanguageController extends ClientController
             return view("errors.404");
         }
 
-        if (!$previousUrl || (isset($previousUrlParts[0]) && $previousUrlParts[0] == 'Lang') ) {
+        if (!$previousUrl || (isset($previousUrlParts[0]) && $previousUrlParts[0] == 'cltvo_lang') ) {
             return Redirect::to($lang) ;
         }
 
-        session(['Lang' => $lang]);
+        session(['cltvo_lang' => $lang]);
 
         App::setLocale( $lang );
 
