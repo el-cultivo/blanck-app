@@ -25,7 +25,28 @@ class ChangeLanguageController extends ClientController
 
 	protected $base_route_parameters = [];
 
+	protected $trans_lang_routes = [
+		'client::language',
+	];
 
+	protected function trasnlatePublicPageBind($value, Language $language)
+	{
+		$page = Page::getModelBySlug($value)->first();
+		if ($page) {
+			return $page->translation($language->iso6391)->slug;
+		}
+		return $value;
+	}
+
+	protected function trasnlatePublicChildPageBind($value, Language $language)
+	{
+		$page = Page::getModelBySlug($value)->first();
+		if ($page) {
+			return $page->translation($language->iso6391)->slug;
+		}
+		return $value;
+	}
+	
     /**
      * Show the application dashboard.
      *
@@ -35,13 +56,12 @@ class ChangeLanguageController extends ClientController
     {
 		session(['cltvo_lang' => $language->iso6391]);
 
-		// try {
-		// 	$cltvo_route = $this->getRouteByObject($language);
-		// 	return Redirect::route($cltvo_route->route_name,$cltvo_route->route_parameters);
-		// } catch (Exception $e) {}
+		if ($request->ajax()) {
+			abort("404");
+		}
 
 		try {
-			$cltvo_route = $this->getRouteByUri($language);
+			$cltvo_route = $this->getRouteByUri($language,$request->headers->get('referer') );
 			return Redirect::route($cltvo_route->route_name,$cltvo_route->route_parameters);
 		} catch (Exception $e) {}
 
@@ -49,26 +69,24 @@ class ChangeLanguageController extends ClientController
     }
 
 
-	protected function getRouteByUri(Language $language)
+	protected function getRouteByUri(Language $language,$previous_url)
 	{
-		$route = app('router')->getRoutes()->match(app('request')->create(session( 'cltvo_trans_url', route($this->base_route_name,$this->base_route_parameters))));
-
+		$route = app('router')->getRoutes()->match(app('request')->create($previous_url));
 		$route_name = $route->getName();
+
+		if (in_array($route_name, $this->trans_lang_routes)) {
+			return (object) [
+				"route_name"		=>		$this->base_route_name,
+				"route_parameters"	=>		$this->base_route_parameters
+			];
+		}
+
 		$route_parameters = collect($route->parameters())->map(function($value,$name)use ($language){
 
-			switch ($name) {
-				case 'public_page':
-					$page = Page::getModelBySlug($value)->first();
-					if ($page) {
-						return $page->translation($language->iso6391)->slug;
-					}
-					break;
-				case 'public_child_page':
-					$page = Page::getModelBySlug($value)->first();
-					if ($page) {
-						return $page->translation($language->iso6391)->slug;
-					}
-					break;
+			$method_name = "trasnlate".ucfirst(camel_case($name))."Bind";
+
+			if (method_exists($this,$method_name )) {
+				$value = $this->$method_name($value, $language);
 			}
 
 			return $value;
@@ -79,39 +97,5 @@ class ChangeLanguageController extends ClientController
 			"route_parameters"	=>		$route_parameters->toArray()
 		];
 	}
-	//
-	// protected function getRouteByObject(Language $language)
-	// {
-	// 	$route = session( 'cltvo_trans_route', [
-	// 		"name"			=> $this->base_route_name,
-	// 		"parameters"	=> $this->base_route_parameters
-	// 	] );
-	//
-	// 	$route_name = isset($route['name']) ?  $route['name'] : $this->base_route_name;
-	// 	$route_parameters = collect( isset($route['parameters']) && is_array($route['parameters']) ?  $route['parameters'] : [] )->map(function($parameter_op)use ($language){
-	//
-	// 		$parameter_op = is_array($parameter_op) ? $parameter_op : [];
-	// 		$parameter_op['class'] = isset($parameter_op['class']) ?  $parameter_op['class'] : "";
-	// 		$parameter_op['key'] = isset($parameter_op['key']) ?  $parameter_op['key'] : null;
-	//
-	// 		if (method_exists($parameter_op['class'],"getTranslatedPublicParameter") ) {
-	// 			$object = $parameter_op['class']::find($parameter_op['key']);
-	// 			return $object ? $object->getTranslatedPublicParameter($language) : null;
-	// 		}
-	//
-	// 		return $parameter_op['key'];
-	// 	})->filter(function($parameter){
-	// 		return is_string($parameter);
-	// 	});
-	//
-	// 	return (object) [
-	// 		"route_name"		=>		$route_name,
-	// 		"route_parameters"	=>		$route_parameters->toArray()
-	// 	];
-	// }
-
-
-
-
 
 }

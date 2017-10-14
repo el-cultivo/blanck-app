@@ -23,7 +23,7 @@ class CltvoCurrentLanguage
      */
     public function handle($request, Closure $next)
     {
-		$this->setTranslateRoute($request);
+		// $this->setTranslateRoute($request);
 		$this->setCurrentLanguage();
         return $next($request);
     }
