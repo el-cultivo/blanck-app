@@ -12,12 +12,20 @@ use Config;
 use Session;
 use Lang;
 
+use Exception;
+
 use App\Models\Language;
-// use Request;
+use App\Models\Pages\Page;
+
 
 
 class ChangeLanguageController extends ClientController
 {
+	protected $base_route_name = 'client::pages.index';
+
+	protected $base_route_parameters = [];
+
+
     /**
      * Show the application dashboard.
      *
@@ -25,58 +33,81 @@ class ChangeLanguageController extends ClientController
      */
     public function changeLang(Language $language ,Request $request)
     {
-        dd($language); // requiere actualizacion y bind
-        $laguagesArray = Language::GetLanguagesIso()->toArray();
+		session(['cltvo_lang' => $language->iso6391]);
 
-        $previousUrl = Session::get('_previous')['url'];
+		// try {
+		// 	$cltvo_route = $this->getRouteByObject($language);
+		// 	return Redirect::route($cltvo_route->route_name,$cltvo_route->route_parameters);
+		// } catch (Exception $e) {}
 
-        $server = $request->root()."/";
-
-        $previousUrlParts =  explode("/",str_replace($server,"",$previousUrl )) ;
-
-
-        // Verifica que el lang al cual quieres ir está en los lenguages disponibles
-        if (!in_array( $lang , $laguagesArray)) {
-            return view("errors.404");
-        }
-
-        if (!$previousUrl || (isset($previousUrlParts[0]) && $previousUrlParts[0] == 'cltvo_lang') ) {
-            return Redirect::to($lang) ;
-        }
-
-        session(['cltvo_lang' => $lang]);
-
-        App::setLocale( $lang );
-
-        Config::set('app.locale_prefix', $lang );
-
-        if ( !isset($previousUrlParts[0]) || !in_array($previousUrlParts[0], $laguagesArray) || $lang == $previousUrlParts[0]  ) {
-            return Redirect::back();
-        }
-
-        $trasnlateUrl = $lang."/";
-
-        if (count($previousUrlParts) > 1) {
-
-            $routesTrans = Lang::get("routes", [], $previousUrlParts[0]);
+		try {
+			$cltvo_route = $this->getRouteByUri($language);
+			return Redirect::route($cltvo_route->route_name,$cltvo_route->route_parameters);
+		} catch (Exception $e) {}
 
 
-            array_shift($previousUrlParts);
 
-            foreach ($previousUrlParts as $key => $part) {
-
-
-                $key = array_search($part, $routesTrans);
-
-
-                $trasnlateUrl .= ($key ? Lang::get("routes.".$key, [], $lang) : $part)."/";
-
-            }
-        }
-
-        // dd($previousUrl,$trasnlateUrl);
-
-        return Redirect::to($trasnlateUrl);
-
+        return Redirect::route($this->base_route_name,$this->base_route_parameters);
     }
+
+
+	protected function getRouteByUri(Language $language)
+	{
+		$route = app('router')->getRoutes()->match(app('request')->create(session( 'cltvo_trans_url', route($this->base_route_name,$this->base_route_parameters))));
+
+		$route_name = $route->getName();
+		$route_parameters = collect($route->parameters())->map(function($value,$name)use ($language){
+
+			switch ($name) {
+				case 'public_page':
+					$page = Page::getModelBySlug($value)->first();
+					if ($page) {
+						return $page->translation($language->iso6391)->slug;
+					}
+					break;
+			}
+
+			return $value;
+		});
+
+		return (object) [
+			"route_name"		=>		$route_name,
+			"route_parameters"	=>		$route_parameters->toArray()
+		];
+	}
+	//
+	// protected function getRouteByObject(Language $language)
+	// {
+	// 	$route = session( 'cltvo_trans_route', [
+	// 		"name"			=> $this->base_route_name,
+	// 		"parameters"	=> $this->base_route_parameters
+	// 	] );
+	//
+	// 	$route_name = isset($route['name']) ?  $route['name'] : $this->base_route_name;
+	// 	$route_parameters = collect( isset($route['parameters']) && is_array($route['parameters']) ?  $route['parameters'] : [] )->map(function($parameter_op)use ($language){
+	//
+	// 		$parameter_op = is_array($parameter_op) ? $parameter_op : [];
+	// 		$parameter_op['class'] = isset($parameter_op['class']) ?  $parameter_op['class'] : "";
+	// 		$parameter_op['key'] = isset($parameter_op['key']) ?  $parameter_op['key'] : null;
+	//
+	// 		if (method_exists($parameter_op['class'],"getTranslatedPublicParameter") ) {
+	// 			$object = $parameter_op['class']::find($parameter_op['key']);
+	// 			return $object ? $object->getTranslatedPublicParameter($language) : null;
+	// 		}
+	//
+	// 		return $parameter_op['key'];
+	// 	})->filter(function($parameter){
+	// 		return is_string($parameter);
+	// 	});
+	//
+	// 	return (object) [
+	// 		"route_name"		=>		$route_name,
+	// 		"route_parameters"	=>		$route_parameters->toArray()
+	// 	];
+	// }
+
+
+
+
+
 }
