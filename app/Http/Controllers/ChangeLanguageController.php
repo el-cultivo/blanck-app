@@ -45,8 +45,6 @@ class ChangeLanguageController extends ClientController
 			return Redirect::route($cltvo_route->route_name,$cltvo_route->route_parameters);
 		} catch (Exception $e) {}
 
-
-
         return Redirect::route($this->base_route_name,$this->base_route_parameters);
     }
 
@@ -60,6 +58,12 @@ class ChangeLanguageController extends ClientController
 
 			switch ($name) {
 				case 'public_page':
+					$page = Page::getModelBySlug($value)->first();
+					if ($page) {
+						return $page->translation($language->iso6391)->slug;
+					}
+					break;
+				case 'public_child_page':
 					$page = Page::getModelBySlug($value)->first();
 					if ($page) {
 						return $page->translation($language->iso6391)->slug;
