@@ -20,12 +20,15 @@ class ViewComposerServiceProvider extends ServiceProvider
 
         view()->composer('admin.general._sidebar', 'App\Http\ViewComposers\Admin\AdminMainMenuComposer');
 
-    // front
-        view()->composer('layouts.client', 'App\Http\ViewComposers\ClientLayoutComposer');
-        view()->composer('client.general._menu', 'App\Http\ViewComposers\ClientMainMenuComposer');
+    // client
+        view()->composer('layouts.client', 'App\Http\ViewComposers\Client\ClientLayoutComposer');
+        view()->composer('client.general._menu', 'App\Http\ViewComposers\Client\ClientMainMenuComposer');
+
+	// splash
+		view()->composer('layouts.splash', 'App\Http\ViewComposers\Client\SplashLayoutComposer');
 
     // email
-        view()->composer('vendor.notifications.email', 'App\Http\ViewComposers\EmailLayoutComposer' );
+        view()->composer('vendor.notifications.email', 'App\Http\ViewComposers\Emails\EmailLayoutComposer' );
     }
 
     /**

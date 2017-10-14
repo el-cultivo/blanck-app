@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\ViewComposers;
+namespace App\Http\ViewComposers\Emails;
 
 use Illuminate\Contracts\View\View;
 
