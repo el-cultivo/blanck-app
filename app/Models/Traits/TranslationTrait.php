@@ -96,7 +96,7 @@ trait TranslationTrait {
     public function translation($languageIso = null)
     {
         if (!Language::languageExist($languageIso)) { // si no existe tomamos el del sistema
-            $languageIso = App::getLocale();
+            $languageIso = cltvoCurrentLanguageIso();
         }
 
         $translation = $this->languages()->where(["iso6391"=>$languageIso])->get()->first();
