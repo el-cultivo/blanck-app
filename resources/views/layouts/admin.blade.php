@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ config("app.locale") }}">
+<html lang="{{ $current_lang_iso }}">
 
 	@include('admin.general.head')
 

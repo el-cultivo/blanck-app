@@ -11,7 +11,6 @@ use Auth;
 use View;
 
 use App\Models\Language;
-use Carbon\Carbon;
 
 
 class Controller extends BaseController
@@ -49,7 +48,7 @@ class Controller extends BaseController
     ];
 
     protected $languages;
-    
+
     protected $current_language;
 
     /**
@@ -58,7 +57,7 @@ class Controller extends BaseController
     public function __construct(){
 
         $this->middleware(function ($request, $next) {
-            
+
             $this->reconstructController();
 
             if (method_exists($this,"constructClientController")  ) {
@@ -82,17 +81,15 @@ class Controller extends BaseController
         $this->userIsSuperAdmin = $this->user ? $this->user->isSuperAdmin() : false;
 
         // Get all languages for the sites
-        $this->languages = Language::all();
+        $this->languages = Language::available()->get();
 
         // Language of the session page
         // Get current Language object of the site
         $current_lang_iso =  cltvoCurrentLanguageIso();
-        $this->current_language = $this->languages->where('iso6391', $current_lang_iso)->first();
+        // $this->current_language = $this->languages->where('iso6391', $current_lang_iso)->first();
 
         View::share("user", $this->user); // pasar a todas las vistas
         View::share("current_lang_iso", $current_lang_iso); // pasar a todas las vistas
         View::share("languages", $this->languages); // pasar a todas las vistas
-
-        Carbon::setLocale($current_lang_iso);
     }
 }

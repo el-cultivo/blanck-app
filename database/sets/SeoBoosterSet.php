@@ -96,7 +96,7 @@ class SeoBoosterSet extends CltvoSet
         }
 
         // Translations
-        foreach (Language::get() as $language)
+        foreach (Language::available()->get() as $language)
         {
             $translation = [
                 'title'         => $translations[$language->iso6391]['title'],

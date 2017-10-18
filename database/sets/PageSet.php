@@ -37,7 +37,7 @@ class PageSet extends CltvoSet
      */
     function __construct()
     {
-        $this->languages = Language::get();
+        $this->languages = Language::available()->get();
         $this->publish = Publish::getPublish();
     }
 
