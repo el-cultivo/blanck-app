@@ -43,7 +43,7 @@
 		        name="sections[]"
 		        :value="id">
 		    <div class="pull-right pageslists--save-button mt-5">
-		        {!! Form::submit("Guardar orden", [
+		        {!! Form::submit(trans('manage_pages.sections.sort.save'), [
 		            'class' => 'btn waves-effect waves-light',
 		            'form'  => 'sort_page_sections_form'
 		        ]) !!}

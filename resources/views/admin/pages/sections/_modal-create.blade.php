@@ -1,7 +1,7 @@
 @extends('layouts.modal',["modal_id"=> "pagesections-modal-create"])
 
 @section('modal-title')
-    Agregar una seccion de página
+    {!! trans('manage_pages.sections.create_modal.label') !!}
 @overwrite
 
 @section('modal-content')
@@ -16,36 +16,36 @@
         ]) !!}
 
         <div class="input-field col s12">
-            {!! Form::label('index', "Nombre:", [
+            {!! Form::label('index', trans('manage_pages.sections.create_modal.form.index.label') , [
                 'class' => 'input-label active',
             ]) !!}
             {!! Form::text('index', null, [
                 'class'         => 'validate',
                 'required'      => 'required',
                 'form'          => 'create_page_section_form',
-                'placeholder'   => 'home-slider'
+                'placeholder'   => trans('manage_pages.sections.create_modal.form.index.placeholder')
             ]) !!}
         </div>
         <div class=" input-field col s12">
-            {!! Form::label('description',"Descripción:", [
+            {!! Form::label('description',trans('manage_pages.sections.create_modal.form.description.label'), [
                 'class' => 'input-label active',
             ]) !!}
             <v-editor :content.sync='item_on_create.description'></v-editor>
             <input type="hidden" v-model="item_on_create.description" name="description">
         </div>
         <div class=" input-field col s12">
-            {!! Form::label('template_path',"Client template path:", [
+            {!! Form::label('template_path',trans('manage_pages.sections.create_modal.form.template_path.label'), [
                 'class' => 'input-label active',
             ]) !!}
             {!! Form::text('template_path', null, [
                 'class'         => 'validate',
                 'required'      => 'required',
                 'form'          => 'create_page_section_form',
-                'placeholder'   => "home.slider"
+                'placeholder'   => trans('manage_pages.sections.create_modal.form.template_path.placeholder')
             ]) !!}
         </div>
         <div class="input-field col s6 ">
-            {!! Form::label('components_max',"Número maximo de componentes:", [
+            {!! Form::label('components_max',trans('manage_pages.sections.create_modal.form.components_max.label'), [
                 'class' => 'input-label active',
             ]) !!}
             {!! Form::number('components_max', null, [
@@ -62,17 +62,17 @@
             {!! Form::select('type_id', $types_list,null, [
                 'class'         => 'validate ',
                 'required'      => 'required',
-                 'placeholder'   => "Seleccionar",
+                 'placeholder'   => trans('manage_pages.sections.create_modal.form.type_id.placeholder'),
                 'form'          => 'create_page_section_form',
                 "id"            => "types-".'create_page_section_form'
             ])  !!}
-            {!! Form::label("types-".'create_page_section_form', "Tipo:", [
+            {!! Form::label("types-".'create_page_section_form', trans('manage_pages.sections.create_modal.form.type_id.label'), [
                 'class'         => 'input-label active',
             ]) !!}
         </div>
 
         <div class="col s12 ">
-            <h6>Partes editables por el usuario</h6>
+            <h6>{!! trans('manage_pages.sections.create_modal.form.editable_contents.label') !!}</h6>
 
             <div class="row">
                 @foreach ($editable_parts as $part_key => $part_label)
@@ -82,7 +82,7 @@
                             'id'    => 'editable_contents-'.$part_key.'-create_page_section_form',
                             'form'	=> 'create_page_section_form',
                             ]) }}
-                        {!! Form::label('editable_contents-'.$part_key.'-create_page_section_form', $part_label, [
+                        {!! Form::label('editable_contents-'.$part_key.'-create_page_section_form', trans('manage_pages.sections.create_modal.form.editable_contents.'.$part_key.'.label') , [
                             'class' => 'input-label'
                         ]) !!}
                     </div>
@@ -93,7 +93,7 @@
 
         <div class="col s12 ">
             <div class="pull-right">
-                {!! Form::submit('Crear', [
+                {!! Form::submit(trans('manage_pages.sections.create_modal.form.save'), [
                     'class'  => 'btn waves-effect waves-light',
                     'form'   => 'create_page_section_form'
                 ]) !!}

@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
 @section('title')
-    Administrador de las secciones de las páginas
+    {!! trans('manage_pages.sections.index.label') !!} |
 @endsection
 
 @section('h1')
-    Administrador de las secciones de las páginas
+    {!! trans('manage_pages.sections.index.label') !!}
 @endsection
 
 @section('action')
@@ -31,7 +31,7 @@
 			<div style="">
 			@include('admin.general._page-instructions', [
 				'title'			=> '',
-				'instructions' 	=> 'Da click para editar o borrar una seccion de página'
+				'instructions' 	=> trans('manage_pages.sections.index.instructions')
 			])
 			</div>
 			<div class="col s10 offset-s1">

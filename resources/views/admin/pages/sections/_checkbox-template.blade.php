@@ -1,6 +1,6 @@
 <template id="pagesections-checkbox-template">
 	<div class="col s10  offset-s1">
-		<a data-target="pagesections-modal-create" class="modal-trigger select--modal-trigger">Agregar una seccion</a>
+		<a data-target="pagesections-modal-create" class="modal-trigger select--modal-trigger">{!! trans('manage_pages.sections.checkbox.add') !!}</a>
 
 		<div class="row">
 			{!! Form::open([

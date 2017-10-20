@@ -1,12 +1,12 @@
 <table class="highlight responsive-table  sections__table">
 	<thead class="sections__table__head">
 		<tr>
-			<th class="sections__table--nombre">Nombre</th>
-			<th class="sections__table--tipo">Tipo</th>
-			<th class="sections__table--direccion">Template</th>
-			<th class="sections__table--direccion">Páginas</th>
-			<th class="center-align sections__table--editar" >Editar</th>
-			<th class="center-align sections__table--desactivar" >Borrar</th>
+			<th class="sections__table--nombre">{!!trans('manage_pages.sections.index.table.name')!!}</th>
+			<th class="sections__table--tipo">{!!trans('manage_pages.sections.index.table.type')!!}</th>
+			<th class="sections__table--direccion">{!!trans('manage_pages.sections.index.table.template')!!}</th>
+			<th class="sections__table--direccion">{!!trans('manage_pages.sections.index.table.pages')!!}</th>
+			<th class="center-align sections__table--editar" >{!!trans('manage_pages.sections.index.table.edit')!!}</th>
+			<th class="center-align sections__table--desactivar" >{!!trans('manage_pages.sections.index.table.delite')!!}</th>
 		</tr>
 	</thead>
 
