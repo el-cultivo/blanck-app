@@ -61,13 +61,13 @@ class ManagePagesSectionsController extends Controller
 
         if (!$page_section) {
             return Response::json([
-                'error' => ["La seccion no pudo ser creada"]
+                'error' => [trans('manage_pages.sections.create.error')]
             ], 422);
         }
 
         return Response::json([ // todo bien
             'data'    => $page_section->load("type","pages"),
-            'message' => ["La seccion fue creada correctamente"],
+            'message' => [trans('manage_pages.sections.create.success')],
             'success' => true
         ]);
 
@@ -95,13 +95,13 @@ class ManagePagesSectionsController extends Controller
 
         if (!$page_section->save()) {
             return Response::json([
-                'error' => ["La seccion no pudo ser actualizada"]
+                'error' => [trans('manage_pages.sections.update.error')]
             ], 422);
         }
 
         return Response::json([ // todo bien
             'data'    => $page_section->load("type","pages"),
-            'message' => ["La seccion fue correctamente actualizada"],
+            'message' => [trans('manage_pages.sections.update.success')],
             'success' => true
         ]);
     }
@@ -116,18 +116,18 @@ class ManagePagesSectionsController extends Controller
     {
         if (!$page_section->isDeletable()) {
             return Response::json([
-                'error' => ["El tipo de registro que desea borrar tiene páginas o componentes asociados"]
+                'error' => [trans('manage_pages.sections.delete.soft.error')]
             ], 422);
         }
 
         if (!$page_section->delete()) {
             return Response::json([
-                'error' => ["La seccion no pudo ser borrada"]
+                'error' => [trans('manage_pages.sections.delete.error')]
             ], 422);
         }
 
         return Response::json([ // todo bien
-            'message' => ["La seccion fue correctamente borrada"],
+            'message' => [trans('manage_pages.sections.delete.success')],
             'success' => true
         ]);
     }

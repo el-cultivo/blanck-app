@@ -85,16 +85,16 @@ class ManagePagesContentsController extends Controller
         $input = $request->all();
 
         if (!Page::whereIn("id",$input["pages"])->update(["order" => null])) {
-            return Redirect::back()->withErrors(["El orden anterior no pudo ser borrado"]);
+            return Redirect::back()->withErrors([trans('manage_pages.content.sort.error')]);
         }
 
         foreach ($input["pages"] as $order => $id) {
             if (!Page::where(["id"=>$id ])->update(["order" => $order])) {
-                return Redirect::back()->withErrors(["El nuevo orden no pudo ser actualizado"]);
+                return Redirect::back()->withErrors([trans('manage_pages.content.sort.error')]);
             }
         }
 
-        return Redirect::route('admin::pages.contents.index')->with('status', "El orden se actualizó correctamente");
+        return Redirect::route('admin::pages.contents.index')->with('status', trans('manage_pages.content.sort.success'));
     }
 
 }
