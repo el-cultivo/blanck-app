@@ -57,7 +57,7 @@ class SetPasswordController extends ClientController
         $user_email->active = true;
 
         if (!$user_email->save()) {
-            return Redirect::back()->withErrors(['Tu cuenta no pudo ser activada']);
+            return Redirect::back()->withErrors([ trans('auth.password_set.error')]);
         }
 
         Auth::login($user_email);

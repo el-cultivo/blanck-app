@@ -1,17 +1,17 @@
 @extends('layouts.admin')
 
 @section('title')
-    Manuales
+    {!! trans('admin_access.manuals.label') !!}
 @endsection
 
 @section('h1')
-    Manuales
+    {!! trans('admin_access.manuals.label') !!}
 @endsection
 
 @section('content')
     @include('admin.general._page-instructions', [
-        'title'         =>  'Manuales',
-        'instructions'  =>  config('cltvo.manual_url') ? '' : 'Próximamente',
+        'title'         =>  trans('admin_access.manuals.label'),
+        'instructions'  =>  config('cltvo.manual_url') ? '' : trans('admin_access.manuals.coming_soon'),
     ])
 
 	@if (config('cltvo.manual_url'))

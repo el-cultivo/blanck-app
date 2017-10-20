@@ -9,19 +9,19 @@
     <div class="users__input-container">
         {!! Form::email('email', null, [
             'class'         => 'input form--input account--input',
-            'placeholder'   => 'Nuevo Correo Electrónico',
+            'placeholder'   => trans('user.update_email.form.email.placeholder'),
             'required'      => 'required',
             'form'          => 'update_email_form'
         ]) !!}
         {!! Form::password('password', [
             'class'         => 'input form--input account--input',
-            'placeholder'   => 'Contraseña',
+            'placeholder'   => trans('user.update_email.form.password.placeholder'),
             'required'      => 'required',
             'form'          => 'update_email_form'
         ]) !!}
     </div>
     <div class="users__submit-container">
-        {!! Form::submit('Guardar', [
+        {!! Form::submit(trans('user.update_email.form.save'), [
             'class' => 'input__submit form--submit',
             'form'  => 'update_email_form'
 

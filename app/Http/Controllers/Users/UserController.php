@@ -46,12 +46,12 @@ class UserController extends ClientController
         $user->email = $input["email"];
 
         if (!$user->save()) {
-            return Redirect::back()->withErrors(["El email no pudo ser actualizdo correctamente"]);
+            return Redirect::back()->withErrors([trans('user.update_email.error')]);
         }
 
         $clone->notify( new UpdateMailNotification);
 
-        return Redirect::route('user::profile',$user->name)->with('status', "El email fue correctamente actualizado");
+        return Redirect::route('user::profile',$user->name)->with('status', trans('user.update_email.success'));
     }
 
 
@@ -62,12 +62,12 @@ class UserController extends ClientController
         $user->password = bcrypt( $input["password"] ) ;
 
         if (!$user->save()) {
-            return Redirect::back()->withErrors(["La contraseña no pudo ser actualizda correctamente"]);
+            return Redirect::back()->withErrors([trans('user.update_password.error')]);
         }
 
         $user->notify( new UpdatePasswordNotification);
 
-        return Redirect::route('user::profile',$user->name)->with('status', "La contraseña fue correctamente actualizada");
+        return Redirect::route('user::profile',$user->name)->with('status', trans('user.update_password.success'));
     }
 
 }

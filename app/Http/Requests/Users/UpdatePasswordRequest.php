@@ -33,14 +33,6 @@ class UpdatePasswordRequest extends Request
     public function messages()
     {
         return [
-
-            'old_password.required'         =>  'Olvidaste ingresar tu contraseña.',
-            'old_password.password_check'   =>  'La contraseña que ingresaste es incorrecta.',
-
-            'password.required'             =>  'Olvidaste ingresar una nueva contraseña.',
-            'password.confirmed'            =>  'Confirma tu contraseña.',
-            'password.min'                  =>  'Tu contraseña debe ser de al menos 6 caracteres.',
-
         ];
     }
 }

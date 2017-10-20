@@ -9,64 +9,56 @@
     <div class=''>
 
         <div class=''>
-            {!! Form::label('first_name', 'Nombre(s):', [
+            {!! Form::label('first_name', trans('contact_form.form.first_name.label') , [
                 'class' => '',
-
-
                 ]) !!}
             {!! Form::text('first_name', null, [
                 'class'         => '',
                 'required'      => 'required',
                 'form'          => 'contact_form',
-                'placeholder'   =>  'María'
+                'placeholder'   => trans('contact_form.form.first_name.placeholder')
             ]) !!}
         </div>
 
         <div class=' '>
-            {!! Form::label('last_name','Apellido(s):', [
+            {!! Form::label('last_name',trans('contact_form.form.last_name.label'), [
                 'class' => '',
-
-
                 ]) !!}
             {!! Form::text('last_name', null, [
                 'class'         => '',
                 'required'      => 'required',
                 'form'          => 'contact_form',
-                'placeholder'   => 'Pérez'
+                'placeholder'   => trans('contact_form.form.last_name.placeholder')
             ]) !!}
         </div>
 
         <div class=''>
-            {!! Form::label('email', 'Email:', [
+            {!! Form::label('email', trans('contact_form.form.email.label'), [
                 'class' => '',
-
-
                 ]) !!}
             {!! Form::email('email', null, [
                 'class'       => '',
                 'required'    => 'required',
                 'form'        => 'contact_form',
-                'placeholder' => 'ejemplo@ejemplo.com'
+                'placeholder' => trans('contact_form.form.email.placeholder')
             ]) !!}
 
         </div>
 
 		<div class=' '>
-            {!! Form::label('message','Apellido(s):', [
+            {!! Form::label('message',trans('contact_form.form.message.label'), [
                 'class' => '',
-
-
                 ]) !!}
             {!! Form::textarea('message', null, [
                 'class'         => '',
                 'form'          => 'contact_form',
-                'placeholder'   => 'Hola...'
+                'placeholder'   => trans('contact_form.form.message.placeholder')
             ]) !!}
         </div>
 
         <div class=''>
             <div class=''>
-                {!! Form::submit('Guardar', [
+                {!! Form::submit(trans('contact_form.form.message.send'), [
                     'class' => '',
                     'form'  => 'contact_form'
                 ]) !!}

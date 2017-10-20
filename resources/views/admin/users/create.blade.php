@@ -2,11 +2,11 @@
 
 
 @section('title')
-    Agregar Usuario
+    {!! trans('manage_users.create.label') !!} |
 @endsection
 
 @section('h1')
-    Agregar Usuario
+    {!! trans('manage_users.create.label') !!}
 @endsection
 
 
@@ -18,8 +18,8 @@
 
 @section('content')
     @include('admin.general._page-instructions', [
-        'title'         =>  '',
-        'instructions'  =>  'Llena los campos para crear un nuevo usuario'
+        'title'         =>  "",
+        'instructions'  =>  trans('manage_users.create.instructions')
     ])
     @include('admin.users._form',[
         "form_id"       => 'create_user_form',

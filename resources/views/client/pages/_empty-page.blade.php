@@ -6,6 +6,6 @@
     ">
     <h1 style="width: 100%;">{{ $page->label }}</h1>
     <p style="width: 100%;">
-        Próximamente
+        {!! trans('client.layout.coming_soon') !!}
     </p>
 </div>

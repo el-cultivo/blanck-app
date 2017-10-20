@@ -1,4 +1,4 @@
-<template id="{{ $select_plural }}-select-template">
+<script  type="x/templates" id="{{ $select_plural }}-select-template">
 	<div class="input-field">
 
 		{!! Form::label($select_id, $select_label, [
@@ -29,4 +29,4 @@
 		<a data-target="{{ $select_plural }}-modal-create" class="modal-trigger select--modal-trigger">@yield( 'modal-label' )</a>
 
 	</div>
-</template>
+</script>

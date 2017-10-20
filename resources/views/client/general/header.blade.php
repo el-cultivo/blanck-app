@@ -19,7 +19,7 @@
 		</div>
 
 		@if (isset($user) && $user->hasPermission('admin_access'))
-			<div class="user-admin-link"><a href="{{ route("admin::index") }}">Admin</a></div>
+			<div class="user-admin-link"><a href="{{ route("admin::index") }}">{!! trans('client.layout.admin_access') !!}</a></div>
 		@endif
 
 

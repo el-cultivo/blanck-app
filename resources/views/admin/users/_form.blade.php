@@ -8,19 +8,19 @@
     <div class="row">
 
         <div class="input-field col s5  offset-s1">
-            {!! Form::label('first_name', "Nombre(s):", [
+            {!! Form::label('first_name', trans('manage_users.create.form.first_name.label'), [
                 'class' => 'active',
             ]) !!}
             {!! Form::text('first_name', $user_edit->first_name, [
                 'class'         => 'validate',
                 'required'      => 'required',
                 'form'          => $form_id,
-                'placeholder'   =>  "María"
+                'placeholder'   =>  trans('manage_users.create.form.first_name.placeholder')
             ]) !!}
         </div>
 
         <div class=" input-field col s5">
-            {!! Form::label('last_name',"Apellido(s):", [
+            {!! Form::label('last_name',trans('manage_users.create.form.last_name.label'), [
                 'class' => 'active',
 
 
@@ -29,12 +29,12 @@
                 'class'         => 'validate',
                 'required'      => 'required',
                 'form'          => $form_id,
-                'placeholder'   => "Pérez"
+                'placeholder'   => trans('manage_users.create.form.last_name.placeholder')
             ]) !!}
         </div>
 
         <div class="input-field col s10  offset-s1">
-            {!! Form::label('email', "Email:", [
+            {!! Form::label('email', trans('manage_users.create.form.email.label'), [
                 'class' => '',
 
 
@@ -43,14 +43,14 @@
                 'class'       => 'validate',
                 'required'    => 'required',
                 'form'        => $form_id,
-                'placeholder' => "ejemplo@ejemplo.com"
+                'placeholder' => trans('manage_users.create.form.email.placeholder')
             ]) !!}
 
         </div>
 
         <div class="col s10  offset-s1 ">
             <div class="pull-right">
-                {!! Form::submit("Guardar", [
+                {!! Form::submit(trans('manage_users.create.form.save'), [
                     'class' => 'btn waves-effect waves-light',
                     'form'  => $form_id
                 ]) !!}

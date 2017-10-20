@@ -6,7 +6,7 @@
 		<div class="set--wrap wrap">
 
 			<div class="set--title page-title">
-				Activar cuenta
+				{!! trans('auth.password_set.label') !!}
 			</div>
 
 			{!! Form::open([
@@ -20,20 +20,18 @@
 				{!! Form::password('password', [
 					'class' => 'form--input',
 					'required' => 'required',
-					'placeholder' => 'Contraseña'
+					'placeholder' => trans('auth.password_set.form.password.placeholder')
 					]) !!}
 
 				{!! Form::password('password_confirmation', [
 					'class' => 'form--input',
 					'required' => 'required',
-					'placeholder' => 'Confirmar Contraseña'
+					'placeholder' =>  trans('auth.password_set.form.password_confirmation.placeholder')
 					]) !!}
 
 				<button type="submit" class="form--submit">
-					enviar contraseña
+					{!! trans('auth.password_set.form.save') !!}
 				</button>
-
-				</div>
 
 			{!! Form::close() !!}
 

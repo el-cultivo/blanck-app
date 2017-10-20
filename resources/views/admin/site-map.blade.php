@@ -1,17 +1,17 @@
 @extends('layouts.admin')
 
 @section('title')
-    Mapa de rutas
+    {!! trans('admin_access.site_map.label') !!}
 @endsection
 
 @section('h1')
-    Mapa de rutas
+    {!! trans('admin_access.site_map.label') !!}
 @endsection
 
 @section('content')
     @include('admin.general._page-instructions', [
-        'title'         =>  'Rutas',
-        'instructions'  =>  'Lista de rutas del sitio'
+        'title'         => trans('admin_access.site_map.label'),
+        'instructions'  => trans('admin_access.site_map.instructions')
     ])
 
     <div class="col s10 col offset-s1 ">
@@ -33,7 +33,7 @@
                         </div>
                         <div class="collapsible-body">
                             <p>
-                                <strong>Nombre:</strong> {{$route->getName() }}<br>
+                                <strong>{!! trans('admin_access.site_map.route_name.label') !!}</strong> {{$route->getName() }}<br>
                                 <strong>Uri:</strong> {{$route->uri() }}<br><br>
                                 <strong>Methods:</strong> {{ implode(' | ', $route->methods()) }} <br>
                                 @if ($route->domain())

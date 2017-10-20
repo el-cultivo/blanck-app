@@ -1,10 +1,10 @@
 <table class="highlight  responsive-table ">
     <thead class="">
         <tr>
-            <th>Nombre</th>
-            <th>Roles</th>
-            <th>Correo electrónico</th>
-            <th class="center-align" >Reactivar</th>
+            <th>{!! trans('manage_users.trash.table.name') !!}</th>
+            <th>{!! trans('manage_users.trash.table.roles') !!}</th>
+            <th>{!! trans('manage_users.trash.table.email') !!}</th>
+            <th class="center-align" >{!! trans('manage_users.trash.table.recovery') !!}</th>
         </tr>
     </thead>
     <tbody class="" v-if= "filtered_list.length > 0" >
@@ -44,7 +44,7 @@
 	<tbody v-if= "filtered_list.length == 0"  >
 		<tr>
 			<td colspan=4 class="center-align">
-				Sin usuarios
+				{!! trans('manage_users.trash.table.empty') !!}
 			</td>
 		</tr>
 	</tbody>

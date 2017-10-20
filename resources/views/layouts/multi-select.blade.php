@@ -10,7 +10,7 @@
 	 ]) !!}
 		 <label class="label">@yield('select-title')</label>
 		 <div class="submenu submenu_JS" v-on:click="openMultiSelect()" style="position: relative">
-			 <div class="select-wrapper"><span class="select" contenteditable="false" placeholder="Elige una opción">@{{ labels }}</span><span class="caret">▼</span></div>
+			 <div class="select-wrapper"><span class="select" contenteditable="false" placeholder="{!! trans('admin.form.muliti-select.choice') !!}">@{{ labels }}</span><span class="caret">▼</span></div>
 
 
 			 <!-- opciones del select -->
@@ -42,7 +42,7 @@
 		<div class="">
 		<br><br><br>
             <div class="pull-right">
-                {!! Form::submit("Guardar", [
+                {!! Form::submit(trans('admin.form.save') , [
                     'class' => 'btn waves-effect waves-light btn-creel flex-collapsible ',
                     'form'  => $form_id
                 ]) !!}

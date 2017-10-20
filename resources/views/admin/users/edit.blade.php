@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
 @section('title')
-    Editar Usuario
+    {!! trans('manage_users.edit.label') !!}
 @endsection
 
 @section('h1')
-    Editar Usuario
+    {!! trans('manage_users.edit.label') !!}
 @endsection
 
 @section('action')
@@ -18,7 +18,7 @@
 
     @include('admin.general._page-instructions', [
         'title'         =>  '',
-        'instructions'  =>  'Edita los campos para actualizar a '.$user_edit->name
+        'instructions'  =>  trans('manage_users.edit.instructions', ['name' => $user_edit->name])
     ])
 
     @include('admin.users._form',[

@@ -5,13 +5,13 @@
 @endsection --}}
 
 @section('h1')
-    Hola {{ $user->first_name }}
+	{!! trans('admin_access.index.greeting', ["name" => $user->first_name ]) !!}
 @endsection
 
 @section('content')
     @include('admin.general._page-instructions', [
-        'title'         =>  'Administrador',
-        'instructions'  =>  'Da click en alguno de los items del menu lateral'
+        'title'         =>  trans('admin_access.index.label'),
+        'instructions'  =>  trans('admin_access.index.instructions')
     ])
 
     <div class="col s10 offset-s1">
@@ -21,7 +21,7 @@
                 @if ($user->hasPermission($item['permission']))
                     <a class="col s4 center-align welcome__item" href="{{ route('admin::'.$item['route_name']) }}">
                         <i class="medium material-icons welcome__item--icon">{{ $item['icon'] }}</i>
-                        <span class="welcome__item--label">{{ $item['label'] }}</span>
+                        <span class="welcome__item--label">{!! trans($item['label'] .'.admin_menu.label') !!}</span>
                     </a>
                 @endif
 	    	@endforeach
