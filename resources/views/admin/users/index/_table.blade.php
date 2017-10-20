@@ -1,11 +1,11 @@
 <table class="highlight responsive-table " >
     <thead class="">
         <tr>
-            <th>Nombre</th>
-            <th>Roles</th>
-            <th>Correo electrónico</th>
-            <th class="center-align" >Editar</th>
-            <th class="center-align" >Desactivar</th>
+            <th>{!! trans('manage_users.index.table.name') !!}</th>
+            <th>{!! trans('manage_users.index.table.roles') !!}</th>
+            <th>{!! trans('manage_users.index.table.email') !!}</th>
+            <th class="center-align" >{!! trans('manage_users.index.table.edit') !!}</th>
+            <th class="center-align" >{!! trans('manage_users.index.table.delete') !!}</th>
         </tr>
     </thead>
 
@@ -57,7 +57,7 @@
 	<tbody v-if= "filtered_list.length == 0"  >
 		<tr>
 			<td colspan=5 class="center-align">
-				Sin usuarios
+				{!! trans('manage_users.index.table.empty') !!}
 			</td>
 		</tr>
 	</tbody>

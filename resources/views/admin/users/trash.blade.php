@@ -2,12 +2,12 @@
 
 
 @section('title')
-    Usuarios desactivados
+    {!! trans('manage_users.trash.label') !!} |
 @endsection
 
 
 @section('h1')
-    Usuarios desactivados
+    {!! trans('manage_users.trash.label') !!} 
 @endsection
 
 @section('action')

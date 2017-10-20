@@ -9,5 +9,5 @@
 ])
 
 @section('select-title')
-    Roles
+    {!! trans('manage_users.edit.roles.label') !!}
 @overwrite

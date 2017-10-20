@@ -2,11 +2,11 @@
 
 
 @section('title')
-    Lista de Usuarios |
+    {!! trans('manage_users.index.label') !!} |
 @endsection
 
 @section('h1')
-    Lista de Usuarios
+    {!! trans('manage_users.index.label') !!}
 @endsection
 
 @section('action')
