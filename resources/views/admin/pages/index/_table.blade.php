@@ -1,11 +1,11 @@
 <table class="bordered highlight responsive-table ">
     <thead class="">
         <tr>
-            <th>Nombre <small><br>(index)</small></th>
-            <th>Página padre</th>
-            <th>Secciones</th>
-            <th class="center-align" >Modificar</th>
-            <th class="center-align" >Eliminar</th>
+            <th>{!! trans('manage_pages.index.table.name') !!} <small><br>(index)</small></th>
+            <th>{!! trans('manage_pages.index.table.parent') !!}</th>
+            <th>{!! trans('manage_pages.index.table.sections') !!}</th>
+            <th class="center-align" >{!! trans('manage_pages.index.table.edit') !!}</th>
+            <th class="center-align" >{!! trans('manage_pages.index.table.delete') !!}</th>
         </tr>
     </thead>
 
@@ -19,16 +19,16 @@
                         ({{ $page_edit->index }})
                         @if ($page_edit->main)
                             <br>
-                            Página principal del sitio
+                            {!! trans('manage_pages.index.table.main_page') !!}
                         @endif
                     </small>
                 </td>
                 <td>
-                    {!! $page_edit->parent ? $page_edit->parent->label."<br><small>(".$page_edit->parent->index.")</small>"  :"N/A"  !!}
+                    {!! $page_edit->parent ? $page_edit->parent->label."<br><small>(".$page_edit->parent->index.")</small>"  : trans('manage_pages.index.table.not_child')  !!}
                 </td>
                 <td>
                     @if ($page_edit->sections->isEmpty())
-                        sin secciones
+                        {!! trans('manage_pages.index.table.sections_empty') !!}
                     @else
                         {!!$page_edit->sections->implode("index",",<br/>")!!}
                     @endif

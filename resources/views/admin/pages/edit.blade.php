@@ -2,11 +2,11 @@
 
 
 @section('title')
-    Modificar página
+    {!! trans('manage_pages.edit.label') !!} |
 @endsection
 
 @section('h1')
-    Modificar página
+    {!! trans('manage_pages.edit.label') !!}
 @endsection
 
 
@@ -19,7 +19,7 @@
 @section('content')
     @include('admin.general._page-instructions', [
         'title'         =>  '',
-        'instructions'  =>  'Edita los campos para actualizar a '.$page_edit->index
+        'instructions'  =>  trans('manage_pages.edit.instructions', ["page" => $page_edit->index] )
     ])
 
     @include('admin.pages._basic-info-form',[
@@ -29,7 +29,7 @@
     ])
 
     @include('admin.general._page-subtitle', [
-        'title'         =>  'Secciones',
+        'title'         =>  trans('manage_pages.edit.sections'),
         // 'instructions'  =>  'Edita los campos para actualizar a '.$page_edit->index
     ])
 

@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
 @section('title')
-    Administrador de páginas
+    {!! trans('manage_pages.index.label') !!} |
 @endsection
 
 @section('h1')
-    Administrador de páginas
+    {!! trans('manage_pages.index.label') !!}
 @endsection
 
 @section('action')
@@ -18,7 +18,7 @@
 
     @include('admin.general._page-instructions', [
         'title'         =>  '',
-        'instructions'  =>  'Da click para editar la estructura de una página.'
+        'instructions'  =>  trans('manage_pages.index.instructions')
     ])
 
     <div class="col s10 offset-s1">
