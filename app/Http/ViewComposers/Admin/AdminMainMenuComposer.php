@@ -27,7 +27,7 @@ class AdminMainMenuComposer
 			$this->setMenuItem('photos_view', [
 				$this->setSubMenuItem('photos.index', 'photos_view', 'index')
 			]),
-			$this->setMenuItem('manage_pages_contents', [
+			$this->setMenuItem('manage_pages', [
 				$this->setSubMenuItem('pages.contents.index', 'manage_pages_contents', 'contents.index'),
 				$this->setSubMenuItem('pages.contents.edit', 'manage_pages_contents', ''),
 				$this->setSubMenuItem('pages.create', 'manage_pages', 'create'),
@@ -41,11 +41,11 @@ class AdminMainMenuComposer
 				$this->setSubMenuItem('settings.index', 'system_config', 'settings.index'),
 				$this->setSubMenuItem('seo_booster.index', 'manage_seo_booster', 'seo_booster.index')
 			]),
-			$this->setMenuItem('routes_view', [
-				$this->setSubMenuItem('site_map', 'routes_view', 'site_map')
+			$this->setMenuItem('admin_access.site_map', [
+				$this->setSubMenuItem('site_map', 'routes_view', 'index')
 			]),
-			$this->setMenuItem('admin_access_manuals', [
-				$this->setSubMenuItem('manuals', 'admin_access', 'videos')
+			$this->setMenuItem('admin_access.manuals', [
+				$this->setSubMenuItem('manuals', 'admin_access', 'index')
 			])
 		]);
 	}
