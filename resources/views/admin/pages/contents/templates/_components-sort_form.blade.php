@@ -13,7 +13,7 @@
         name="components[]"
         :value="id">
     <div class="pull-right pageslists--save-button mt-5">
-        {!! Form::submit("Guardar orden", [
+        {!! Form::submit(trans('manage_pages.contents.components.sort.save') , [
             'class' => 'btn waves-effect waves-light',
             'form'  => '&#123;&#123;section.index+"_sort_components_form"&#125;&#125;'
         ]) !!}

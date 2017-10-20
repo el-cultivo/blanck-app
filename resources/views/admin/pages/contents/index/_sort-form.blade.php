@@ -12,7 +12,7 @@
         name="pages[]"
         :value="id">
     <div class="pull-right pageslists--save-button mt-5">
-        {!! Form::submit("Guardar orden", [
+        {!! Form::submit(trans('manage_pages.contents.index.table.save_sort'), [
             'class' => 'btn waves-effect waves-light',
             'form'  => '&#123;&#123;index+"_sort_page_form"&#125;&#125;'
         ]) !!}

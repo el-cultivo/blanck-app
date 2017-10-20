@@ -13,7 +13,7 @@
                 </span>
             </div>
             <div  style="display: inline-block; width: calc(100% - 160px);">
-                <h4  v-if="editing_title === false" v-text='component.index ? component.index : "Pónme un nombre" '   @click="editing_title = true"></h3>
+                <h4  v-if="editing_title === false" v-text='component.index ? component.index : "{!! trans("manage_pages.contents.components.gimme_name") !!}" '   @click="editing_title = true"></h3>
                 <input v-else type="text"  v-model="component.index" @change="editing_title = false" @keyup.enter.prevent="editing_title = false">
             </div>
             <div class="pull-right" v-if="section.type.unlimited" style="margin-top: 10px;">
@@ -46,5 +46,5 @@
 </ul>
 
 <div v-if="list.length == 0">
-    Sección vacía
+    {!! trans('manage_pages.contents.components.empty') !!}
 </div>
