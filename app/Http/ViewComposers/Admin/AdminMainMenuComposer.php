@@ -28,12 +28,12 @@ class AdminMainMenuComposer
 				$this->setSubMenuItem('photos.index', 'photos_view', 'index')
 			]),
 			$this->setMenuItem('manage_pages_contents', [
-				$this->setSubMenuItem('pages.contents.index', 'manage_pages_contents', 'index'),
+				$this->setSubMenuItem('pages.contents.index', 'manage_pages_contents', 'contents.index'),
 				$this->setSubMenuItem('pages.contents.edit', 'manage_pages_contents', ''),
 				$this->setSubMenuItem('pages.create', 'manage_pages', 'create'),
 				$this->setSubMenuItem('pages.index', 'manage_pages', 'index'),
 				$this->setSubMenuItem('pages.edit', 'manage_pages', ''),
-				$this->setSubMenuItem('pages.sections.index', 'manage_pages', 'index')
+				$this->setSubMenuItem('pages.sections.index', 'manage_pages', 'sections.index')
 			]),
 			$this->setMenuItem('system_config', [
 				$this->setSubMenuItem('copies.index', 'system_config', 'copies.index'),
