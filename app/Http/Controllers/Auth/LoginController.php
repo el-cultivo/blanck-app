@@ -60,7 +60,7 @@ class LoginController extends ClientController
         if( !$user->isActive() ){
             Auth::logout();
             return Redirect::back()->withErrors([
-                'active' => "te enviamos un correo para activar tu cuenta"
+                'active' => trans('auth.login.in_active_account.error')
             ]);
         }
 
