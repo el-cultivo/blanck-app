@@ -32,14 +32,6 @@ class UpdateEmailRequest extends Request
     public function messages()
     {
         return [
-            'password.required'         =>  'Olvidaste ingresar tu contraseña.',
-            'password.password_check'   =>  'La contraseña que ingresaste es incorrecta.',
-
-            'email.required'            =>  'Olvidaste ingresar tu correo electrónico.',
-            'email.email'               =>  'Ingresa una dirección de correo electrónico válida.',
-            'email.max'                 =>  'El campo correo electrónico no puede ser mayor a 255 caracteres.',
-            'email.unique'              =>  'La dirección de correo electrónico ya ha sido registrada.',
-            'email.not_in'              =>  'La dirección de correo electrónico es inválida.',
         ];
     }
 }
