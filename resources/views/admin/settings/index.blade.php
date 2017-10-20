@@ -2,11 +2,11 @@
 
 
 @section('title')
-    Ajustes
+    {!! trans('manage_settings.index.label') !!} |
 @endsection
 
 @section('h1')
-    Ajustes
+    {!! trans('manage_settings.index.label') !!}
 @endsection
 
 

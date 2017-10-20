@@ -102,7 +102,7 @@
         <div class="col s12">
 
             <div class="pull-right">
-                {!! Form::submit('guardar', [
+                {!! Form::submit('manage_settings.mail.create.form.save'), [
                     'class' => 'btn waves-effect waves-light',
                     'form'  => 'update_setting-mail_form',
                     ]) !!}

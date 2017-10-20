@@ -2,11 +2,11 @@
 
 
 @section('title')
-    Shapes
+    {!! trans('manage_settings.copies. index.label') !!} |
 @endsection
 
 @section('h1')
-    Shapes
+    {!! trans('manage_settings.copies. index.label') !!} |
 @endsection
 
 

@@ -49,7 +49,7 @@
 
                                    <div class="col s12">
                                        <div class=" pull-right">
-                                           {!! Form::submit("Guardar", [
+                                           {!! Form::submit(trans('manage_settings.copies.create.form.save'), [
                                                'class' => 'btn waves-effect waves-light',
                                                'form'  => "update_component_".$copy->id."_form"
                                            ]) !!}

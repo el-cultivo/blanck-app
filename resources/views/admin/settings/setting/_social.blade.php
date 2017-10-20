@@ -50,7 +50,7 @@
 
         <div class="col s12">
             <div class="pull-right">
-                {!! Form::submit('guardar', [
+                {!! Form::submit(trans('manage_settings.social.create.form.save'), [
                     'class' => 'btn waves-effect waves-light',
                     'form'  => 'update_setting-social_form',
                     ]) !!}

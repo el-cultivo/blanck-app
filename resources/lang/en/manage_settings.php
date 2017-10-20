@@ -6,132 +6,154 @@ return [
 
         'first_name' => [
 
-            'label'         => 'Nombre',
-            'placeholder'   => 'Nombre',
+            'label'         => 'First Name',
+            'placeholder'   => 'First Name',
 
         ],
 
         'last_name' => [
 
-            'label'         => 'Apellido',
-            'placeholder'   => 'Apellido',
+            'label'         => 'Last Name',
+            'placeholder'   => 'Last Name',
 
         ],
 
         'email' => [
 
-            'label'         => 'Correo de usuario',
+            'label'         => 'User email',
             'placeholder'   => 'info@elcultivo.net',
 
         ],
 
         'roles' => [
 
-            'label'     => 'Rol',
-            'select'    => 'Selecciona un rol',
+            'label'     => 'Role',
+            'select'    => 'Select a role',
 
         ],
 
-        'save' => 'guardar',
+        'save' => 'Save',
 
     ],
 
     'success' => [
 
-        'create'    => 'La configuración ha sido creada',
-        'update'    => 'La configuración ha sido actualizada',
-        'trash'     => 'La configuración ha sido borrada',
-        'recovery'  => 'La configuración ha sido recuperada',
+        'create'    => 'The configuration has been set',
+        'update'    => 'The configuration has been updated',
+        'trash'     => 'The configuration has been deleted',
+        'recovery'  => 'The configuration has been recovered',
 
     ],
 
     'error' => [
-        'noexist'   => 'La configuración no existe',
-        'cantsave'  => 'La conifguración no se pudo guardar',
-        'canteditthisuser' => 'No es posible editar este usuario',
-        'dontUpdateUser' => 'No es posible actualizar este usuario',
-        'cantedityoursroles' => 'No es posible editar tu rol',
-        'canttrashthisuser' => 'No es posible borrar este usuario',
-        'canttrashyourself' => 'No es posible borrar tu usuario',
-        'problemtotrashthisuser' => 'Hubo un problema al borrar este usuario',
-        'usernotintrash' => 'Este usuario no se ha eliminado',
-        'cantrecoverthisuser' => 'No es posible recuperar este usuario',
-        'problemtorecoverthisuser' => 'Hubo un problema al recuperar este usuario',
+        'noexist'   => 'The configuration does not exist',
+        'cantsave'  => 'The configuration could not be saved',
+        'canteditthisuser' => 'The user could not be edited',
+        'dontUpdateUser' => 'The user could not be updated',
+        'cantedityoursroles' => 'Can not edit your role',
+        'canttrashthisuser' => 'Can not delete this user',
+        'canttrashyourself' => 'Can not trash your user',
+        'problemtotrashthisuser' => 'An error occured while trashing this user',
+        'usernotintrash' => 'This user was not trashed',
+        'cantrecoverthisuser' => 'This user can not be recovered',
+        'problemtorecoverthisuser' => 'An error occured while recovering this user',
     ],
 
     'blog' => [
         'title' => 'Blog',
         'url'   => [
-            'placeholder'   => 'Ej. https://www.tumblr.com/elcultivo/',
+            'placeholder'   => 'Ex. https://www.tumblr.com/elcultivo/',
             'label'         => 'Link:',
-            'helper'        => 'Este link estará conectado con la imagen de Moodboard en About',
+            'helper'        => 'This link will be conected with the Moodboard image in About',
         ]
     ],
 
     'social' => [
         'title'     => 'Redes sociales',
         'facebook'  => [
-            'placeholder'   => 'Ej. https://www.tumblr.com/elcultivo/',
+            'placeholder'   => 'Ex. https://www.tumblr.com/elcultivo/',
             'label'         => 'Facebook:',
-            'helper'        => 'Este link estará conectado con la forma de contacto del footer',
+            'helper'        => 'This link will be conected with the footer contact form',
         ],
         'twitter'   => [
-            'placeholder'   => 'Ej. https://www.tumblr.com/elcultivo/',
+            'placeholder'   => 'Ex. https://www.tumblr.com/elcultivo/',
             'label'         => 'Twitter:',
-            'helper'        => 'Este link estará conectado con la forma de contacto del footer',
+            'helper'        => 'This link will be conected with the footer contact form',
         ],
         'instagram' => [
-            'placeholder'   => 'Ej. https://www.tumblr.com/elcultivo/',
+            'placeholder'   => 'Ex. https://www.tumblr.com/elcultivo/',
             'label'         => 'Instagram:',
-            'helper'        => 'Este link estará conectado con la imagen de instagram en About',
+            'helper'        => 'This link will be conected with the instagram image in About',
         ],
         'pinterest' => [
-            'placeholder'   => 'Ej. https://www.tumblr.com/elcultivo/',
+            'placeholder'   => 'Ex. https://www.tumblr.com/elcultivo/',
             'label'         => 'Pinterest:',
-            'helper'        => 'Este link estará conectado con la forma de contacto del footer',
+            'helper'        => 'This link will be conected with the footer contact form',
         ],
+        'create'    =>  [
+            'form'  =>  [
+                'save'  =>  ''
+            ]
+        ]
     ],
 
     'mail' => [
         'title' => 'Correo',
         'contact'   => [
-            'placeholder'   => 'Ej. info@elcultivo.net',
-            'label'         => 'Correo de contacto:',
+            'placeholder'   => 'Ex. info@elcultivo.net',
+            'label'         => 'Contact email:',
             'helper'        => '',
         ],
         'system'   => [
-            'placeholder'   => 'Ej. hola@elcultivo.net',
-            'label'         => 'Correo del sistema:',
-            'helper'        => 'Correo con el que se enviarán los mails de registro, etc.',
+            'placeholder'   => 'Ex. hola@elcultivo.net',
+            'label'         => 'System email:',
+            'helper'        => 'Mail that will send register mails, etc',
         ],
         'notifications'   => [
-            'placeholder'   => 'Ej. hola@elcultivo.net',
-            'label'         => 'Correo de notificaciones:',
-            'helper'        => 'Correo con el que se enviarán los mails de notificaciones',
+            'placeholder'   => 'Ex. hola@elcultivo.net',
+            'label'         => 'Notifications email:',
+            'helper'        => 'Mail that will send notification mails',
         ],
         'register_copy' => [
             'es' => [
-                'label'         => 'Copy para mail de registro (español):',
+                'label'         => 'Mail register copy (spanish):',
             ],
             'en' => [
-                'label'         => '(ingles):',
+                'label'         => '(english):',
             ],
         ],
         'purchase_copy' => [
             'es' => [
-                'label'         => 'Copy para mail de compra (español):',
+                'label'         => 'Purchase mail copy (spanish):',
             ],
             'en' => [
-                'label'         => '(ingles):',
+                'label'         => '(english):',
             ],
         ],
         'thanks_copy' => [
             'es' => [
-                'label'         => 'Copy para página de agradecimiento (español):',
+                'label'         => 'Thank-you page copy (spanish):',
             ],
             'en' => [
-                'label'         => '(ingles):',
+                'label'         => '(english):',
             ],
+        ],
+        'create'    =>  [
+            'form'  =>  [
+                'save'  =>  ''
+            ]
+        ]
+        'mail_greeting' => [
+          'en' => [
+              'label'         => 'Mail greeting:',
+          ],
+
+        ],
+        'mail_farewell' => [
+          'en' => [
+              'label'         => 'Mail farewell:',
+          ],
+
         ],
     ],
 
@@ -139,69 +161,85 @@ return [
         'title' => 'Envíos',
         'origin-address'    => [
             'street-1'  => [
-                'placeholder'   => 'Calle y número',
+                'placeholder'   => 'Street & number',
                 'label'         => 'Street 1:',
-                'helper'        => 'Primera linea de dirección de envío',
+                'helper'        => 'First line of shipping address',
             ],
             'street-2'  => [
-                'placeholder'   => 'Número interior, suite, fraccionamiento o delegación',
+                'placeholder'   => 'Apartment number, , suite, delegation',
                 'label'         => 'Street 2:',
-                'helper'        => 'La segunda linea para la dirección de envío',
+                'helper'        => 'Second line of shipping address',
             ],
             'street-3'  => [
-                'placeholder'   => 'Colonia',
+                'placeholder'   => 'Neighborhood',
                 'label'         => 'Street 3:',
-                'helper'        => 'La tercera linea para la dirección de envío',
+                'helper'        => 'Third line of shipping address',
             ],
             'city'  => [
-                'placeholder'   => 'Ej. Ciudad de México',
+                'placeholder'   => 'Ex. Mexico City',
                 'label'         => 'Ciudad',
-                'helper'        => 'La ciudad de la dirección de envío',
+                'helper'        => 'City of shipping address',
             ],
             'state'  => [
-                'placeholder'   => 'Ej. Distrito Federal',
-                'label'         => 'Estado:',
-                'helper'        => 'El estado de la dirección de envío',
+                'placeholder'   => 'Ex. Mexico City',
+                'label'         => 'State:',
+                'helper'        => 'State of shipping address',
             ],
             'country'  => [
-                'placeholder'   => 'Ej. México',
-                'label'         => 'País:',
-                'helper'        => 'El país de la compañia',
+                'placeholder'   => 'Ex. Mexico',
+                'label'         => 'Country:',
+                'helper'        => 'Country of shipping address',
             ],
             'zip'  => [
-                'placeholder'   => 'Ej. 01234',
-                'label'         => 'Código postal:',
-                'helper'        => 'Código postal de la dirección',
+                'placeholder'   => 'Ex. 01234',
+                'label'         => 'Zip Code:',
+                'helper'        => 'Zip Code of shipping address',
             ],
         ],
         'average-weight'    => [
-            'placeholder'   => 'Ej. 10',
-            'label'         => 'Peso promedio:',
-            'helper'        => 'Peso promedio de cada envío en kilogramos',
+            'placeholder'   => 'Ex. 10',
+            'label'         => 'Average weight:',
+            'helper'        => 'Average weight of shipping, in kilograms',
         ],
         'minimal-clothing'  => [
-            'placeholder'   => 'Ej. 5',
-            'label'         => 'Prendas mínimas:',
-            'helper'        => 'Prendas mínimas por caja',
+            'placeholder'   => 'Ex. 5',
+            'label'         => 'Minimal clothes:',
+            'helper'        => 'Minimal clothes per box',
         ],
     ],
 
     'exchange_rate' => [
-        'title'     => 'Tipo de cambio',
+        'title'     => 'Exchange rate',
         'US'   => [
             'currency' => [
-                'placeholder'   => 'Ej. USD',
-                'label'         => 'Tipo de moneda (US):',
+                'placeholder'   => 'Ex. USD',
+                'label'         => 'Type of currency (US):',
                 'helper'        => '',
             ],
             'exchange' => [
-                'placeholder'   => 'Ej. 19.56',
-                'label'         => 'Tipo de cambio (US):',
+                'placeholder'   => 'Ex. 19.56',
+                'label'         => 'Exchange rate (US):',
             ],
         ],
     ],
 
     'general' => [
-        'save'  => 'guardar',
-    ]
+        'save'  => 'Save',
+    ],
+
+    'index' => [
+        'label' =>  ''
+    ],
+
+    'copies'    =>  [
+        'index' => [
+            'label' =>  ''
+        ],
+        'create'    =>  [
+            'form'  =>  [
+                'save'  =>  ''
+            ],
+        ],
+    ],
+
 ];

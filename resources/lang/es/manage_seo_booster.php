@@ -1,6 +1,12 @@
 <?php
 
 return [
-	'title'			=> 'Título',
-	'description'	=> 'Descripción'
+	'title'			=> 'Title',
+	'description'	=> 'Description',
+	'title' => [
+            'es' => ''
+    ],
+    'description' => [
+            'es' => ''
+    ],
 ];

@@ -56,6 +56,11 @@ return [
             'label'         => 'Pinterest:',
             'helper'        => 'Este link estará conectado con la forma de contacto del footer',
         ],
+        'create'    =>  [
+            'form'  =>  [
+                'save'  =>  ''
+            ]
+        ]
     ],
 
     'mail' => [
@@ -115,6 +120,11 @@ return [
                 'label'         => 'Despedida (Inglés):',
             ],
         ],
+        'create'    =>  [
+            'form'  =>  [
+                'save'  =>  ''
+            ]
+        ]
     ],
 
     'shipment' => [
@@ -213,5 +223,20 @@ return [
 
     'general' => [
         'save'  => 'guardar',
-    ]
+    ],
+
+    'index' => [
+        'label' =>  ''
+    ],
+
+    'copies'    =>  [
+        'index' => [
+            'label' =>  ''
+        ],
+        'create'    =>  [
+            'form'  =>  [
+                'save'  =>  ''
+            ],
+        ],
+    ],
 ];
