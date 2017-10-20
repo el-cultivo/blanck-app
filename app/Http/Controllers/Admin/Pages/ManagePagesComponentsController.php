@@ -38,13 +38,13 @@ class ManagePagesComponentsController extends Controller
 
         if (!$new_component) {
             return Response::json([
-                'error' => ["La seccion no pudo ser creada"]
+                'error' => [trans('manage_pages.create.error')]
             ], 422);
         }
 
         return Response::json([ // todo bien
             'data'    => Component::getWithTranslations()->find($new_component->id),
-            'message' => ["La seccion fue creada correctamente"],
+            'message' => [trans('manage_pages.create.success')],
             'success' => true
         ]);
     }
@@ -65,7 +65,7 @@ class ManagePagesComponentsController extends Controller
 
         if (!$section_component->save()) {
             return Response::json([
-                'error' => ["El componente no pudo ser actualizado"]
+                'error' => [trans('manage_pages.update.error')]
             ], 422);
         }
 
@@ -101,7 +101,7 @@ class ManagePagesComponentsController extends Controller
 
         return Response::json([ // todo bien
             'data'    => Component::with('languages','photos')->GetWithTranslations()->find($section_component->id),
-            'message' => ["Componente correctmente actualizado"],
+            'message' => [trans('manage_pages.update.success')],
             'success' => true
         ]);
 
@@ -120,32 +120,32 @@ class ManagePagesComponentsController extends Controller
 
         if (!$page_section->type->unlimited) {
             return Response::json([
-                'error' => ["El componente no puede ser borrado"]
+                'error' => [trans('manage_pages.delete.error')]
             ], 422);
         }
 
         if (!$section_component->photos->isEmpty()) {
             if (!$section_component->photos()->detach()) {
                 return Response::json([
-                    'error' => ["El componente no pudo ser borrado porque tiene imagenes associadas"]
+                    'error' => [trans('manage_pages.delete.images')]
                 ], 422);
             }
         }
 
         if (!$section_component->languages()->detach()) {
             return Response::json([
-                'error' => ["El componente no pudo ser borrado"]
+                'error' => [trans('manage_pages.delete.error')]
             ], 422);
         }
 
         if (!$section_component->delete()) {
             return Response::json([
-                'error' => ["El componente no pudo ser borrado"]
+                'error' => [trans('manage_pages.delete.error')]
             ], 422);
         }
 
         return Response::json([ // todo bien
-            'message' => ["El componente fue correctamente borrado"],
+            'message' => [trans('manage_pages.delete.success')],
             'success' => true
         ]);
 
@@ -157,21 +157,21 @@ class ManagePagesComponentsController extends Controller
 
         if (!Component::whereIn("id",$input["components"])->update(["order" => null])) {
             return Response::json([
-                'error' => ["El nuevo orden no pudo ser actualizado"]
+                'error' => [trans('manage_pages.sort.error')]
             ], 422);
         }
 
         foreach ($input["components"] as $order => $id) {
             if (!Component::where(["id"=>$id ])->update(["order" => $order])) {
                 return Response::json([
-                    'error' => ["El nuevo orden no pudo ser actualizado"]
+                    'error' => [trans('manage_pages.sort.error')]
                 ], 422);
             }
         }
 
         return Response::json([ // todo bien
             "data"    => $page_section->load("components")->components->pluck("id","order"),
-            'message' => ["Orden correctamente guardado"],
+            'message' => [trans('manage_pages.sort.success')],
             'success' => true
         ]);
     }
