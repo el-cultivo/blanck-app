@@ -80,7 +80,7 @@ class ManagePagesController extends Controller
         ]);
 
         if(!$new_page){
-            return Redirect::back()->withErrors(["No se pudo crear la página"]);
+            return Redirect::back()->withErrors([trans( "manage_pages.create.error")]);
         }
 
         foreach ($this->languages as $language) {
@@ -91,7 +91,7 @@ class ManagePagesController extends Controller
             ]);
         }
 
-        return Redirect::route( 'admin::pages.edit', [$new_page->id] )->with('status', "Página correctamente creada");
+        return Redirect::route( 'admin::pages.edit', [$new_page->id] )->with('status', trans( "manage_pages.create.success"));
     }
 
     /**
@@ -132,7 +132,7 @@ class ManagePagesController extends Controller
         }
 
         if(!$page_edit->save()){
-            return Redirect::back()->withErrors(["No se pudo actualizar la página"]);
+            return Redirect::back()->withErrors([trans( "manage_pages.edit.error")]);
         }
 
         foreach ($this->languages as $language) {
@@ -143,7 +143,7 @@ class ManagePagesController extends Controller
             ]);
         }
 
-        return Redirect::back()->with('status', "Página correctamente actualizada");
+        return Redirect::back()->with('status', trans( "manage_pages.edit.success"));
     }
 
     /**
@@ -155,28 +155,28 @@ class ManagePagesController extends Controller
     public function destroy(Page $page_edit)
     {
         if ($page_edit->main) {
-            return Redirect::back()->withErrors(["No puedes borrar la página principal del sitio"]);
+            return Redirect::back()->withErrors( [trans( "manage_pages.delete.main.error")]);
         }
 
         if (!$page_edit->isDeletable()) {
-            return Redirect::back()->withErrors(["La página que desea borrar tiene páginas hijas"]);
+            return Redirect::back()->withErrors([trans( "manage_pages.delete.deletable.error")]);
         }
 
         if (!$page_edit->sections->isEmpty()) {
             if (!$page_edit->sections()->detach()) {
-                return Redirect::back()->withErrors(["La página que desea borrar tiene secciones asociadas"]);
+                return Redirect::back()->withErrors([trans( "manage_pages.delete.sections.error")]);
             }
         }
 
         if (!$page_edit->languages()->detach()) {
-            return Redirect::back()->withErrors(["La página no pudo ser borrada"]); //Enviar el mensaje con el idioma que corresponde
+            return Redirect::back()->withErrors([trans( "manage_pages.delete.languages.error")]); //Enviar el mensaje con el idioma que corresponde
         }
 
         if (!$page_edit->delete()) {
-            return Redirect::back()->withErrors(["La página no pudo ser borrada"]);
+            return Redirect::back()->withErrors([trans( "manage_pages.delete.delete.error")]);
         }
 
-        return Redirect::route('admin::pages.index')->with('status', "La página fue correctamente borrada");
+        return Redirect::route('admin::pages.index')->with('status', trans( "manage_pages.delete.delete.success"));
 
     }
 
@@ -194,7 +194,7 @@ class ManagePagesController extends Controller
                         "section_id"        =>  $page_section->id,
                         "is_associated"    =>  true
                     ],
-                    'error' => ["La seccion ya se encuetra previamente asociada"]
+                    'error' => [trans( "manage_pages.sections.associate.previous_error")]
                 ], 422);
             }
 
@@ -204,12 +204,12 @@ class ManagePagesController extends Controller
                         "section_id"        =>  $page_section->id,
                         "is_associated"    =>  false
                     ],
-                    'error' => ["La seccion no pudo ser asociada"]
+                    'error' => [trans( "manage_pages.sections.associate.error")]
                 ], 422);
             }
 
 
-            $mesaje = ["Seccion asociada correctamente."];
+            $mesaje = [trans( "manage_pages.sections.associate.success")];
         }else{
             if (!$page_edit->sections()->detach($page_section)) {
                 return Response::json([
@@ -217,11 +217,11 @@ class ManagePagesController extends Controller
                         "section_id"        =>  $page_section->id,
                         "is_associated"    =>  true
                     ],
-                    'error' => ["La seccion no pudo ser desasociado"]
+                    'error' => [trans( "manage_pages.sections.disassociate.error")]
                 ], 422);
             }
 
-            $mesaje = ["Seccion desasociada correctamente."];
+            $mesaje = [trans( "manage_pages.sections.disassociate.success")];
         }
 
         return Response::json([ // todo bien
@@ -252,7 +252,7 @@ class ManagePagesController extends Controller
 
         return Response::json([ // todo bien
             "data"    => $page_edit->load("sections")->sections_order,
-            'message' => ["Orden correctamente guardado"],
+            'message' => [trans( "manage_pages.sections.sort.success")],
             'success' => true
         ]);
     }

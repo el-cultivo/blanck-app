@@ -2,11 +2,11 @@
 
 
 @section('title')
-    Agregar página
+    {!! trans('manage_pages.create.label') !!} |
 @endsection
 
 @section('h1')
-    Agregar página
+    {!! trans('manage_pages.create.label') !!}
 @endsection
 
 
@@ -19,7 +19,7 @@
 @section('content')
     @include('admin.general._page-instructions', [
         'title'         =>  '',
-        'instructions'  =>  'Llena los campos para crear un nuevo usuario'
+        'instructions'  =>  trans('manage_pages.create.instructions')
     ])
     @include('admin.pages._basic-info-form',[
         "form_id"       => 'create_page_form',
