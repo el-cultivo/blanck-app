@@ -12,12 +12,41 @@ use Config;
 use Session;
 use Lang;
 
+use Exception;
+
 use App\Models\Language;
-// use Request;
+use App\Models\Pages\Page;
+
 
 
 class ChangeLanguageController extends ClientController
 {
+	protected $base_route_name = 'client::pages.index';
+
+	protected $base_route_parameters = [];
+
+	protected $trans_lang_routes = [
+		'client::language',
+	];
+
+	protected function trasnlatePublicPageBind($value, Language $language)
+	{
+		$page = Page::getModelBySlug($value)->first();
+		if ($page) {
+			return $page->translation($language->iso6391)->slug;
+		}
+		return $value;
+	}
+
+	protected function trasnlatePublicChildPageBind($value, Language $language)
+	{
+		$page = Page::getModelBySlug($value)->first();
+		if ($page) {
+			return $page->translation($language->iso6391)->slug;
+		}
+		return $value;
+	}
+	
     /**
      * Show the application dashboard.
      *
@@ -25,58 +54,48 @@ class ChangeLanguageController extends ClientController
      */
     public function changeLang(Language $language ,Request $request)
     {
-        dd($language); // requiere actualizacion y bind
-        $laguagesArray = Language::GetLanguagesIso()->toArray();
+		session(['cltvo_lang' => $language->iso6391]);
 
-        $previousUrl = Session::get('_previous')['url'];
+		if ($request->ajax()) {
+			abort("404");
+		}
 
-        $server = $request->root()."/";
+		try {
+			$cltvo_route = $this->getRouteByUri($language,$request->headers->get('referer') );
+			return Redirect::route($cltvo_route->route_name,$cltvo_route->route_parameters);
+		} catch (Exception $e) {}
 
-        $previousUrlParts =  explode("/",str_replace($server,"",$previousUrl )) ;
-
-
-        // Verifica que el lang al cual quieres ir está en los lenguages disponibles
-        if (!in_array( $lang , $laguagesArray)) {
-            return view("errors.404");
-        }
-
-        if (!$previousUrl || (isset($previousUrlParts[0]) && $previousUrlParts[0] == 'Lang') ) {
-            return Redirect::to($lang) ;
-        }
-
-        session(['Lang' => $lang]);
-
-        App::setLocale( $lang );
-
-        Config::set('app.locale_prefix', $lang );
-
-        if ( !isset($previousUrlParts[0]) || !in_array($previousUrlParts[0], $laguagesArray) || $lang == $previousUrlParts[0]  ) {
-            return Redirect::back();
-        }
-
-        $trasnlateUrl = $lang."/";
-
-        if (count($previousUrlParts) > 1) {
-
-            $routesTrans = Lang::get("routes", [], $previousUrlParts[0]);
-
-
-            array_shift($previousUrlParts);
-
-            foreach ($previousUrlParts as $key => $part) {
-
-
-                $key = array_search($part, $routesTrans);
-
-
-                $trasnlateUrl .= ($key ? Lang::get("routes.".$key, [], $lang) : $part)."/";
-
-            }
-        }
-
-        // dd($previousUrl,$trasnlateUrl);
-
-        return Redirect::to($trasnlateUrl);
-
+        return Redirect::route($this->base_route_name,$this->base_route_parameters);
     }
+
+
+	protected function getRouteByUri(Language $language,$previous_url)
+	{
+		$route = app('router')->getRoutes()->match(app('request')->create($previous_url));
+		$route_name = $route->getName();
+
+		if (in_array($route_name, $this->trans_lang_routes)) {
+			return (object) [
+				"route_name"		=>		$this->base_route_name,
+				"route_parameters"	=>		$this->base_route_parameters
+			];
+		}
+
+		$route_parameters = collect($route->parameters())->map(function($value,$name)use ($language){
+
+			$method_name = "trasnlate".ucfirst(camel_case($name))."Bind";
+
+			if (method_exists($this,$method_name )) {
+				$value = $this->$method_name($value, $language);
+			}
+
+			return $value;
+		});
+
+		return (object) [
+			"route_name"		=>		$route_name,
+			"route_parameters"	=>		$route_parameters->toArray()
+		];
+	}
+
 }

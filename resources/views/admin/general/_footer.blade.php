@@ -6,7 +6,7 @@
                     <img class="footer__logo" src="{{ asset('images/cltvo-white.svg') }}">
                 </a>
                 <span class="right" >
-                    Desarrollo Web por <a class="footer__link" href="http://www.elcultivo.mx/" target="_blank"> El Cultivo</a>
+					{!! trans('admin.layout.development_by',["name" => '<a class="footer__link" href="http://www.elcultivo.mx/" target="_blank"> El Cultivo</a>']) !!}
                 </span>
             </div>
         </div>

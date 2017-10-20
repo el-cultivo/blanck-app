@@ -13,9 +13,16 @@
 		<div class="header__social">
 			@include('client.general._social', [ 'class' => 'header__social-item' ])
 		</div>
+
+		<div class="header__social">
+			@include('client.general._languages', [ 'class' => 'header__social-item' ])
+		</div>
+
 		@if (isset($user) && $user->hasPermission('admin_access'))
-			<div class="user-admin-link"><a href="{{ route("admin::index") }}">Admin</a></div>
+			<div class="user-admin-link"><a href="{{ route("admin::index") }}">{!! trans('client.layout.admin_access') !!}</a></div>
 		@endif
+
+
 		<div class="header__mobile--btn mobile_btn_JS">&#9776;</div>
 		<div class="clear"></div>
 	</div>

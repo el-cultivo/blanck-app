@@ -14,12 +14,25 @@
 
 			<!-- Dropdown Structure -->
 			<ul id='dropdown1' class='dropdown-content sidebar__main--profile--dropDown-ul'>
-				<li><a href="{{ route("user::profile", $user->name) }}" class="sidebar__main--profile--dropDown-ul--link">Mi perfil</a></li>
-				<li><a href="{{ route("client::pages.index") }}" class="sidebar__main--profile--dropDown-ul--link">Ver sitio</a></li>
+				<li><a href="{{ route("user::profile", $user->name) }}" class="sidebar__main--profile--dropDown-ul--link">{!! trans('admin.layout.sidebar.my_account') !!}</a></li>
+				<li><a href="{{ route("client::pages.index") }}" class="sidebar__main--profile--dropDown-ul--link">{!! trans('admin.layout.sidebar.see_site') !!}</a></li>
+				<li class="divider"></li>
+
+				@foreach ($languages as $language)
+
+					<li>
+						@if ($language->is_current)
+							<span class="sidebar__main--profile--dropDown-ul--link" >* {{$language->label}} </span>
+						@else
+							<a href="{{$language->translate_url}}" class="sidebar__main--profile--dropDown-ul--link">{{$language->label}}</a>
+						@endif
+					</li>
+				@endforeach
+
 				<li class="divider"></li>
 				<li>
 					{!! Form::open(['method' => 'POST', 'route' => 'client::logout']) !!}
-							{!! Form::submit("Cerrar sesión", ['class' => 'sidebar__main--profile--dropDown-ul--link']) !!}
+							{!! Form::submit(trans('admin.layout.sidebar.logout'), ['class' => 'sidebar__main--profile--dropDown-ul--link']) !!}
 					{!! Form::close() !!}
 				</li>
 			</ul>

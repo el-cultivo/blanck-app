@@ -96,7 +96,7 @@ trait TranslationTrait {
     public function translation($languageIso = null)
     {
         if (!Language::languageExist($languageIso)) { // si no existe tomamos el del sistema
-            $languageIso = App::getLocale();
+            $languageIso = cltvoCurrentLanguageIso();
         }
 
         $translation = $this->languages()->where(["iso6391"=>$languageIso])->get()->first();
@@ -114,11 +114,11 @@ trait TranslationTrait {
         $nombre_compuesto = "";
 
         foreach ($this->languages as $language) {
-            if (!$language->isCurrentLanguage()) {
+            if (!$language->is_current) {
                 $nombre_compuesto .= $glue_open;
             }
             $nombre_compuesto .= $language->pivot->$key;
-            if (!$language->isCurrentLanguage()) {
+            if (!$language->is_current) {
                 $nombre_compuesto .= $glue_clouse;
             }
         }

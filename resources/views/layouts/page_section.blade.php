@@ -1,4 +1,4 @@
-<template id="section-{{ $section_index }}-template">
+<script  type="x/templates" id="section-{{ $section_index }}-template">
     <div >
         <div class="col s10 offset-s1 center-align">
 			<h5>@{{section.label}}</h5>
@@ -12,4 +12,4 @@
             <div class="divider"></div>
         </div>
     </div>
-</template>
+</script >

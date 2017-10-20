@@ -11,6 +11,6 @@
         </a>
     </div>
     <div class="col s6 right-align ">
-        Desarrollo Web por <a href="http://www.elcultivo.mx/" target="_blank">El Cultivo</a>
+		{!! trans('admin.layout.development_by',["name" => '<a href="http://www.elcultivo.mx/" target="_blank">El Cultivo</a>']) !!}
     </div>
-</div> 
+</div>

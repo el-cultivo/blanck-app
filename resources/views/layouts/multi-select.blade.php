@@ -19,7 +19,7 @@
 			         <input
 			             type="checkbox"
 			             name="{{ $select_plural }}[]"
-			             :id="'{{$select_plural}}'+item.{{ $option_value }}"
+						 :id="'{{$select_plural}}'+'_'+item.{{ $option_value }}"
 			             :value="item.{{ $option_value }}"
 			             :checked = "is_checked(item.{{ $option_value }})"
 			             v-model="checkedItems"
@@ -42,7 +42,7 @@
 		<div class="">
 		<br><br><br>
             <div class="pull-right">
-                {!! Form::submit("Guardar", [
+                {!! Form::submit(trans('admin.form.save') , [
                     'class' => 'btn waves-effect waves-light btn-creel flex-collapsible ',
                     'form'  => $form_id
                 ]) !!}

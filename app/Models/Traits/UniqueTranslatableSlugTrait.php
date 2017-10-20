@@ -52,6 +52,16 @@ trait UniqueTranslatableSlugTrait
         })->with('languages');
     }
 
+	public function scopeGetModelBySlugInCurrentLanguage($query, $slug)
+	{
+		return $query->whereHas('languages', function($pivot_query) use($slug) {
+			$pivot_query->where([
+				$this->getColSlugName()	=> $slug,
+				"iso6391"				=> cltvoCurrentLanguageIso(),
+			]);
+		})->with('languages');
+	}
+
     public static function getObjectBySlug($slug)
     {
         $models = static::getModelBySlug($slug)->get();

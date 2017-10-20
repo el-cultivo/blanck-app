@@ -15,37 +15,37 @@ class AdminMainMenuComposer
 	protected function getMenuItems()
 	{
 		return collect([
-			$this->setMenuItem('Inicio', [
-				$this->setSubMenuItem('index', 'admin_access', 'Administrador')
+			$this->setMenuItem('admin_access', [
+				$this->setSubMenuItem('index', 'admin_access', 'index')
 			]),
-			$this->setMenuItem('Usuarios', [
-				$this->setSubMenuItem('users.create', 'manage_users', 'Agregar usuario'),
-				$this->setSubMenuItem('users.index', 'manage_users', 'Lista de usuarios'),
-				$this->setSubMenuItem('users.trash', 'manage_users', 'Usuarios desactivados'),
+			$this->setMenuItem('manage_users', [
+				$this->setSubMenuItem('users.create', 'manage_users', 'create'),
+				$this->setSubMenuItem('users.index', 'manage_users', 'index'),
+				$this->setSubMenuItem('users.trash', 'manage_users', 'trash'),
 				$this->setSubMenuItem('users.edit', 'manage_users', '')
 			]),
-			$this->setMenuItem('Imágenes', [
-				$this->setSubMenuItem('photos.index', 'photos_view', 'Media Manager')
+			$this->setMenuItem('photos_view', [
+				$this->setSubMenuItem('photos.index', 'photos_view', 'index')
 			]),
-			$this->setMenuItem('Páginas', [
-				$this->setSubMenuItem('pages.contents.index', 'manage_pages_contents', 'Lista de páginas'),
+			$this->setMenuItem('manage_pages_contents', [
+				$this->setSubMenuItem('pages.contents.index', 'manage_pages_contents', 'index'),
 				$this->setSubMenuItem('pages.contents.edit', 'manage_pages_contents', ''),
-				$this->setSubMenuItem('pages.create', 'manage_pages', 'Agregar página'),
-				$this->setSubMenuItem('pages.index', 'manage_pages', 'Administrar páginas'),
+				$this->setSubMenuItem('pages.create', 'manage_pages', 'create'),
+				$this->setSubMenuItem('pages.index', 'manage_pages', 'index'),
 				$this->setSubMenuItem('pages.edit', 'manage_pages', ''),
-				$this->setSubMenuItem('pages.sections.index', 'manage_pages', 'Administrar secciones')
+				$this->setSubMenuItem('pages.sections.index', 'manage_pages', 'index')
 			]),
-			$this->setMenuItem('Ajustes', [
-				$this->setSubMenuItem('copies.index', 'system_config', 'Copies del sistema'),
-				$this->setSubMenuItem('shapes.index', 'system_config', 'Imágenes del sistema'),
-				$this->setSubMenuItem('settings.index', 'system_config', 'Ajustes del sistema'),
-				$this->setSubMenuItem('seo_booster.index', 'manage_seo_booster', 'Seo Booster')
+			$this->setMenuItem('system_config', [
+				$this->setSubMenuItem('copies.index', 'system_config', 'copies.index'),
+				$this->setSubMenuItem('shapes.index', 'system_config', 'shapes.index'),
+				$this->setSubMenuItem('settings.index', 'system_config', 'settings.index'),
+				$this->setSubMenuItem('seo_booster.index', 'manage_seo_booster', 'seo_booster.index')
 			]),
-			$this->setMenuItem('Rutas', [
-				$this->setSubMenuItem('site_map', 'routes_view', 'Lista de rutas')
+			$this->setMenuItem('routes_view', [
+				$this->setSubMenuItem('site_map', 'routes_view', 'site_map')
 			]),
-			$this->setMenuItem('Manuales', [
-				$this->setSubMenuItem('manuals', 'admin_access', 'Videos')
+			$this->setMenuItem('admin_access_manuals', [
+				$this->setSubMenuItem('manuals', 'admin_access', 'videos')
 			])
 		]);
 	}
@@ -75,10 +75,16 @@ class AdminMainMenuComposer
 			return $user->hasPermission($permissions->unique()->toArray());
 		})->map(function($menu_item) use ($user){
 			return (object) [
-				'label'		=> $menu_item->label,
+				'label'		=> trans($menu_item->label.".admin_menu.label"),
 				'current'	=> $this->isActiveSection($menu_item->routes->pluck('name')->toArray()),
-				'sub_menu'	=> $menu_item->routes->filter(function($sub_menu_item) use ($user){
+				'sub_menu'	=> $menu_item->routes->filter(function($sub_menu_item) use ($user,$menu_item){
 					return !empty($sub_menu_item->label) && $user->hasPermission($sub_menu_item->permission);
+				})->map(function($sub_menu_item) use ($menu_item){
+					return (object) [
+						'name'			=> $sub_menu_item->name,
+						'permission'	=> $sub_menu_item->permission,
+						'label'			=> trans($menu_item->label.".admin_menu.".$sub_menu_item->label),
+					];;
 				})
 			];
 		});
