@@ -1,4 +1,4 @@
-<template id="{{$modal_id}}-template">
+<script type="x/templates"  id="{{$modal_id}}-template">
     <div  id="{{$modal_id}}" class="modal">
         <div class="" role="document">
             <div class="modal-content">
@@ -30,4 +30,4 @@
             --}}
         </div>
     </div>
-</template>
+</script>
