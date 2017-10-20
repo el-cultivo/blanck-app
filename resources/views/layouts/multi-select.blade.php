@@ -42,7 +42,7 @@
 		<div class="">
 		<br><br><br>
             <div class="pull-right">
-                {!! Form::submit("Guardar", [
+                {!! Form::submit(trans('admin.form.save') , [
                     'class' => 'btn waves-effect waves-light btn-creel flex-collapsible ',
                     'form'  => $form_id
                 ]) !!}
