@@ -242,4 +242,17 @@ return [
         ],
     ],
 
+    'update'    =>  [
+        'copy'  =>  [
+            'value' =>  [
+                'required'  =>  '',
+                'array'     =>  '',
+                'en'        =>  [
+                    'present'   =>  '',
+                    'string'    =>  ''
+                ]
+            ]
+        ]
+    ],
+
 ];

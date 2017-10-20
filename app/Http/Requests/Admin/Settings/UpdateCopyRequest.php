@@ -28,7 +28,7 @@ class UpdateCopyRequest extends Request
      */
     public function rules()
     {
-        
+
         $rules = [
             'value'           => 'required|array',
         ];
@@ -38,5 +38,23 @@ class UpdateCopyRequest extends Request
         }
 
         return $rules;
+    }
+
+    public function messages()
+    {
+        $messages = [
+            'value.required' => trans('manage_settings.update.copy.value.required'),
+            'value.array' => trans('manage_settings.update.copy.value.array'),
+        ];
+
+         foreach ($this->languages_isos as $lang_iso) {
+
+          $messages['value.'.$lang_iso.'.present'] = trans('manage_settings.update.copy.value.'.$lang_iso.'.present');
+          $messages['value.'.$lang_iso.'.string'] = trans('manage_settings.update.copy.value.'.$lang_iso.'.string');
+        }
+
+        return $messages;
+
+
     }
 }
