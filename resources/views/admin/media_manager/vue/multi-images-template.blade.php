@@ -2,8 +2,8 @@
 	<div>
 
 		<div class="row mb-5">
-			<div class="col s10">
-				<h5 class="">@{{title || 'Galería'}}</h5>
+			<div class="col s12">
+				<h5 class=""  v-text = ' title ? title : "{{trans('manage_photo.title')}}" '></h5>
 			</div>
 		</div>
 
@@ -24,7 +24,7 @@
 							:default-order="defaultOrder"
 							>
 							<div slot="remove" style="margin-top: 5%; cursor: pointer;">
-								<a class="button__as-link" v-on:click.stop="remove($index)">Remover</a>
+								<a class="button__as-link" v-on:click.stop="remove($index)">{{trans('manage_photo.button.remove')}}</a>
 							</div>
 						</single-image>
 					</div>
@@ -36,7 +36,7 @@
 			<div class="col s10 ">
 				<div class="pull-left btn" v-on:click="addSingleImageComponent">
 					<span class="icon-plus fa fa-plus"></span>
-					<span class="icon-text-plus">Agregar</span>
+					<span class="icon-text-plus">{{trans('manage_photo.button.add')}}</span>
 				</div>
 			</div>
 		</div>
@@ -50,7 +50,7 @@
 			'v-on:submit.prevent'	=> 'postOrders'
 			]) !!}
 
-			{!! Form::submit('Guardar Orden', ['style' => 'margin-bottom: 10%;', 'class' => 'btn btn-primary button pull-right', ':form'=> "'sort-multi-images_'+printable_ref+'_form'"]) !!}
+			{!! Form::submit(trans('manage_photo.create.form.save'), ['style' => 'margin-bottom: 10%;', 'class' => 'btn btn-primary button pull-right', ':form'=> "'sort-multi-images_'+printable_ref+'_form'"]) !!}
 
 			    <input type="hidden" :form="'sort-multi-images_'+printable_ref+'_form'" name="photos[]" :value="id" v-for="id in ordered_ids">
 
