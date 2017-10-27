@@ -1,61 +1,180 @@
 <?php
 return [
 	'admin_menu'	=>	[
-		'label'		=>	'Páginas',
-		'index'		=>	'Administrar Páginas',
-		'create'	=>	'Agregar Página',
+		'label'		=>	'Pages',
+		'index'		=>	'Manage Pages',
+		'create'	=>	'Add Page',
 		'contents' => [
-			'index' => 'Páginas',
+			'index' => 'Pages',
 		],
 		'sections' => [
-			'index' => 'Administrador de Secciones',
-		]
+			'index' => 'Manage Sections',
+		],
 	],
 	'update'		=>	[
-		'error'		=>	"El componente no pudo ser actualizado",
-		'success'	=>	"El componente fue correctamente actualizado"
-	],
-	'update'		=>	[
-		'error'		=>	"El componente no pudo ser actualizado",
-		'success'	=>	"El componente fue correctamente actualizado"
+		'error'		=>	"Could not update component",
+		'success'	=>	"Component updated successfuly"
 	],
 	'delete'		=>	[
-		'error'		=>	"El componente no puede ser borrado",
-		'images'	=>	"El componente no pudo ser borrado porque tiene imágenes asociadas",
-		'success'	=>	"El componente fue correctamente borrado"
+		'error'		=>	"Can not delete this component",
+		'images'	=>	"Can not delete this component, it has related images",
+		'success'	=>	"Component deleted successfuly",
+		'delete'		=>	[
+			'error'		=>	"Can not delete this page",
+			'success'	=>	"Image deleted successfuly"
+		],
+		'main'	=>	[
+				'error'	=>	'Can not delete this page'
+		],
+		'deletable'	=>	[
+			'error'		=>	"Page is not deletable",
+		],
+		'sections'	=>	[
+			'error'	=>	'Can not delete this page. It has associated sections'
+		],
+		'languages'	=>	[
+			'error'	=>	'Can not delete this page. Languages error'
+		]
 	],
 	'sort'		=>	[
-		'error'		=>	"El nuevo orden no pudo ser actualizado",
-		'success'	=>	"Orden correctamente guardado"
+		'error'		=>	"Can not update new order",
+		'success'	=>	"New order saved successfuly"
 	],
 	'content'	=>	[
 		'sort'	=>	[
-			'error'		=>	"El orden anterior no pudo ser borrado",
-			'success'	=>	"El orden se actualizó correctamente"
+			'error'		=>	"Last order could not be deleted",
+			'success'	=>	"Order updated successfuly"
 		]
 	],
 	'sections'		=>	[
+		'index' => 'Manage Sections',
 		'create'	=>	[
-			'error'		=>	"La sección no pudo ser creada",
-			'success'	=>	"La sección fue creada correctamente"
+			'error'		=>	"Could not create section",
+			'success'	=>	"Section created successfuly"
 		],
 		'update'	=>	[
-			'error'		=>	"La sección no pudo ser actualizada",
-			'success'	=>	"La sección fue correctamente actualizada"
+			'error'		=>	"Could not update section",
+			'success'	=>	"Section updated successfuly"
 		],
 		'delete'	=>	[
 			'soft'	=>	[
-				'error'		=>	"La sección que desea borrar tiene páginas o componentes asociados, por lo que no puede ser eliminada",
-			]
-			'error'		=>	"La sección no pudo ser borrada",
-			'success'	=>	"La sección fue borrada correctamente "
+				'error'		=>	"This section is asociated to pages or components, so it can not be deleted",
+			],
+			'error'		=>	"Could not delete section",
+			'success'	=>	"Section deleted successfuly"
 		],
-
-	]
+		'associate'	=>	[
+			'error'		=>	"Could not asociate section",
+			'success'	=>	"Section asociated successfuly",
+			'previous_error'	=>	'Could not find associated sections'
+		],
+		'disassociate'	=>	[
+			'error'		=>	"Could not disasociate section",
+			'success'	=>	"Section disasociated successfuly"
+		],
+		'sort'	=>	[
+			'error'		=>	"Could not sort section",
+			'success'	=>	"Section sorted successfuly",
+			'save'	=>	'Save Sections',
+		],
+		'index'	=>	[
+			'label'	=>	'Manage Sections',
+			'instructions'	=>	'Click to edit pages sections',
+			'table'	=>	[
+				'name'	=>	'Name',
+				'type'	=>	'Type',
+				'template'	=>	'Template',
+				'pages'	=>	'Pages',
+				'edit'	=>	'Edit',
+				'delite'	=>	'Delete',
+			],
+		],
+		'create_modal'	=>	[
+			'label'	=>	'Create Section',
+			'form'	=>	[
+					'index'	=>	[
+							'label'	=> 'Section Name',
+							'placeholder'	=>	'Home Slider',
+					],
+					'description'	=>	[
+							'label'	=>	'Description'
+					],
+					'template_path'	=>	[
+						'label'	=> 'Template path',
+						'placeholder'	=>	'home.slider',
+					],
+					'components_max'	=>	[
+						'label'	=> 'Maximum number of components',
+					],
+					'type_id'	=>	[
+						'label'	=> 'Type',
+						'placeholder'	=>	'Select',
+					],
+					'editable_contents'	=>	[
+						'label'	=> 'User Editable Contents',
+						'gallery_img'	=>	[
+								'label'	=>	'Gallery Image',
+						],
+						'title'	=>	[
+								'label'	=>	'Title',
+						],
+						'excerpt'	=>	[
+								'label'	=>	'Excerpt',
+						],
+						'iframe'	=>	[
+								'label'	=>	'iFrame',
+						],
+						'thumbnail_img'	=>	[
+								'label'	=>	'Thumbnail Image',
+						],
+						'subtitle'	=>	[
+								'label'	=>	'Subtitle',
+						],
+						'content'	=>	[
+								'label'	=>	'Content',
+						],
+						'link'	=>	[
+								'label'	=>	'Link',
+						],
+					],
+					'save'	=>	'Save',
+			],
+		],
+		'checkbox' => [
+			'add'	=>	'Select sections to add',
+		],
+		'index'	=>	[
+			'label' => 'Manage Sections',
+			'instructions'	=>	'Manage sections',
+			'table'	=>	[
+				'name'	=>	'Name',
+				'type'	=>	'Type',
+				'template'	=>	'Template',
+				'pages'	=>	'Pages',
+				'edit'	=>	'Edit',
+				'delite'	=>	'Delete',
+			],
+		],
+		'edit_modal'	=>	[
+				'label'	=>	'Edit Section',
+				'form'	=>	[
+						'description'	=>	[
+								'label'	=>	'Description'
+						],
+						'template_path'	=>	[
+									'label'	=>	'Template Path'
+						],
+						'template_pathtemplate_path'	=>	[
+									'placeholder'	=>	'home.slider'
+						],
+						'save'	=>	'Save',
+				],
+		],
+	],
 
 	'create'	=>	[
-		'error'		=>	"La sección no pudo ser creada",
-		'success'	=>	"La sección fue creada correctamente"
+		'error'		=>	"Could not create section",
+		'success'	=>	"Section created successfuly",
 		'label'	=>	'Add Page',
 		'instructions'	=> 'Fill in the blanks to add a new page',
 		'form'	=>	[
@@ -101,4 +220,77 @@ return [
 			'sections_empty'	=> 'No sections',
 		],
 	],
+	'edit'	=>	[
+		'label'	=>	'Edit Pages',
+		'instructions'	=>	'Edit this page',
+		'sections'	=> 'Sections',
+		'success'	=>	'Page edited successfuly',
+		'error'	=>	'Page could not be edited',
+	],
+	'contents' => [
+		'admin_menu' => [
+				'label'	=>	'Pages',
+		],
+		'index'	=>	[
+			'label' => 'Pages',
+			'instructions'	=>	'Manage pages',
+			'table'	=>	[
+				'name'	=>	'Name',
+				'state'	=>	'State',
+				'index'	=>	'Index',
+				'show'	=>	'Show',
+				'edit'	=>	'Edit',
+				'main_page'	=>	'Main Page',
+			],
+		],
+		'edit'	=>	[
+			'label'	=> 'Edit Page',
+			'instructions'	=>	'Edit the form to update pages',
+		],
+		'components'	=>	[
+			'gimme_name'	=>	'Give me a name',
+			'form'	=>	[
+				'title'	=>	[
+					'label'	=>	'Title',
+					'placeholder'	=>	'Title'
+				],
+				'excerpt'	=>	[
+					'label'	=>	'Excerpt'
+				],
+				'link_title'	=> [
+						'label'	=>	'Link',
+						'placeholder'	=>	'link'
+				],
+				'link_url'	=> [
+						'label'	=>	'Link Url',
+						'placeholder'	=>	'http://www.example.com'
+				],
+				'tblank_link_'	=>	[
+					'label'	=>	'Open in a new window?',
+					'no'	=>	'No',
+					'yes'	=>	'Yes'
+				],
+				'save'	=>	'Save',
+				'subtitle'	=>	[
+					'label'	=>	'Subtitle',
+					'placeholder'	=>	'subtitle',
+				],
+				'content'	=>	[
+					'label'	=>	'Content',
+				]
+			],
+			'sort'	=> [
+				'add'	=> 'Add',
+				'save'	=>	'Save'
+			],
+			'empty'	=>	'Empty',
+
+		],
+	],
+	'recovery'	=>	[
+			'success'	=>	'Page recovered successfuly',
+			'error'	=>	'Page could not be recovered',
+	],
+
+
 ];

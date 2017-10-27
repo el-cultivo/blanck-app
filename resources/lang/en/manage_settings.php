@@ -69,7 +69,7 @@ return [
     ],
 
     'social' => [
-        'title'     => 'Redes sociales',
+        'title'     => 'Social Networks',
         'facebook'  => [
             'placeholder'   => 'Ex. https://www.tumblr.com/elcultivo/',
             'label'         => 'Facebook:',
@@ -92,17 +92,17 @@ return [
         ],
         'create'    =>  [
             'form'  =>  [
-                'save'  =>  ''
+                'save'  =>  'Save'
             ]
         ]
     ],
 
     'mail' => [
-        'title' => 'Correo',
+        'title' => 'eMail',
         'contact'   => [
             'placeholder'   => 'Ex. info@elcultivo.net',
             'label'         => 'Contact email:',
-            'helper'        => '',
+            'helper'        => 'Save',
         ],
         'system'   => [
             'placeholder'   => 'Ex. hola@elcultivo.net',
@@ -140,9 +140,9 @@ return [
         ],
         'create'    =>  [
             'form'  =>  [
-                'save'  =>  ''
+                'save'  =>  'Save'
             ]
-        ]
+        ],
         'mail_greeting' => [
           'en' => [
               'label'         => 'Mail greeting:',
@@ -158,7 +158,7 @@ return [
     ],
 
     'shipment' => [
-        'title' => 'Envíos',
+        'title' => 'Shippings',
         'origin-address'    => [
             'street-1'  => [
                 'placeholder'   => 'Street & number',
@@ -214,7 +214,7 @@ return [
             'currency' => [
                 'placeholder'   => 'Ex. USD',
                 'label'         => 'Type of currency (US):',
-                'helper'        => '',
+                'helper'        => 'Helper',
             ],
             'exchange' => [
                 'placeholder'   => 'Ex. 19.56',
@@ -223,21 +223,30 @@ return [
         ],
     ],
 
+    'contact' => [
+        'title' => 'Contact',
+        'phone' => [
+            'label'         => 'Telephone',
+            'placeholder'   => '0152 5583 0080',
+        ]
+    ],
+
+
     'general' => [
         'save'  => 'Save',
     ],
 
     'index' => [
-        'label' =>  ''
+        'label' =>  'Manage Settings'
     ],
 
     'copies'    =>  [
         'index' => [
-            'label' =>  ''
+            'label' =>  'Copies',
         ],
         'create'    =>  [
             'form'  =>  [
-                'save'  =>  ''
+                'save'  =>  'Save'
             ],
         ],
     ],
@@ -245,11 +254,11 @@ return [
     'update'    =>  [
         'copy'  =>  [
             'value' =>  [
-                'required'  =>  '',
-                'array'     =>  '',
+                'required'  =>  'This field is required',
+                'array'     =>  'This field must be an array',
                 'en'        =>  [
-                    'present'   =>  '',
-                    'string'    =>  ''
+                    'present'   =>  'It is mandatory to fill this field',
+                    'string'    =>  'This field must be a string'
                 ]
             ]
         ]

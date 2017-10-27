@@ -1,7 +1,7 @@
 <?php
 return [
 	'admin_menu'	=>	[
-		'label'		=>	'Manuales',
+		'label'		=>	'Manuals',
 		'videos'	=>	'Videos'
 	],
 ];
