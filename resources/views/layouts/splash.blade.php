@@ -19,18 +19,30 @@
 			body {
 				height: calc(100% - 16px) ;
 				width: calc(100% - 8px) ;
-				color: #B0BEC5;
+				background-color: #215056;
+				color: #000;
                 display: table;
                 font-weight: 100;
                 font-family: 'Lato', sans-serif;
+                
 			}
-
+			header{
+				height: 200px;
+			    width: 300px;
+			    object-fit: cover;
+			    margin: 0px auto;
+			    background-image: url(images/elcultivo.svg);
+			    background-position: center;
+			    background-repeat: no-repeat;
+			    background-size: 80%;
+			}
 
 			.splash {
 				height: 100%;
-				width: 100%;
+				width: 300px;
+				object-fit: cover;
 				margin: 0px auto;
-				background-image: url("images/logo.svg");
+				background-image: url("images/aboutus-portada.svg");
 				background-position: center;
 				background-repeat: no-repeat;
 				background-size: 40%;
@@ -76,7 +88,8 @@
 			.splash__footer ul li a {
 				text-decoration: none;
 				text-transform: uppercase;
-				font-family: 'Lato';				height: 100%;
+				font-family: 'Lato';				
+				height: 100%;
 				width: 100%;
 				font-weight: 500;
 				font-size: 12px;
@@ -112,39 +125,12 @@
         </style>
     </head>
     <body>
+    	<header>
+    		
+    	</header>
 		@yield('content')
-		<footer class="splash__footer">
-			<ul>
-
-				<li>
-					<a href="http://www.elcultivo.mx/" target="_blank">
-					El cultivo
-					</a>
-				</li>
-				<li>
-					<a href="https://www.facebook.com/el.cultivo.mx" target="_blank">
-					Facebook
-					</a>
-				</li>
-				<li>
-					<a href="https://twitter.com/el_cultivo" target="_blank">
-					Twitter
-					</a>
-
-				</li>
-				<li>
-					<a href="https://www.instagram.com/el_cultivo/" target="_blank">
-					Instagram
-					</a>
-				</li>
-
-				<li>
-					<a   href="https://www.google.com.mx/maps/place/Plaza+Grijalva+5,+Cuauht%C3%A9moc,+06500+Ciudad+de+M%C3%A9xico,+CDMX/@19.4339329,-99.1717392,17z/data=!3m1!4b1!4m5!3m4!1s0x85d1f8b50e6589ef:0xbde7084245778c26!8m2!3d19.4339329!4d-99.1695452">
-					Plaza Grijalva 5, Cuauhtémoc, 06500 Ciudad de México, CDMX
-					</a>
-				</li>
-
-			</ul>
-		</footer>
+		<section>
+			<h3>sitio web en construcción</h3>
+		</section>
     </body>
 </html>
