@@ -26,90 +26,58 @@
                 font-family: 'Lato', sans-serif;
                 
 			}
+			.container{
+				text-align: center;
+			    display: table-cell;
+			    vertical-align: middle;
+			    height: 100vh;
+			}
 			header{
-				height: 200px;
+				height: 100px;
 			    width: 300px;
-			    object-fit: cover;
 			    margin: 0px auto;
 			    background-image: url(images/elcultivo.svg);
 			    background-position: center;
 			    background-repeat: no-repeat;
-			    background-size: 80%;
+			    padding: 0px;
+			    margin-bottom: 50px;
 			}
 
 			.splash {
-				height: 100%;
-				width: 300px;
+				height: 500px;
+				width: auto;
 				object-fit: cover;
 				margin: 0px auto;
 				background-image: url("images/aboutus-portada.svg");
 				background-position: center;
 				background-repeat: no-repeat;
-				background-size: 40%;
+
+			}
+			h2{
+				font-weight: 100;
+				font-size: 42px;
+			}
+			h2, h3{
+				color: white;
+				text-align: center;
+				padding: 0px;
+    			margin: 0px;
+			}
+			h3{
+				font-size: 2em;
+				margin-top: 15px;
+				letter-spacing: 1px;
 			}
 			.splash__svg {
 				z-index: 1;
 			}
-			.splash__footer {
-				position: fixed;
-				left: 0;
-				bottom: 0;
-				z-index: 2;
-				min-width: 100%;
-				display: -webkit-box;
-				display: -webkit-flex;
-				display: -ms-flexbox;
-				display: flex;
-				-webkit-box-pack: center;
-				-webkit-justify-content: center;
-				-ms-flex-pack: center;
-				justify-content: center;
-				padding-top: 2px;
-				padding-bottom: 2px;
-				padding-right: 20px;
-				padding-left: 20px;
-				text-align: center;
-				box-sizing: border-box;
-				background-color: whitesmoke;
-			}
-			.splash__footer ul {
-				width: 100%;
-			}
-			.splash__footer ul li {
-				margin-right: 30px;
-				margin-left: 30px;
-				text-align: center;
-				line-height: 35px;
-				font-weight: normal;
-				display: inline-block;
-
-				font-weight: bold;
-			}
-			.splash__footer ul li a {
-				text-decoration: none;
-				text-transform: uppercase;
-				font-family: 'Lato';				
-				height: 100%;
-				width: 100%;
-				font-weight: 500;
-				font-size: 12px;
-				color: #312822;
-			}
-			.splash__footer ul li a:hover {
-				color: #EA7640;
-				text-decoration: underline;
-			}
-
-			.splash__footer ul li:last-child {
-				margin-right: 0px;
-				margin-left: 0px;
-				display: block;
-			}
+			
 
 			.container {
 				text-align: center;
 				display: table-cell;
 				vertical-align: middle;
+				background-size: 90%;
 			}
 
 			.content {
@@ -125,12 +93,17 @@
         </style>
     </head>
     <body>
-    	<header>
-    		
-    	</header>
-		@yield('content')
-		<section>
-			<h3>sitio web en construcción</h3>
-		</section>
+    	<div class="container">
+	    	<header>
+	    		
+	    	</header>
+			@yield('content')
+			<section>
+
+				<h2>sitio web en construcción</h2>
+				<h3>elcultivo.mx</h3>
+
+			</section>
+		</div>
     </body>
 </html>
