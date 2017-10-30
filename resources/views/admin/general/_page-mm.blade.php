@@ -9,7 +9,7 @@
         <div class="form-group">
             {!! Form::label('inputname', $title, ['class' => 'text__p']) !!}
             {!! Form::textarea('inputname', null, [
-                'class' => 'form-control summernote_JS',
+                'class' => 'form-control ',
                 'required' => 'required'
             ]) !!}
         </div>

@@ -38,7 +38,7 @@
                                            <div class="input-field" >
                                                {!! Form::label("value[".$language->iso6391."]", trans('manage_copies.'.$page_slug.'.'.$copy->key.'.label').' ('.$language->label.'):', ['class' => 'input-label active']) !!}
                                                {!! Form::textarea("value[".$language->iso6391."]", $copy->{$language->iso6391."_value"}, [
-                                                   'class'       => 'materialize-textarea validate summernote_JS',
+                                                   'class'       => 'materialize-textarea validate ',
                                                    'placeholder' => trans('manage_copies.'.$page_slug.'.'.$copy->key.'.placeholder')." (".$language->label.")",
                                                    // 'required'    => 'required',
                                                    'form'        => "update_component_".$copy->id."_form"
