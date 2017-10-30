@@ -29,4 +29,14 @@ return [
 		'exist'     =>  'This role does not exist',
 	],
 
+	'update_email'   => [
+		'success'  =>  'email updated successfuly ',
+		'error'     =>  'email could not be updated ',
+	],
+
+	'update_password'   => [
+		'success'  =>  'Password updated successfuly ',
+		'error'     =>  'Password could not be updated ',
+	],
+
 ];

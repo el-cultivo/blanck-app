@@ -4,10 +4,10 @@
             <thead class="">
                 <tr>
                     <th></th>
-                    <th>Nombre (index)</th>
-                    <th>Estado</th>
-                    <th class="center-align"  >Ver</th>
-                    <th class="center-align"  >Editar</th>
+                    <th>{!! trans('manage_pages.contents.index.table.name') !!} (index)</th>
+                    <th>{!! trans('manage_pages.contents.index.table.state') !!}</th>
+                    <th class="center-align"  >{!! trans('manage_pages.contents.index.table.show') !!}</th>
+                    <th class="center-align"  >{!! trans('manage_pages.contents.index.table.edit') !!}</th>
                 </tr>
             </thead>
 
@@ -31,7 +31,7 @@
                         @{{{ page.complete_label }}}
                         <small v-if = 'page.main' >
                             <br>
-                            Página principal del sitio
+                            {!! trans('manage_pages.contents.index.table.main_page') !!}
                         </small>
 
                     </td>

@@ -2,11 +2,11 @@
 
 
 @section('title')
-    Páginas
+    {!! trans('manage_pages.contents.index.label') !!} |
 @endsection
 
 @section('h1')
-    Páginas
+    {!! trans('manage_pages.contents.index.label') !!}
 @endsection
 
 @section('content')
@@ -19,7 +19,7 @@
         <div class="">
             @include('admin.general._page-instructions', [
                 'title'         =>  '',
-                'instructions'  =>  'Da click para ver o editar una página. <br>Utliliza las flechas para cambiar el orden.'
+                'instructions'  =>  trans('manage_pages.contents.index.instructions')
             ])
             <div class="col s10 offset-s1">
                 <div v-for="pages_group in list" track-by="$index">
