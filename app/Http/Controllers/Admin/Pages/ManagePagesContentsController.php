@@ -66,9 +66,9 @@ class ManagePagesContentsController extends Controller
      */
     public function edit(Page $page_edit_content)
     {
-
         $data = [
-            'page_edit'      => $page_edit_content
+            'page_edit' => $page_edit_content,
+            'seo' => $page_edit->getOrCreateSeo()
         ];
 
         return view('admin.pages.contents.edit', $data );

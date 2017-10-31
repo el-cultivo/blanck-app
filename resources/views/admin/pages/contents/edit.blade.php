@@ -28,6 +28,12 @@
         "form_method"   => 'PATCH'
     ])
 
+    @include('admin.seo._form', [
+        'seoable_type' => 'page',
+        'seoable' => $page_edit,
+        'seo' => $seo
+    ])
+
     <current-page-sections :list="store.current_page.sections_maped" :current-page="store.current_page"></current-page-sections-checkbox>
 
 @endsection
@@ -74,5 +80,6 @@
 @section('vue_store')
     <script>
         mainVueStore.current_page = {!! $page_edit !!};
+        mainVueStore.seo =  {!! $seo !!};
     </script>
 @endsection

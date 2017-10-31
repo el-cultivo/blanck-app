@@ -64,6 +64,7 @@ class Photo extends Model
         // code  => class name
         'page_component'     => "App\Models\Pages\Sections\Components\Component",
         'setting_shape'      => "App\Models\Settings\Shape",
+        'seo'                => "App\Models\Seo\Seo",
     ];
 
     /**
