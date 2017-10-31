@@ -9,13 +9,11 @@
 			@endif
 		</title>
         <link href="https://fonts.googleapis.com/css?family=Lato:100, 500" rel="stylesheet" type="text/css">
-
         <style>
 			html {
 				height: 100%;
 				width: 100%;
 			}
-
 			body {
 				height: calc(100% - 16px) ;
 				width: calc(100% - 8px) ;
@@ -42,7 +40,6 @@
 			    padding: 0px;
 			    margin-bottom: 50px;
 			}
-
 			.splash {
 				height: 500px;
 				width: auto;
@@ -71,38 +68,29 @@
 			.splash__svg {
 				z-index: 1;
 			}
-			
-
 			.container {
 				text-align: center;
 				display: table-cell;
 				vertical-align: middle;
 				background-size: 90%;
 			}
-
 			.content {
 				text-align: center;
 				display: inline-block;
 			}
-
 			.title {
 				font-size: 72px;
 				margin-bottom: 40px;
 			}
-
         </style>
     </head>
     <body>
     	<div class="container">
-	    	<header>
-	    		
-	    	</header>
+	    	<header></header>
 			@yield('content')
 			<section>
-
-				<h2>sitio web en construcción</h2>
+				<h2>Sitio web en construcción</h2>
 				<h3>elcultivo.mx</h3>
-
 			</section>
 		</div>
     </body>
