@@ -13,52 +13,52 @@ class CreateSeoBooster extends Migration
      */
     public function up()
     {
-        Schema::create('seo_booster', function (Blueprint $table) {
+        Schema::create('seo', function (Blueprint $table) {
             $table->increments('id');
             $table->string('route_name');
             $table->text('parameters');
             $table->timestamps();
         });
 
-        Schema::create('language_seo_booster', function (Blueprint $table) {
+        Schema::create('language_seo', function (Blueprint $table) {
             $table->integer('language_id')->unsigned();
-            $table->integer('seo_booster_id')->unsigned();
+            $table->integer('seo_id')->unsigned();
 
             $table->string('title')->nullable();
             $table->text('description')->nullable();
 
-            $table->primary(['language_id', 'seo_booster_id']);
+            $table->primary(['language_id', 'seo_id']);
 
             $table  ->foreign('language_id')
                     ->references('id')
                     ->on('languages')
                     ->onDelete('RESTRICT');
-            $table  ->foreign('seo_booster_id')
+            $table  ->foreign('seo_id')
                     ->references('id')
-                    ->on('seo_booster')
+                    ->on('seo')
                     ->onDelete('RESTRICT');
 
             $table->timestamps();
         });
 
-        Schema::create('photo_seo_booster', function (Blueprint $table) {
+        Schema::create('photo_seo', function (Blueprint $table) {
             $table->integer('photo_id')->unsigned();
-            $table->integer('seo_booster_id')->unsigned();
+            $table->integer('seo_id')->unsigned();
 
             $table->string('use')->default('thumbnail');
             $table->unsignedInteger('order')->nullable();
             $table->string('class')->nullable();
 
-            $table->unique(['use', 'order', 'seo_booster_id']);
-            $table->unique(['photo_id', 'use', 'seo_booster_id']);
+            $table->unique(['use', 'order', 'seo_id']);
+            $table->unique(['photo_id', 'use', 'seo_id']);
 
             $table  ->foreign('photo_id')
                     ->references('id')
                     ->on('photos')
                     ->onDelete('RESTRICT');
-            $table  ->foreign('seo_booster_id')
+            $table  ->foreign('seo_id')
                     ->references('id')
-                    ->on('seo_booster')
+                    ->on('seo')
                     ->onDelete('RESTRICT');
 
             $table->timestamps();
@@ -72,8 +72,8 @@ class CreateSeoBooster extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('photo_seo_booster');
-        Schema::dropIfExists('language_seo_booster');
-        Schema::dropIfExists('seo_booster');
+        Schema::dropIfExists('photo_seo');
+        Schema::dropIfExists('language_seo');
+        Schema::dropIfExists('seo');
     }
 }

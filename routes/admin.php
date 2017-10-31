@@ -52,6 +52,11 @@ Route::group(['middleware' => ['permission:manage_seo_booster'], 'prefix' => 'se
     ]);
 });
 
+// Administrador de Seo Booster
+Route::group(['middleware' => ['permission:manage_seo_booster'], 'prefix' => 'seo', 'as' => 'seo.' ], function(){
+    Route::patch( '/' , 'Admin\Seo\ManageSeoController@update')->name('update');
+});
+
 // Administrador de usuarios
 Route::group(['middleware' => ['permission:manage_users'] ,'prefix' => 'users', 'as' => 'users.'], function(){
     Route::resource('/', 'Admin\Users\ManageUserController',

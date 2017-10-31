@@ -106,6 +106,7 @@ class ManagePagesController extends Controller
             "page_edit"         => $page_edit,
             'types_list'     => Type::get()->pluck('label_description','id'),
             'editable_parts' => Component::EDITABLE_CONTENTS,
+            'seo' => $page_edit->getOrCreateSeo()
         ];
 
         return view('admin.pages.edit',$data);

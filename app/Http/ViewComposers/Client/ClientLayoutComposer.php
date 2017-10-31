@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\ViewComposers\Client;
 
-use Illuminate\Contracts\View\View;
-
-use App\Models\Settings\Setting;
 use Auth;
+use App\Models\Seo\Seo;
+use App\Models\Settings\Setting;
+use Illuminate\Contracts\View\View;
 
 class ClientLayoutComposer
 {
@@ -12,5 +12,6 @@ class ClientLayoutComposer
 	{
         $social_networks = Setting::getSocialNetworks();
 		$view->with('social_networks', $social_networks);
+		$view->with('seo', Seo::getForCurrentRoute());
 	}
 }

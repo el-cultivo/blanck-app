@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    {!! trans('manage_pages.index.label') !!} |
+    {!! trans('manage_pages.index.label') !!}
 @endsection
 
 @section('h1')

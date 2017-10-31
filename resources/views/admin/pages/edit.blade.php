@@ -2,7 +2,7 @@
 
 
 @section('title')
-    {!! trans('manage_pages.edit.label') !!} |
+    {!! trans('manage_pages.edit.label') !!}
 @endsection
 
 @section('h1')
@@ -37,6 +37,18 @@
     <pagesections-checkbox :list="store.pagesections.data" :current-page="store.current_page"></pagesections-checkbox>
     <pagesections-sort :list="store.current_page.sections_minified" :current-page="store.current_page"></pagesections-sort>
 
+    <div class="col s12">
+        <div class="divider"></div>
+    </div>
+
+    <div class=" col s10 offset-s1">
+        @include('admin.seo._form', [
+            'seoable_type' => 'page',
+            'seoable' => $page_edit,
+            'seo' => $seo
+        ])
+    </div>
+
 @endsection
 
 
@@ -48,11 +60,14 @@
 	@include('admin.pages.sections._modal-create')
     @include('admin.pages.sections._checkbox-template')
     @include('admin.pages.sections._sort-template')
+    @include('admin.media_manager.vue._modal-media_manager')
+    @include('admin.media_manager.vue.single-image-template')
 @endsection
 
 @section('vue_store')
 	<script>
         mainVueStore.current_page = {!! $page_edit !!};
+        mainVueStore.seo =  {!! $seo !!};
 		mainVueStore.pagesections = {
 			data: undefined, //IMPORTANTE: tenemos que registrar esta propiedad para que el get deposite lo recibido ahí, y SOBRETODO  para que el sistema de reactividad de Vue funcione adecuadamente
 			routes: {

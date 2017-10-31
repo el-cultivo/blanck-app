@@ -2,7 +2,7 @@
 
 
 @section('title')
-    {!! trans('manage_users.create.label') !!} |
+    {!! trans('manage_users.create.label') !!}
 @endsection
 
 @section('h1')

@@ -2,7 +2,7 @@
 
 
 @section('title')
-    {!! trans('manage_pages.contents.edit.label') !!} |
+    {!! trans('manage_pages.contents.edit.label') !!}
 @endsection
 
 @section('h1')
