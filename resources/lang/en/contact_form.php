@@ -28,7 +28,10 @@ return [
 	],
 
 	'send'	=> [
-		"success"	=> "Thank you very much! We have received your message correctly, you will soon receive a confirmation email.",
+		"success"	=> "Thank you very much! We have received your message successfuly, you will soon receive a confirmation email.",
+	],
+	'sended'	=> [
+		"success"	=> "Thank you very much! We have received your message successfuly, you will soon receive a confirmation email.",
 	]
 
 ];

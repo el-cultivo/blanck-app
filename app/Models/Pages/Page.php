@@ -8,6 +8,7 @@ use App\Models\Traits\TranslationTrait;
 use App\Models\Traits\UniqueTranslatableSlugTrait;
 use App\Models\Traits\PublishableTrait;
 use App\Models\Traits\UpdatedAtTrait;
+use App\Models\Traits\SeoableTrait;
 
 use App\Models\Pages\Sections\Section;
 
@@ -18,6 +19,7 @@ class Page extends Model
     use UniqueTranslatableSlugTrait;
     use PublishableTrait;
     use UpdatedAtTrait;
+    use SeoableTrait;
     /**
      * The database table used by the model.
      *
@@ -276,4 +278,34 @@ class Page extends Model
         return $total == 0;
     }
 
+    public function getPublicRouteName()
+    {
+        if ($this->main) {
+            return 'client::pages.index';
+        }
+
+        if (!$this->parent_id) {
+            return 'client::pages.show';
+        }
+
+        return 'client::pages.showChild';
+    }
+
+    public function getPublicParameters()
+    {
+        if ($this->main) {
+            return [];
+        }
+
+        if (!$this->parent_id) {
+            return [
+                'public_page' => $this->slug
+            ];
+        }
+
+        return [
+            'public_child_page' => $this->slug,
+            'public_page' => $this->parent->slug,
+        ];
+    }
 }

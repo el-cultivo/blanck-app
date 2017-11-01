@@ -4,8 +4,26 @@ return [
 
     'sections'   => [
         'home-splash'   =>  [ // section index
-            'title'     => "home splash"
+            'title'     => "Splash"
         ],
+        'home-offers'	=>	[
+    			'title'	=>	'Offers',
+    		],
+    		'home-banner'	=>	[
+    			'title'	=>	'Banner',
+    		],
+    		'home-icons'	=>	[
+    			'title'	=>	'Icons',
+    		],
+    		'home-slider'	=>	[
+    			'title'	=>	'Slider',
+    		],
+    		'home-break'	=>	[
+    			'title'	=>	'Break',
+    		],
+    		'home-contact'	=>	[
+    			'title'	=>	'Contact',
+    		],
     ],
     'pages'      =>  [
         'required'  =>  "Pages are required",
