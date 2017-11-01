@@ -17,35 +17,34 @@
 			}
 
 			body {
-				height: calc(100% - 16px) ;
 				width: calc(100% - 8px) ;
 				background-color: #215056;
 				color: #000;
                 display: table;
                 font-weight: 100;
                 font-family: 'Lato', sans-serif;
-                
+                height: 100vh;
+                overflow: hidden;
 			}
 			.container{
 				text-align: center;
 			    display: table-cell;
 			    vertical-align: middle;
-			    height: 100vh;
 			}
 			header{
-				height: 100px;
-			    width: 300px;
+				height: 25px;
+    			width: 175px;
 			    margin: 0px auto;
 			    background-image: url(images/elcultivo.svg);
 			    background-position: center;
 			    background-repeat: no-repeat;
 			    padding: 0px;
-			    margin-bottom: 50px;
+			    margin-bottom: 105px;
 			}
 
 			.splash {
-				height: 500px;
-				width: auto;
+				height: 278px;
+    			width: 167px;
 				object-fit: cover;
 				margin: 0px auto;
 				background-image: url("images/aboutus-portada.svg");
@@ -55,7 +54,7 @@
 			}
 			h2{
 				font-weight: 100;
-				font-size: 42px;
+				font-size: 30px;
 			}
 			h2, h3{
 				color: white;
@@ -64,8 +63,8 @@
     			margin: 0px;
 			}
 			h3{
-				font-size: 2em;
-				margin-top: 15px;
+				font-size: 20px;
+				margin-top: 10px;
 				letter-spacing: 1px;
 			}
 			.splash__svg {
