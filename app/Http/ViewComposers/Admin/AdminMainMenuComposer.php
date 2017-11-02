@@ -39,7 +39,7 @@ class AdminMainMenuComposer
 				$this->setSubMenuItem('copies.index', 'system_config', 'copies.index'),
 				$this->setSubMenuItem('shapes.index', 'system_config', 'shapes.index'),
 				$this->setSubMenuItem('settings.index', 'system_config', 'settings.index'),
-				$this->setSubMenuItem('seo_booster.index', 'manage_seo_booster', 'seo_booster.index')
+				$this->setSubMenuItem('seo.index', 'manage_seo_booster', 'seo.index')
 			]),
 			$this->setMenuItem('admin_access.site_map', [
 				$this->setSubMenuItem('site_map', 'routes_view', 'index')

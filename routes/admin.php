@@ -45,16 +45,11 @@ Route::group(['middleware' => ['permission:system_config'] ,'prefix' => 'shapes'
 });
 
 // Administrador de Seo Booster
-Route::group(['middleware' => ['permission:manage_seo_booster'], 'prefix' => 'seo_booster', 'as' => 'seo_booster.'], function(){
-    Route::resource('/', 'Admin\Settings\ManageSeoBoosterController',
-        ['only'         => ['index'],
-        'parameters'    => ['' => 'seo_booster']
-    ]);
-});
-
-// Administrador de Seo Booster
 Route::group(['middleware' => ['permission:manage_seo_booster'], 'prefix' => 'seo', 'as' => 'seo.' ], function(){
-    Route::patch( '/' , 'Admin\Seo\ManageSeoController@update')->name('update');
+    Route::resource('/', 'Admin\Seo\ManageSeoController', [
+        'only'         => ['index', 'create', 'edit', 'store', 'update'],
+        'parameters'   => ['' => 'seo']
+    ]);
 });
 
 // Administrador de usuarios

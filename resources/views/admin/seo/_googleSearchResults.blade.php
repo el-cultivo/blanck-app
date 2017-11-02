@@ -6,15 +6,15 @@
                 <div class="google-search-results">
                     <div class="googleSearchResults__DIV_1">
                         <h3 class="googleSearchResults__H3_2">
-                            <a href="{{ route($model->getPublicRouteName(), $model->getPublicParameters()) }}" target="_blank" class="googleSearchResults__A_3">
-                                {{ $title }}: {{ config('app.name') }}
+                            <a href="{{ $seo->uri }}" target="_blank" class="googleSearchResults__A_3">
+                                {{ $seo->translation($language->iso6391)->title }}: {{ config('app.name') }}
                             </a>
                         </h3>
 
                         <div class="googleSearchResults__DIV_4">
                             <div class="googleSearchResults__DIV_5">
                                 <div class="googleSearchResults__DIV_6">
-                                    <cite class="googleSearchResults__CITE_7">{{ route($model->getPublicRouteName(), $model->getPublicParameters()) }}</cite>
+                                    <cite class="googleSearchResults__CITE_7">{{ $seo->uri }}</cite>
                                     <div class="googleSearchResults__DIV_9">
                                         <a href="#" class="googleSearchResults__A_10"><span class="googleSearchResults__SPAN_11"></span></a>
                                         <div class="googleSearchResults__DIV_12">
@@ -28,7 +28,7 @@
                                             </ol>
                                         </div>
                                     </div>
-                                </div><span class="googleSearchResults__SPAN_18">{{ substr($description, 0, 160) }} ...</span>
+                                </div><span class="googleSearchResults__SPAN_18">{{ substr($seo->translation($language->iso6391)->description, 0, 160) }} ...</span>
                             </div>
                         </div>
                     </div>

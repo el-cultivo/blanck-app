@@ -4,6 +4,10 @@
 <div class="col s10 offset-s1">
     <div class="row">
         <h6 class=""><b>Seo Booster</b></h6>
+        <div class="col s12" style="margin-top: 20px; margin-bottom: 30px;">
+            <label for="">{{ trans('manage_seo.edit.route') }}:</label>
+            <a href="{{ $seo->uri }}" target="_blank">{{ $seo->uri }}</a>
+        </div>
         <div class="col s2">
             <single-image
                 :ref-path="['seo']"
@@ -17,7 +21,7 @@
         <div class="col s10">
             {!! Form::open([
                 'method'                => 'PATCH',
-                'route'                 => ['admin::seo.update'],
+                'route'                 => ['admin::seo.update', $seo],
                 'role'                  => 'form',
                 'id'                    => 'update_seo_form',
                 'class'                 => '',
@@ -31,14 +35,13 @@
                     <input type="hidden" name="seoable_id" value="{{ $seoable->id }}" form="update_seo_form">
                     <br><br>
                     @include('admin.seo._googleSearchResults', [
-                        'model' => $seoable,
-                        'title' => $seo->translation($language->iso6391)->title, 
-                        'description' => $seo->translation($language->iso6391)->description
+                        'seo' => $seo,
+                        'lang' => $language
                     ])
                 @endforeach
                 <div class="pull-right">
                     {!! Form::submit(trans('manage_pages.create.form.save'), [
-                        'class' => 'btn waves-effect waves-light flex-collapsible black',
+                        'class' => 'btn waves-effect waves-light flex-collapsible',
                         'form' => 'update_seo_form'
                     ]) !!}
                 </div>

@@ -2,19 +2,14 @@
 
 namespace App\Models\Seo;
 
-use App\Models\Settings\Setting;
-
-use App\Models\Traits\TranslationTrait;
-use App\Models\Traits\PhotoableTrait;
-
-use Illuminate\Database\Eloquent\Model;
-
-use Illuminate\Support\Facades\Route as RouteFacade;
-use Illuminate\Support\Facades\Request;
-
-use Illuminate\Routing\Route;
-
 use Exception;
+use Illuminate\Routing\Route;
+use App\Models\Settings\Setting;
+use App\Models\Traits\PhotoableTrait;
+use App\Models\Traits\TranslationTrait;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Route as RouteFacade;
 
 class Seo extends Model
 {
@@ -81,7 +76,6 @@ class Seo extends Model
         'description',
         'uri',
         'thumbnail_image',
-        // 'isos'
     ];
 
     /**
@@ -90,24 +84,9 @@ class Seo extends Model
      * @var array
      */
     public static $binds = [
-        // code  => class name
-        'public_product' => 'App\Models\Products\Product',
-        'public_collection' => 'App\Models\Collections\Collection',
+        // variable  => class name
         'public_page' => 'App\Models\Pages\Page',
         'public_child_page' => 'App\Models\Pages\Page',
-    ];
-
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array
-     */
-    public static $associable_models = [
-        // code  => class name
-        'page'               => "App\Models\Pages\Page",
-        'collection'         => "App\Models\Collections\Collection",
-        'product'            => "App\Models\Products\Product",
-        'project'            => "App\Models\Projects\Project",
     ];
 
     /**
@@ -157,6 +136,16 @@ class Seo extends Model
     }
 
     /**
+     * Get edit structure url
+     *
+     * @return bool
+     */
+    public function getEditUrlAttribute()
+    {
+        return route("admin::seo.edit",$this->id);
+    }
+
+    /**
      * Get the administrator flag for the user.
      *
      * @return bool
@@ -171,9 +160,9 @@ class Seo extends Model
      *
      * @return bool
      */
-    public function scopeParameters($query, $route)
+    public function scopeParameters($query, $parameterName, $parameterValue)
     {
-        return $query->where('parameters', $route);
+        return $query->where('parameters->' . $parameterName, $parameterValue);
     }
 
     /**
@@ -216,7 +205,7 @@ class Seo extends Model
 
         }
 
-        return static::getDefault();
+        return static::route($route->getName())->first() ?: static::getDefault();
     }
 
     /**
@@ -240,7 +229,7 @@ class Seo extends Model
      *
      * @return bool
      */
-    protected static function generate($route_name, $parameters)
+    protected static function generate($route_name, $parameters = [])
     {
         $router = resolve('Illuminate\Contracts\Routing\Registrar');
 
@@ -300,7 +289,7 @@ class Seo extends Model
 
         foreach ($parameterNames as $parameterName) {
             if (array_key_exists($parameterName, $parameters)) {
-                $query->where('parameters->' . $parameterName, $parameters[$parameterName]);
+                $query->parameters($parameterName, $parameters[$parameterName]);
             }
         }
 
