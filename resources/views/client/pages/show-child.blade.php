@@ -1,7 +1,7 @@
 @extends('layouts.client')
 
 @section('title')
-		{{$public_child_page->label}} | {{$public_page->label}} |
+		{{$public_child_page->label}} | {{$public_page->label}}
 @endsection
 
 @section('content')

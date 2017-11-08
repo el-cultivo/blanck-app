@@ -2,7 +2,7 @@
 
 
 @section('title')
-    {!! trans('manage_users.trash.label') !!} |
+    {!! trans('manage_users.trash.label') !!}
 @endsection
 
 

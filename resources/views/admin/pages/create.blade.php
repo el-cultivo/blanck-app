@@ -2,7 +2,7 @@
 
 
 @section('title')
-    {!! trans('manage_pages.create.label') !!} |
+    {!! trans('manage_pages.create.label') !!}
 @endsection
 
 @section('h1')

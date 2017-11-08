@@ -2,7 +2,7 @@
 
 
 @section('title')
-    {!! trans('manage_pages.edit.label') !!} |
+    {!! trans('manage_pages.edit.label') !!}
 @endsection
 
 @section('h1')
@@ -32,7 +32,6 @@
         'title'         =>  trans('manage_pages.edit.sections'),
         // 'instructions'  =>  'Edita los campos para actualizar a '.$page_edit->index
     ])
-
 
     <pagesections-checkbox :list="store.pagesections.data" :current-page="store.current_page"></pagesections-checkbox>
     <pagesections-sort :list="store.current_page.sections_minified" :current-page="store.current_page"></pagesections-sort>
