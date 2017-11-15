@@ -5,10 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\TranslationTrait;
 use App\Models\Traits\AssociableTrait;
-use App\Models\Allies\Ally;
-use App\Models\Registrations\Registrationtype;
-use App\Models\Films\Film;
-use App\Models\Speakers\Speaker;
 
 use Illuminate\Http\UploadedFile;
 use Carbon\Carbon;
@@ -64,6 +60,7 @@ class Photo extends Model
         // code  => class name
         'page_component'     => "App\Models\Pages\Sections\Components\Component",
         'setting_shape'      => "App\Models\Settings\Shape",
+        'seo'                => "App\Models\Seo\Seo",
     ];
 
     /**
@@ -380,7 +377,6 @@ class Photo extends Model
         return url($this->getImageThumbnailPublicPath());
     }
 
-
     /**
      * borra losarchivos de una imagen
      * @return boolean true en caso de borrar ambos archivos
@@ -391,43 +387,6 @@ class Photo extends Model
     }
 
 
-    // "ally"                  => "App\Models\Allies\Ally",
-    // "registrationtype"      => "App\Models\Registrations\Registrationtype",
-    // "speaker"               => "App\Models\Speakers\Speaker",
-    // 'film'              => "App\Models\Films\Film",
-
-
-    /**
-     * Get all of the posts that are assigned this tag.
-     */
-    public function allies()
-    {
-        return $this->belongsToMany(Ally::class);
-    }
-
-    /**
-     * Get all of the posts that are assigned this tag.
-     */
-    public function speakers()
-    {
-        return $this->belongsToMany(Speaker::class);
-    }
-
-    /**
-     * Get all of the posts that are assigned this tag.
-     */
-    public function registrationtypes()
-    {
-        return $this->belongsToMany( Registrationtype::class );
-    }
-
-    /**
-     * Get all of the posts that are assigned this tag.
-     */
-    public function films()
-    {
-        return $this->belongsToMany( Film::class );
-    }
     /**
      * si una imagen puede ser borrada
      * @return boolean si una imagen tienen objetos asociados regresa false
@@ -435,12 +394,10 @@ class Photo extends Model
     public function isDeletable()
     {
         $total = 0;
-        $total += $this->allies->count();
-        $total += $this->registrationtypes->count();
-        $total += $this->speakers->count();
-        $total += $this->films->count();
+        foreach (static::$associable_models as $key => $class) {
+            $total += $this->belongsToMany($class )->count();
+        }
 
-        /// pendiente
         return $total == 0;
     }
 
