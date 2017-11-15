@@ -103,7 +103,7 @@ class ManagePagesController extends Controller
     public function edit(Page $page_edit)
     {
         $data = [
-            "page_edit"         => $page_edit,
+            "page_edit"      => $page_edit,
             'types_list'     => Type::get()->pluck('label_description','id'),
             'editable_parts' => Component::EDITABLE_CONTENTS,
         ];

@@ -11,7 +11,7 @@ return [
 		'settings' => [
 			'index' => 'Settings',
 		],
-		'seo_booster' => [
+		'seo' => [
 			'index' => 'Seo Booster',
 		]
 	],

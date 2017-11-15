@@ -2,7 +2,7 @@
 
 
 @section('title')
-    {!! trans('manage_pages.contents.edit.label') !!} |
+    {!! trans('manage_pages.contents.edit.label') !!}
 @endsection
 
 @section('h1')
@@ -26,6 +26,12 @@
         "form_id"       => 'edit_page_contents_form',
         "form_route"   => ['admin::pages.contents.update',$page_edit->id],
         "form_method"   => 'PATCH'
+    ])
+
+    @include('admin.seo._form', [
+        'seoable_type' => 'page',
+        'seoable' => $page_edit,
+        'seo' => $seo
     ])
 
     <current-page-sections :list="store.current_page.sections_maped" :current-page="store.current_page"></current-page-sections-checkbox>
@@ -74,5 +80,6 @@
 @section('vue_store')
     <script>
         mainVueStore.current_page = {!! $page_edit !!};
+        mainVueStore.seo =  {!! $seo !!};
     </script>
 @endsection

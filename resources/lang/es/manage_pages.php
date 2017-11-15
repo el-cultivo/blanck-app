@@ -50,7 +50,7 @@ return [
 		'delete'	=>	[
 			'soft'	=>	[
 				'error'		=>	"La sección que desea borrar tiene páginas o componentes asociados, por lo que no puede ser eliminada",
-			]
+			],
 			'error'		=>	"La sección no pudo ser borrada",
 			'success'	=>	"La sección fue borrada correctamente "
 		],

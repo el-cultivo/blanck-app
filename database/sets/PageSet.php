@@ -1,13 +1,13 @@
 <?php
-use App\Console\Cltvo\SetSite\CltvoSet;
-use Illuminate\Console\Command;
 
-use App\Models\Settings\SeoBooster;
-use App\Models\Pages\Page;
-
-use App\Models\Language;
-use App\Models\Publish;
 use App\Models\Photo;
+use App\Models\Publish;
+use App\Models\Seo\Seo;
+use App\Models\Language;
+use App\Models\Pages\Page;
+use Illuminate\Console\Command;
+use App\Models\Settings\SeoBooster;
+use App\Console\Cltvo\SetSite\CltvoSet;
 
 class PageSet extends CltvoSet
 {
@@ -145,16 +145,17 @@ class PageSet extends CltvoSet
         }
 
         // Items de Seo Boosters
-        $seo_boosters = [
-            'route_name'    => 'client::pages.show',
-            'parameters'    => $page->slug
+        $seo = [
+            'route_name' => 'client::pages.show',
+            'parameters' => [
+                'public_page' => $page->slug
+            ]
         ];
 
         // Crear Seo Booster
-        $seo_booster = SeoBooster::create($seo_boosters);
+        $seo_booster = Seo::create($seo);
 
-        if(!$seo_booster)
-        {
+        if(!$seo_booster){
             return false;
         }
 
@@ -172,8 +173,7 @@ class PageSet extends CltvoSet
         // Asociar Photos al Seo Booster
         $photos = Photo::get();
 
-        if(!$photos->isEmpty())
-        {
+        if(!$photos->isEmpty()){
             $seo_booster->associateImage($photos->random(1), ['use' => 'thumbnail']);
         }
 
