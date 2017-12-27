@@ -1,4 +1,4 @@
-<div class="image__col--@{{type}} image__col camera-blue handle singleImage--@{{printable_ref}}_JS" :data-id="image.id">
+<div class="image__col--@{{type}} image__col camera-blue handle singleImage--@{{parent_ref}}_JS" :data-id="image.id">
 	<slot name="title"></slot>
 	<slot name="description"></slot>
 	<div class="image--@{{type}}">

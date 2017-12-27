@@ -14,6 +14,8 @@ export const singleImageMixin = {
 			id: ''
 		},
 		order:-1,
+	    parent_ref: ''
+
 	}},
 
 	props: ['currentImage', 'type', 'photoableType',  'photoableId', 'use', 'class', 'imagesOnLastLoad', 'index', 'parentRef', 'refPath', 'defaultOrder'],
@@ -31,6 +33,10 @@ export const singleImageMixin = {
 		this.image.id = _.pathOr('', ['id'], this.currentImage);
 		this.order = _.pathOr((this.defaultOrder || 0), ['currentImage', 'order'], this);
 		this.printable_ref = Array.isArray(this.refPath) ? this.refPath.join('-') : this.printable_ref;
+		this.parent_ref =
+			this.parentRef !== undefined && typeof this.parentRef === 'string'	 ? this.parentRef 
+			: Array.isArray(this.refPath)	 									 ? this.refPath[0] 
+			:																		's_image';  
 	},
 
 	mixins: [crudAjax],
