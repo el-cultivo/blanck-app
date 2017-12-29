@@ -1,8 +1,12 @@
-# Cltvo Blank app
+# El Cultivo boilerplate for building apps based on Laravel PHP Framework
 
 ## Instalación de la parte del front
 `npm i`
 Luego es necesario ir a las carpetas `resources/assets/sass/` y `resources/assets/js/` y seguir los pasos de sus respectivos readmes. Finalmente para probar que todo funcione correctamente y el proyecto compile `gulp watch`
+
+## Blank-app License
+
+Blank-app boilerplate is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
 ### env
 
