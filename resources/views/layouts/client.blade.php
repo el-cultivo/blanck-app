@@ -6,8 +6,10 @@
 
 	<body id="{{isset($body_id) ? $body_id : 'main-vue'}}" :class="{noScroll_JS: bodyScrollIsDisabled}" >
 		@include('general._alerts')
-		{{-- Analytics --}}
-	    @include('client.general.analytics')
+		{{-- trackings --}}
+		@if (config("app.env") == "production" )
+			@include('client.general._trackings-body')
+		@endif
 
 		{{-- Header --}}
 		@include('client.general.header')
