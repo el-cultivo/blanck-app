@@ -12,6 +12,7 @@ import {mexicoStatesAndMunicipalities} from '../mixins/mexico-states-and-municip
 import {sortByNestedProp, toArray, objTextFilter, tapLog, nonCyclingMoveInArray} from '../../functions/pure';
 import {preSelectOption} from '../../functions/dom';
 import {makePost, openModal, openModalFromSimpleImageCrud, postWithMaterialNote, checkboxesMethods} from './helpers/simple-crud-helpers';
+import {editIndex, onUpdateSuccess} from '../helpers/simple-crud-fix';
 
 // usuarios
 export const rolesMultiSelect = multiSelect('#roles-multi-select-template');
