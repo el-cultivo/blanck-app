@@ -5,7 +5,7 @@ return [
 		'index'		=>	'Administrar Páginas',
 		'create'	=>	'Agregar Página',
 		'contents' => [
-			'index' => 'Páginas',
+			'index' 		=> 'Páginas',
 		],
 		'sections' => [
 			'index' => 'Administrador de Secciones',

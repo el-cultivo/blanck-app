@@ -3,6 +3,7 @@
 return [
 	'title'			=> 'Título',
 	'description'	=> 'Descripción',
+	'preview'		=>	'Vista previa',
 	'update' => [
 		'success' => 'El SEO se ha actualizado exitosamente.'
 	],
@@ -48,5 +49,8 @@ return [
 			],
 			'save' => 'Actualizar'
 		]
+	],
+	'store'	=>	[
+		'success'	=>	'El SEO ha sido creado correctamente'
 	]
 ];

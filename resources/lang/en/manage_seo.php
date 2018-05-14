@@ -48,5 +48,8 @@ return [
 			],
 			'save' => 'Update'
 		]
+	],
+	'store'	=>	[
+		'success'	=>	'SEO created successfuly'
 	]
 ];
