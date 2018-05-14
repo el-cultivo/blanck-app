@@ -19,6 +19,7 @@
         <br> <div class="divider"></div>
     </div>
 
+
     {{-- Mail --}}
     @include('admin.settings.setting._mail')
 

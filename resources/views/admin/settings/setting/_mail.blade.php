@@ -79,13 +79,22 @@
                 ]) !!}
             </div>
 
+            <div class="input-field col s12 ">
+                {!! Form::label('unattendance_copy['.$lang->iso6391.']', trans('manage_settings.mail.unattendance_copy.'.$lang->iso6391.'.label'), ['class' => '']) !!}
+                {!! Form::textarea('unattendance_copy['.$lang->iso6391.']', array_get($setting_mail,'unattendance_copy.'.$lang->iso6391), [
+                    'class' => 'materialize-textarea ',
+                    'form'  => 'update_setting-mail_form',
+                    'rows'  => 2,
+                ]) !!}
+            </div>
+
             {{-- <div class="input-field col s12 ">
                 {!! Form::label('purchase_copy['.$lang->iso6391.']', trans('manage_settings.mail.purchase_copy.'.$lang->iso6391.'.label'), ['class' => '']) !!}
                 {!! Form::textarea('purchase_copy['.$lang->iso6391.']', array_get($setting_mail,'purchase_copy.'.$lang->iso6391), [
                     'class' => 'materialize-textarea ',
                     'form'  => 'update_setting-mail_form',
                     'rows'  => 2,
-                    // 
+                    //
                 ]) !!}
             </div> --}}
 
@@ -102,7 +111,7 @@
         <div class="col s12">
 
             <div class="pull-right">
-                {!! Form::submit('manage_settings.mail.create.form.save'), [
+                {!! Form::submit(trans('manage_settings.mail.create.form.save'), [
                     'class' => 'btn waves-effect waves-light',
                     'form'  => 'update_setting-mail_form',
                     ]) !!}
