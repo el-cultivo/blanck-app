@@ -51,6 +51,10 @@ class PermissionSet extends CltvoSet
                 'slug'  => 'routes_view',
                 'label' => 'Ver rutas'
             ],
+			[
+				'slug' 	=> 'translations_view',
+				'label' => 'Ver traducciones faltantes'
+			],
             [
                 'slug'  => 'manage_pages',
                 'label' => 'Manejo de páginas'
