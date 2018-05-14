@@ -47,6 +47,10 @@ class PermissionSet extends CltvoSet
                 'slug'  => 'photos_view',
                 'label' => 'Ver imagenes'
             ],
+			[
+				'slug'  => 'photo_force_delete',
+				'label' => 'Borrar imagenes con relaciones'
+			],
             [
                 'slug'  => 'routes_view',
                 'label' => 'Ver rutas'
