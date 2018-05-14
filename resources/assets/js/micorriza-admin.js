@@ -26,7 +26,7 @@ import {
 	rolesMultiSelect,
 	users,
 	usersTrash
-} from './vue/components/simple-cruds';
+} from './vue/components/simple-cruds/manage-users';
 
 import {mediaManager} from './vue/components/media-manager';
 import './vue/components/multi-images';
