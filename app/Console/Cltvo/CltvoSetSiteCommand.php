@@ -50,6 +50,7 @@ class CltvoSetSiteCommand extends Command
         parent::__construct();
 
 		$this->composer = $composer;
+		ini_set('memory_limit','512M');
     }
 
 	/**
