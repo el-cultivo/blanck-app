@@ -20,6 +20,11 @@ Route::group(['middleware' => ['permission:routes_view'] ], function(){
     Route::get('site-map', 'Admin\AdminController@siteMap')->name('site_map');
 });
 
+// Mapa de trasnlations
+Route::group(['middleware' => ['permission:translations_view'] ], function(){
+    Route::get('translations', 'Admin\AdminController@translations')->name('translations');
+});
+
 // Administrador de settings
 Route::group(['middleware' => ['permission:system_config'] ,'prefix' => 'settings', 'as' => 'settings.'], function(){
     Route::resource('/', 'Admin\Settings\ManageSettingsController',

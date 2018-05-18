@@ -44,6 +44,9 @@ class AdminMainMenuComposer
 			$this->setMenuItem('admin_access.site_map', [
 				$this->setSubMenuItem('site_map', 'routes_view', 'index')
 			]),
+			$this->setMenuItem('admin_access.translations', [
+				$this->setSubMenuItem('translations', 'translations_view', 'index')
+			]),
 			$this->setMenuItem('admin_access.manuals', [
 				$this->setSubMenuItem('manuals', 'admin_access', 'index')
 			])

@@ -401,4 +401,15 @@ class Photo extends Model
         return $total == 0;
     }
 
+    /**
+     * si una imagen puede ser borrada
+     * @return boolean si una imagen tienen objetos asociados regresa false
+     */
+    public function deleteRelations()
+    {
+        foreach (static::$associable_models as $key => $class) {
+            $this->belongsToMany($class )->sync([]);
+        }
+    }
+
 }

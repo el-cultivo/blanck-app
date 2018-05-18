@@ -149,6 +149,10 @@ class ManagePhotosController extends Controller
      */
     public function destroy(Photo $photo)
     {
+        if ($this->user->hasPermission("photo_force_delete")) {
+            $photo->deleteRelations();
+        }
+		
         if (!$photo->isDeletable()) {
             return Response::json([
                 'error' => [trans( "manage_photo.deletable.error")]

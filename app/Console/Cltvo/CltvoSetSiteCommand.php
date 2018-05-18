@@ -7,6 +7,9 @@ use Illuminate\Support\Composer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Console\ConfirmableTrait;
 
+use Illuminate\Support\Facades\Schema;
+use DB;
+
 class CltvoSetSiteCommand extends Command
 {
 	use ConfirmableTrait;
@@ -23,7 +26,7 @@ class CltvoSetSiteCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'cltvo:set {--s|seed : Seed the database with records } {--m|migrate : Run database migrations } {--r|migrate-refresh : Rollback all database migrations } {--c|clean : seed and migrate-refresh}';
+    protected $signature = 'cltvo:set {--s|seed : Seed the database with records } {--m|migrate : Run database migrations } {--r|migrate-refresh : Rollback all database migrations } {--c|clean : seed and migrate-refresh} {--f|force : Remove all tables in database.Only works with clean option }';
 
     /**
      * The console command description.
@@ -71,12 +74,20 @@ class CltvoSetSiteCommand extends Command
             $this->call("migrate");
         }
 
+		if ($this->option("clean") && $this->option("force") ) {
+			Schema::disableForeignKeyConstraints();
+			foreach(DB::select('SHOW TABLES') as $table) {
+			    $table_array = get_object_vars($table);
+			    Schema::drop($table_array[key($table_array)]);
+			}
+		}
+
         if ($this->option("migrate-refresh") || $this->option("clean")) {
             $this->call("migrate:refresh");
         }
 
 		Model::unguarded(function () {
-			$this->getSeeder()->run();
+			$this->getSeeter()->run();
 		});
 
         if ($this->option("seed") || $this->option("clean")) {
@@ -90,7 +101,7 @@ class CltvoSetSiteCommand extends Command
      *
      * @return \Illuminate\Database\Seeder
      */
-    protected function getSeeder()
+    protected function getSeeter()
     {
         return new \DatabaseSeter($this);
     }

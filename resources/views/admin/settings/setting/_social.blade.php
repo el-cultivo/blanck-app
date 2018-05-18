@@ -17,14 +17,14 @@
             ]) !!}
         </div>
 
-        <div class="input-field col s12">
+        {{-- <div class="input-field col s12">
             {!! Form::label('twitter', trans('manage_settings.social.twitter.label'), ['class' => '']) !!}
             {!! Form::url('twitter', array_get($setting_social,'twitter'), [
                 'class' => 'validate',
                 'form' => 'update_setting-social_form',
                 'placeholder' => trans('manage_settings.social.twitter.placeholder')
             ]) !!}
-        </div>
+        </div> --}}
 
 
 
@@ -37,7 +37,7 @@
             ]) !!}
         </div>
 
-        {{-- <div class="input-field col s12">
+        <div class="input-field col s12">
 
             {!! Form::label('pinterest', trans('manage_settings.social.pinterest.label'), ['class' => '']) !!}
             {!! Form::url('pinterest', array_get($setting_social,'pinterest'), [
@@ -46,7 +46,7 @@
                 'placeholder' => trans('manage_settings.social.pinterest.placeholder')
             ]) !!}
 
-        </div> --}}
+        </div>
 
         <div class="col s12">
             <div class="pull-right">

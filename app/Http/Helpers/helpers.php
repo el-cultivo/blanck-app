@@ -132,3 +132,33 @@ function cltvoCurrentLanguageIso()
 {
 	return isset(config('app.available_langs')[ session('cltvo_lang')]) ? session('cltvo_lang') : config( 'app.locale');
 }
+
+function explodeTranstationsLine($text)
+{
+
+    if (substr_count($text,"trans") == substr_count($text,getTransFindKey())) {
+        return collect(explode("trans",$text ));
+    }
+
+	$lastPos = 0;
+	$parts = [];
+
+	while (($lastPos = strpos($text, getTransFindKey() , $lastPos))!== false) {
+		$positions[] = $lastPos;
+		$lastPos = $lastPos + strlen(getTransFindKey());
+	}
+
+	foreach ($positions as $key => $position) {
+		$parts[] = substr($text, $position,isset($positions[$key+1])? $positions[$key+1] : strlen($text));
+	}
+
+	return collect($parts)->map(function($part){
+		return str_replace(getTransFindKey(), "(", $part );
+	});
+
+}
+
+function getTransFindKey()
+{
+	return "trans"."(";
+}
